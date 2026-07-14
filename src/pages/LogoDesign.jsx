@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import WatermarkDownloadButton from "../components/WatermarkDownloadButton";
 import {
   ArrowRight,
   BadgeCheck,
@@ -14,140 +13,7 @@ import {
   X,
 } from "lucide-react";
 
-const logoSamples = [
-  {
-    title: "Animalia Logo",
-    image: "/images/logo-design/animalia.webp",
-  },
-  {
-    title: "Black Hat Logo",
-    image: "/images/logo-design/balck-hat.webp",
-  },
-  {
-    title: "Bear Chat Logo",
-    image: "/images/logo-design/bearchat.webp",
-  },
-  {
-    title: "Bird Logo",
-    image: "/images/logo-design/bird.webp",
-  },
-  {
-    title: "Bishop Logo",
-    image: "/images/logo-design/bishop-logo.webp",
-  },
-  {
-    title: "C&C Logo",
-    image: "/images/logo-design/C&C-logo.webp",
-  },
-  {
-    title: "Chicken Tikka Logo",
-    image: "/images/logo-design/chicken-tikka.webp",
-  },
-  {
-    title: "Chrunchy Logo",
-    image: "/images/logo-design/chrunchy.webp",
-  },
-  {
-    title: "Clay Human Logo",
-    image: "/images/logo-design/clay-human.webp",
-  },
-  {
-    title: "Dance Logo",
-    image: "/images/logo-design/dance-logo.webp",
-  },
-  {
-    title: "Data Location Logo",
-    image: "/images/logo-design/data-loacation-logo.webp",
-  },
-  {
-    title: "Digital Library Logo",
-    image: "/images/logo-design/digtal-library-logo.webp",
-  },
-  {
-    title: "Dott Logo",
-    image: "/images/logo-design/Dott-logo.webp",
-  },
-  {
-    title: "Dragonoid Logo",
-    image: "/images/logo-design/dragonoid-logo.webp",
-  },
-  {
-    title: "Drive Com Logo",
-    image: "/images/logo-design/drive-com.webp",
-  },
-  {
-    title: "Elephant Logo",
-    image: "/images/logo-design/elephant-logo.webp",
-  },
-  {
-    title: "Food Logo",
-    image: "/images/logo-design/food.webp",
-  },
-  {
-    title: "Geek Owl Logo",
-    image: "/images/logo-design/geekowl.webp",
-  },
-  {
-    title: "Goat Leaf Logo",
-    image: "/images/logo-design/goat-leaf.webp",
-  },
-  {
-    title: "Humming Bird Logo",
-    image: "/images/logo-design/humming-bird1.webp",
-  },
-  {
-    title: "Moto Race Logo",
-    image: "/images/logo-design/moto-race-logo.webp",
-  },
-  {
-    title: "Nail Queen Logo",
-    image: "/images/logo-design/nail-queen.webp",
-  },
-  {
-    title: "Navyojan Logo",
-    image: "/images/logo-design/navyojan.webp",
-  },
-  {
-    title: "Organics Logo",
-    image: "/images/logo-design/Organics-logo.webp",
-  },
-  {
-    title: "Pasta House Logo",
-    image: "/images/logo-design/Pasta-house.webp",
-  },
-  {
-    title: "Peacock Logo",
-    image: "/images/logo-design/peacock.webp",
-  },
-  {
-    title: "Quick Stop Logo",
-    image: "/images/logo-design/quick-stop.webp",
-  },
-  {
-    title: "Restaurant 2 Logo",
-    image: "/images/logo-design/restaurant-2.webp",
-  },
-  {
-    title: "Restaurant Logo",
-    image: "/images/logo-design/restaurant.webp",
-  },
-  {
-    title: "Turning Point Logo",
-    image: "/images/logo-design/TURNING-POINT.webp",
-  },
-  {
-    title: "Veggie Food Logo",
-    image: "/images/logo-design/VEGGIE-FOOD.webp",
-  },
-  {
-    title: "Wetcap Logo",
-    image: "/images/logo-design/wetcap-logo.webp",
-  },
-  {
-    title: "Whale Logo",
-    image: "/images/logo-design/whale-logo.webp",
-  },
-];
+import { logoDownloads } from "../data/logoDownloads";
 
 const benefits = [
   "Custom logo concepts based on your business identity",
@@ -180,8 +46,9 @@ function LogoDesign() {
   const [previewLogo, setPreviewLogo] = useState(null);
   const [showAll, setShowAll] = useState(false);
 
-  const visibleLogos = showAll ? logoSamples : logoSamples.slice(0, 4);
-
+  const visibleLogos = showAll
+    ? logoDownloads
+    : logoDownloads.slice(0, 4);
 
   useEffect(() => {
     const handleEscape = (event) => {
@@ -207,7 +74,7 @@ function LogoDesign() {
         <div className="container logo-v2-hero-grid">
           <div className="logo-v2-hero-content">
             <span className="section-label dark-label">
-              <Sparkles size={16} />
+              <Sparkles size={16} aria-hidden="true" />
               Creative Service
             </span>
 
@@ -221,7 +88,8 @@ function LogoDesign() {
 
             <div className="logo-v2-hero-actions">
               <Link to="/contact" className="primary-btn">
-                Commission Logo Work <ArrowRight size={18} />
+                Commission Logo Work
+                <ArrowRight size={18} aria-hidden="true" />
               </Link>
 
               <a href="#logo-gallery" className="secondary-btn">
@@ -232,10 +100,11 @@ function LogoDesign() {
 
           <div className="logo-v2-hero-card">
             <div className="logo-v2-card-icon">
-              <Brush size={34} />
+              <Brush size={34} aria-hidden="true" />
             </div>
 
             <h3>Premium Logo Identity</h3>
+
             <p>
               Minimal, mascot, character, modern, business, and brand-focused
               logo design styles for every creative need.
@@ -251,29 +120,42 @@ function LogoDesign() {
         </div>
       </section>
 
-      <section className="logo-v2-gallery-section" id="logo-gallery">
+      <section
+        className="logo-v2-gallery-section"
+        id="logo-gallery"
+      >
         <div className="container">
           <div className="logo-v2-heading">
-            <span className="section-label">Logo Design Gallery</span>
+            <span className="section-label">
+              Logo Design Gallery
+            </span>
+
             <h2>Explore professional logo design styles</h2>
+
             <p>
-              A clean showcase layout inspired by creative portfolio grids. Add
-              your own logo samples inside the image folder and display them
-              beautifully on this page.
+              Select Preview to view a logo in the modal. Select Download to
+              open the full dynamic download page for that specific logo.
             </p>
           </div>
 
           <div className="logo-v2-gallery-grid">
             {visibleLogos.map((item) => (
-              <div className="logo-v2-card" key={item.title}>
+              <article
+                className="logo-v2-card"
+                key={item.slug}
+              >
                 <div className="logo-v2-image-wrap">
-                  <img src={item.image} alt={item.title} />
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    loading="lazy"
+                  />
                 </div>
 
                 <div className="logo-v2-card-content">
                   <div className="logo-v2-card-info">
                     <h3>{item.title}</h3>
-                    <span>Logo Design</span>
+                    <span>{item.category}</span>
                   </div>
 
                   <div className="logo-v2-actions">
@@ -282,32 +164,34 @@ function LogoDesign() {
                       className="logo-v2-preview-btn"
                       onClick={() => setPreviewLogo(item)}
                     >
-                      <Eye size={15} />
+                      <Eye size={15} aria-hidden="true" />
                       Preview
                     </button>
 
-                    <WatermarkDownloadButton
-                      imageUrl={item.image}
-                      fileName={`${item.title
-                        .toLowerCase()
-                        .trim()
-                        .replace(/\s+/g, "-")}.png`}
+                    <Link
+                      to={`/logo-download/${item.slug}`}
                       className="logo-v2-download-btn"
-                    />
+                      aria-label={`Open download page for ${item.title}`}
+                    >
+                      <Download size={15} aria-hidden="true" />
+                      Download
+                    </Link>
                   </div>
                 </div>
-              </div>
+              </article>
             ))}
           </div>
 
-          {logoSamples.length > 4 && (
+          {logoDownloads.length > 4 && (
             <div className="logo-v2-view-all-wrap">
               <button
                 type="button"
                 className="logo-v2-view-all-btn"
-                onClick={() => setShowAll(!showAll)}
+                onClick={() => setShowAll((current) => !current)}
               >
-                {showAll ? "Show Less" : "View All Logo Designs"}
+                {showAll
+                  ? "Show Less"
+                  : "View All Logo Designs"}
               </button>
             </div>
           )}
@@ -318,10 +202,14 @@ function LogoDesign() {
         <div
           className="logo-v2-modal-overlay"
           onClick={() => setPreviewLogo(null)}
+          role="presentation"
         >
           <div
             className="logo-v2-modal-box"
             onClick={(event) => event.stopPropagation()}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="logo-preview-title"
           >
             <button
               type="button"
@@ -329,27 +217,32 @@ function LogoDesign() {
               onClick={() => setPreviewLogo(null)}
               aria-label="Close preview"
             >
-              <X size={22} />
+              <X size={22} aria-hidden="true" />
             </button>
 
             <div className="logo-v2-modal-image">
-              <img src={previewLogo.image} alt={previewLogo.title} />
+              <img
+                src={previewLogo.image}
+                alt={previewLogo.title}
+              />
             </div>
 
             <div className="logo-v2-modal-footer">
               <div>
-                <h3>{previewLogo.title}</h3>
+                <h3 id="logo-preview-title">
+                  {previewLogo.title}
+                </h3>
                 <p>Full logo preview</p>
               </div>
 
-              <button
-                type="button"
+              <Link
+                to={`/logo-download/${previewLogo.slug}`}
                 className="logo-v2-download-btn"
-                onClick={() => handleDownload(previewLogo)}
+                onClick={() => setPreviewLogo(null)}
               >
-                <Download size={15} />
+                <Download size={15} aria-hidden="true" />
                 Download
-              </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -358,7 +251,9 @@ function LogoDesign() {
       <section className="logo-v2-detail-section">
         <div className="container logo-v2-detail-grid">
           <div className="logo-v2-detail-content">
-            <span className="section-label">Service Details</span>
+            <span className="section-label">
+              Service Details
+            </span>
 
             <h2>What you get in Logo Design</h2>
 
@@ -371,7 +266,7 @@ function LogoDesign() {
             <div className="logo-v2-benefit-list">
               {benefits.map((item) => (
                 <div key={item}>
-                  <BadgeCheck size={21} />
+                  <BadgeCheck size={21} aria-hidden="true" />
                   <span>{item}</span>
                 </div>
               ))}
@@ -388,7 +283,8 @@ function LogoDesign() {
             </p>
 
             <Link to="/contact" className="primary-btn">
-              Start Logo Project <ArrowRight size={18} />
+              Start Logo Project
+              <ArrowRight size={18} aria-hidden="true" />
             </Link>
           </aside>
         </div>
@@ -397,8 +293,12 @@ function LogoDesign() {
       <section className="logo-v2-process-section">
         <div className="container">
           <div className="logo-v2-heading">
-            <span className="section-label">Our Process</span>
+            <span className="section-label">
+              Our Process
+            </span>
+
             <h2>Simple process, professional result</h2>
+
             <p>
               From idea to final logo delivery, the complete process is clear,
               smooth, and focused on your business identity.
@@ -410,14 +310,17 @@ function LogoDesign() {
               const Icon = item.icon;
 
               return (
-                <div className="logo-v2-process-card" key={item.title}>
+                <article
+                  className="logo-v2-process-card"
+                  key={item.title}
+                >
                   <div className="logo-v2-process-icon">
-                    <Icon size={25} />
+                    <Icon size={25} aria-hidden="true" />
                   </div>
 
                   <h3>{item.title}</h3>
                   <p>{item.text}</p>
-                </div>
+                </article>
               );
             })}
           </div>

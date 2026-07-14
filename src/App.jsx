@@ -1,4 +1,8 @@
-import { Routes, Route } from "react-router-dom";
+import {
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -16,23 +20,35 @@ import PosterDesign from "./pages/PosterDesign";
 import BusinessCardDesign from "./pages/BusinessCardDesign";
 import BrandingMaterials from "./pages/BrandingMaterials";
 import BrandingMaterialView from "./pages/BrandingMaterialView";
-
+import LogoDownloadPreview from "./pages/LogoDownloadPreview";
 
 import NotFound from "./pages/NotFound";
 
 function App() {
+  const location = useLocation();
+
+  const isLogoDownloadPage =
+    location.pathname.startsWith("/logo-download/");
+
   return (
     <>
-      {/* Globally scrolls every new page to the top */}
       <ScrollToTop />
 
-      <Navbar />
+      {!isLogoDownloadPage && <Navbar />}
 
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
+
+          <Route
+            path="/about"
+            element={<About />}
+          />
+
+          <Route
+            path="/contact"
+            element={<Contact />}
+          />
 
           <Route
             path="/services/logo-design"
@@ -65,20 +81,28 @@ function App() {
           />
 
           <Route
-                path="/services/branding-materials/:brandSlug"
-                element={<BrandingMaterialView />}
-              />
+            path="/services/branding-materials/:brandSlug"
+            element={<BrandingMaterialView />}
+          />
+
+          <Route
+            path="/logo-download/:slug"
+            element={<LogoDownloadPreview />}
+          />
 
           <Route
             path="/services/:slug"
             element={<ServicePage />}
           />
 
-          <Route path="*" element={<NotFound />} />
+          <Route
+            path="*"
+            element={<NotFound />}
+          />
         </Routes>
       </main>
 
-      <Footer />
+      {!isLogoDownloadPage && <Footer />}
     </>
   );
 }
