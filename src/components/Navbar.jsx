@@ -7,6 +7,22 @@ function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [serviceOpen, setServiceOpen] = useState(false);
 
+  const toggleMenu = () => {
+    setMenuOpen((current) => {
+      const nextValue = !current;
+
+      if (!nextValue) {
+        setServiceOpen(false);
+      }
+
+      return nextValue;
+    });
+  };
+
+  const toggleServices = () => {
+    setServiceOpen((current) => !current);
+  };
+
   const closeMenu = () => {
     setMenuOpen(false);
     setServiceOpen(false);
@@ -14,22 +30,32 @@ function Navbar() {
 
   return (
     <header className="site-header">
-      <nav className="navbar container">
+      <nav className="navbar container" aria-label="Main navigation">
         <Link to="/" className="brand" onClick={closeMenu}>
           <img
-            src="/images/logo.webp"alt="Limitless Design Logo"className="brand-logo"/>
-            <span className="brand-text">Limitless Design</span>
+            src="/images/logo.webp"
+            alt="Limitless Design Logo"
+            className="brand-logo"
+          />
+
+          <span className="brand-text">Limitless Design</span>
         </Link>
 
         <button
+          type="button"
           className="mobile-toggle"
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Toggle navigation menu"
+          onClick={toggleMenu}
+          aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
+          aria-expanded={menuOpen}
+          aria-controls="main-navigation-menu"
         >
           {menuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
 
-        <div className={`nav-menu ${menuOpen ? "active" : ""}`}>
+        <div
+          id="main-navigation-menu"
+          className={`nav-menu ${menuOpen ? "active" : ""}`}
+        >
           <div className="nav-links">
             <NavLink to="/" onClick={closeMenu}>
               Home
@@ -39,17 +65,29 @@ function Navbar() {
               About
             </NavLink>
 
-            <div className="dropdown">
+            <div className={`dropdown ${serviceOpen ? "active" : ""}`}>
               <button
-                className="dropdown-btn"
-                onClick={() => setServiceOpen(!serviceOpen)}
                 type="button"
+                className="dropdown-btn"
+                onClick={toggleServices}
+                aria-expanded={serviceOpen}
+                aria-controls="service-dropdown-menu"
               >
-                Service <ChevronDown size={16} />
+                <span>Services</span>
+
+                <ChevronDown
+                  size={17}
+                  className={`dropdown-arrow ${
+                    serviceOpen ? "rotate" : ""
+                  }`}
+                />
               </button>
 
-              <div className={`dropdown-menu ${serviceOpen ? "show" : ""}`}>
-                {services.slice(0, 6).map((service) => (
+              <div
+                id="service-dropdown-menu"
+                className={`dropdown-menu ${serviceOpen ? "show" : ""}`}
+              >
+                {services.map((service) => (
                   <Link
                     key={service.slug}
                     to={`/services/${service.slug}`}
@@ -64,10 +102,6 @@ function Navbar() {
             <a href="/#features" onClick={closeMenu}>
               Features
             </a>
-
-            {/* <NavLink to="/contact" onClick={closeMenu}>
-              Contacts
-            </NavLink> */}
           </div>
 
           <Link to="/contact" className="nav-btn" onClick={closeMenu}>

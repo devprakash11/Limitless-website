@@ -1,6 +1,33 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap");
 
-/* Base styles: Laptop/Desktop */
+/* =========================================================================
+   STYLESHEET SECTIONS
+   01. Global Base Styles & Design Variables
+   02. Site Header & Navigation
+   03. Home Page — Professional Landing Hero
+   04. Shared Section Styles
+   05. Home Page — Features Section
+   06. Home Page — Call to Action
+   07. Inner Page Hero
+   08. About Page
+   09. Service Detail Page
+   10. Contact Page
+   11. Site Footer
+   12. Global Responsive Styles
+   13. Home Page — Platform Features
+   14. Logo Design Service Page
+   15. Social Media Banner Service Page
+   16. Photo Frame Service Page
+   17. Poster Design Service Page
+   18. Business Card Design Service Page
+   19. Shared Small-Mobile Responsive Styles
+   20. Branding Materials — Coming Soon Page
+   21. Home Page — Animations
+========================================================================= */
+
+/* ========================================================================
+   01. GLOBAL BASE STYLES & DESIGN VARIABLES
+======================================================================== */
 
 :root {
   --primary: #6d5dfc;
@@ -58,7 +85,9 @@ button {
   margin: 0 auto;
 }
 
-/* Header */
+/* ========================================================================
+   02. SITE HEADER & NAVIGATION
+======================================================================== */
 
 .site-header {
   position: sticky;
@@ -222,7 +251,9 @@ button {
   border-radius: 14px;
 }
 
-/* New Professional Landing Page */
+/* ========================================================================
+   03. HOME PAGE — PROFESSIONAL LANDING HERO
+======================================================================== */
 
 .ld-hero {
   position: relative;
@@ -507,7 +538,9 @@ button {
   font-weight: 750;
 }
 
-/* Common Sections */
+/* ========================================================================
+   04. SHARED SECTION STYLES
+======================================================================== */
 
 .section {
   padding: 94px 0;
@@ -624,7 +657,9 @@ button {
   font-weight: 900;
 }
 
-/* Features */
+/* ========================================================================
+   05. HOME PAGE — FEATURES SECTION
+======================================================================== */
 
 .features-section {
   padding: 100px 0;
@@ -705,7 +740,9 @@ button {
   color: var(--muted);
 }
 
-/* CTA */
+/* ========================================================================
+   06. HOME PAGE — CALL TO ACTION
+======================================================================== */
 
 .cta-section {
   padding: 80px 0;
@@ -779,7 +816,9 @@ button {
   line-height: 1.8;
 }
 
-/* Button placed at the bottom left */
+/* ----------------------------------------------------------
+   CTA BUTTON
+---------------------------------------------------------- */
 
 .cta-commission-btn {
   width: fit-content;
@@ -812,11 +851,11 @@ button {
   transform: translateX(4px);
 }
 
-/* =====================================================
-   CTA TABLET
-===================================================== */
+/* ----------------------------------------------------------
+   CTA RESPONSIVE — TABLET
+---------------------------------------------------------- */
 
-/* Tablet */
+/* Tablet: CTA */
 @media (max-width: 1024px) {
   .cta-box {
     padding: 50px;
@@ -827,11 +866,11 @@ button {
   }
 }
 
-/* =====================================================
-   CTA MOBILE
-===================================================== */
+/* ----------------------------------------------------------
+   CTA RESPONSIVE — MOBILE
+---------------------------------------------------------- */
 
-/* Mobile */
+/* Mobile: CTA */
 @media (max-width: 768px) {
   .cta-section {
     padding: 60px 0;
@@ -866,7 +905,9 @@ button {
   }
 }
 
-/* Page Hero */
+/* ========================================================================
+   07. INNER PAGE HERO
+======================================================================== */
 
 .page-hero {
   padding: 96px 0;
@@ -906,7 +947,9 @@ button {
   margin: 0 auto 18px;
 }
 
-/* About */
+/* ========================================================================
+   08. ABOUT PAGE
+======================================================================== */
 
 .about-grid,
 .contact-grid,
@@ -991,7 +1034,9 @@ button {
   padding: 30px;
 }
 
-/* Service Detail */
+/* ========================================================================
+   09. SERVICE DETAIL PAGE
+======================================================================== */
 
 .service-detail-grid {
   align-items: start;
@@ -1011,7 +1056,9 @@ button {
   align-items: flex-start;
 }
 
-/* Contact */
+/* ========================================================================
+   10. CONTACT PAGE
+======================================================================== */
 
 .contact-grid {
   align-items: start;
@@ -1052,7 +1099,9 @@ button {
   resize: vertical;
 }
 
-/* Footer */
+/* ========================================================================
+   11. SITE FOOTER
+======================================================================== */
 
 .footer {
   padding-top: 72px;
@@ -1106,9 +1155,11 @@ button {
   color: #94a3b8;
 }
 
-/* Responsive */
+/* ========================================================================
+   12. GLOBAL RESPONSIVE STYLES
+======================================================================== */
 
-/* Tablet */
+/* Global Responsive: Tablet */
 @media (max-width: 1024px) {
   .mobile-toggle {
     display: grid;
@@ -1216,7 +1267,7 @@ button {
   }
 }
 
-/* Mobile */
+/* Global Responsive: Mobile */
 @media (max-width: 768px) {
   .container {
     width: min(100% - 24px, var(--container));
@@ -1324,9 +1375,9 @@ button {
 
 }
 
-/* =====================================================
-   PLATFORM FEATURES
-===================================================== */
+/* ========================================================================
+   13. HOME PAGE — PLATFORM FEATURES
+======================================================================== */
 
 .features-section {
   padding: 100px 0;
@@ -1389,7 +1440,9 @@ button {
   color: #8bffcb;
 }
 
-/* Right cards */
+/* ----------------------------------------------------------
+   PLATFORM FEATURE CARDS
+---------------------------------------------------------- */
 
 .features-panel {
   display: grid;
@@ -1445,11 +1498,11 @@ button {
   line-height: 1.7;
 }
 
-/* =====================================================
-   PLATFORM FEATURES RESPONSIVE
-===================================================== */
+/* ----------------------------------------------------------
+   PLATFORM FEATURES — RESPONSIVE
+---------------------------------------------------------- */
 
-/* Tablet */
+/* Platform Features: Tablet */
 @media (max-width: 1024px) {
   .features-grid {
     grid-template-columns: 1fr;
@@ -1466,7 +1519,7 @@ button {
   }
 }
 
-/* Mobile */
+/* Platform Features: Mobile */
 @media (max-width: 768px) {
   .features-section {
     padding: 70px 0;
@@ -1498,7 +1551,9 @@ button {
   }
 }
 
-/* Logo Design Page V2 */
+/* ========================================================================
+   14. LOGO DESIGN SERVICE PAGE
+======================================================================== */
 
 .logo-v2-hero {
   position: relative;
@@ -1605,7 +1660,9 @@ button {
   font-weight: 800;
 }
 
-/* Gallery */
+/* ----------------------------------------------------------
+   LOGO DESIGN — GALLERY
+---------------------------------------------------------- */
 
 .logo-v2-gallery-section {
   padding: 92px 0;
@@ -1753,7 +1810,9 @@ button {
   font-size: 0.92rem;
 }
 
-/* Modal */
+/* ----------------------------------------------------------
+   LOGO DESIGN — PREVIEW MODAL
+---------------------------------------------------------- */
 
 .logo-v2-modal-overlay {
   position: fixed;
@@ -1837,7 +1896,9 @@ button {
   font-size: 0.92rem;
 }
 
-/* Details */
+/* ----------------------------------------------------------
+   LOGO DESIGN — SERVICE DETAILS
+---------------------------------------------------------- */
 
 .logo-v2-detail-section {
   padding: 92px 0;
@@ -1917,7 +1978,9 @@ button {
   margin-top: 24px;
 }
 
-/* Process */
+/* ----------------------------------------------------------
+   LOGO DESIGN — PROCESS
+---------------------------------------------------------- */
 
 .logo-v2-process-section {
   padding: 92px 0;
@@ -1964,9 +2027,11 @@ button {
   line-height: 1.75;
 }
 
-/* Responsive */
+/* ----------------------------------------------------------
+   LOGO DESIGN — RESPONSIVE
+---------------------------------------------------------- */
 
-/* Tablet */
+/* Logo Design: Tablet */
 @media (max-width: 1024px) {
   .logo-v2-hero-grid,
   .logo-v2-detail-grid {
@@ -1982,7 +2047,7 @@ button {
   }
 }
 
-/* Mobile */
+/* Logo Design: Mobile */
 @media (max-width: 768px) {
   .logo-v2-hero {
     padding: 70px 0;
@@ -2045,7 +2110,9 @@ button {
   }
 }
 
-/* Social Media Banner Page V2 */
+/* ========================================================================
+   15. SOCIAL MEDIA BANNER SERVICE PAGE
+======================================================================== */
 
 .smb-v2-hero {
   position: relative;
@@ -2152,7 +2219,9 @@ button {
   font-weight: 800;
 }
 
-/* Gallery */
+/* ----------------------------------------------------------
+   SOCIAL MEDIA BANNER — GALLERY
+---------------------------------------------------------- */
 
 .smb-v2-gallery-section {
   padding: 92px 0;
@@ -2300,7 +2369,9 @@ button {
   font-size: 0.92rem;
 }
 
-/* Modal */
+/* ----------------------------------------------------------
+   SOCIAL MEDIA BANNER — PREVIEW MODAL
+---------------------------------------------------------- */
 
 .smb-v2-modal-overlay {
   position: fixed;
@@ -2384,7 +2455,9 @@ button {
   font-size: 0.92rem;
 }
 
-/* Details */
+/* ----------------------------------------------------------
+   SOCIAL MEDIA BANNER — SERVICE DETAILS
+---------------------------------------------------------- */
 
 .smb-v2-detail-section {
   padding: 92px 0;
@@ -2464,7 +2537,9 @@ button {
   margin-top: 24px;
 }
 
-/* Process */
+/* ----------------------------------------------------------
+   SOCIAL MEDIA BANNER — PROCESS
+---------------------------------------------------------- */
 
 .smb-v2-process-section {
   padding: 92px 0;
@@ -2511,9 +2586,11 @@ button {
   line-height: 1.75;
 }
 
-/* Responsive */
+/* ----------------------------------------------------------
+   SOCIAL MEDIA BANNER — RESPONSIVE
+---------------------------------------------------------- */
 
-/* Tablet */
+/* Social Media Banner: Tablet */
 @media (max-width: 1024px) {
   .smb-v2-hero-grid,
   .smb-v2-detail-grid {
@@ -2529,7 +2606,7 @@ button {
   }
 }
 
-/* Mobile */
+/* Social Media Banner: Mobile */
 @media (max-width: 768px) {
   .smb-v2-hero {
     padding: 70px 0;
@@ -2592,7 +2669,9 @@ button {
   }
 }
 
-/* Photo Frame Page */
+/* ========================================================================
+   16. PHOTO FRAME SERVICE PAGE
+======================================================================== */
 
 .pf-page-hero {
   position: relative;
@@ -2699,7 +2778,9 @@ button {
   font-weight: 800;
 }
 
-/* Gallery */
+/* ----------------------------------------------------------
+   PHOTO FRAME — GALLERY
+---------------------------------------------------------- */
 
 .pf-page-gallery-section {
   padding: 92px 0;
@@ -2847,7 +2928,9 @@ button {
   font-size: 0.92rem;
 }
 
-/* Modal */
+/* ----------------------------------------------------------
+   PHOTO FRAME — PREVIEW MODAL
+---------------------------------------------------------- */
 
 .pf-page-modal-overlay {
   position: fixed;
@@ -2931,7 +3014,9 @@ button {
   font-size: 0.92rem;
 }
 
-/* Details */
+/* ----------------------------------------------------------
+   PHOTO FRAME — SERVICE DETAILS
+---------------------------------------------------------- */
 
 .pf-page-detail-section {
   padding: 92px 0;
@@ -3011,7 +3096,9 @@ button {
   margin-top: 24px;
 }
 
-/* Process */
+/* ----------------------------------------------------------
+   PHOTO FRAME — PROCESS
+---------------------------------------------------------- */
 
 .pf-page-process-section {
   padding: 92px 0;
@@ -3058,9 +3145,11 @@ button {
   line-height: 1.75;
 }
 
-/* Responsive */
+/* ----------------------------------------------------------
+   PHOTO FRAME — RESPONSIVE
+---------------------------------------------------------- */
 
-/* Tablet */
+/* Photo Frame: Tablet */
 @media (max-width: 1024px) {
   .pf-page-hero-grid,
   .pf-page-detail-grid {
@@ -3076,7 +3165,7 @@ button {
   }
 }
 
-/* Mobile */
+/* Photo Frame: Mobile */
 @media (max-width: 768px) {
   .pf-page-hero {
     padding: 70px 0;
@@ -3139,7 +3228,9 @@ button {
   }
 }
 
-/* Poster Design Page */
+/* ========================================================================
+   17. POSTER DESIGN SERVICE PAGE
+======================================================================== */
 
 .pd-page-hero {
   position: relative;
@@ -3246,7 +3337,9 @@ button {
   font-weight: 800;
 }
 
-/* Gallery */
+/* ----------------------------------------------------------
+   POSTER DESIGN — GALLERY
+---------------------------------------------------------- */
 
 .pd-page-gallery-section {
   padding: 92px 0;
@@ -3394,7 +3487,9 @@ button {
   font-size: 0.92rem;
 }
 
-/* Modal */
+/* ----------------------------------------------------------
+   POSTER DESIGN — PREVIEW MODAL
+---------------------------------------------------------- */
 
 .pd-page-modal-overlay {
   position: fixed;
@@ -3478,7 +3573,9 @@ button {
   font-size: 0.92rem;
 }
 
-/* Details */
+/* ----------------------------------------------------------
+   POSTER DESIGN — SERVICE DETAILS
+---------------------------------------------------------- */
 
 .pd-page-detail-section {
   padding: 92px 0;
@@ -3558,7 +3655,9 @@ button {
   margin-top: 24px;
 }
 
-/* Process */
+/* ----------------------------------------------------------
+   POSTER DESIGN — PROCESS
+---------------------------------------------------------- */
 
 .pd-page-process-section {
   padding: 92px 0;
@@ -3605,9 +3704,11 @@ button {
   line-height: 1.75;
 }
 
-/* Responsive */
+/* ----------------------------------------------------------
+   POSTER DESIGN — RESPONSIVE
+---------------------------------------------------------- */
 
-/* Tablet */
+/* Poster Design: Tablet */
 @media (max-width: 1024px) {
   .pd-page-hero-grid,
   .pd-page-detail-grid {
@@ -3623,7 +3724,7 @@ button {
   }
 }
 
-/* Mobile */
+/* Poster Design: Mobile */
 @media (max-width: 768px) {
   .pd-page-hero {
     padding: 70px 0;
@@ -3686,7 +3787,9 @@ button {
   }
 }
 
-/* Business Card Design Page */
+/* ========================================================================
+   18. BUSINESS CARD DESIGN SERVICE PAGE
+======================================================================== */
 
 .bcd-page-hero {
   position: relative;
@@ -3793,7 +3896,9 @@ button {
   font-weight: 800;
 }
 
-/* Gallery */
+/* ----------------------------------------------------------
+   BUSINESS CARD — GALLERY
+---------------------------------------------------------- */
 
 .bcd-page-gallery-section {
   padding: 92px 0;
@@ -3941,7 +4046,9 @@ button {
   font-size: 0.92rem;
 }
 
-/* Modal */
+/* ----------------------------------------------------------
+   BUSINESS CARD — PREVIEW MODAL
+---------------------------------------------------------- */
 
 .bcd-page-modal-overlay {
   position: fixed;
@@ -4025,7 +4132,9 @@ button {
   font-size: 0.92rem;
 }
 
-/* Details */
+/* ----------------------------------------------------------
+   BUSINESS CARD — SERVICE DETAILS
+---------------------------------------------------------- */
 
 .bcd-page-detail-section {
   padding: 92px 0;
@@ -4105,7 +4214,9 @@ button {
   margin-top: 24px;
 }
 
-/* Process */
+/* ----------------------------------------------------------
+   BUSINESS CARD — PROCESS
+---------------------------------------------------------- */
 
 .bcd-page-process-section {
   padding: 92px 0;
@@ -4152,9 +4263,11 @@ button {
   line-height: 1.75;
 }
 
-/* Responsive */
+/* ----------------------------------------------------------
+   BUSINESS CARD — RESPONSIVE
+---------------------------------------------------------- */
 
-/* Tablet */
+/* Business Card: Tablet */
 @media (max-width: 1024px) {
   .bcd-page-hero-grid,
   .bcd-page-detail-grid {
@@ -4170,7 +4283,7 @@ button {
   }
 }
 
-/* Mobile */
+/* Business Card: Mobile */
 @media (max-width: 768px) {
   .bcd-page-hero {
     padding: 70px 0;
@@ -4233,7 +4346,9 @@ button {
   }
 }
 
-/* Small Mobile */
+/* ========================================================================
+   19. SHARED SMALL-MOBILE RESPONSIVE STYLES
+======================================================================== */
 @media (max-width: 480px) {
   .container {
     width: min(100% - 20px, var(--container));
@@ -4400,9 +4515,9 @@ button {
   }
 }
 
-/* =========================================================
-   BRANDING MATERIALS — COMING SOON PAGE
-========================================================= */
+/* ========================================================================
+   20. BRANDING MATERIALS — COMING SOON PAGE
+======================================================================== */
 
 .bm-coming-soon {
   position: relative;
@@ -4641,9 +4756,9 @@ button {
   background: rgba(185, 78, 231, 0.08);
 }
 
-/* =========================================================
-   TABLET
-========================================================= */
+/* ----------------------------------------------------------
+   BRANDING MATERIALS — TABLET
+---------------------------------------------------------- */
 
 @media (max-width: 900px) {
   .bm-coming-soon {
@@ -4657,9 +4772,9 @@ button {
   }
 }
 
-/* =========================================================
-   MOBILE
-========================================================= */
+/* ----------------------------------------------------------
+   BRANDING MATERIALS — MOBILE
+---------------------------------------------------------- */
 
 @media (max-width: 600px) {
   .bm-coming-soon {
@@ -4746,9 +4861,9 @@ button {
   }
 }
 
-/* =========================================================
-   SMALL MOBILE
-========================================================= */
+/* ----------------------------------------------------------
+   BRANDING MATERIALS — SMALL MOBILE
+---------------------------------------------------------- */
 
 @media (max-width: 380px) {
   .bm-coming-soon {
@@ -4767,5 +4882,479 @@ button {
 
   .bm-coming-soon h2 {
     font-size: 22px;
+  }
+}
+
+/* ========================================================================
+   21. HOME PAGE — ANIMATIONS
+======================================================================== */
+
+/* The animation classes below require the updated Home.jsx file. */
+
+/* ------------------------------------------------------------------------
+   HERO BACKGROUND AND GRADIENT MOTION
+------------------------------------------------------------------------ */
+
+.home-page .ld-hero::after {
+  content: "";
+  position: absolute;
+  top: 8%;
+  right: -8%;
+  z-index: 0;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(109, 93, 252, 0.2) 0%,
+    rgba(255, 95, 199, 0.12) 42%,
+    transparent 72%
+  );
+  filter: blur(10px);
+  pointer-events: none;
+  animation: home-orb-drift 9s ease-in-out infinite alternate;
+}
+
+.home-page .ld-gradient-text {
+  background-size: 220% auto;
+  animation: home-gradient-flow 6s ease-in-out infinite;
+}
+
+/* ------------------------------------------------------------------------
+   HERO ENTRANCE
+------------------------------------------------------------------------ */
+
+.home-page .home-hero-enter {
+  opacity: 0;
+  animation-name: home-fade-up;
+  animation-duration: 0.8s;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  animation-fill-mode: both;
+}
+
+.home-page .home-delay-1 {
+  animation-delay: 80ms;
+}
+
+.home-page .home-delay-2 {
+  animation-delay: 180ms;
+}
+
+.home-page .home-delay-3 {
+  animation-delay: 290ms;
+}
+
+.home-page .home-delay-4 {
+  animation-delay: 400ms;
+}
+
+.home-page .home-hero-card-enter {
+  opacity: 0;
+  animation-name: home-card-enter;
+  animation-duration: 0.82s;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  animation-delay: var(--hero-delay, 420ms);
+  animation-fill-mode: both;
+}
+
+.home-page .home-stat-enter {
+  opacity: 0;
+  animation-name: home-stat-enter;
+  animation-duration: 0.72s;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  animation-delay: var(--hero-delay, 760ms);
+  animation-fill-mode: both;
+}
+
+.home-page .ld-text-card {
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    background-color 0.3s ease;
+}
+
+.home-page .ld-text-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(109, 93, 252, 0.28);
+  box-shadow: 0 30px 80px rgba(79, 70, 229, 0.16);
+}
+
+.home-page .ld-hero-stats > div {
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.home-page .ld-hero-stats > div:hover {
+  transform: translateY(-4px) scale(1.025);
+  border-color: rgba(109, 93, 252, 0.25);
+  box-shadow: 0 24px 58px rgba(79, 70, 229, 0.13);
+}
+
+/* ------------------------------------------------------------------------
+   BUTTON MOTION
+------------------------------------------------------------------------ */
+
+.home-page .ld-primary-btn,
+.home-page .ld-secondary-btn,
+.home-page .cta-commission-btn {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.home-page .ld-primary-btn::before,
+.home-page .cta-commission-btn::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -120%;
+  z-index: -1;
+  width: 58%;
+  height: 200%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.42),
+    transparent
+  );
+  transform: rotate(18deg);
+  pointer-events: none;
+  transition: left 0.65s ease;
+}
+
+.home-page .ld-primary-btn:hover::before,
+.home-page .cta-commission-btn:hover::before {
+  left: 145%;
+}
+
+.home-page .ld-secondary-btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    rgba(109, 93, 252, 0.08),
+    rgba(255, 95, 199, 0.08)
+  );
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.home-page .ld-secondary-btn:hover::after {
+  opacity: 1;
+}
+
+/* ------------------------------------------------------------------------
+   SCROLL REVEAL
+------------------------------------------------------------------------ */
+
+.home-page.home-motion-ready [data-home-reveal] {
+  opacity: 0;
+  transform: translateY(34px) scale(0.985);
+  transition:
+    opacity 0.72s ease,
+    transform 0.72s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.home-page.home-motion-ready [data-home-reveal="left"] {
+  transform: translateX(-48px);
+}
+
+.home-page.home-motion-ready [data-home-reveal="right"] {
+  transform: translateX(48px);
+}
+
+.home-page.home-motion-ready [data-home-reveal="scale"] {
+  transform: translateY(18px) scale(0.94);
+}
+
+.home-page.home-motion-ready [data-home-reveal].is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+.home-page .home-service-item {
+  min-width: 0;
+}
+
+.home-page .home-service-item > * {
+  height: 100%;
+}
+
+/* ------------------------------------------------------------------------
+   CARD MICRO-INTERACTIONS
+------------------------------------------------------------------------ */
+
+.home-page .why-card,
+.home-page .service-card,
+.home-page .feature-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.home-page .why-card::after,
+.home-page .service-card::after,
+.home-page .feature-card::after {
+  content: "";
+  position: absolute;
+  right: -25%;
+  bottom: -55%;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(109, 93, 252, 0.1),
+    transparent 68%
+  );
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 0.3s ease,
+    transform 0.4s ease;
+}
+
+.home-page .why-card:hover::after,
+.home-page .service-card:hover::after,
+.home-page .feature-card:hover::after {
+  opacity: 1;
+  transform: translate(-18px, -18px) scale(1.15);
+}
+
+.home-page .why-card {
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.home-page .why-card:hover {
+  transform: translateY(-8px);
+  border-color: #c7d2fe;
+  box-shadow: 0 30px 76px rgba(79, 70, 229, 0.14);
+}
+
+.home-page .why-icon,
+.home-page .service-icon {
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s ease;
+}
+
+.home-page .why-card:hover .why-icon,
+.home-page .service-card:hover .service-icon {
+  transform: translateY(-3px) rotate(-4deg) scale(1.06);
+  box-shadow: 0 22px 46px rgba(109, 93, 252, 0.38);
+}
+
+.home-page .feature-card {
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.home-page .feature-card:hover {
+  transform: translateY(-7px);
+  border-color: rgba(255, 95, 199, 0.34);
+}
+
+.home-page .feature-list > div {
+  transition:
+    transform 0.25s ease,
+    color 0.25s ease;
+}
+
+.home-page .feature-list > div:hover {
+  transform: translateX(6px);
+  color: #ffffff;
+}
+
+.home-page .feature-list svg {
+  transition:
+    transform 0.3s ease,
+    filter 0.3s ease;
+}
+
+.home-page .feature-list > div:hover svg {
+  transform: scale(1.15) rotate(-6deg);
+  filter: drop-shadow(0 0 8px rgba(139, 255, 203, 0.45));
+}
+
+/* ------------------------------------------------------------------------
+   CTA DECORATIVE MOTION
+------------------------------------------------------------------------ */
+
+.home-page .cta-box::after {
+  content: "";
+  position: absolute;
+  right: -70px;
+  bottom: -95px;
+  width: 270px;
+  height: 270px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 34px rgba(255, 255, 255, 0.045),
+    0 0 0 70px rgba(255, 255, 255, 0.025);
+  pointer-events: none;
+  animation: home-cta-ring 7s ease-in-out infinite alternate;
+}
+
+/* ------------------------------------------------------------------------
+   KEYFRAMES
+------------------------------------------------------------------------ */
+
+@keyframes home-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes home-card-enter {
+  from {
+    opacity: 0;
+    transform: translate(44px, 18px) scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+@keyframes home-stat-enter {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.94);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes home-gradient-flow {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes home-orb-drift {
+  from {
+    transform: translate(0, 0) scale(0.95);
+  }
+
+  to {
+    transform: translate(-55px, 42px) scale(1.12);
+  }
+}
+
+@keyframes home-cta-ring {
+  from {
+    transform: translate(0, 0) scale(0.96);
+    opacity: 0.72;
+  }
+
+  to {
+    transform: translate(-18px, -12px) scale(1.06);
+    opacity: 1;
+  }
+}
+
+/* ------------------------------------------------------------------------
+   TABLET
+------------------------------------------------------------------------ */
+
+@media (max-width: 1024px) {
+  .home-page .ld-hero::after {
+    top: 22%;
+    right: -18%;
+    width: 360px;
+    height: 360px;
+  }
+
+  .home-page .home-hero-card-enter {
+    animation-name: home-fade-up;
+  }
+}
+
+/* ------------------------------------------------------------------------
+   MOBILE
+------------------------------------------------------------------------ */
+
+@media (max-width: 768px) {
+  .home-page .ld-hero::after {
+    top: 12%;
+    right: -48%;
+    width: 310px;
+    height: 310px;
+    opacity: 0.72;
+  }
+
+  .home-page .home-hero-enter,
+  .home-page .home-hero-card-enter,
+  .home-page .home-stat-enter {
+    animation-duration: 0.65s;
+  }
+
+  .home-page.home-motion-ready [data-home-reveal],
+  .home-page.home-motion-ready [data-home-reveal="left"],
+  .home-page.home-motion-ready [data-home-reveal="right"],
+  .home-page.home-motion-ready [data-home-reveal="scale"] {
+    transform: translateY(22px) scale(0.985);
+  }
+
+  .home-page.home-motion-ready [data-home-reveal].is-visible {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  .home-page .why-card:hover,
+  .home-page .feature-card:hover {
+    transform: translateY(-4px);
+  }
+}
+
+/* ------------------------------------------------------------------------
+   REDUCED MOTION ACCESSIBILITY
+------------------------------------------------------------------------ */
+
+@media (prefers-reduced-motion: reduce) {
+  .home-page *,
+  .home-page *::before,
+  .home-page *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .home-page .home-hero-enter,
+  .home-page .home-hero-card-enter,
+  .home-page .home-stat-enter,
+  .home-page.home-motion-ready [data-home-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
