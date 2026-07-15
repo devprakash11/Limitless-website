@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { services } from "../data/services";
 
@@ -7,30 +7,110 @@ function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [serviceOpen, setServiceOpen] = useState(false);
 
-  const toggleMenu = () => {
-    setMenuOpen((current) => {
-      const nextValue = !current;
+  const location = useLocation();
 
-      if (!nextValue) {
+  /*
+   * Open and close the complete mobile navigation.
+   */
+  const toggleMenu = () => {
+    setMenuOpen((currentMenuState) => {
+      const nextMenuState = !currentMenuState;
+
+      /*
+       * Close the Services dropdown when the
+       * complete mobile navigation is closed.
+       */
+      if (!nextMenuState) {
         setServiceOpen(false);
       }
 
-      return nextValue;
+      return nextMenuState;
     });
   };
 
-  const toggleServices = () => {
-    setServiceOpen((current) => !current);
+  /*
+   * Open and close only the Services dropdown.
+   */
+  const toggleServices = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    setServiceOpen((currentServiceState) => !currentServiceState);
   };
 
+  /*
+   * Close the mobile navigation and Services dropdown.
+   */
   const closeMenu = () => {
     setMenuOpen(false);
     setServiceOpen(false);
   };
 
+  /*
+   * Close the navigation automatically after the route changes.
+   */
+  useEffect(() => {
+    setMenuOpen(false);
+    setServiceOpen(false);
+  }, [location.pathname, location.hash]);
+
+  /*
+   * Prevent the page behind the mobile navigation from scrolling.
+   */
+  useEffect(() => {
+    const isMobileView = window.innerWidth <= 991;
+
+    if (menuOpen && isMobileView) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
+
+  /*
+   * Close the navigation when the Escape key is pressed.
+   */
+  useEffect(() => {
+    const handleEscapeKey = (event) => {
+      if (event.key === "Escape") {
+        closeMenu();
+      }
+    };
+
+    document.addEventListener("keydown", handleEscapeKey);
+
+    return () => {
+      document.removeEventListener("keydown", handleEscapeKey);
+    };
+  }, []);
+
+  /*
+   * Reset the mobile menu when changing from mobile to desktop.
+   */
+  useEffect(() => {
+    const handleWindowResize = () => {
+      if (window.innerWidth > 991) {
+        setMenuOpen(false);
+        setServiceOpen(false);
+        document.body.style.overflow = "";
+      }
+    };
+
+    window.addEventListener("resize", handleWindowResize);
+
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
+    };
+  }, []);
+
   return (
     <header className="site-header">
       <nav className="navbar container" aria-label="Main navigation">
+        {/* Brand Logo */}
         <Link to="/" className="brand" onClick={closeMenu}>
           <img
             src="/images/logo.webp"
@@ -41,34 +121,64 @@ function Navbar() {
           <span className="brand-text">Limitless Design</span>
         </Link>
 
+        {/* Mobile Toggle Button */}
         <button
           type="button"
-          className="mobile-toggle"
+          className={`mobile-toggle ${menuOpen ? "active" : ""}`}
           onClick={toggleMenu}
-          aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
+          aria-label={
+            menuOpen ? "Close navigation menu" : "Open navigation menu"
+          }
           aria-expanded={menuOpen}
           aria-controls="main-navigation-menu"
         >
-          {menuOpen ? <X size={24} /> : <Menu size={24} />}
+          {menuOpen ? (
+            <X size={24} aria-hidden="true" />
+          ) : (
+            <Menu size={24} aria-hidden="true" />
+          )}
         </button>
 
+        {/* Navigation Menu */}
         <div
           id="main-navigation-menu"
           className={`nav-menu ${menuOpen ? "active" : ""}`}
         >
           <div className="nav-links">
-            <NavLink to="/" onClick={closeMenu}>
+            {/* Home */}
+            <NavLink
+              to="/"
+              end
+              onClick={closeMenu}
+              className={({ isActive }) =>
+                isActive ? "nav-link active" : "nav-link"
+              }
+            >
               Home
             </NavLink>
 
-            <NavLink to="/about" onClick={closeMenu}>
+            {/* About */}
+            <NavLink
+              to="/about"
+              onClick={closeMenu}
+              className={({ isActive }) =>
+                isActive ? "nav-link active" : "nav-link"
+              }
+            >
               About
             </NavLink>
 
-            <div className={`dropdown ${serviceOpen ? "active" : ""}`}>
+            {/* Services Dropdown */}
+            <div
+              className={`dropdown ${
+                serviceOpen ? "active dropdown-open" : ""
+              }`}
+            >
               <button
                 type="button"
-                className="dropdown-btn"
+                className={`dropdown-btn ${
+                  serviceOpen ? "active" : ""
+                }`}
                 onClick={toggleServices}
                 aria-expanded={serviceOpen}
                 aria-controls="service-dropdown-menu"
@@ -77,6 +187,7 @@ function Navbar() {
 
                 <ChevronDown
                   size={17}
+                  aria-hidden="true"
                   className={`dropdown-arrow ${
                     serviceOpen ? "rotate" : ""
                   }`}
@@ -85,26 +196,46 @@ function Navbar() {
 
               <div
                 id="service-dropdown-menu"
-                className={`dropdown-menu ${serviceOpen ? "show" : ""}`}
+                className={`dropdown-menu ${
+                  serviceOpen ? "show" : ""
+                }`}
+                aria-hidden={!serviceOpen}
               >
-                {services.map((service) => (
-                  <Link
-                    key={service.slug}
-                    to={`/services/${service.slug}`}
-                    onClick={closeMenu}
-                  >
-                    {service.title}
-                  </Link>
-                ))}
+                <div className="dropdown-menu-inner">
+                  {services.map((service) => (
+                    <NavLink
+                      key={service.slug}
+                      to={`/services/${service.slug}`}
+                      onClick={closeMenu}
+                      className={({ isActive }) =>
+                        isActive
+                          ? "dropdown-link active"
+                          : "dropdown-link"
+                      }
+                    >
+                      {service.title}
+                    </NavLink>
+                  ))}
+                </div>
               </div>
             </div>
 
-            <a href="/#features" onClick={closeMenu}>
+            {/* Features */}
+            <a
+              href="/#features"
+              className="nav-link"
+              onClick={closeMenu}
+            >
               Features
             </a>
           </div>
 
-          <Link to="/contact" className="nav-btn" onClick={closeMenu}>
+          {/* Commission Work Button */}
+          <Link
+            to="/contact"
+            className="nav-btn"
+            onClick={closeMenu}
+          >
             Commission Work
           </Link>
         </div>
