@@ -1,0 +1,9 @@
+{
+  "name": "Test Customer",
+  "email": "your-test-email@example.com",
+  "phone": "+91 9876543210",
+  "service": "Logo Design",
+  "message": "I need a modern logo for a new creative technology business.",
+  "website": "",
+  "submissionSource": "http://localhost:5173/contact"
+}
