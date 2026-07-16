@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+
+import DownloadPreviewButton from "../components/DownloadPreviewButton";
 import {
   ArrowRight,
   BadgeCheck,
   Brush,
-  Download,
   Eye,
   Layers3,
   Palette,
@@ -13,7 +14,7 @@ import {
   X,
 } from "lucide-react";
 
-import { logoDownloads } from "../data/logoDownloads";
+import { logoDownloads } from "../data/downloadAssets";
 
 const benefits = [
   "Custom logo concepts based on your business identity",
@@ -46,9 +47,13 @@ function LogoDesign() {
   const [previewLogo, setPreviewLogo] = useState(null);
   const [showAll, setShowAll] = useState(false);
 
-  const visibleLogos = showAll
+  const availableLogos = Array.isArray(logoDownloads)
     ? logoDownloads
-    : logoDownloads.slice(0, 4);
+    : [];
+
+  const visibleLogos = showAll
+    ? availableLogos
+    : availableLogos.slice(0, 4);
 
   useEffect(() => {
     const handleEscape = (event) => {
@@ -168,21 +173,19 @@ function LogoDesign() {
                       Preview
                     </button>
 
-                    <Link
-                      to={`/logo-download/${item.slug}`}
+                    <DownloadPreviewButton
+                      asset={item}
                       className="logo-v2-download-btn"
-                      aria-label={`Open download page for ${item.title}`}
                     >
-                      <Download size={15} aria-hidden="true" />
                       Download
-                    </Link>
+                    </DownloadPreviewButton>
                   </div>
                 </div>
               </article>
             ))}
           </div>
 
-          {logoDownloads.length > 4 && (
+          {availableLogos.length > 4 && (
             <div className="logo-v2-view-all-wrap">
               <button
                 type="button"
@@ -235,14 +238,13 @@ function LogoDesign() {
                 <p>Full logo preview</p>
               </div>
 
-              <Link
-                to={`/logo-download/${previewLogo.slug}`}
+              <DownloadPreviewButton
+                asset={previewLogo}
                 className="logo-v2-download-btn"
-                onClick={() => setPreviewLogo(null)}
+                onBeforeNavigate={() => setPreviewLogo(null)}
               >
-                <Download size={15} aria-hidden="true" />
                 Download
-              </Link>
+              </DownloadPreviewButton>
             </div>
           </div>
         </div>

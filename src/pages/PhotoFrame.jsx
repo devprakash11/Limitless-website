@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import WatermarkDownloadButton from "../components/WatermarkDownloadButton";
+
+import DownloadPreviewButton from "../components/DownloadPreviewButton";
+import { photoFrameDownloads } from "../data/downloadAssets";
 
 import {
   ArrowRight,
@@ -13,45 +15,6 @@ import {
   Sparkles,
   X,
 } from "lucide-react";
-
-const frameSamples = [
-{
-  title: "Baby Photo Frame",
-  image: "/images/photo-frame/baby-frame.webp",
-},
-{
-  title: "Greeting Card Design",
-  image: "/images/photo-frame/card.webp",
-},
-{
-  title: "Classic Photo Frame",
-  image: "/images/photo-frame/frame.webp",
-},
-{
-  title: "Google Template Design",
-  image: "/images/photo-frame/google-template.webp",
-},
-{
-  title: "Love Photo Frame",
-  image: "/images/photo-frame/love-frame.webp",
-},
-{
-  title: "Love Story Photo Frame",
-  image: "/images/photo-frame/love-story-frame.webp",
-},
-{
-  title: "Sorry Card Design",
-  image: "/images/photo-frame/sorry-card.webp",
-},
-{
-  title: "Wedding Photo Frame",
-  image: "/images/photo-frame/wedding.webp",
-},
-{
-  title: "Wedding Photo Frame",
-  image: "/images/photo-frame/wedding.webp",
-},
-];
 
 const benefits = [
   "Custom photo frame designs for events, festivals, brands, and campaigns",
@@ -80,21 +43,17 @@ const process = [
   },
 ];
 
-function createFileName(title) {
-  return `${title
-    .toLowerCase()
-    .trim()
-    .replace(/[^a-z0-9\s-]/g, "")
-    .replace(/\s+/g, "-")}.png`;
-}
-
 function PhotoFrame() {
   const [previewFrame, setPreviewFrame] = useState(null);
   const [showAll, setShowAll] = useState(false);
 
+  const availableFrames = Array.isArray(photoFrameDownloads)
+    ? photoFrameDownloads
+    : [];
+
   const visibleFrames = showAll
-    ? frameSamples
-    : frameSamples.slice(0, 4);
+    ? availableFrames
+    : availableFrames.slice(0, 4);
 
   useEffect(() => {
     const handleEscape = (event) => {
@@ -139,10 +98,7 @@ function PhotoFrame() {
                 <ArrowRight size={18} />
               </Link>
 
-              <a
-                href="#photo-frame-gallery"
-                className="secondary-btn"
-              >
+              <a href="#photo-frame-gallery" className="secondary-btn">
                 View Samples
               </a>
             </div>
@@ -177,9 +133,7 @@ function PhotoFrame() {
       >
         <div className="container">
           <div className="pf-page-heading">
-            <span className="section-label">
-              Photo Frame Gallery
-            </span>
+            <span className="section-label">Photo Frame Gallery</span>
 
             <h2>Explore professional photo frame styles</h2>
 
@@ -190,64 +144,73 @@ function PhotoFrame() {
             </p>
           </div>
 
-          <div className="pf-page-gallery-grid">
-            {visibleFrames.map((item) => (
-              <div
-                className="pf-page-card"
-                key={item.title}
-              >
-                <div className="pf-page-image-wrap">
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    loading="lazy"
-                  />
-                </div>
-
-                <div className="pf-page-card-content">
-                  <div className="pf-page-card-info">
-                    <h3>{item.title}</h3>
-                    <span>Photo Frame</span>
-                  </div>
-
-                  <div className="pf-page-actions">
-                    <button
-                      type="button"
-                      className="pf-page-preview-btn"
-                      onClick={() => setPreviewFrame(item)}
-                    >
-                      <Eye size={15} />
-                      Preview
-                    </button>
-
-                    <WatermarkDownloadButton
-                      imageUrl={item.image}
-                      fileName={createFileName(item.title)}
-                      className="pf-page-download-btn"
+          {visibleFrames.length > 0 ? (
+            <div className="pf-page-gallery-grid">
+              {visibleFrames.map((item) => (
+                <article className="pf-page-card" key={item.slug}>
+                  <div className="pf-page-image-wrap">
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      loading="lazy"
                     />
                   </div>
-                </div>
-              </div>
-            ))}
-          </div>
 
-          {frameSamples.length > 4 && (
+                  <div className="pf-page-card-content">
+                    <div className="pf-page-card-info">
+                      <h3>{item.title}</h3>
+                      <span>{item.category}</span>
+                    </div>
+
+                    <div className="pf-page-actions">
+                      <button
+                        type="button"
+                        className="pf-page-preview-btn"
+                        onClick={() => setPreviewFrame(item)}
+                        aria-label={`Preview ${item.title}`}
+                      >
+                        <Eye size={15} aria-hidden="true" />
+                        Preview
+                      </button>
+
+                      <DownloadPreviewButton
+                        asset={item}
+                        className="pf-page-download-btn"
+                      >
+                        Download
+                      </DownloadPreviewButton>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          ) : (
+            <div className="pf-page-empty-state" role="status">
+              <Frame size={42} aria-hidden="true" />
+              <h3>No photo frames available</h3>
+              <p>
+                Add photo frame objects inside the photoFrameDownloads array in
+                src/data/downloadAssets.js.
+              </p>
+            </div>
+          )}
+
+          {availableFrames.length > 4 && (
             <div className="pf-page-view-all-wrap">
               <button
                 type="button"
                 className="pf-page-view-all-btn"
                 onClick={() => setShowAll((current) => !current)}
+                aria-expanded={showAll}
               >
-                {showAll
-                  ? "Show Less"
-                  : "View All Photo Frames"}
+                {showAll ? "Show Less" : "View All Photo Frames"}
               </button>
             </div>
           )}
         </div>
       </section>
 
-      {/* Preview modal */}
+      {/* Quick preview modal */}
       {previewFrame && (
         <div
           className="pf-page-modal-overlay"
@@ -267,7 +230,7 @@ function PhotoFrame() {
               onClick={() => setPreviewFrame(null)}
               aria-label="Close preview"
             >
-              <X size={22} />
+              <X size={22} aria-hidden="true" />
             </button>
 
             <div className="pf-page-modal-image">
@@ -282,15 +245,16 @@ function PhotoFrame() {
                 <h3 id="photo-frame-preview-title">
                   {previewFrame.title}
                 </h3>
-
                 <p>Full photo frame preview</p>
               </div>
 
-              <WatermarkDownloadButton
-                imageUrl={previewFrame.image}
-                fileName={createFileName(previewFrame.title)}
+              <DownloadPreviewButton
+                asset={previewFrame}
                 className="pf-page-download-btn"
-              />
+                onBeforeNavigate={() => setPreviewFrame(null)}
+              >
+                Download
+              </DownloadPreviewButton>
             </div>
           </div>
         </div>
@@ -300,9 +264,7 @@ function PhotoFrame() {
       <section className="pf-page-detail-section">
         <div className="container pf-page-detail-grid">
           <div className="pf-page-detail-content">
-            <span className="section-label">
-              Service Details
-            </span>
+            <span className="section-label">Service Details</span>
 
             <h2>What you get in Photo Frame Design</h2>
 
@@ -315,7 +277,7 @@ function PhotoFrame() {
             <div className="pf-page-benefit-list">
               {benefits.map((item) => (
                 <div key={item}>
-                  <BadgeCheck size={21} />
+                  <BadgeCheck size={21} aria-hidden="true" />
                   <span>{item}</span>
                 </div>
               ))}
@@ -333,7 +295,7 @@ function PhotoFrame() {
 
             <Link to="/contact" className="primary-btn">
               Start Frame Project
-              <ArrowRight size={18} />
+              <ArrowRight size={18} aria-hidden="true" />
             </Link>
           </aside>
         </div>
@@ -343,9 +305,7 @@ function PhotoFrame() {
       <section className="pf-page-process-section">
         <div className="container">
           <div className="pf-page-heading">
-            <span className="section-label">
-              Our Process
-            </span>
+            <span className="section-label">Our Process</span>
 
             <h2>Simple process, beautiful frame output</h2>
 
@@ -360,17 +320,14 @@ function PhotoFrame() {
               const Icon = item.icon;
 
               return (
-                <div
-                  className="pf-page-process-card"
-                  key={item.title}
-                >
+                <article className="pf-page-process-card" key={item.title}>
                   <div className="pf-page-process-icon">
-                    <Icon size={25} />
+                    <Icon size={25} aria-hidden="true" />
                   </div>
 
                   <h3>{item.title}</h3>
                   <p>{item.text}</p>
-                </div>
+                </article>
               );
             })}
           </div>

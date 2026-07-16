@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import WatermarkDownloadButton from "../components/WatermarkDownloadButton";
+
+import DownloadPreviewButton from "../components/DownloadPreviewButton";
+import { businessCardDownloads } from "../data/downloadAssets";
 
 import {
   ArrowRight,
@@ -14,25 +16,9 @@ import {
   X,
 } from "lucide-react";
 
-const businessCardSamples = [
-  {
-    title: "Premium Business Card",
-    image: "/images/business-card-design/chrunchy-visiting-card.webp",
-  },
-  {
-    title: "Premium Business Card",
-    image: "/images/business-card-design/visiting-card-2.webp",
-  },
-  {
-    title: "Premium Business Card",
-    image: "/images/business-card-design/visiting-card.webp",
-  },
-  {
-    title: "Premium Business Card",
-    image: "/images/business-card-design/visiting-card1.webp",
-  },
-  
-];
+/* =========================================================
+   BUSINESS CARD BENEFITS
+========================================================= */
 
 const benefits = [
   "Professional business card designs for brands, founders, agencies, and service providers",
@@ -42,6 +28,10 @@ const benefits = [
   "Print-ready and digital-ready export formats",
   "Strong first impression with professional contact information layout",
 ];
+
+/* =========================================================
+   BUSINESS CARD DESIGN PROCESS
+========================================================= */
 
 const process = [
   {
@@ -61,22 +51,38 @@ const process = [
   },
 ];
 
-// Creates a clean PNG filename
-function createFileName(title) {
-  return `${title
-    .toLowerCase()
-    .trim()
-    .replace(/[^a-z0-9\s-]/g, "")
-    .replace(/\s+/g, "-")}.png`;
-}
+/* =========================================================
+   BUSINESS CARD DESIGN PAGE
+========================================================= */
 
 function BusinessCardDesign() {
   const [previewCard, setPreviewCard] = useState(null);
   const [showAll, setShowAll] = useState(false);
 
+  /*
+    All business-card items now come from the shared
+    downloadAssets.js registry.
+
+    The same asset object powers:
+    1. Business Card gallery cards
+    2. Quick preview modal
+    3. Global full-screen download preview
+    4. Previous and next design navigation
+    5. PNG, JPG, WEBP and source-file downloads
+  */
+  const availableCards = Array.isArray(
+    businessCardDownloads
+  )
+    ? businessCardDownloads
+    : [];
+
   const visibleCards = showAll
-    ? businessCardSamples
-    : businessCardSamples.slice(0, 4);
+    ? availableCards
+    : availableCards.slice(0, 4);
+
+  /* =========================================================
+     QUICK PREVIEW MODAL
+  ========================================================= */
 
   useEffect(() => {
     const handleEscape = (event) => {
@@ -98,12 +104,15 @@ function BusinessCardDesign() {
 
   return (
     <>
-      {/* Hero section */}
+      {/* =====================================================
+          HERO SECTION
+      ====================================================== */}
+
       <section className="bcd-page-hero">
         <div className="container bcd-page-hero-grid">
           <div className="bcd-page-hero-content">
             <span className="section-label dark-label">
-              <Sparkles size={16} />
+              <Sparkles size={16} aria-hidden="true" />
               Creative Service
             </span>
 
@@ -111,14 +120,14 @@ function BusinessCardDesign() {
 
             <p>
               Create professional business card designs for founders,
-              entrepreneurs, agencies, consultants, service providers, startups,
-              and personal brands.
+              entrepreneurs, agencies, consultants, service providers,
+              startups, and personal brands.
             </p>
 
             <div className="bcd-page-hero-actions">
               <Link to="/contact" className="primary-btn">
                 Commission Card Work
-                <ArrowRight size={18} />
+                <ArrowRight size={18} aria-hidden="true" />
               </Link>
 
               <a
@@ -132,7 +141,10 @@ function BusinessCardDesign() {
 
           <div className="bcd-page-hero-card">
             <div className="bcd-page-card-icon">
-              <BriefcaseBusiness size={34} />
+              <BriefcaseBusiness
+                size={34}
+                aria-hidden="true"
+              />
             </div>
 
             <h3>Premium Business Card Identity</h3>
@@ -152,7 +164,10 @@ function BusinessCardDesign() {
         </div>
       </section>
 
-      {/* Gallery section */}
+      {/* =====================================================
+          BUSINESS CARD GALLERY
+      ====================================================== */}
+
       <section
         className="bcd-page-gallery-section"
         id="business-card-gallery"
@@ -166,59 +181,95 @@ function BusinessCardDesign() {
             <h2>Explore professional business card styles</h2>
 
             <p>
-              Showcase premium business cards, corporate cards, creative cards,
-              startup cards, and personal branding cards in a clean
+              Showcase premium business cards, corporate cards, creative
+              cards, startup cards, and personal branding cards in a clean
               portfolio-style grid.
             </p>
           </div>
 
-          <div className="bcd-page-gallery-grid">
-            {visibleCards.map((item) => (
-              <div
-                className="bcd-page-card"
-                key={item.title}
-              >
-                <div className="bcd-page-image-wrap">
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    loading="lazy"
-                  />
-                </div>
-
-                <div className="bcd-page-card-content">
-                  <div className="bcd-page-card-info">
-                    <h3>{item.title}</h3>
-                    <span>Business Card Design</span>
-                  </div>
-
-                  <div className="bcd-page-actions">
-                    <button
-                      type="button"
-                      className="bcd-page-preview-btn"
-                      onClick={() => setPreviewCard(item)}
-                    >
-                      <Eye size={15} />
-                      Preview
-                    </button>
-
-                    <WatermarkDownloadButton
-                      imageUrl={item.image}
-                      fileName={createFileName(item.title)}
-                      className="bcd-page-download-btn"
+          {visibleCards.length > 0 ? (
+            <div className="bcd-page-gallery-grid">
+              {visibleCards.map((item) => (
+                <article
+                  className="bcd-page-card"
+                  key={item.slug}
+                >
+                  <div className="bcd-page-image-wrap">
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      loading="lazy"
                     />
                   </div>
-                </div>
-              </div>
-            ))}
-          </div>
 
-          {businessCardSamples.length > 4 && (
+                  <div className="bcd-page-card-content">
+                    <div className="bcd-page-card-info">
+                      <h3>{item.title}</h3>
+
+                      <span>
+                        {item.category ||
+                          "Business Card Design"}
+                      </span>
+                    </div>
+
+                    <div className="bcd-page-actions">
+                      {/* Opens the existing quick image preview */}
+                      <button
+                        type="button"
+                        className="bcd-page-preview-btn"
+                        onClick={() => setPreviewCard(item)}
+                        aria-label={`Preview ${item.title}`}
+                      >
+                        <Eye size={15} aria-hidden="true" />
+                        Preview
+                      </button>
+
+                      {/*
+                        Opens the universal download preview.
+
+                        Example URL:
+                        /download/business-card-design/premium-business-card-one
+                      */}
+                      <DownloadPreviewButton
+                        asset={item}
+                        className="bcd-page-download-btn"
+                      >
+                        Download
+                      </DownloadPreviewButton>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          ) : (
+            <div
+              className="bcd-page-empty-state"
+              role="status"
+            >
+              <BriefcaseBusiness
+                size={44}
+                aria-hidden="true"
+              />
+
+              <h3>No business cards available</h3>
+
+              <p>
+                Add business-card entries inside the
+                businessCardDownloads array in
+                src/data/downloadAssets.js.
+              </p>
+            </div>
+          )}
+
+          {availableCards.length > 4 && (
             <div className="bcd-page-view-all-wrap">
               <button
                 type="button"
                 className="bcd-page-view-all-btn"
-                onClick={() => setShowAll((current) => !current)}
+                onClick={() => {
+                  setShowAll((current) => !current);
+                }}
+                aria-expanded={showAll}
               >
                 {showAll
                   ? "Show Less"
@@ -229,7 +280,10 @@ function BusinessCardDesign() {
         </div>
       </section>
 
-      {/* Preview modal */}
+      {/* =====================================================
+          QUICK PREVIEW MODAL
+      ====================================================== */}
+
       {previewCard && (
         <div
           className="bcd-page-modal-overlay"
@@ -249,7 +303,7 @@ function BusinessCardDesign() {
               onClick={() => setPreviewCard(null)}
               aria-label="Close preview"
             >
-              <X size={22} />
+              <X size={22} aria-hidden="true" />
             </button>
 
             <div className="bcd-page-modal-image">
@@ -268,17 +322,22 @@ function BusinessCardDesign() {
                 <p>Full business card preview</p>
               </div>
 
-              <WatermarkDownloadButton
-                imageUrl={previewCard.image}
-                fileName={createFileName(previewCard.title)}
+              <DownloadPreviewButton
+                asset={previewCard}
                 className="bcd-page-download-btn"
-              />
+                onBeforeNavigate={() => setPreviewCard(null)}
+              >
+                Download
+              </DownloadPreviewButton>
             </div>
           </div>
         </div>
       )}
 
-      {/* Service details */}
+      {/* =====================================================
+          SERVICE DETAILS
+      ====================================================== */}
+
       <section className="bcd-page-detail-section">
         <div className="container bcd-page-detail-grid">
           <div className="bcd-page-detail-content">
@@ -297,7 +356,11 @@ function BusinessCardDesign() {
             <div className="bcd-page-benefit-list">
               {benefits.map((item) => (
                 <div key={item}>
-                  <BadgeCheck size={21} />
+                  <BadgeCheck
+                    size={21}
+                    aria-hidden="true"
+                  />
+
                   <span>{item}</span>
                 </div>
               ))}
@@ -309,19 +372,22 @@ function BusinessCardDesign() {
 
             <p>
               Share your logo, name, designation, phone, email, website,
-              address, brand colors, and preferred card style. We will create a
-              professional business card design for you.
+              address, brand colors, and preferred card style. We will create
+              a professional business card design for you.
             </p>
 
             <Link to="/contact" className="primary-btn">
               Start Card Project
-              <ArrowRight size={18} />
+              <ArrowRight size={18} aria-hidden="true" />
             </Link>
           </aside>
         </div>
       </section>
 
-      {/* Process section */}
+      {/* =====================================================
+          PROCESS SECTION
+      ====================================================== */}
+
       <section className="bcd-page-process-section">
         <div className="container">
           <div className="bcd-page-heading">
@@ -342,17 +408,17 @@ function BusinessCardDesign() {
               const Icon = item.icon;
 
               return (
-                <div
+                <article
                   className="bcd-page-process-card"
                   key={item.title}
                 >
                   <div className="bcd-page-process-icon">
-                    <Icon size={25} />
+                    <Icon size={25} aria-hidden="true" />
                   </div>
 
                   <h3>{item.title}</h3>
                   <p>{item.text}</p>
-                </div>
+                </article>
               );
             })}
           </div>

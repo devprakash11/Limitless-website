@@ -23,7 +23,7 @@
    19. Shared Small-Mobile Responsive Styles
    20. Branding Materials — Coming Soon Page
    21. Home Page — Animations
-   22. Dynamic Logo Download Page
+   22. Universal Download Preview Page
 ========================================================================= */
 
 /* ========================================================================
@@ -6503,7 +6503,7 @@ a.commission-contact-item:hover {
 }
 
 /* ========================================================================
-   22. DYNAMIC LOGO DOWNLOAD PAGE
+   22. UNIVERSAL DOWNLOAD PREVIEW PAGE
 ======================================================================== */
 
 .ldp-page,
@@ -7381,4 +7381,19 @@ a.commission-contact-item:hover {
   .ldp-download-panel {
     animation: none;
   }
+}
+
+/* ========================================================================
+   UNIVERSAL GALLERY DOWNLOAD BUTTON — DISABLED STATE
+======================================================================== */
+
+.logo-v2-download-btn:disabled,
+.pf-page-download-btn:disabled,
+.pd-page-download-btn:disabled,
+.smb-v2-download-btn:disabled,
+.bcd-page-download-btn:disabled {
+  opacity: 0.58;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }

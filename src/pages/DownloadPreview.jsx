@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   Check,
   ChevronDown,
@@ -19,22 +19,25 @@ import {
 } from "lucide-react";
 import {
   Link,
+  useLocation,
   useNavigate,
   useParams,
 } from "react-router-dom";
 
 import {
-  getLogoDownloadBySlug,
-  getLogoDownloadIndex,
-  logoDownloads,
-} from "../data/logoDownloads";
+  buildDownloadUrl,
+  getDownloadBySlug,
+  getDownloadCategory,
+  getDownloadIndex,
+  getDownloadsByCategory,
+} from "../data/downloadAssets";
 
 /* =========================================================
    DOWNLOAD HELPERS
 ========================================================= */
 
 function getFormatIcon(label = "") {
-  const type = label.toUpperCase();
+  const type = String(label).toUpperCase();
 
   if (type.includes("ZIP") || type.includes("RAR")) {
     return FileArchive;
@@ -70,7 +73,7 @@ function saveBlob(blob, filename) {
   const anchor = document.createElement("a");
 
   anchor.href = objectUrl;
-  anchor.download = filename;
+  anchor.download = filename || "download";
   document.body.appendChild(anchor);
   anchor.click();
   anchor.remove();
@@ -85,10 +88,6 @@ async function downloadDirectFile(format) {
     throw new Error("The download URL is missing.");
   }
 
-  /*
-    Fetching first gives the browser a proper downloadable Blob.
-    If the server blocks fetch/CORS, the fallback opens the file.
-  */
   try {
     const response = await fetch(format.url);
 
@@ -100,10 +99,12 @@ async function downloadDirectFile(format) {
     saveBlob(blob, format.filename);
   } catch {
     const anchor = document.createElement("a");
+
     anchor.href = format.url;
-    anchor.download = format.filename;
+    anchor.download = format.filename || "download";
     anchor.target = "_blank";
     anchor.rel = "noopener noreferrer";
+
     document.body.appendChild(anchor);
     anchor.click();
     anchor.remove();
@@ -122,33 +123,27 @@ function loadImage(imageUrl) {
     image.onerror = () => {
       reject(
         new Error(
-          "The logo image could not be loaded for conversion."
+          "The preview image could not be loaded for format conversion."
         )
       );
     };
+
     image.src = imageUrl;
   });
 }
 
-async function downloadConvertedImage(
-  imageUrl,
-  format
-) {
+async function downloadConvertedImage(imageUrl, format) {
   const image = await loadImage(imageUrl);
   const canvas = document.createElement("canvas");
   const context = canvas.getContext("2d");
 
   if (!context) {
-    throw new Error("Image conversion is not supported.");
+    throw new Error("Image conversion is not supported by this browser.");
   }
 
   canvas.width = image.naturalWidth;
   canvas.height = image.naturalHeight;
 
-  /*
-    JPG does not support transparency, so a white background
-    is added before drawing the logo.
-  */
   if (format.mimeType === "image/jpeg") {
     context.fillStyle = "#ffffff";
     context.fillRect(0, 0, canvas.width, canvas.height);
@@ -174,38 +169,52 @@ async function downloadConvertedImage(
 }
 
 /* =========================================================
-   SINGLE DYNAMIC LOGO DOWNLOAD PAGE
+   UNIVERSAL DOWNLOAD PREVIEW PAGE
+
+   Standard route:
+   /download/:category/:slug
+
+   Legacy route example:
+   /logo-download/:slug
+   Use <DownloadPreview fixedCategory="logo-design" />
 ========================================================= */
 
-function LogoDownloadPreview() {
-  const { slug } = useParams();
+function DownloadPreview({ fixedCategory = "" }) {
+  const params = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
 
-  const logo = useMemo(
-    () => getLogoDownloadBySlug(slug),
-    [slug]
+  const categoryKey = fixedCategory || params.category || "";
+  const slug = params.slug || "";
+
+  const category = useMemo(
+    () => getDownloadCategory(categoryKey),
+    [categoryKey]
+  );
+
+  const assets = useMemo(
+    () => getDownloadsByCategory(categoryKey),
+    [categoryKey]
+  );
+
+  const asset = useMemo(
+    () => getDownloadBySlug(categoryKey, slug),
+    [categoryKey, slug]
   );
 
   const currentIndex = useMemo(
-    () => getLogoDownloadIndex(slug),
-    [slug]
+    () => getDownloadIndex(categoryKey, slug),
+    [categoryKey, slug]
   );
 
-  const previousLogo =
-    currentIndex > 0
-      ? logoDownloads[currentIndex - 1]
+  const previousAsset = currentIndex > 0 ? assets[currentIndex - 1] : null;
+  const nextAsset =
+    currentIndex >= 0 && currentIndex < assets.length - 1
+      ? assets[currentIndex + 1]
       : null;
 
-  const nextLogo =
-    currentIndex >= 0 &&
-    currentIndex < logoDownloads.length - 1
-      ? logoDownloads[currentIndex + 1]
-      : null;
-
-  const [selectedFormatId, setSelectedFormatId] =
-    useState("");
-  const [isFormatMenuOpen, setIsFormatMenuOpen] =
-    useState(true);
+  const [selectedFormatId, setSelectedFormatId] = useState("");
+  const [isFormatMenuOpen, setIsFormatMenuOpen] = useState(true);
   const [copied, setCopied] = useState(false);
   const [downloadStatus, setDownloadStatus] = useState({
     state: "idle",
@@ -213,31 +222,58 @@ function LogoDownloadPreview() {
   });
 
   useEffect(() => {
+    const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
     return () => {
-      document.body.style.overflow = "";
+      document.body.style.overflow = previousOverflow;
     };
   }, []);
 
   useEffect(() => {
-    setSelectedFormatId(logo?.formats?.[0]?.id || "");
+    setSelectedFormatId(asset?.formats?.[0]?.id || "");
     setIsFormatMenuOpen(true);
     setDownloadStatus({
       state: "idle",
       message: "",
     });
-  }, [logo]);
+  }, [asset]);
 
   const selectedFormat =
-    logo?.formats?.find(
-      (format) => format.id === selectedFormatId
-    ) ||
-    logo?.formats?.[0] ||
+    asset?.formats?.find((format) => format.id === selectedFormatId) ||
+    asset?.formats?.[0] ||
     null;
 
+  const goToAsset = useCallback(
+    (targetAsset) => {
+      if (!targetAsset) {
+        return;
+      }
+
+      /*
+        Replace the current preview-history entry so selecting
+        previous or next does not require multiple Back clicks.
+      */
+      navigate(
+        buildDownloadUrl(
+          categoryKey,
+          targetAsset.slug
+        ),
+        {
+          replace: true,
+          state: location.state,
+        }
+      );
+    },
+    [
+      categoryKey,
+      location.state,
+      navigate,
+    ]
+  );
+
   const handleDownload = async () => {
-    if (!logo || !selectedFormat) {
+    if (!asset || !selectedFormat) {
       return;
     }
 
@@ -248,10 +284,7 @@ function LogoDownloadPreview() {
 
     try {
       if (selectedFormat.mode === "convert") {
-        await downloadConvertedImage(
-          logo.image,
-          selectedFormat
-        );
+        await downloadConvertedImage(asset.image, selectedFormat);
       } else {
         await downloadDirectFile(selectedFormat);
       }
@@ -273,9 +306,7 @@ function LogoDownloadPreview() {
 
   const handleCopyLink = async () => {
     try {
-      await navigator.clipboard.writeText(
-        window.location.href
-      );
+      await navigator.clipboard.writeText(window.location.href);
       setCopied(true);
 
       window.setTimeout(() => {
@@ -286,59 +317,120 @@ function LogoDownloadPreview() {
     }
   };
 
-  const handleClose = () => {
-    if (window.history.length > 1) {
+  const handleClose = useCallback(() => {
+    const openedFromGallery =
+      Boolean(location.state?.fromDownloadButton);
+
+    /*
+      When the user opened this page from a gallery, return to
+      that exact browser-history entry.
+    */
+    if (
+      openedFromGallery &&
+      window.history.length > 1
+    ) {
       navigate(-1);
       return;
     }
 
-    navigate("/services/logo-design");
-  };
+    /*
+      Directly opened preview URLs return to their configured
+      category gallery instead of an unrelated browser page.
+    */
+    navigate(
+      location.state?.fromPath ||
+        category?.galleryPath ||
+        "/",
+      {
+        replace: true,
+      }
+    );
+  }, [
+    category?.galleryPath,
+    location.state,
+    navigate,
+  ]);
 
-  if (!logo) {
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        handleClose();
+      }
+
+      if (
+        event.key === "ArrowLeft" &&
+        previousAsset
+      ) {
+        goToAsset(previousAsset);
+      }
+
+      if (
+        event.key === "ArrowRight" &&
+        nextAsset
+      ) {
+        goToAsset(nextAsset);
+      }
+    };
+
+    window.addEventListener(
+      "keydown",
+      handleKeyDown
+    );
+
+    return () => {
+      window.removeEventListener(
+        "keydown",
+        handleKeyDown
+      );
+    };
+  }, [
+    goToAsset,
+    handleClose,
+    nextAsset,
+    previousAsset,
+  ]);
+
+  if (!category || !asset) {
     return (
       <main className="ldp-not-found">
         <div className="ldp-not-found-card">
           <ImageIcon size={54} aria-hidden="true" />
 
-          <h1>Logo not found</h1>
+          <h1>Design not found</h1>
 
           <p>
-            The requested logo does not exist or the URL is
-            incorrect.
+            The requested design category, asset, or URL does not exist.
           </p>
 
           <Link
-            to="/services/logo-design"
+            to={category?.galleryPath || "/"}
             className="ldp-return-button"
           >
-            Return to Logo Gallery
+            Return to Design Gallery
           </Link>
         </div>
       </main>
     );
   }
 
+  const featureIcons = [Layers3, FileImage, Download];
+
   return (
     <main className="ldp-page">
       <div className="ldp-shell">
-        {/* Top navigation */}
         <header className="ldp-topbar">
           <div className="ldp-logo-meta">
-            <div
-              className="ldp-brand-icon"
-              aria-hidden="true"
-            >
+            <div className="ldp-brand-icon" aria-hidden="true">
               <ImageIcon size={23} />
             </div>
 
             <div className="ldp-logo-title">
-              <h1>{logo.title}</h1>
+              <h1>{asset.title}</h1>
 
               <p>
-                {logo.creator}
+                {asset.creator}
                 <span aria-hidden="true"> • </span>
-                {logo.category}
+                {asset.category}
               </p>
             </div>
           </div>
@@ -347,11 +439,9 @@ function LogoDownloadPreview() {
             <button
               type="button"
               className="ldp-toolbar-button"
-              onClick={() =>
-                window.open(logo.image, "_blank")
-              }
-              aria-label="Open full size image"
-              title="Open full size image"
+              onClick={() => window.open(asset.image, "_blank")}
+              aria-label="Open full-size image"
+              title="Open full-size image"
             >
               <Maximize2 size={20} />
             </button>
@@ -363,18 +453,14 @@ function LogoDownloadPreview() {
               aria-label="Copy page link"
               title="Copy page link"
             >
-              {copied ? (
-                <Check size={20} />
-              ) : (
-                <Copy size={20} />
-              )}
+              {copied ? <Check size={20} /> : <Copy size={20} />}
             </button>
 
             <button
               type="button"
               className="ldp-toolbar-button"
-              aria-label="Logo information"
-              title={logo.description}
+              aria-label="Design information"
+              title={asset.description}
             >
               <Info size={20} />
             </button>
@@ -391,92 +477,66 @@ function LogoDownloadPreview() {
         </header>
 
         <div className="ldp-main-layout">
-          {/* Large preview */}
           <section
             className="ldp-stage"
-            aria-label={`${logo.title} preview`}
+            aria-label={`${asset.title} preview`}
           >
             <button
               type="button"
               className="ldp-side-arrow ldp-side-arrow-left"
-              onClick={() =>
-                previousLogo &&
-                navigate(
-                  `/logo-download/${previousLogo.slug}`
-                )
-              }
-              disabled={!previousLogo}
-              aria-label="Previous logo"
+              onClick={() => goToAsset(previousAsset)}
+              disabled={!previousAsset}
+              aria-label={`Previous ${category.singularName}`}
             >
               <ChevronLeft size={26} />
             </button>
 
             <div className="ldp-preview-card">
               <div className="ldp-preview-heading">
-                <span>Premium Logo Asset</span>
-                <strong>{logo.title}</strong>
+                <span>{asset.previewEyebrow}</span>
+                <strong>{asset.title}</strong>
               </div>
 
               <div className="ldp-preview-image">
-                <img
-                  src={logo.image}
-                  alt={logo.title}
-                />
+                <img src={asset.image} alt={asset.title} />
               </div>
 
               <div className="ldp-preview-features">
-                <div>
-                  <Layers3 size={20} aria-hidden="true" />
-                  <span>
-                    <strong>Organised Asset</strong>
-                    Clean logo presentation
-                  </span>
-                </div>
+                {asset.previewFeatures.map((feature, index) => {
+                  const FeatureIcon =
+                    featureIcons[index % featureIcons.length];
 
-                <div>
-                  <FileImage size={20} aria-hidden="true" />
-                  <span>
-                    <strong>Multiple Formats</strong>
-                    PNG, JPG and WEBP
-                  </span>
-                </div>
+                  return (
+                    <div key={`${feature.title}-${index + 1}`}>
+                      <FeatureIcon size={20} aria-hidden="true" />
 
-                <div>
-                  <Download size={20} aria-hidden="true" />
-                  <span>
-                    <strong>Ready to Download</strong>
-                    Digital branding use
-                  </span>
-                </div>
+                      <span>
+                        <strong>{feature.title}</strong>
+                        {feature.text}
+                      </span>
+                    </div>
+                  );
+                })}
               </div>
             </div>
 
             <button
               type="button"
               className="ldp-side-arrow ldp-side-arrow-right"
-              onClick={() =>
-                nextLogo &&
-                navigate(
-                  `/logo-download/${nextLogo.slug}`
-                )
-              }
-              disabled={!nextLogo}
-              aria-label="Next logo"
+              onClick={() => goToAsset(nextAsset)}
+              disabled={!nextAsset}
+              aria-label={`Next ${category.singularName}`}
             >
               <ChevronRight size={26} />
             </button>
           </section>
 
-          {/* Download sidebar */}
           <aside className="ldp-download-panel">
             <div className="ldp-selected-file">
               <span>Selected file</span>
-              <strong>
-                {selectedFormat?.label || "Choose format"}
-              </strong>
+              <strong>{selectedFormat?.label || "Choose format"}</strong>
               <small>
-                {selectedFormat?.size ||
-                  "Select a format below"}
+                {selectedFormat?.size || "Select a format below"}
               </small>
             </div>
 
@@ -486,8 +546,7 @@ function LogoDownloadPreview() {
                 className="ldp-primary-download"
                 onClick={handleDownload}
                 disabled={
-                  !selectedFormat ||
-                  downloadStatus.state === "loading"
+                  !selectedFormat || downloadStatus.state === "loading"
                 }
               >
                 <Download size={20} aria-hidden="true" />
@@ -501,18 +560,14 @@ function LogoDownloadPreview() {
                 type="button"
                 className="ldp-format-toggle"
                 onClick={() =>
-                  setIsFormatMenuOpen(
-                    (current) => !current
-                  )
+                  setIsFormatMenuOpen((current) => !current)
                 }
                 aria-expanded={isFormatMenuOpen}
                 aria-label="Show file types"
               >
                 <ChevronDown
                   size={20}
-                  className={
-                    isFormatMenuOpen ? "is-open" : ""
-                  }
+                  className={isFormatMenuOpen ? "is-open" : ""}
                 />
               </button>
             </div>
@@ -528,16 +583,11 @@ function LogoDownloadPreview() {
 
             {isFormatMenuOpen && (
               <div className="ldp-format-menu">
-                <span className="ldp-format-title">
-                  File type
-                </span>
+                <span className="ldp-format-title">File type</span>
 
-                {logo.formats.map((format) => {
-                  const FormatIcon = getFormatIcon(
-                    format.label
-                  );
-                  const isSelected =
-                    selectedFormat?.id === format.id;
+                {asset.formats.map((format) => {
+                  const FormatIcon = getFormatIcon(format.label);
+                  const isSelected = selectedFormat?.id === format.id;
 
                   return (
                     <button
@@ -546,15 +596,10 @@ function LogoDownloadPreview() {
                       className={`ldp-format-item ${
                         isSelected ? "is-selected" : ""
                       }`}
-                      onClick={() =>
-                        setSelectedFormatId(format.id)
-                      }
+                      onClick={() => setSelectedFormatId(format.id)}
                     >
                       <span className="ldp-format-icon">
-                        <FormatIcon
-                          size={19}
-                          aria-hidden="true"
-                        />
+                        <FormatIcon size={19} aria-hidden="true" />
                       </span>
 
                       <span className="ldp-format-copy">
@@ -582,18 +627,18 @@ function LogoDownloadPreview() {
             )}
 
             <div className="ldp-about-logo">
-              <h2>About this logo</h2>
-              <p>{logo.description}</p>
+              <h2>About this design</h2>
+              <p>{asset.description}</p>
             </div>
 
             <div className="ldp-logo-tags">
-              {logo.tags.map((tag) => (
+              {asset.tags.map((tag) => (
                 <span key={tag}>{tag}</span>
               ))}
             </div>
 
             <div className="ldp-specification-list">
-              {logo.specifications.map((item) => (
+              {asset.specifications.map((item) => (
                 <div key={item.label}>
                   <span>{item.label}</span>
                   <strong>{item.value}</strong>
@@ -602,16 +647,13 @@ function LogoDownloadPreview() {
             </div>
 
             <a
-              href={logo.image}
+              href={asset.image}
               target="_blank"
               rel="noopener noreferrer"
               className="ldp-open-image"
             >
               Open original image
-              <ExternalLink
-                size={16}
-                aria-hidden="true"
-              />
+              <ExternalLink size={16} aria-hidden="true" />
             </a>
           </aside>
         </div>
@@ -620,4 +662,4 @@ function LogoDownloadPreview() {
   );
 }
 
-export default LogoDownloadPreview;
+export default DownloadPreview;

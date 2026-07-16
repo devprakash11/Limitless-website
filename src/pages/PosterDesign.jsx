@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import WatermarkDownloadButton from "../components/WatermarkDownloadButton";
+
+import DownloadPreviewButton from "../components/DownloadPreviewButton";
+import { posterDownloads } from "../data/downloadAssets";
 
 import {
   ArrowRight,
@@ -14,88 +16,9 @@ import {
   X,
 } from "lucide-react";
 
-const posterSamples = [
-  {
-    title: "Air Force Day Poster",
-    image: "/images/poster-design/Air_Force_Day_Poster.webp",
-  },
-  {
-    title: "Chhath Puja Poster",
-    image: "/images/poster-design/chhath-puja.webp",
-  },
-  {
-    title: "Chhath Puja Poster",
-    image: "/images/poster-design/chhath-puja1.webp",
-  },
-  {
-    title: "Fresh Fruits Poster",
-    image: "/images/poster-design/fresh-fruits.webp",
-  },
-  {
-    title: "Gandhi Jayanti Poster",
-    image: "/images/poster-design/gandhi-jayanti..webp",
-  },
-  {
-    title: "Happy Diwali Poster",
-    image: "/images/poster-design/happy-diwali.webp",
-  },
-  {
-    title: "Happy New Year Poster",
-    image: "/images/poster-design/happy-new-year.webp",
-  },
-  {
-    title: "Hiring Poster",
-    image: "/images/poster-design/hiring-poster.webp",
-  },
-  {
-    title: "Hospital Pamphlet",
-    image: "/images/poster-design/hospital-pamphlate.webp",
-  },
-  {
-    title: "Independence Day Poster",
-    image: "/images/poster-design/independence-dayai.webp",
-  },
-  {
-    title: "Mehndi Arts Poster",
-    image: "/images/poster-design/mehndi-arts.webp",
-  },
-  {
-    title: "Merry Christmas Poster",
-    image: "/images/poster-design/merry-christmas.webp",
-  },
-  {
-    title: "Pamphlet Design",
-    image: "/images/poster-design/pamphlete-2.webp",
-  },
-  {
-    title: "Pamphlet Design",
-    image: "/images/poster-design/pamphlete.webp",
-  },
-  {
-    title: "Pamphlet Design",
-    image: "/images/poster-design/pamphlete1.webp",
-  },
-  {
-    title: "Pamphlet Design",
-    image: "/images/poster-design/pamphlete02.webp",
-  },
-  {
-    title: "Pamphlet Design",
-    image: "/images/poster-design/pamphlete4.webp",
-  },
-  {
-    title: "Pizza Poster",
-    image: "/images/poster-design/pizza-poster.webp",
-  },
-  {
-    title: "Creative Poster Design",
-    image: "/images/poster-design/poster.webp",
-  },
-  {
-    title: "Ram Navami Poster",
-    image: "/images/poster-design/ramnavmi.webp",
-  },
-];
+/* =========================================================
+   POSTER DESIGN SERVICE BENEFITS
+========================================================= */
 
 const benefits = [
   "Professional poster designs for events, offers, campaigns, and promotions",
@@ -105,6 +28,10 @@ const benefits = [
   "Attractive color, typography, layout, and CTA direction",
   "High-quality export for social media, website, WhatsApp, and printing",
 ];
+
+/* =========================================================
+   POSTER DESIGN PROCESS
+========================================================= */
 
 const process = [
   {
@@ -124,21 +51,35 @@ const process = [
   },
 ];
 
-function createFileName(title) {
-  return `${title
-    .toLowerCase()
-    .trim()
-    .replace(/[^a-z0-9\s-]/g, "")
-    .replace(/\s+/g, "-")}.png`;
-}
+/* =========================================================
+   POSTER DESIGN PAGE
+========================================================= */
 
 function PosterDesign() {
   const [previewPoster, setPreviewPoster] = useState(null);
   const [showAll, setShowAll] = useState(false);
 
+  /*
+    Poster data comes from the universal download registry.
+
+    The same object is now used by:
+    1. Poster gallery cards
+    2. Quick preview modal
+    3. Full-screen download preview
+    4. Previous and next asset navigation
+    5. File-format download system
+  */
+  const availablePosters = Array.isArray(posterDownloads)
+    ? posterDownloads
+    : [];
+
   const visiblePosters = showAll
-    ? posterSamples
-    : posterSamples.slice(0, 4);
+    ? availablePosters
+    : availablePosters.slice(0, 4);
+
+  /* =========================================================
+     QUICK PREVIEW MODAL
+  ========================================================= */
 
   useEffect(() => {
     const handleEscape = (event) => {
@@ -160,12 +101,15 @@ function PosterDesign() {
 
   return (
     <>
-      {/* Hero section */}
+      {/* =====================================================
+          HERO SECTION
+      ====================================================== */}
+
       <section className="pd-page-hero">
         <div className="container pd-page-hero-grid">
           <div className="pd-page-hero-content">
             <span className="section-label dark-label">
-              <Sparkles size={16} />
+              <Sparkles size={16} aria-hidden="true" />
               Creative Service
             </span>
 
@@ -180,7 +124,7 @@ function PosterDesign() {
             <div className="pd-page-hero-actions">
               <Link to="/contact" className="primary-btn">
                 Commission Poster Work
-                <ArrowRight size={18} />
+                <ArrowRight size={18} aria-hidden="true" />
               </Link>
 
               <a
@@ -194,7 +138,10 @@ function PosterDesign() {
 
           <div className="pd-page-hero-card">
             <div className="pd-page-card-icon">
-              <GalleryVerticalEnd size={34} />
+              <GalleryVerticalEnd
+                size={34}
+                aria-hidden="true"
+              />
             </div>
 
             <h3>Impactful Poster Designs</h3>
@@ -215,7 +162,10 @@ function PosterDesign() {
         </div>
       </section>
 
-      {/* Gallery section */}
+      {/* =====================================================
+          POSTER GALLERY
+      ====================================================== */}
+
       <section
         className="pd-page-gallery-section"
         id="poster-design-gallery"
@@ -230,58 +180,92 @@ function PosterDesign() {
 
             <p>
               Showcase event posters, offer posters, campaign posters, product
-              launch posters, and awareness posters in a clean portfolio-style
-              grid.
+              launch posters, pamphlets, and awareness posters in a clean
+              portfolio-style grid.
             </p>
           </div>
 
-          <div className="pd-page-gallery-grid">
-            {visiblePosters.map((item) => (
-              <div
-                className="pd-page-card"
-                key={item.title}
-              >
-                <div className="pd-page-image-wrap">
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    loading="lazy"
-                  />
-                </div>
-
-                <div className="pd-page-card-content">
-                  <div className="pd-page-card-info">
-                    <h3>{item.title}</h3>
-                    <span>Poster Design</span>
-                  </div>
-
-                  <div className="pd-page-actions">
-                    <button
-                      type="button"
-                      className="pd-page-preview-btn"
-                      onClick={() => setPreviewPoster(item)}
-                    >
-                      <Eye size={15} />
-                      Preview
-                    </button>
-
-                    <WatermarkDownloadButton
-                      imageUrl={item.image}
-                      fileName={createFileName(item.title)}
-                      className="pd-page-download-btn"
+          {visiblePosters.length > 0 ? (
+            <div className="pd-page-gallery-grid">
+              {visiblePosters.map((item) => (
+                <article
+                  className="pd-page-card"
+                  key={item.slug}
+                >
+                  <div className="pd-page-image-wrap">
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      loading="lazy"
                     />
                   </div>
-                </div>
-              </div>
-            ))}
-          </div>
 
-          {posterSamples.length > 4 && (
+                  <div className="pd-page-card-content">
+                    <div className="pd-page-card-info">
+                      <h3>{item.title}</h3>
+
+                      <span>
+                        {item.category || "Poster Design"}
+                      </span>
+                    </div>
+
+                    <div className="pd-page-actions">
+                      {/* Opens the small preview popup */}
+                      <button
+                        type="button"
+                        className="pd-page-preview-btn"
+                        onClick={() => setPreviewPoster(item)}
+                        aria-label={`Preview ${item.title}`}
+                      >
+                        <Eye size={15} aria-hidden="true" />
+                        Preview
+                      </button>
+
+                      {/*
+                        Opens the global download preview.
+
+                        Example URL:
+                        /download/poster-design/air-force-day-poster
+                      */}
+                      <DownloadPreviewButton
+                        asset={item}
+                        className="pd-page-download-btn"
+                      >
+                        Download
+                      </DownloadPreviewButton>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          ) : (
+            <div
+              className="pd-page-empty-state"
+              role="status"
+            >
+              <GalleryVerticalEnd
+                size={44}
+                aria-hidden="true"
+              />
+
+              <h3>No poster designs available</h3>
+
+              <p>
+                Add poster entries inside the posterDownloads array in
+                src/data/downloadAssets.js.
+              </p>
+            </div>
+          )}
+
+          {availablePosters.length > 4 && (
             <div className="pd-page-view-all-wrap">
               <button
                 type="button"
                 className="pd-page-view-all-btn"
-                onClick={() => setShowAll((current) => !current)}
+                onClick={() => {
+                  setShowAll((current) => !current);
+                }}
+                aria-expanded={showAll}
               >
                 {showAll
                   ? "Show Less"
@@ -292,7 +276,10 @@ function PosterDesign() {
         </div>
       </section>
 
-      {/* Preview modal */}
+      {/* =====================================================
+          QUICK PREVIEW MODAL
+      ====================================================== */}
+
       {previewPoster && (
         <div
           className="pd-page-modal-overlay"
@@ -312,7 +299,7 @@ function PosterDesign() {
               onClick={() => setPreviewPoster(null)}
               aria-label="Close preview"
             >
-              <X size={22} />
+              <X size={22} aria-hidden="true" />
             </button>
 
             <div className="pd-page-modal-image">
@@ -331,17 +318,22 @@ function PosterDesign() {
                 <p>Full poster preview</p>
               </div>
 
-              <WatermarkDownloadButton
-                imageUrl={previewPoster.image}
-                fileName={createFileName(previewPoster.title)}
+              <DownloadPreviewButton
+                asset={previewPoster}
                 className="pd-page-download-btn"
-              />
+                onBeforeNavigate={() => setPreviewPoster(null)}
+              >
+                Download
+              </DownloadPreviewButton>
             </div>
           </div>
         </div>
       )}
 
-      {/* Service details */}
+      {/* =====================================================
+          SERVICE DETAILS
+      ====================================================== */}
+
       <section className="pd-page-detail-section">
         <div className="container pd-page-detail-grid">
           <div className="pd-page-detail-content">
@@ -360,7 +352,11 @@ function PosterDesign() {
             <div className="pd-page-benefit-list">
               {benefits.map((item) => (
                 <div key={item}>
-                  <BadgeCheck size={21} />
+                  <BadgeCheck
+                    size={21}
+                    aria-hidden="true"
+                  />
+
                   <span>{item}</span>
                 </div>
               ))}
@@ -378,13 +374,16 @@ function PosterDesign() {
 
             <Link to="/contact" className="primary-btn">
               Start Poster Project
-              <ArrowRight size={18} />
+              <ArrowRight size={18} aria-hidden="true" />
             </Link>
           </aside>
         </div>
       </section>
 
-      {/* Process section */}
+      {/* =====================================================
+          PROCESS SECTION
+      ====================================================== */}
+
       <section className="pd-page-process-section">
         <div className="container">
           <div className="pd-page-heading">
@@ -405,17 +404,17 @@ function PosterDesign() {
               const Icon = item.icon;
 
               return (
-                <div
+                <article
                   className="pd-page-process-card"
                   key={item.title}
                 >
                   <div className="pd-page-process-icon">
-                    <Icon size={25} />
+                    <Icon size={25} aria-hidden="true" />
                   </div>
 
                   <h3>{item.title}</h3>
                   <p>{item.text}</p>
-                </div>
+                </article>
               );
             })}
           </div>

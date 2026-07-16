@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import WatermarkDownloadButton from "../components/WatermarkDownloadButton";
+
+import DownloadPreviewButton from "../components/DownloadPreviewButton";
+import { socialMediaBannerDownloads } from "../data/downloadAssets";
 
 import {
   ArrowRight,
   BadgeCheck,
   Eye,
-  Image,
+  Image as ImageIcon,
   Layers3,
   Megaphone,
   Palette,
@@ -14,40 +16,9 @@ import {
   X,
 } from "lucide-react";
 
-const bannerSamples = [
-  {
-    title: "Fashion Sale Banner",
-    image: "/images/social-media-banner/logo.webp",
-  },
-  {
-    title: "Festival Offer Banner",
-    image: "/images/social-media-banner/logo.webp",
-  },
-  {
-    title: "Product Promotion Banner",
-    image: "/images/social-media-banner/logo.webp",
-  },
-  {
-    title: "Instagram Post Banner",
-    image: "/images/social-media-banner/logo.webp",
-  },
-  {
-    title: "Business Campaign Banner",
-    image: "/images/social-media-banner/logo.webp",
-  },
-  {
-    title: "Food Offer Banner",
-    image: "/images/social-media-banner/logo.webp",
-  },
-  {
-    title: "Brand Awareness Banner",
-    image: "/images/social-media-banner/logo.webp",
-  },
-  {
-    title: "Ecommerce Ad Banner",
-    image: "/images/social-media-banner/logo.webp",
-  },
-];
+/* =========================================================
+   SOCIAL MEDIA BANNER BENEFITS
+========================================================= */
 
 const benefits = [
   "Scroll-stopping social media creatives for campaigns and promotions",
@@ -57,6 +28,10 @@ const benefits = [
   "High-quality export formats for ads, posts, stories, and banners",
   "Brand-consistent design using colors, typography, and visual identity",
 ];
+
+/* =========================================================
+   SOCIAL MEDIA BANNER PROCESS
+========================================================= */
 
 const process = [
   {
@@ -76,22 +51,37 @@ const process = [
   },
 ];
 
-// Creates a clean PNG filename from the banner title
-function createFileName(title) {
-  return `${title
-    .toLowerCase()
-    .trim()
-    .replace(/[^a-z0-9\s-]/g, "")
-    .replace(/\s+/g, "-")}.png`;
-}
+/* =========================================================
+   SOCIAL MEDIA BANNER PAGE
+========================================================= */
 
 function SocialMediaBanner() {
   const [previewBanner, setPreviewBanner] = useState(null);
   const [showAll, setShowAll] = useState(false);
 
+  /*
+    Every banner now comes from the shared downloadAssets.js file.
+
+    The same asset object is used by:
+    1. The Social Media Banner gallery
+    2. The quick preview modal
+    3. The global full-screen download page
+    4. Previous and next design navigation
+    5. PNG, JPG, WEBP and source-file downloads
+  */
+  const availableBanners = Array.isArray(
+    socialMediaBannerDownloads
+  )
+    ? socialMediaBannerDownloads
+    : [];
+
   const visibleBanners = showAll
-    ? bannerSamples
-    : bannerSamples.slice(0, 4);
+    ? availableBanners
+    : availableBanners.slice(0, 4);
+
+  /* =========================================================
+     QUICK PREVIEW MODAL
+  ========================================================= */
 
   useEffect(() => {
     const handleEscape = (event) => {
@@ -113,27 +103,30 @@ function SocialMediaBanner() {
 
   return (
     <>
-      {/* Hero section */}
+      {/* =====================================================
+          HERO SECTION
+      ====================================================== */}
+
       <section className="smb-v2-hero">
         <div className="container smb-v2-hero-grid">
           <div className="smb-v2-hero-content">
             <span className="section-label dark-label">
-              <Sparkles size={16} />
+              <Sparkles size={16} aria-hidden="true" />
               Creative Service
             </span>
 
             <h1>Social Media Banner</h1>
 
             <p>
-              Create professional social media banners for Instagram, Facebook,
-              LinkedIn, YouTube, ads, campaigns, offers, product promotions, and
-              brand awareness.
+              Create professional social media banners for Instagram,
+              Facebook, LinkedIn, YouTube, ads, campaigns, offers, product
+              promotions, and brand awareness.
             </p>
 
             <div className="smb-v2-hero-actions">
               <Link to="/contact" className="primary-btn">
                 Commission Banner Work
-                <ArrowRight size={18} />
+                <ArrowRight size={18} aria-hidden="true" />
               </Link>
 
               <a
@@ -147,7 +140,7 @@ function SocialMediaBanner() {
 
           <div className="smb-v2-hero-card">
             <div className="smb-v2-card-icon">
-              <Image size={34} />
+              <ImageIcon size={34} aria-hidden="true" />
             </div>
 
             <h3>High-Impact Social Creatives</h3>
@@ -167,7 +160,10 @@ function SocialMediaBanner() {
         </div>
       </section>
 
-      {/* Gallery section */}
+      {/* =====================================================
+          BANNER GALLERY
+      ====================================================== */}
+
       <section
         className="smb-v2-gallery-section"
         id="social-banner-gallery"
@@ -187,53 +183,85 @@ function SocialMediaBanner() {
             </p>
           </div>
 
-          <div className="smb-v2-gallery-grid">
-            {visibleBanners.map((item) => (
-              <div
-                className="smb-v2-card"
-                key={item.title}
-              >
-                <div className="smb-v2-image-wrap">
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    loading="lazy"
-                  />
-                </div>
-
-                <div className="smb-v2-card-content">
-                  <div className="smb-v2-card-info">
-                    <h3>{item.title}</h3>
-                    <span>Social Media Banner</span>
-                  </div>
-
-                  <div className="smb-v2-actions">
-                    <button
-                      type="button"
-                      className="smb-v2-preview-btn"
-                      onClick={() => setPreviewBanner(item)}
-                    >
-                      <Eye size={15} />
-                      Preview
-                    </button>
-
-                    <WatermarkDownloadButton
-                      imageUrl={item.image}
-                      fileName={createFileName(item.title)}
-                      className="smb-v2-download-btn"
+          {visibleBanners.length > 0 ? (
+            <div className="smb-v2-gallery-grid">
+              {visibleBanners.map((item) => (
+                <article
+                  className="smb-v2-card"
+                  key={item.slug}
+                >
+                  <div className="smb-v2-image-wrap">
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      loading="lazy"
                     />
                   </div>
-                </div>
-              </div>
-            ))}
-          </div>
 
-          {bannerSamples.length > 4 && (
+                  <div className="smb-v2-card-content">
+                    <div className="smb-v2-card-info">
+                      <h3>{item.title}</h3>
+
+                      <span>
+                        {item.category || "Social Media Banner"}
+                      </span>
+                    </div>
+
+                    <div className="smb-v2-actions">
+                      {/* Opens the quick image preview */}
+                      <button
+                        type="button"
+                        className="smb-v2-preview-btn"
+                        onClick={() => setPreviewBanner(item)}
+                        aria-label={`Preview ${item.title}`}
+                      >
+                        <Eye size={15} aria-hidden="true" />
+                        Preview
+                      </button>
+
+                      {/*
+                        Opens the universal download preview.
+
+                        Example URL:
+                        /download/social-media-banner/fashion-sale-banner
+                      */}
+                      <DownloadPreviewButton
+                        asset={item}
+                        className="smb-v2-download-btn"
+                      >
+                        Download
+                      </DownloadPreviewButton>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          ) : (
+            <div
+              className="smb-v2-empty-state"
+              role="status"
+            >
+              <ImageIcon size={44} aria-hidden="true" />
+
+              <h3>No banner designs available</h3>
+
+              <p>
+                Add banner entries inside the
+                socialMediaBannerDownloads array in
+                src/data/downloadAssets.js.
+              </p>
+            </div>
+          )}
+
+          {availableBanners.length > 4 && (
             <div className="smb-v2-view-all-wrap">
               <button
                 type="button"
                 className="smb-v2-view-all-btn"
-                onClick={() => setShowAll((current) => !current)}
+                onClick={() => {
+                  setShowAll((current) => !current);
+                }}
+                aria-expanded={showAll}
               >
                 {showAll
                   ? "Show Less"
@@ -244,7 +272,10 @@ function SocialMediaBanner() {
         </div>
       </section>
 
-      {/* Preview modal */}
+      {/* =====================================================
+          QUICK PREVIEW MODAL
+      ====================================================== */}
+
       {previewBanner && (
         <div
           className="smb-v2-modal-overlay"
@@ -264,7 +295,7 @@ function SocialMediaBanner() {
               onClick={() => setPreviewBanner(null)}
               aria-label="Close preview"
             >
-              <X size={22} />
+              <X size={22} aria-hidden="true" />
             </button>
 
             <div className="smb-v2-modal-image">
@@ -283,17 +314,22 @@ function SocialMediaBanner() {
                 <p>Full banner preview</p>
               </div>
 
-              <WatermarkDownloadButton
-                imageUrl={previewBanner.image}
-                fileName={createFileName(previewBanner.title)}
+              <DownloadPreviewButton
+                asset={previewBanner}
                 className="smb-v2-download-btn"
-              />
+                onBeforeNavigate={() => setPreviewBanner(null)}
+              >
+                Download
+              </DownloadPreviewButton>
             </div>
           </div>
         </div>
       )}
 
-      {/* Service details section */}
+      {/* =====================================================
+          SERVICE DETAILS
+      ====================================================== */}
+
       <section className="smb-v2-detail-section">
         <div className="container smb-v2-detail-grid">
           <div className="smb-v2-detail-content">
@@ -301,7 +337,9 @@ function SocialMediaBanner() {
               Service Details
             </span>
 
-            <h2>What you get in Social Media Banner Design</h2>
+            <h2>
+              What you get in Social Media Banner Design
+            </h2>
 
             <p>
               Our social media banner design service helps businesses and
@@ -312,7 +350,11 @@ function SocialMediaBanner() {
             <div className="smb-v2-benefit-list">
               {benefits.map((item) => (
                 <div key={item}>
-                  <BadgeCheck size={21} />
+                  <BadgeCheck
+                    size={21}
+                    aria-hidden="true"
+                  />
+
                   <span>{item}</span>
                 </div>
               ))}
@@ -330,13 +372,16 @@ function SocialMediaBanner() {
 
             <Link to="/contact" className="primary-btn">
               Start Banner Project
-              <ArrowRight size={18} />
+              <ArrowRight size={18} aria-hidden="true" />
             </Link>
           </aside>
         </div>
       </section>
 
-      {/* Process section */}
+      {/* =====================================================
+          PROCESS SECTION
+      ====================================================== */}
+
       <section className="smb-v2-process-section">
         <div className="container">
           <div className="smb-v2-heading">
@@ -357,17 +402,17 @@ function SocialMediaBanner() {
               const Icon = item.icon;
 
               return (
-                <div
+                <article
                   className="smb-v2-process-card"
                   key={item.title}
                 >
                   <div className="smb-v2-process-icon">
-                    <Icon size={25} />
+                    <Icon size={25} aria-hidden="true" />
                   </div>
 
                   <h3>{item.title}</h3>
                   <p>{item.text}</p>
-                </div>
+                </article>
               );
             })}
           </div>
