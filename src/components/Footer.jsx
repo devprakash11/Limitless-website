@@ -11,9 +11,19 @@ import { services } from "../data/services";
 function Footer() {
   const currentYear = new Date().getFullYear();
 
+  const availableServices = Array.isArray(services)
+    ? services.filter(
+        (service) =>
+          service &&
+          service.slug &&
+          service.title
+      )
+    : [];
+
   return (
     <footer className="footer">
       <div className="container footer-grid">
+        {/* Footer introduction */}
         <div className="footer-about">
           <Link
             to="/"
@@ -37,27 +47,44 @@ function Footer() {
           </p>
         </div>
 
+        {/* Company links */}
         <div className="footer-col">
           <h4>Company</h4>
 
-          <Link to="/">Home</Link>
-          <Link to="/about">About Us</Link>
-          <Link to="/contact">Contact</Link>
+          <Link to="/">
+            Home
+          </Link>
+
+          <Link to="/about">
+            About Us
+          </Link>
+
+          <Link to="/price">
+            Pricing
+          </Link>
+
+          <Link to="/contact">
+            Contact
+          </Link>
         </div>
 
+        {/* Service links */}
         <div className="footer-col">
           <h4>Services</h4>
 
-          {services.slice(0, 6).map((service) => (
-            <Link
-              key={service.slug}
-              to={`/services/${service.slug}`}
-            >
-              {service.title}
-            </Link>
-          ))}
+          {availableServices
+            .slice(0, 6)
+            .map((service) => (
+              <Link
+                key={service.slug}
+                to={`/services/${service.slug}`}
+              >
+                {service.title}
+              </Link>
+            ))}
         </div>
 
+        {/* Contact details */}
         <div className="footer-col footer-contact-col">
           <h4>Contact</h4>
 
@@ -86,7 +113,9 @@ function Footer() {
               aria-hidden="true"
             />
 
-            <span>+91 76675 83859</span>
+            <span>
+              +91 76675 83859
+            </span>
           </a>
 
           <div

@@ -1,6 +1,15 @@
 import { useEffect, useState } from "react";
-import { Link, NavLink, useLocation } from "react-router-dom";
-import { ChevronDown, Menu, X } from "lucide-react";
+import {
+  Link,
+  NavLink,
+  useLocation,
+} from "react-router-dom";
+import {
+  ChevronDown,
+  Menu,
+  X,
+} from "lucide-react";
+
 import { services } from "../data/services";
 
 function Navbar() {
@@ -35,7 +44,9 @@ function Navbar() {
     event.preventDefault();
     event.stopPropagation();
 
-    setServiceOpen((currentServiceState) => !currentServiceState);
+    setServiceOpen(
+      (currentServiceState) => !currentServiceState
+    );
   };
 
   /*
@@ -47,7 +58,7 @@ function Navbar() {
   };
 
   /*
-   * Close the navigation automatically after the route changes.
+   * Close navigation automatically after route changes.
    */
   useEffect(() => {
     setMenuOpen(false);
@@ -55,7 +66,7 @@ function Navbar() {
   }, [location.pathname, location.hash]);
 
   /*
-   * Prevent the page behind the mobile navigation from scrolling.
+   * Prevent the page behind the mobile menu from scrolling.
    */
   useEffect(() => {
     const isMobileView = window.innerWidth <= 991;
@@ -72,7 +83,7 @@ function Navbar() {
   }, [menuOpen]);
 
   /*
-   * Close the navigation when the Escape key is pressed.
+   * Close navigation when the Escape key is pressed.
    */
   useEffect(() => {
     const handleEscapeKey = (event) => {
@@ -81,15 +92,22 @@ function Navbar() {
       }
     };
 
-    document.addEventListener("keydown", handleEscapeKey);
+    document.addEventListener(
+      "keydown",
+      handleEscapeKey
+    );
 
     return () => {
-      document.removeEventListener("keydown", handleEscapeKey);
+      document.removeEventListener(
+        "keydown",
+        handleEscapeKey
+      );
     };
   }, []);
 
   /*
-   * Reset the mobile menu when changing from mobile to desktop.
+   * Reset mobile navigation when changing
+   * from mobile to desktop.
    */
   useEffect(() => {
     const handleWindowResize = () => {
@@ -100,49 +118,86 @@ function Navbar() {
       }
     };
 
-    window.addEventListener("resize", handleWindowResize);
+    window.addEventListener(
+      "resize",
+      handleWindowResize
+    );
 
     return () => {
-      window.removeEventListener("resize", handleWindowResize);
+      window.removeEventListener(
+        "resize",
+        handleWindowResize
+      );
     };
   }, []);
 
+  const availableServices = Array.isArray(services)
+    ? services.filter(
+        (service) =>
+          service &&
+          service.slug &&
+          service.title
+      )
+    : [];
+
   return (
     <header className="site-header">
-      <nav className="navbar container" aria-label="Main navigation">
+      <nav
+        className="navbar container"
+        aria-label="Main navigation"
+      >
         {/* Brand Logo */}
-        <Link to="/" className="brand" onClick={closeMenu}>
+        <Link
+          to="/"
+          className="brand"
+          onClick={closeMenu}
+          aria-label="Go to Limitless Design home page"
+        >
           <img
             src="/images/logo.webp"
             alt="Limitless Design Logo"
             className="brand-logo"
           />
 
-          <span className="brand-text">Limitless Design</span>
+          <span className="brand-text">
+            Limitless Design
+          </span>
         </Link>
 
         {/* Mobile Toggle Button */}
         <button
           type="button"
-          className={`mobile-toggle ${menuOpen ? "active" : ""}`}
+          className={`mobile-toggle ${
+            menuOpen ? "active" : ""
+          }`}
           onClick={toggleMenu}
           aria-label={
-            menuOpen ? "Close navigation menu" : "Open navigation menu"
+            menuOpen
+              ? "Close navigation menu"
+              : "Open navigation menu"
           }
           aria-expanded={menuOpen}
           aria-controls="main-navigation-menu"
         >
           {menuOpen ? (
-            <X size={24} aria-hidden="true" />
+            <X
+              size={24}
+              aria-hidden="true"
+            />
           ) : (
-            <Menu size={24} aria-hidden="true" />
+            <Menu
+              size={24}
+              aria-hidden="true"
+            />
           )}
         </button>
 
         {/* Navigation Menu */}
         <div
           id="main-navigation-menu"
-          className={`nav-menu ${menuOpen ? "active" : ""}`}
+          className={`nav-menu ${
+            menuOpen ? "active" : ""
+          }`}
         >
           <div className="nav-links">
             {/* Home */}
@@ -151,7 +206,9 @@ function Navbar() {
               end
               onClick={closeMenu}
               className={({ isActive }) =>
-                isActive ? "nav-link active" : "nav-link"
+                isActive
+                  ? "nav-link active"
+                  : "nav-link"
               }
             >
               Home
@@ -162,7 +219,9 @@ function Navbar() {
               to="/about"
               onClick={closeMenu}
               className={({ isActive }) =>
-                isActive ? "nav-link active" : "nav-link"
+                isActive
+                  ? "nav-link active"
+                  : "nav-link"
               }
             >
               About
@@ -171,7 +230,9 @@ function Navbar() {
             {/* Services Dropdown */}
             <div
               className={`dropdown ${
-                serviceOpen ? "active dropdown-open" : ""
+                serviceOpen
+                  ? "active dropdown-open"
+                  : ""
               }`}
             >
               <button
@@ -202,32 +263,47 @@ function Navbar() {
                 aria-hidden={!serviceOpen}
               >
                 <div className="dropdown-menu-inner">
-                  {services.map((service) => (
-                    <NavLink
-                      key={service.slug}
-                      to={`/services/${service.slug}`}
-                      onClick={closeMenu}
-                      className={({ isActive }) =>
-                        isActive
-                          ? "dropdown-link active"
-                          : "dropdown-link"
-                      }
-                    >
-                      {service.title}
-                    </NavLink>
-                  ))}
+                  {availableServices.map(
+                    (service) => (
+                      <NavLink
+                        key={service.slug}
+                        to={`/services/${service.slug}`}
+                        onClick={closeMenu}
+                        className={({ isActive }) =>
+                          isActive
+                            ? "dropdown-link active"
+                            : "dropdown-link"
+                        }
+                      >
+                        {service.title}
+                      </NavLink>
+                    )
+                  )}
                 </div>
               </div>
             </div>
 
+            {/* Pricing Page */}
+            <NavLink
+              to="/price"
+              onClick={closeMenu}
+              className={({ isActive }) =>
+                isActive
+                  ? "nav-link active"
+                  : "nav-link"
+              }
+            >
+              Prices
+            </NavLink>
+
             {/* Features */}
-            <a
-              href="/#features"
+            <Link
+              to="/#features"
               className="nav-link"
               onClick={closeMenu}
             >
               Features
-            </a>
+            </Link>
           </div>
 
           {/* Commission Work Button */}
