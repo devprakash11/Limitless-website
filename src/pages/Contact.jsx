@@ -10,7 +10,7 @@ import {
   Phone,
   Send,
   ShieldCheck,
-  Sparkles
+  Sparkles,
 } from "lucide-react";
 
 const receiverEmail = "help.limitlessdesign@gmail.com";
@@ -24,7 +24,7 @@ const serviceOptions = [
   "Business Card Design",
   "Branding Materials",
   "UI Design",
-  "Custom Creative Work"
+  "Custom Creative Work",
 ];
 
 const initialFormData = {
@@ -33,7 +33,7 @@ const initialFormData = {
   phone: "",
   service: "",
   message: "",
-  website: ""
+  website: "",
 };
 
 function Contact() {
@@ -52,13 +52,13 @@ function Contact() {
 
     setFormData((currentData) => ({
       ...currentData,
-      [name]: value
+      [name]: value,
     }));
 
     if (errors[name]) {
       setErrors((currentErrors) => ({
         ...currentErrors,
-        [name]: ""
+        [name]: "",
       }));
     }
 
@@ -76,29 +76,23 @@ function Contact() {
 
     if (!formData.email.trim()) {
       validationErrors.email = "Please enter your email address.";
-    } else if (
-      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())
-    ) {
-      validationErrors.email =
-        "Please enter a valid email address.";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) {
+      validationErrors.email = "Please enter a valid email address.";
     }
 
     if (
       formData.phone.trim() &&
       !/^[0-9+\-\s()]{8,15}$/.test(formData.phone.trim())
     ) {
-      validationErrors.phone =
-        "Please enter a valid phone number.";
+      validationErrors.phone = "Please enter a valid phone number.";
     }
 
     if (!formData.service) {
-      validationErrors.service =
-        "Please select the required service.";
+      validationErrors.service = "Please select the required service.";
     }
 
     if (!formData.message.trim()) {
-      validationErrors.message =
-        "Please describe your project requirement.";
+      validationErrors.message = "Please describe your project requirement.";
     } else if (formData.message.trim().length < 20) {
       validationErrors.message =
         "Please provide at least 20 characters about your project.";
@@ -121,9 +115,7 @@ function Contact() {
 
       const firstErrorField = Object.keys(validationErrors)[0];
 
-      document
-        .querySelector(`[name="${firstErrorField}"]`)
-        ?.focus();
+      document.querySelector(`[name="${firstErrorField}"]`)?.focus();
 
       return;
     }
@@ -141,85 +133,25 @@ function Contact() {
     setSubmitError("");
     setErrors({});
 
-    const subject =
-      `New ${formData.service} Requirement ` +
-      `from ${formData.name.trim()}`;
-
-    const formPayload = new FormData();
-
-    formPayload.append("name", formData.name.trim());
-    formPayload.append("email", formData.email.trim());
-
-    formPayload.append(
-      "phone",
-      formData.phone.trim() || "Not provided"
-    );
-
-    formPayload.append("service", formData.service);
-    formPayload.append("message", formData.message.trim());
-
-    formPayload.append(
-      "_subject",
-      subject
-    );
-
-    formPayload.append(
-      "_template",
-      "table"
-    );
-
-    formPayload.append(
-      "_captcha",
-      "false"
-    );
-
-    formPayload.append(
-      "_replyto",
-      formData.email.trim()
-    );
-
-    formPayload.append(
-      "_honey",
-      formData.website
-    );
-
-    formPayload.append(
-      "submission_source",
-      window.location.href
-    );
-
-    /*
-      Stop the request automatically if FormSubmit takes
-      longer than 10 seconds to respond.
-    */
-    const controller = new AbortController();
-
-    const timeoutId = window.setTimeout(() => {
-      controller.abort();
-    }, 10000);
-
     try {
-      const response = await fetch(
-        `https://formsubmit.co/ajax/${receiverEmail}`,
-        {
-          method: "POST",
-          headers: {
-            Accept: "application/json"
-          },
-          body: formPayload,
-          signal: controller.signal
-        }
-      );
+      const response = await fetch("/.netlify/functions/send-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          phone: formData.phone.trim(),
+          service: formData.service,
+          message: formData.message.trim(),
+        }),
+      });
 
-      const responseData = await response
-        .json()
-        .catch(() => null);
+      const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(
-          responseData?.message ||
-            "The requirement could not be submitted."
-        );
+        throw new Error(data.error || "Failed to submit requirement.");
       }
 
       setSubmitted(true);
@@ -227,19 +159,13 @@ function Contact() {
       setErrors({});
       setSubmitError("");
     } catch (error) {
-      console.error("Requirement submission failed:", error);
+      console.error(error);
 
-      if (error.name === "AbortError") {
-        setSubmitError(
-          "Submission is taking too long. Please check your internet connection and try again."
-        );
-      } else {
-        setSubmitError(
-          "Your requirement could not be submitted. Please try again."
-        );
-      }
+      setSubmitError(
+        error.message ||
+          "Your requirement could not be submitted. Please try again.",
+      );
     } finally {
-      window.clearTimeout(timeoutId);
       setIsSubmitting(false);
     }
   };
@@ -259,19 +185,17 @@ function Contact() {
           <div className="commission-hero-content">
             <span className="commission-hero-label">
               <Sparkles size={16} />
-
               Commission Creative Work
             </span>
 
             <h1>
-              Let’s create something{" "}
-              <span>limitless together.</span>
+              Let’s create something <span>limitless together.</span>
             </h1>
 
             <p>
-              Tell us about your creative requirement and we will
-              help you design professional visuals for your brand,
-              campaign, business, or digital product.
+              Tell us about your creative requirement and we will help you
+              design professional visuals for your brand, campaign, business, or
+              digital product.
             </p>
 
             <div className="commission-hero-points">
@@ -297,16 +221,13 @@ function Contact() {
       <section className="commission-section">
         <div className="container commission-layout">
           <aside className="commission-info-card">
-            <span className="commission-card-label">
-              Contact Information
-            </span>
+            <span className="commission-card-label">Contact Information</span>
 
             <h2>Start your creative project with us</h2>
 
             <p className="commission-info-description">
-              Contact Limitless Design directly or complete the
-              requirement form. Your project details will be
-              submitted directly to our team.
+              Contact Limitless Design directly or complete the requirement
+              form. Your project details will be submitted directly to our team.
             </p>
 
             <div className="commission-contact-list">
@@ -326,10 +247,7 @@ function Contact() {
                   <strong>{receiverEmail}</strong>
                 </span>
 
-                <ExternalLink
-                  size={17}
-                  className="commission-contact-arrow"
-                />
+                <ExternalLink size={17} className="commission-contact-arrow" />
               </a>
 
               <a
@@ -346,10 +264,7 @@ function Contact() {
                   <strong>+91 {contactNumber}</strong>
                 </span>
 
-                <ArrowRight
-                  size={17}
-                  className="commission-contact-arrow"
-                />
+                <ArrowRight size={17} className="commission-contact-arrow" />
               </a>
 
               <div className="commission-contact-item commission-location-item">
@@ -371,9 +286,8 @@ function Contact() {
 
               <span>
                 <strong>Quick response</strong>
-
-                We will review your project details and contact you
-                regarding the next steps.
+                We will review your project details and contact you regarding
+                the next steps.
               </span>
             </div>
 
@@ -381,8 +295,7 @@ function Contact() {
               <ShieldCheck size={18} />
 
               <span>
-                Your contact details are used only for discussing
-                your project.
+                Your contact details are used only for discussing your project.
               </span>
             </div>
           </aside>
@@ -398,8 +311,8 @@ function Contact() {
                   <h2>Tell us about your project</h2>
 
                   <p>
-                    Complete the form below and submit your project
-                    requirement directly to Limitless Design.
+                    Complete the form below and submit your project requirement
+                    directly to Limitless Design.
                   </p>
                 </div>
 
@@ -408,13 +321,8 @@ function Contact() {
                   onSubmit={handleSubmit}
                   noValidate
                 >
-                  <div
-                    className="commission-honeypot"
-                    aria-hidden="true"
-                  >
-                    <label htmlFor="commission-website">
-                      Website
-                    </label>
+                  <div className="commission-honeypot" aria-hidden="true">
+                    <label htmlFor="commission-website">Website</label>
 
                     <input
                       id="commission-website"
@@ -441,9 +349,7 @@ function Contact() {
                         autoComplete="name"
                         value={formData.name}
                         onChange={handleChange}
-                        className={
-                          errors.name ? "has-error" : ""
-                        }
+                        className={errors.name ? "has-error" : ""}
                       />
 
                       {errors.name && (
@@ -466,9 +372,7 @@ function Contact() {
                         autoComplete="email"
                         value={formData.email}
                         onChange={handleChange}
-                        className={
-                          errors.email ? "has-error" : ""
-                        }
+                        className={errors.email ? "has-error" : ""}
                       />
 
                       {errors.email && (
@@ -481,9 +385,7 @@ function Contact() {
 
                   <div className="commission-form-row">
                     <div className="commission-field">
-                      <label htmlFor="commission-phone">
-                        Phone number
-                      </label>
+                      <label htmlFor="commission-phone">Phone number</label>
 
                       <input
                         id="commission-phone"
@@ -493,9 +395,7 @@ function Contact() {
                         autoComplete="tel"
                         value={formData.phone}
                         onChange={handleChange}
-                        className={
-                          errors.phone ? "has-error" : ""
-                        }
+                        className={errors.phone ? "has-error" : ""}
                       />
 
                       {errors.phone && (
@@ -515,19 +415,12 @@ function Contact() {
                         name="service"
                         value={formData.service}
                         onChange={handleChange}
-                        className={
-                          errors.service ? "has-error" : ""
-                        }
+                        className={errors.service ? "has-error" : ""}
                       >
-                        <option value="">
-                          Select a service
-                        </option>
+                        <option value="">Select a service</option>
 
                         {serviceOptions.map((service) => (
-                          <option
-                            key={service}
-                            value={service}
-                          >
+                          <option key={service} value={service}>
                             {service}
                           </option>
                         ))}
@@ -553,9 +446,7 @@ function Contact() {
                       placeholder="Describe your project, design style, required size, preferred colors, deadline, and other important details."
                       value={formData.message}
                       onChange={handleChange}
-                      className={
-                        errors.message ? "has-error" : ""
-                      }
+                      className={errors.message ? "has-error" : ""}
                     />
 
                     <div className="commission-message-meta">
@@ -565,22 +456,16 @@ function Contact() {
                         </small>
                       ) : (
                         <small>
-                          Add complete information for an accurate
-                          response.
+                          Add complete information for an accurate response.
                         </small>
                       )}
 
-                      <small>
-                        {formData.message.length} characters
-                      </small>
+                      <small>{formData.message.length} characters</small>
                     </div>
                   </div>
 
                   {submitError && (
-                    <div
-                      className="commission-submit-error"
-                      role="alert"
-                    >
+                    <div className="commission-submit-error" role="alert">
                       {submitError}
                     </div>
                   )}
@@ -608,8 +493,8 @@ function Contact() {
                   </button>
 
                   <p className="commission-form-note">
-                    Clicking Send Requirement will submit your
-                    information directly without opening Gmail.
+                    Clicking Send Requirement will submit your information
+                    directly without opening Gmail.
                   </p>
                 </form>
               </>
@@ -627,22 +512,19 @@ function Contact() {
                   Requirement Submitted
                 </span>
 
-                <h2>
-                  Your requirement has been submitted successfully
-                </h2>
+                <h2>Your requirement has been submitted successfully</h2>
 
                 <p>
-                  Thank you for contacting Limitless Design. Your
-                  project information has been submitted to our team.
+                  Thank you for contacting Limitless Design. Your project
+                  information has been submitted to our team.
                 </p>
 
                 <div className="commission-success-notice">
                   <Mail size={20} />
 
                   <span>
-                    Our team will review your requirement and contact
-                    you using the email address or phone number
-                    provided.
+                    Our team will review your requirement and contact you using
+                    the email address or phone number provided.
                   </span>
                 </div>
 
@@ -652,9 +534,7 @@ function Contact() {
                     className="commission-submit-button"
                     onClick={handleSubmitAnother}
                   >
-                    <span>
-                      Submit Another Requirement
-                    </span>
+                    <span>Submit Another Requirement</span>
 
                     <ArrowRight size={18} />
                   </button>
