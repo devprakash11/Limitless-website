@@ -21,7 +21,7 @@ import BusinessCardDesign from "./pages/BusinessCardDesign";
 import BrandingMaterials from "./pages/BrandingMaterials";
 import BrandingMaterialView from "./pages/BrandingMaterialView";
 import DownloadPreview from "./pages/DownloadPreview";
-import Price from "./pages/Price";
+import Price from "./pages/price";
 
 import NotFound from "./pages/NotFound";
 
