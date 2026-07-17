@@ -21,6 +21,7 @@ import BusinessCardDesign from "./pages/BusinessCardDesign";
 import BrandingMaterials from "./pages/BrandingMaterials";
 import BrandingMaterialView from "./pages/BrandingMaterialView";
 import DownloadPreview from "./pages/DownloadPreview";
+import Price from "./pages/Price";
 
 import NotFound from "./pages/NotFound";
 
@@ -99,6 +100,11 @@ function App() {
         element={<DownloadPreview />}
       />
 
+      <Route
+        path="/price"
+        element={<Price />}
+      />
+
       {/*
         Optional legacy route.
 
@@ -111,7 +117,7 @@ function App() {
           <DownloadPreview fixedCategory="logo-design" />
         }
       />
-
+      
       {/*
         Keep the generic service route after all specific service
         routes so specific pages are matched first.
