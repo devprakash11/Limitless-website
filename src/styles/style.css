@@ -2177,6 +2177,90 @@ a.commission-contact-item:hover {
   color: var(--white);
 }
 
+
+/* ------------------------------------------------------------------------
+   CLICKABLE FOOTER CONTACT LINKS
+------------------------------------------------------------------------ */
+
+.footer-contact-col {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.footer-contact-col .footer-contact-link {
+  width: fit-content;
+  max-width: 100%;
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 0 0 12px;
+  padding: 5px 0;
+  color: #94a3b8;
+  font-size: 0.94rem;
+  line-height: 1.55;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  transition:
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.footer-contact-col .footer-contact-link span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.footer-contact-col .footer-contact-link svg {
+  flex: 0 0 auto;
+  margin-top: 3px;
+  color: #c4b5fd;
+  transition:
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.footer-contact-col a.footer-contact-link:hover {
+  color: var(--white);
+  transform: translateX(4px);
+}
+
+.footer-contact-col a.footer-contact-link:hover svg {
+  color: var(--secondary);
+  transform: scale(1.08);
+}
+
+.footer-contact-col a.footer-contact-link:focus-visible {
+  color: var(--white);
+  outline: 3px solid rgba(109, 93, 252, 0.35);
+  outline-offset: 4px;
+  border-radius: 6px;
+}
+
+.footer-contact-col .footer-location {
+  cursor: default;
+}
+
+@media (max-width: 768px) {
+  .footer-contact-col {
+    align-items: flex-start;
+  }
+
+  .footer-contact-col .footer-contact-link {
+    font-size: 0.92rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-contact-col .footer-contact-link {
+    width: 100%;
+    gap: 9px;
+    font-size: 0.88rem;
+  }
+}
+
 .footer-bottom {
   margin-top: 52px;
   padding: 22px 0;
@@ -7219,7 +7303,7 @@ a.commission-contact-item:hover {
 }
 
 /* ------------------------------------------------------------------------
-   DYNAMIC LOGO DOWNLOAD — TABLET
+   UNIVERSAL DOWNLOAD PREVIEW — TABLET
 ------------------------------------------------------------------------ */
 
 @media (max-width: 1024px) {
@@ -7246,7 +7330,7 @@ a.commission-contact-item:hover {
 }
 
 /* ------------------------------------------------------------------------
-   DYNAMIC LOGO DOWNLOAD — MOBILE
+   UNIVERSAL DOWNLOAD PREVIEW — MOBILE
 ------------------------------------------------------------------------ */
 
 @media (max-width: 768px) {
@@ -7276,15 +7360,24 @@ a.commission-contact-item:hover {
     padding: 12px;
   }
 
+  /*
+    Mobile content order:
+
+    1. Image/design preview
+    2. Selected file and download options
+
+    The desktop layout is unchanged.
+  */
+  .ldp-stage {
+    min-height: auto;
+    order: 1;
+    padding: 58px 14px 16px;
+  }
+
   .ldp-download-panel {
     position: static;
     max-height: none;
-    order: -1;
-  }
-
-  .ldp-stage {
-    min-height: auto;
-    padding: 58px 14px 16px;
+    order: 2;
   }
 
   .ldp-side-arrow {
@@ -7338,7 +7431,7 @@ a.commission-contact-item:hover {
 }
 
 /* ------------------------------------------------------------------------
-   DYNAMIC LOGO DOWNLOAD — SMALL MOBILE
+   UNIVERSAL DOWNLOAD PREVIEW — SMALL MOBILE
 ------------------------------------------------------------------------ */
 
 @media (max-width: 480px) {
