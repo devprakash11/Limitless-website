@@ -112,23 +112,23 @@ export const services = [
       "Complete brand consistency"
     ]
   },
-  // {
-  //   title: "UI Design",
-  //   slug: "ui-design",
-  //   icon: MonitorSmartphone,
-  //   short:
-  //     "Modern website and app UI designs with premium layouts and user-focused experience.",
-  //   description:
-  //     "We design professional user interfaces for websites, apps, dashboards, landing pages, ecommerce platforms, and SaaS products. Our UI work focuses on clarity, conversion, responsiveness, and visual quality.",
-  //   features: [
-  //     "Website UI design",
-  //     "Mobile app UI design",
-  //     "Dashboard interface design",
-  //     "Landing page UI",
-  //     "Ecommerce UI design",
-  //     "Responsive layout system"
-  //   ]
-  // },
+  {
+    title: "UI Design",
+    slug: "ui-design",
+    icon: MonitorSmartphone,
+    short:
+      "Modern website and app UI designs with premium layouts and user-focused experience.",
+    description:
+      "We design professional user interfaces for websites, apps, dashboards, landing pages, ecommerce platforms, and SaaS products. Our UI work focuses on clarity, conversion, responsiveness, and visual quality.",
+    features: [
+      "Website UI design",
+      "Mobile app UI design",
+      "Dashboard interface design",
+      "Landing page UI",
+      "Ecommerce UI design",
+      "Responsive layout system"
+    ]
+  },
   // {
   //   title: "Creative Design",
   //   slug: "creative-design",

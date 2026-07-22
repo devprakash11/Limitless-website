@@ -2,11 +2,13 @@ import { Link } from "react-router-dom";
 import {
   ArrowRight,
   BadgeCheck,
-  Clock,
-  Crown,
-  Gem,
+  Briefcase,
+  CheckCircle2,
   Layers3,
-  ShieldCheck,
+  Palette,
+  Rocket,
+  Sparkles,
+  Store,
   Users,
 } from "lucide-react";
 
@@ -18,109 +20,98 @@ import { services } from "../data/services";
    PAGE DATA
 ========================================================= */
 
-const whyChooseItems = [
-  {
-    icon: Crown,
-    title: "Premium Design Quality",
-    description:
-      "Every creative is designed with professional layout, clean spacing, strong typography, and brand-focused direction.",
-  },
-  {
-    icon: Users,
-    title: "Seller-Friendly Platform",
-    description:
-      "Designers and creative sellers can showcase their services while clients easily discover the right creative solution.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Reliable Work Process",
-    description:
-      "Clear project flow, proper communication, and organized design delivery make every commission smooth and trustworthy.",
-  },
-  {
-    icon: Clock,
-    title: "Fast Turnaround",
-    description:
-      "Get high-quality design assets within practical timelines without compromising professional visual standards.",
-  },
-  {
-    icon: Layers3,
-    title: "Multiple Creative Categories",
-    description:
-      "From logos and social banners to business cards, posters, branding materials, and UI designs—everything is available.",
-  },
-  {
-    icon: Gem,
-    title: "Business-Ready Output",
-    description:
-      "Designs are created for real business use across websites, social media, ads, campaigns, printing, and brand communication.",
-  },
-];
-
 const heroCards = [
   {
     number: "01",
-    title: "Creative Marketplace",
+    title: "Choose the outcome",
     description:
-      "Sell and discover premium creative services in one professional platform.",
+      "Start with what you need to launch, promote, present, or improve.",
   },
   {
     number: "02",
-    title: "Design Categories",
+    title: "Match the right format",
     description:
-      "Logo, banner, poster, branding, business card, UI design, and more.",
+      "Select a logo, poster, business card, photo frame, or full brand package.",
   },
   {
     number: "03",
-    title: "Commission Work",
+    title: "Move from brief to delivery",
     description:
-      "Request custom creative work based on your brand or campaign requirements.",
+      "Share your direction, review the work, and receive a business-ready design.",
   },
 ];
 
 const heroStats = [
   {
-    value: "20+",
-    label: "Creative Categories",
+    value: "5+",
+    label: "Core Design Services",
   },
   {
     value: "300+",
-    label: "Design Assets",
+    label: "Creative Assets",
   },
   {
-    value: "100%",
-    label: "Business Focused",
+    value: "1",
+    label: "Clear Project Process",
   },
 ];
 
-const platformFeatures = [
-  "Verified creative sellers",
-  "Custom commission work",
-  "Professional service categories",
-  "Brand identity support",
-  "Campaign-ready creatives",
-  "Responsive marketplace experience",
-];
-
-const featureCards = [
+const audiencePaths = [
   {
-    number: "01",
-    title: "Discover Creative Sellers",
+    icon: Briefcase,
+    eyebrow: "For Businesses",
+    title: "Get the design your next move actually needs",
     description:
-      "Find talented designers based on service category, style, and business requirements.",
+      "Launch a brand, promote an offer, prepare an event, or improve how your business looks across customer touchpoints.",
+    points: [
+      "Clear service-based pricing",
+      "Custom creative direction",
+      "Designs prepared for practical use",
+    ],
+    linkLabel: "Commission a Project",
+    linkTo: "/contact",
     featured: true,
   },
   {
-    number: "02",
-    title: "Commission Custom Work",
+    icon: Store,
+    eyebrow: "For Creative Sellers",
+    title: "Present your work as a professional service",
     description:
-      "Request personalized designs for campaigns, brands, products, and digital platforms.",
+      "Organize creative services by category, make your strengths easier to discover, and build confidence before a client reaches out.",
+    points: [
+      "Focused service categories",
+      "Professional portfolio presentation",
+      "A clearer path from discovery to enquiry",
+    ],
+    linkLabel: "Explore Services",
+    linkTo: "#services",
+  },
+];
+
+const valueItems = [
+  {
+    icon: Sparkles,
+    title: "Brief-first collaboration",
+    description:
+      "The project starts with the goal, audience, size, content, and references—not guesswork.",
   },
   {
-    number: "03",
-    title: "Build Brand Identity",
+    icon: Layers3,
+    title: "Variants where they matter",
     description:
-      "Create consistent visuals across websites, print, ads, social media, and business communication.",
+      "Logo and poster packages include useful options so you can compare directions before finalizing.",
+  },
+  {
+    icon: Palette,
+    title: "Consistent visual thinking",
+    description:
+      "Typography, colour, layout, and brand personality are considered together instead of as separate pieces.",
+  },
+  {
+    icon: Rocket,
+    title: "Ready for real business use",
+    description:
+      "Every design is created with its final use in mind, from digital campaigns to print and brand communication.",
   },
 ];
 
@@ -130,8 +121,14 @@ const featureCards = [
 
 function HeroCard({ card, featured }) {
   return (
-    <article className={`ld-text-card ${featured ? "main-card" : ""}`}>
-      <span className="ld-card-number">{card.number}</span>
+    <article
+      className={`ld-text-card ${
+        featured ? "main-card" : ""
+      }`}
+    >
+      <span className="ld-card-number">
+        {card.number}
+      </span>
 
       <div className="ld-card-content">
         <h3>{card.title}</h3>
@@ -141,29 +138,92 @@ function HeroCard({ card, featured }) {
   );
 }
 
-function WhyChooseCard({ item }) {
+function AudienceCard({ item }) {
   const Icon = item.icon;
 
   return (
-    <article className="why-card">
-      <div className="why-icon" aria-hidden="true">
-        <Icon size={25} />
+    <article
+      className={`home-audience-card ${
+        item.featured ? "is-featured" : ""
+      }`}
+    >
+      <div
+        className="home-audience-icon"
+        aria-hidden="true"
+      >
+        <Icon size={27} />
       </div>
 
+      <span className="home-audience-eyebrow">
+        {item.eyebrow}
+      </span>
+
       <h3>{item.title}</h3>
-      <p>{item.description}</p>
+
+      <p className="home-audience-description">
+        {item.description}
+      </p>
+
+      <ul className="home-audience-list">
+        {item.points.map((point) => (
+          <li key={point}>
+            <CheckCircle2
+              size={18}
+              aria-hidden="true"
+            />
+
+            <span>{point}</span>
+          </li>
+        ))}
+      </ul>
+
+      {item.linkTo.startsWith("#") ? (
+        <a
+          href={item.linkTo}
+          className="home-audience-link"
+        >
+          {item.linkLabel}
+          <ArrowRight
+            size={18}
+            aria-hidden="true"
+          />
+        </a>
+      ) : (
+        <Link
+          to={item.linkTo}
+          className="home-audience-link"
+        >
+          {item.linkLabel}
+          <ArrowRight
+            size={18}
+            aria-hidden="true"
+          />
+        </Link>
+      )}
     </article>
   );
 }
 
-function FeatureCard({ feature }) {
+function ValueCard({ item, index }) {
+  const Icon = item.icon;
+
   return (
-    <article
-      className={`feature-card ${feature.featured ? "active" : ""}`}
-    >
-      <span>{feature.number}</span>
-      <h3>{feature.title}</h3>
-      <p>{feature.description}</p>
+    <article className="home-value-card">
+      <div className="home-value-card-top">
+        <div
+          className="home-value-icon"
+          aria-hidden="true"
+        >
+          <Icon size={24} />
+        </div>
+
+        <span>
+          {String(index + 1).padStart(2, "0")}
+        </span>
+      </div>
+
+      <h3>{item.title}</h3>
+      <p>{item.description}</p>
     </article>
   );
 }
@@ -184,38 +244,46 @@ function Home() {
 
   return (
     <main className="home-page">
-      {/* Hero section */}
-      <section className="ld-hero" aria-labelledby="ld-home-title">
+      {/* Hero */}
+      <section
+        className="ld-hero"
+        aria-labelledby="ld-home-title"
+      >
         <div className="container ld-hero-container">
           <div className="ld-hero-left">
             <span className="ld-hero-badge">
-              Creative Marketplace for Modern Brands
+              Design Marketplace for Growing Brands
             </span>
 
             <h1 id="ld-home-title">
               <span className="ld-heading-dark">
-                Discover, Sell &amp; Commission
+                Find the right design.
               </span>
 
               <span className="ld-gradient-text">
-                Limitless Creative Designs.
+                Launch with confidence.
               </span>
             </h1>
 
             <p className="ld-hero-description">
-              Limitless Design is a professional platform where sellers offer
-              logo designs, social media banners, photo frames, posters,
-              business cards, branding materials, UI designs, and many more
-              creative services.
+              Explore professional creative services or commission
+              something tailored to your brand, campaign, event, or
+              business goal—all through one clear design process.
             </p>
 
             <div className="ld-hero-actions">
-              <a href="#services" className="ld-primary-btn">
+              <a
+                href="#services"
+                className="ld-primary-btn"
+              >
                 Explore Services
               </a>
 
-              <Link to="/contact" className="ld-secondary-btn">
-                Commission Work
+              <Link
+                to="/price"
+                className="ld-secondary-btn"
+              >
+                View Pricing
               </Link>
             </div>
           </div>
@@ -241,118 +309,155 @@ function Home() {
         </div>
       </section>
 
-      {/* Why choose us */}
-      <section className="section" id="why">
+      {/* Services */}
+      <section
+        className="section service-section"
+        id="services"
+      >
         <div className="container">
           <SectionHeading
-            label="Why Choose Us"
-            title="A creative platform built for serious brands and sellers"
-            text="Limitless Design gives sellers a professional platform and gives businesses a trusted space to commission high-quality creative work."
-          />
-
-          <div className="why-grid">
-            {whyChooseItems.map((item) => (
-              <WhyChooseCard key={item.title} item={item} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Services section */}
-      <section className="section service-section" id="services">
-        <div className="container">
-          <SectionHeading
-            label="What We Offer"
-            title="Professional creative services for every business need"
-            text="Explore premium design categories created for brands, creators, ecommerce sellers, agencies, startups, and growing businesses."
+            label="Choose a Service"
+            title="Start with the exact design deliverable you need"
+            text="Browse focused creative services instead of paying for a broad package that does not match your current project."
           />
 
           {availableServices.length > 0 ? (
             <div className="service-grid">
-              {availableServices.map((service, index) => (
-                <ServiceCard
-                  key={
-                    service.slug ??
-                    service.title ??
-                    `service-${index + 1}`
-                  }
-                  service={service}
-                />
-              ))}
+              {availableServices.map(
+                (service, index) => (
+                  <ServiceCard
+                    key={
+                      service.slug ??
+                      service.title ??
+                      `service-${index + 1}`
+                    }
+                    service={service}
+                  />
+                )
+              )}
             </div>
           ) : (
-            <div className="service-empty-message" role="status">
+            <div
+              className="service-empty-message"
+              role="status"
+            >
               <h3>No services available</h3>
 
               <p>
-                Creative services will appear here after they are added to the
-                services data file.
+                Creative services will appear here after they
+                are added to the services data file.
               </p>
             </div>
           )}
         </div>
       </section>
 
-      {/* Features section */}
-      <section className="features-section" id="features">
-        <div className="container features-grid">
-          <div className="features-content">
-            <span className="section-label dark-label">
-              Platform Features
-            </span>
+      {/* Audience paths */}
+      <section className="home-audience-section">
+        <div className="container">
+          <SectionHeading
+            label="Built for Both Sides"
+            title="One platform, two clear ways to move forward"
+            text="Businesses can commission focused creative work, while designers can present services in a more professional and discoverable way."
+          />
 
-            <h2>
-              Everything required to start creative selling professionally
-            </h2>
-
-            <p>
-              Limitless Design is built as a future-ready creative marketplace
-              where sellers can list their services and clients can commission
-              professional design work with confidence.
-            </p>
-
-            <div className="feature-list">
-              {platformFeatures.map((feature) => (
-                <div key={feature}>
-                  <BadgeCheck size={19} aria-hidden="true" />
-                  <span>{feature}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="features-panel">
-            {featureCards.map((feature) => (
-              <FeatureCard
-                key={feature.number}
-                feature={feature}
+          <div className="home-audience-grid">
+            {audiencePaths.map((item) => (
+              <AudienceCard
+                key={item.eyebrow}
+                item={item}
               />
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA section */}
+      {/* Distinct value section */}
+      <section
+        className="home-value-section"
+        id="features"
+      >
+        <div className="container">
+          <div className="home-value-heading">
+            <div>
+              <span className="section-label dark-label">
+                What Makes the Work Better
+              </span>
+
+              <h2>
+                A stronger result starts long before the first
+                layout is created
+              </h2>
+            </div>
+
+            <p>
+              The platform is designed around useful project
+              information, clear deliverables, and visual systems
+              that can work beyond a single screen or post.
+            </p>
+          </div>
+
+          <div className="home-value-grid">
+            {valueItems.map((item, index) => (
+              <ValueCard
+                key={item.title}
+                item={item}
+                index={index}
+              />
+            ))}
+          </div>
+
+          <div className="home-value-footer">
+            <div>
+              <BadgeCheck
+                size={20}
+                aria-hidden="true"
+              />
+
+              <span>
+                Need editable source files? Raw files can be
+                added separately to eligible design projects.
+              </span>
+            </div>
+
+            <Link to="/price">
+              See Pricing Details
+              <ArrowRight
+                size={18}
+                aria-hidden="true"
+              />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
       <section className="cta-section">
         <div className="container cta-box">
           <div className="cta-content">
             <span className="section-label dark-label">
-              Start Your Project
+              Bring the Brief
             </span>
 
-            <h2>Need a custom design for your brand?</h2>
+            <h2>
+              Have a clear idea or only a rough one?
+            </h2>
 
             <p>
-              Commission professional creative work and bring your visual idea
-              to life with Limitless Design.
+              Share the goal, audience, content, and visual
+              references. Limitless Design will help turn that
+              information into a focused creative direction.
             </p>
 
             <Link
               to="/contact"
               className="primary-btn white-btn cta-commission-btn"
             >
-              Commission Work
-              <ArrowRight size={18} aria-hidden="true" />
+              Start a Project
+              <ArrowRight
+                size={18}
+                aria-hidden="true"
+              />
             </Link>
           </div>
         </div>

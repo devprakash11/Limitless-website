@@ -22,6 +22,7 @@ import BrandingMaterials from "./pages/BrandingMaterials";
 import BrandingMaterialView from "./pages/BrandingMaterialView";
 import DownloadPreview from "./pages/DownloadPreview";
 import Price from "./pages/price";
+import UIDesign from "./pages/UIDesign";
 
 import NotFound from "./pages/NotFound";
 
@@ -103,6 +104,11 @@ function App() {
       <Route
         path="/price"
         element={<Price />}
+      />
+
+      <Route
+        path="/services/ui-design"
+        element={<UIDesign />}
       />
 
       {/*
