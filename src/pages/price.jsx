@@ -4,10 +4,12 @@ import {
   BadgeCheck,
   Check,
   CreditCard,
+  Crown,
   FileArchive,
   FileImage,
   Image as ImageIcon,
   Layers3,
+  MonitorSmartphone,
   Palette,
   PenTool,
   Sparkles,
@@ -100,6 +102,55 @@ const pricingPlans = [
     ],
     note:
       "Best suited for startups, small businesses, product brands, and new business launches.",
+  },
+];
+
+
+const uiUxPlans = [
+  {
+    slug: "ui-ux-basic-plan",
+    title: "Basic Plan",
+    price: "3499",
+    icon: MonitorSmartphone,
+    label: "Starter UI/UX",
+    description:
+      "A focused UI/UX package for small business websites, portfolios, landing pages, and compact digital experiences.",
+    features: [
+      "Basic visual theme",
+      "Maximum 4 pages",
+      "2 to 3 promotional poster designs",
+      "Desktop and mobile responsive layouts",
+      "Basic user-flow and page hierarchy",
+      "Standard buttons, forms, cards, and navigation",
+      "Up to 2 revision rounds",
+      "Final screen previews and export files",
+    ],
+    note:
+      "Best suited for smaller projects with a clear and limited page structure.",
+  },
+  {
+    slug: "ui-ux-professional-plan",
+    title: "Professional Plan",
+    price: "7999",
+    icon: Crown,
+    label: "Advanced UI/UX",
+    recommended: true,
+    description:
+      "A complete custom UI/UX direction for growing brands, service platforms, e-commerce stores, and multi-page products.",
+    features: [
+      "Fully custom visual theme",
+      "Multiple pages based on the approved scope",
+      "4 promotional poster designs",
+      "Desktop, tablet, and mobile responsive layouts",
+      "Detailed user-flow and page hierarchy",
+      "Custom reusable UI components",
+      "Typography and colour style direction",
+      "Interactive screen-flow presentation",
+      "Up to 4 revision rounds",
+      "Organized design presentation for development reference",
+    ],
+    note:
+      "Best suited for brands that need a scalable, detailed, and consistent digital experience.",
   },
 ];
 
@@ -208,6 +259,156 @@ function PriceCard({ plan }) {
         </Link>
       </div>
     </article>
+  );
+}
+
+
+function UIUXPlanColumn({ plan }) {
+  const Icon = plan.icon;
+
+  return (
+    <div
+      className={`price-page-uiux-plan ${
+        plan.recommended ? "is-recommended" : ""
+      }`}
+    >
+      {plan.recommended && (
+        <span className="price-page-uiux-recommended">
+          <Sparkles size={14} aria-hidden="true" />
+          Recommended
+        </span>
+      )}
+
+      <div className="price-page-uiux-plan-header">
+        <div
+          className="price-page-uiux-plan-icon"
+          aria-hidden="true"
+        >
+          <Icon size={25} />
+        </div>
+
+        <div>
+          <span>{plan.label}</span>
+          <h3>{plan.title}</h3>
+        </div>
+      </div>
+
+      <p className="price-page-uiux-plan-description">
+        {plan.description}
+      </p>
+
+      <div className="price-page-uiux-plan-price">
+        <span>Starting at</span>
+
+        <div>
+          <small>₹</small>
+          <strong>{plan.price}</strong>
+        </div>
+
+        <p>UI/UX design charge</p>
+      </div>
+
+      <div className="price-page-uiux-plan-divider" />
+
+      <ul className="price-page-uiux-feature-list">
+        {plan.features.map((feature) => (
+          <li key={feature}>
+            <span aria-hidden="true">
+              <Check size={15} />
+            </span>
+
+            <p>{feature}</p>
+          </li>
+        ))}
+      </ul>
+
+      <div className="price-page-uiux-plan-note">
+        <BadgeCheck size={18} aria-hidden="true" />
+        <p>{plan.note}</p>
+      </div>
+
+      <Link
+        to="/contact"
+        state={{
+          selectedService: `UI/UX Design - ${plan.title}`,
+          selectedPrice: `₹${plan.price}`,
+        }}
+        className="price-page-uiux-plan-button"
+      >
+        Choose {plan.title}
+        <ArrowRight size={17} aria-hidden="true" />
+      </Link>
+    </div>
+  );
+}
+
+function UIUXPricingBox() {
+  return (
+    <section
+      className="price-page-uiux-section"
+      id="ui-ux-pricing"
+    >
+      <div className="container">
+        <div className="price-page-section-heading">
+          <span>UI/UX Design Plans</span>
+
+          <h2>
+            Two UI/UX plans inside one clear package box
+          </h2>
+
+          <p>
+            Compare the Basic and Professional plans side by side
+            and choose the package that matches your project size,
+            visual direction, and page requirements.
+          </p>
+        </div>
+
+        <div className="price-page-uiux-box">
+          <div className="price-page-uiux-box-top">
+            <div>
+              <span>UI/UX Design Packages</span>
+
+              <h3>
+                From compact websites to complete multi-page
+                digital experiences
+              </h3>
+            </div>
+
+            <div className="price-page-uiux-starting">
+              <small>Plans start from</small>
+              <strong>₹3,499</strong>
+            </div>
+          </div>
+
+          <div className="price-page-uiux-comparison">
+            {uiUxPlans.map((plan) => (
+              <UIUXPlanColumn
+                key={plan.slug}
+                plan={plan}
+              />
+            ))}
+          </div>
+
+          <div className="price-page-uiux-box-footer">
+            <div>
+              <BadgeCheck size={20} aria-hidden="true" />
+
+              <p>
+                Final pricing may change for advanced dashboards,
+                complex user flows, custom illustrations, extensive
+                content creation, or pages outside the approved
+                project scope.
+              </p>
+            </div>
+
+            <p>
+              Editable source file:
+              <strong> Not Provided</strong>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -338,8 +539,10 @@ function Price() {
         </div>
       </section>
 
+      <UIUXPricingBox />
+
       {/* Important pricing information */}
-      <section className="price-page-info-section">
+      {/* <section className="price-page-info-section">
         <div className="container price-page-info-card">
           <div className="price-page-info-icon" aria-hidden="true">
             <Layers3 size={30} />
@@ -363,7 +566,7 @@ function Price() {
             <strong>+₹499</strong>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Work process */}
       <section className="price-page-process-section">
