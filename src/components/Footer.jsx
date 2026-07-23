@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+
 import {
   Mail,
   MapPin,
@@ -6,7 +7,43 @@ import {
   Sparkles,
 } from "lucide-react";
 
+import {
+  FaBehance,
+  FaDribbble,
+  FaInstagram,
+  FaLinkedin,
+  FaYoutube,
+} from "react-icons/fa6";
+
 import { services } from "../data/services";
+
+const socialLinks = [
+  // {
+  //   name: "YouTube",
+  //   href: "https://www.youtube.com/",
+  //   icon: FaYoutube,
+  // },
+  {
+    name: "Instagram",
+    href: "https://www.instagram.com/limitless_design11?igsh=a245ZDk1emF1bXJu&utm_source=qr",
+    icon: FaInstagram,
+  },
+  {
+    name: "Behance",
+    href: "https://www.behance.net/devprakash116",
+    icon: FaBehance,
+  },
+  // {
+  //   name: "Dribbble",
+  //   href: "https://dribbble.com/",
+  //   icon: FaDribbble,
+  // },
+  // {
+  //   name: "LinkedIn",
+  //   href: "https://www.linkedin.com/",
+  //   icon: FaLinkedin,
+  // },
+];
 
 function Footer() {
   const currentYear = new Date().getFullYear();
@@ -14,16 +51,14 @@ function Footer() {
   const availableServices = Array.isArray(services)
     ? services.filter(
         (service) =>
-          service &&
-          service.slug &&
-          service.title
+          service?.slug &&
+          service?.title
       )
     : [];
 
   return (
     <footer className="footer">
       <div className="container footer-grid">
-        {/* Footer introduction */}
         <div className="footer-about">
           <Link
             to="/"
@@ -45,30 +80,49 @@ function Footer() {
             offer premium design services and businesses discover
             powerful visual solutions.
           </p>
+
+          <div
+            className="footer-socials"
+            aria-label="Limitless Design social media"
+          >
+            <span className="footer-socials-title">
+              Follow our creative work
+            </span>
+
+            <div className="footer-social-links">
+              {socialLinks.map((social) => {
+                const Icon = social.icon;
+
+                return (
+                  <a
+                    key={social.name}
+                    href={social.href}
+                    className="footer-social-link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Open Limitless Design on ${social.name}`}
+                    title={social.name}
+                  >
+                    <Icon
+                      size={19}
+                      aria-hidden="true"
+                    />
+                  </a>
+                );
+              })}
+            </div>
+          </div>
         </div>
 
-        {/* Company links */}
         <div className="footer-col">
           <h4>Company</h4>
 
-          <Link to="/">
-            Home
-          </Link>
-
-          <Link to="/about">
-            About Us
-          </Link>
-
-          <Link to="/price">
-            Pricing
-          </Link>
-
-          <Link to="/contact">
-            Contact
-          </Link>
+          <Link to="/">Home</Link>
+          <Link to="/about">About Us</Link>
+          <Link to="/price">Pricing</Link>
+          <Link to="/contact">Contact</Link>
         </div>
 
-        {/* Service links */}
         <div className="footer-col">
           <h4>Services</h4>
 
@@ -84,7 +138,6 @@ function Footer() {
             ))}
         </div>
 
-        {/* Contact details */}
         <div className="footer-col footer-contact-col">
           <h4>Contact</h4>
 

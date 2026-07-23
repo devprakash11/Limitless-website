@@ -8,7 +8,6 @@ import {
   FileArchive,
   FileImage,
   Image as ImageIcon,
-  Layers3,
   MonitorSmartphone,
   Palette,
   PenTool,
@@ -169,9 +168,21 @@ const processSteps = [
   },
   {
     number: "03",
-    title: "Review the design",
+    title: "Pay 50% advance",
     text:
-      "Review the presented design direction and select the option that works best for you.",
+      "After the project scope and price are confirmed, pay 50% of the total amount. Design work starts after the advance payment is received.",
+  },
+  {
+    number: "04",
+    title: "Review and approve the work",
+    text:
+      "Review the presented design, share revisions within the approved scope, and confirm the completed work.",
+  },
+  {
+    number: "05",
+    title: "Pay the remaining 50%",
+    text:
+      "Pay the remaining 50% after the work is completed and approved. Final high-resolution files are delivered after the payment is received.",
   },
 ];
 
@@ -438,9 +449,9 @@ function Price() {
 
             <p>
               Choose the design service that fits your requirement.
-              Every listed price covers the design work. Editable
-              raw or source files are available for an additional
-              ₹499.
+              A 50% advance payment confirms the project and starts
+              the work. The remaining 50% is payable after completion
+              and approval, before the final files are delivered.
             </p>
 
             <div className="price-page-hero-actions">
@@ -473,7 +484,7 @@ function Price() {
 
               <span>
                 <BadgeCheck size={17} aria-hidden="true" />
-                Raw file option available
+                Simple 50% + 50% payment terms
               </span>
             </div>
           </div>
@@ -541,32 +552,39 @@ function Price() {
 
       <UIUXPricingBox />
 
-      {/* Important pricing information */}
-      {/* <section className="price-page-info-section">
+      {/* Payment terms */}
+      <section
+        className="price-page-info-section"
+        aria-labelledby="price-page-payment-title"
+      >
         <div className="container price-page-info-card">
           <div className="price-page-info-icon" aria-hidden="true">
-            <Layers3 size={30} />
+            <CreditCard size={30} />
           </div>
 
           <div className="price-page-info-content">
-            <span>Important Pricing Information</span>
+            <span>Payment Terms</span>
 
-            <h2>Design pricing and raw-file pricing are separate</h2>
+            <h2 id="price-page-payment-title">
+              50% before work starts and 50% after completion
+            </h2>
 
             <p>
-              The listed package amount covers the design service.
-              An editable source or raw file is not included in the
-              base amount. Add ₹499 when you need the original
-              editable working file.
+              A 50% advance payment is required after the project
+              scope, price, and requirements are confirmed. Work
+              begins only after the advance payment is received.
+              The remaining 50% is payable after the design work is
+              completed and approved, before final high-resolution
+              or editable files are delivered.
             </p>
           </div>
 
           <div className="price-page-info-price">
-            <small>Raw file add-on</small>
-            <strong>+₹499</strong>
+            <small>Payment split</small>
+            <strong>50 / 50</strong>
           </div>
         </div>
-      </section> */}
+      </section>
 
       {/* Work process */}
       <section className="price-page-process-section">
@@ -577,8 +595,9 @@ function Price() {
             <h2>A simple process from brief to final design</h2>
 
             <p>
-              Start by choosing a service and sharing the information
-              needed to create your design.
+              Choose a service, share the project brief, pay the 50%
+              advance to begin, review the completed work, and pay the
+              remaining 50% before final file delivery.
             </p>
           </div>
 

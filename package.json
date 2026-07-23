@@ -13,6 +13,7 @@
     "nodemailer": "^9.0.3",
     "react": "latest",
     "react-dom": "latest",
+    "react-icons": "^5.7.0",
     "react-router-dom": "^7.18.1"
   },
   "devDependencies": {
