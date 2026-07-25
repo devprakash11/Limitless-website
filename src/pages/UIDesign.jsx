@@ -21,175 +21,31 @@ import {
    SMALL COMPONENTS
 ========================================================= */
 
-function UIDesignFallbackArtwork({
+const DEFAULT_UI_IMAGE =
+  "/images/ui-design/placeholder/ui-design-placeholder.webp";
+
+function UIDesignImage({
   item,
-  portrait = false,
-}) {
-  const content = item.previewContent;
-
-  return (
-    <div
-      className={`uicg-fallback-artwork uicg-fallback-${
-        item.preview
-      } ${portrait ? "is-portrait" : ""}`}
-      aria-label={`${item.title} generated preview placeholder`}
-    >
-      <div className="uicg-fallback-browser">
-        <div aria-hidden="true">
-          <span />
-          <span />
-          <span />
-        </div>
-
-        <small>{item.title}</small>
-      </div>
-
-      <div className="uicg-fallback-page">
-        <header className="uicg-fallback-nav">
-          <div className="uicg-fallback-brand">
-            <span>{item.title.charAt(0)}</span>
-            <strong>Limitless UI</strong>
-          </div>
-
-          <div
-            className="uicg-fallback-links"
-            aria-hidden="true"
-          >
-            <span />
-            <span />
-            <span />
-          </div>
-
-          <i aria-hidden="true" />
-        </header>
-
-        <section className="uicg-fallback-hero">
-          <div className="uicg-fallback-copy">
-            <small>{content.kicker}</small>
-            <h4>{content.headline}</h4>
-            <p>{content.subline}</p>
-
-            <span>{content.action}</span>
-          </div>
-
-          <div className="uicg-fallback-visual">
-            <div className="uicg-fallback-shape" />
-
-            <div className="uicg-fallback-metric">
-              <small>{content.metricLabel}</small>
-              <strong>{content.metricValue}</strong>
-
-              <div aria-hidden="true">
-                <span />
-                <span />
-                <span />
-                <span />
-                <span />
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="uicg-fallback-feature-row">
-          {item.deliverables.map((deliverable) => (
-            <article key={deliverable}>
-              <i aria-hidden="true" />
-              <span>{deliverable}</span>
-            </article>
-          ))}
-        </section>
-
-        {portrait && (
-          <>
-            <section className="uicg-fallback-wide-feature">
-              <div>
-                <small>Focused interface direction</small>
-                <h5>{content.headline}</h5>
-                <p>{content.subline}</p>
-              </div>
-
-              <span aria-hidden="true" />
-            </section>
-
-            <section className="uicg-fallback-product-grid">
-              {[1, 2, 3, 4].map((card) => (
-                <article key={card}>
-                  <span aria-hidden="true" />
-                  <i />
-                  <i />
-                </article>
-              ))}
-            </section>
-
-            <section className="uicg-fallback-story">
-              <div>
-                <small>Preview content</small>
-                <h5>Designed for a clear and confident user journey.</h5>
-              </div>
-
-              <span aria-hidden="true" />
-            </section>
-
-            <section className="uicg-fallback-product-grid second-grid">
-              {[1, 2, 3, 4, 5, 6].map((card) => (
-                <article key={card}>
-                  <span aria-hidden="true" />
-                  <i />
-                  <i />
-                </article>
-              ))}
-            </section>
-
-            <section className="uicg-fallback-testimonials">
-              {[1, 2, 3].map((card) => (
-                <article key={card}>
-                  <span />
-                  <i />
-                  <i />
-                </article>
-              ))}
-            </section>
-
-            <footer className="uicg-fallback-footer">
-              <strong>Limitless UI</strong>
-
-              <div aria-hidden="true">
-                <span />
-                <span />
-                <span />
-              </div>
-            </footer>
-          </>
-        )}
-      </div>
-    </div>
-  );
-}
-
-function UIDesignMedia({
-  item,
-  image,
-  portrait = false,
+  src,
   className = "",
+  eager = false,
 }) {
-  const [imageFailed, setImageFailed] = useState(false);
-
-  if (image && !imageFailed) {
-    return (
-      <img
-        src={image}
-        alt={`${item.title} preview`}
-        className={className}
-        loading="lazy"
-        onError={() => setImageFailed(true)}
-      />
-    );
-  }
+  const imageSource = src || DEFAULT_UI_IMAGE;
 
   return (
-    <UIDesignFallbackArtwork
-      item={item}
-      portrait={portrait}
+    <img
+      src={imageSource}
+      alt={`${item.title} preview`}
+      className={className}
+      loading={eager ? "eager" : "lazy"}
+      decoding="async"
+      onError={(event) => {
+        if (event.currentTarget.src.endsWith(DEFAULT_UI_IMAGE)) {
+          return;
+        }
+
+        event.currentTarget.src = DEFAULT_UI_IMAGE;
+      }}
     />
   );
 }
@@ -201,9 +57,9 @@ function UIDesignCard({ item, index, onPreview }) {
   return (
     <article className="uicg-card">
       <div className="uicg-card-media">
-        <UIDesignMedia
+        <UIDesignImage
           item={item}
-          image={item.cardImage}
+          src={item.cardImage}
           className="uicg-card-image"
         />
 
@@ -331,11 +187,11 @@ function UIDesignPreviewModal({ item, onClose }) {
         <div className="uicg-preview-scroll-area">
           <div className="uicg-preview-canvas">
             <div className="uicg-preview-image-shell">
-              <UIDesignMedia
+              <UIDesignImage
                 item={item}
-                image={item.previewImage}
-                portrait
+                src={item.previewImage || item.cardImage}
                 className="uicg-preview-image"
+                eager
               />
             </div>
           </div>
