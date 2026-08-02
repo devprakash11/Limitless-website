@@ -15,6 +15,7 @@ import {
 import SectionHeading from "../components/SectionHeading";
 import ServiceCard from "../components/ServiceCard";
 import { services } from "../data/services";
+import SEO from "../components/SEO";
 
 /* =========================================================
    PAGE DATA
@@ -243,7 +244,15 @@ function Home() {
     : [];
 
   return (
-    <main className="home-page">
+    <>
+      <SEO
+        title="Limitless Design | Logo, Branding and Graphic Design Services"
+        description="Limitless Design provides professional logo design, branding, poster design, business card design, photo frames and creative graphic design services for businesses and growing brands."
+        path="/"
+        image="/logo-01.webp"
+      />
+
+      <main className="home-page">
       {/* Hero */}
       <section
         className="ld-hero"
@@ -462,7 +471,8 @@ function Home() {
           </div>
         </div>
       </section>
-    </main>
+      </main>
+    </>
   );
 }
 

@@ -2,42 +2,66 @@ export const brandingSamples = [
   {
     title: "Blinkit Brand Kit",
     slug: "blinkit-brand-kit",
+    category: "Grocery Delivery Branding",
     image: "/images/branding-materials/brand-1.webp",
+    description: "A fast, recognizable identity system for grocery delivery.",
+    tags: ["Logo", "Packaging", "Apparel"],
   },
   {
     title: "Coffee Brand Identity",
     slug: "coffee-brand-identity",
+    category: "Cafe Branding",
     image: "/images/branding-materials/brand-2.webp",
+    description: "A warm premium identity for a modern coffee business.",
+    tags: ["Packaging", "Typography", "Pattern"],
   },
   {
     title: "Fashion Brand Kit",
     slug: "fashion-brand-kit",
+    category: "Fashion Branding",
     image: "/images/branding-materials/brand-3.webp",
+    description: "An editorial identity for apparel and lifestyle brands.",
+    tags: ["Labels", "Apparel", "Shopping Bag"],
   },
   {
     title: "Startup Brand System",
     slug: "startup-brand-system",
+    category: "Technology Branding",
     image: "/images/branding-materials/brand-4.webp",
+    description: "A digital-first system for technology and SaaS startups.",
+    tags: ["Digital Kit", "Presentation", "Stationery"],
   },
   {
     title: "Food Brand Identity",
     slug: "food-brand-identity",
+    category: "Food Branding",
     image: "/images/branding-materials/brand-5.webp",
+    description: "A vibrant identity for food, restaurant, and delivery brands.",
+    tags: ["Food Box", "Menu", "Campaigns"],
   },
   {
     title: "Luxury Product Branding",
     slug: "luxury-product-branding",
+    category: "Luxury Branding",
     image: "/images/branding-materials/brand-6.webp",
+    description: "A refined premium identity for high-end product businesses.",
+    tags: ["Monogram", "Packaging", "Gold System"],
   },
   {
     title: "Agency Brand Materials",
     slug: "agency-brand-materials",
+    category: "Agency Branding",
     image: "/images/branding-materials/brand-7.webp",
+    description: "A bold flexible identity for creative and digital agencies.",
+    tags: ["Proposal", "Presentation", "Digital Assets"],
   },
   {
     title: "Ecommerce Brand Kit",
     slug: "ecommerce-brand-kit",
+    category: "Ecommerce Branding",
     image: "/images/branding-materials/brand-8.webp",
+    description: "A conversion-ready identity for online stores and marketplaces.",
+    tags: ["Shipping Box", "Labels", "Sale Assets"],
   },
 ];
 
@@ -47,25 +71,24 @@ export const brandingBenefits = [
   "Brand patterns, packaging, stationery, and merchandise mockups",
   "Social media-ready and print-ready visual brand materials",
   "Consistent design system for marketing and business communication",
-  "Premium brand presentation for client approval and brand guidelines",
+  "Premium brand presentation for approval and brand guidelines",
 ];
 
 export const brandingProcess = [
   {
     title: "Brand Direction",
-    text: "We understand your business, logo, color preference, audience, tone, and visual style.",
+    text: "We understand your business, logo, color preferences, audience, tone, and visual style.",
   },
   {
     title: "Material Design",
-    text: "We design logo usage, colors, typography, brand patterns, packaging, stationery, and mockups.",
+    text: "We design logo usage, colors, typography, patterns, packaging, stationery, and mockups.",
   },
   {
     title: "Final Brand Kit",
-    text: "You receive a professional branding material presentation ready for digital and print use.",
+    text: "You receive a professional branding presentation prepared for digital and print use.",
   },
 ];
 
-// Provides all image properties expected by BrandingBoard
 const createFallbackImages = (image) => ({
   heroLogo: image,
   logoSystem: image,
@@ -85,37 +108,19 @@ export const brandCases = [
     category: "Grocery Delivery Branding",
     year: "2026",
     description:
-      "A complete branding material presentation showing logo system, color palette, typography, brand pattern, apparel, bag, packaging, and marketing elements.",
+      "A complete branding presentation showing the logo system, color palette, typography, pattern, apparel, bag, packaging, and marketing elements.",
     images: {
-      heroLogo:
-        "/images/branding-materials/blinkit/hero-logo.webp",
-      logoSystem:
-        "/images/branding-materials/blinkit/logo-system.webp",
-      pattern:
-        "/images/branding-materials/blinkit/pattern.webp",
-      colors:
-        "/images/branding-materials/blinkit/colors.webp",
-      typography:
-        "/images/branding-materials/blinkit/typography.webp",
-      apparel:
-        "/images/branding-materials/blinkit/apparel.webp",
-      bag:
-        "/images/branding-materials/blinkit/bag.webp",
-      packaging:
-        "/images/branding-materials/blinkit/packaging.webp",
+      heroLogo: "/images/branding-materials/blinkit/hero-logo.webp",
+      logoSystem: "/images/branding-materials/blinkit/logo-system.webp",
+      pattern: "/images/branding-materials/blinkit/pattern.webp",
+      colors: "/images/branding-materials/blinkit/colors.webp",
+      typography: "/images/branding-materials/blinkit/typography.webp",
+      apparel: "/images/branding-materials/blinkit/apparel.webp",
+      bag: "/images/branding-materials/blinkit/bag.webp",
+      packaging: "/images/branding-materials/blinkit/packaging.webp",
     },
-    colors: [
-      "#F8CB30",
-      "#009B3A",
-      "#101010",
-      "#FFFFFF",
-    ],
-    typography: [
-      "Berlin Sans FB",
-      "Poppins",
-      "Bold Display",
-      "Regular Sans",
-    ],
+    colors: ["#F8CB30", "#009B3A", "#101010", "#FFFFFF"],
+    typography: ["Berlin Sans FB", "Poppins", "Bold Display", "Regular Sans"],
     elements: [
       "Logo system and usage direction",
       "Primary and secondary brand colors",
@@ -125,7 +130,6 @@ export const brandCases = [
       "Marketing-ready visual brand presentation",
     ],
   },
-
   {
     slug: "coffee-brand-identity",
     brandName: "Coffee Brand",
@@ -133,37 +137,19 @@ export const brandCases = [
     category: "Cafe Branding",
     year: "2026",
     description:
-      "A premium branding material system for a coffee business with warm colors, packaging, typography, and social media identity.",
+      "A premium branding system for a coffee business with warm colors, packaging, typography, and social media identity.",
     images: {
-      heroLogo:
-        "/images/branding-materials/coffee/hero-logo.webp",
-      logoSystem:
-        "/images/branding-materials/coffee/logo-system.webp",
-      pattern:
-        "/images/branding-materials/coffee/pattern.webp",
-      colors:
-        "/images/branding-materials/coffee/colors.webp",
-      typography:
-        "/images/branding-materials/coffee/typography.webp",
-      apparel:
-        "/images/branding-materials/coffee/apparel.webp",
-      bag:
-        "/images/branding-materials/coffee/bag.webp",
-      packaging:
-        "/images/branding-materials/coffee/packaging.webp",
+      heroLogo: "/images/branding-materials/coffee/hero-logo.webp",
+      logoSystem: "/images/branding-materials/coffee/logo-system.webp",
+      pattern: "/images/branding-materials/coffee/pattern.webp",
+      colors: "/images/branding-materials/coffee/colors.webp",
+      typography: "/images/branding-materials/coffee/typography.webp",
+      apparel: "/images/branding-materials/coffee/apparel.webp",
+      bag: "/images/branding-materials/coffee/bag.webp",
+      packaging: "/images/branding-materials/coffee/packaging.webp",
     },
-    colors: [
-      "#5B371F",
-      "#C99052",
-      "#F5E7D3",
-      "#111111",
-    ],
-    typography: [
-      "Playfair Display",
-      "Inter",
-      "Bold Serif",
-      "Clean Sans",
-    ],
+    colors: ["#5B371F", "#C99052", "#F5E7D3", "#111111"],
+    typography: ["Playfair Display", "Inter", "Bold Serif", "Clean Sans"],
     elements: [
       "Coffee logo identity",
       "Packaging and label direction",
@@ -173,7 +159,6 @@ export const brandCases = [
       "Premium product presentation",
     ],
   },
-
   {
     slug: "fashion-brand-kit",
     brandName: "Fashion Brand",
@@ -181,22 +166,10 @@ export const brandCases = [
     category: "Fashion and Apparel Branding",
     year: "2026",
     description:
-      "A modern fashion branding system created for apparel labels, boutiques, online fashion stores, and lifestyle businesses.",
-    images: createFallbackImages(
-      "/images/branding-materials/brand-3.webp"
-    ),
-    colors: [
-      "#111111",
-      "#D8B4A0",
-      "#F7F2EE",
-      "#FFFFFF",
-    ],
-    typography: [
-      "Cormorant Garamond",
-      "Montserrat",
-      "Elegant Serif",
-      "Modern Sans",
-    ],
+      "A modern fashion branding system for apparel labels, boutiques, online fashion stores, and lifestyle businesses.",
+    images: createFallbackImages("/images/branding-materials/brand-3.webp"),
+    colors: ["#111111", "#D8B4A0", "#F7F2EE", "#FFFFFF"],
+    typography: ["Cormorant Garamond", "Montserrat", "Elegant Serif", "Modern Sans"],
     elements: [
       "Fashion logo and identity direction",
       "Premium neutral color palette",
@@ -206,7 +179,6 @@ export const brandCases = [
       "Social media brand templates",
     ],
   },
-
   {
     slug: "startup-brand-system",
     brandName: "Startup Brand",
@@ -214,22 +186,10 @@ export const brandCases = [
     category: "Technology Startup Branding",
     year: "2026",
     description:
-      "A clean and modern identity system designed for technology startups, digital products, SaaS platforms, and new businesses.",
-    images: createFallbackImages(
-      "/images/branding-materials/brand-4.webp"
-    ),
-    colors: [
-      "#2563EB",
-      "#7C3AED",
-      "#0F172A",
-      "#F8FAFC",
-    ],
-    typography: [
-      "Manrope",
-      "Inter",
-      "Bold Sans",
-      "Product UI Sans",
-    ],
+      "A clean modern identity system for technology startups, digital products, SaaS platforms, and new businesses.",
+    images: createFallbackImages("/images/branding-materials/brand-4.webp"),
+    colors: ["#2563EB", "#7C3AED", "#0F172A", "#F8FAFC"],
+    typography: ["Manrope", "Inter", "Bold Sans", "Product UI Sans"],
     elements: [
       "Modern startup logo system",
       "Digital-first color palette",
@@ -239,7 +199,6 @@ export const brandCases = [
       "Investor presentation visual style",
     ],
   },
-
   {
     slug: "food-brand-identity",
     brandName: "Food Brand",
@@ -247,22 +206,10 @@ export const brandCases = [
     category: "Food and Restaurant Branding",
     year: "2026",
     description:
-      "A vibrant food branding identity created for restaurants, cloud kitchens, packaged food businesses, and delivery brands.",
-    images: createFallbackImages(
-      "/images/branding-materials/brand-5.webp"
-    ),
-    colors: [
-      "#E63946",
-      "#F4A261",
-      "#2A9D8F",
-      "#FFF8E7",
-    ],
-    typography: [
-      "Poppins",
-      "Nunito",
-      "Friendly Display",
-      "Readable Sans",
-    ],
+      "A vibrant food identity for restaurants, cloud kitchens, packaged food businesses, and delivery brands.",
+    images: createFallbackImages("/images/branding-materials/brand-5.webp"),
+    colors: ["#E63946", "#F4A261", "#2A9D8F", "#FFF8E7"],
+    typography: ["Poppins", "Nunito", "Friendly Display", "Readable Sans"],
     elements: [
       "Food business logo direction",
       "Bright and appetising color system",
@@ -272,7 +219,6 @@ export const brandCases = [
       "Social media promotion templates",
     ],
   },
-
   {
     slug: "luxury-product-branding",
     brandName: "Luxury Product",
@@ -280,22 +226,10 @@ export const brandCases = [
     category: "Luxury Product Branding",
     year: "2026",
     description:
-      "A premium visual identity system designed for luxury products, beauty brands, jewellery, fragrances, and high-end businesses.",
-    images: createFallbackImages(
-      "/images/branding-materials/brand-6.webp"
-    ),
-    colors: [
-      "#0B0B0B",
-      "#C5A059",
-      "#F5F0E6",
-      "#FFFFFF",
-    ],
-    typography: [
-      "Bodoni Moda",
-      "DM Sans",
-      "Luxury Serif",
-      "Minimal Sans",
-    ],
+      "A premium identity system for luxury products, beauty brands, jewellery, fragrances, and high-end businesses.",
+    images: createFallbackImages("/images/branding-materials/brand-6.webp"),
+    colors: ["#0B0B0B", "#C5A059", "#F5F0E6", "#FFFFFF"],
+    typography: ["Bodoni Moda", "DM Sans", "Luxury Serif", "Minimal Sans"],
     elements: [
       "Premium logo and monogram system",
       "Luxury black and gold palette",
@@ -305,7 +239,6 @@ export const brandCases = [
       "High-end marketing templates",
     ],
   },
-
   {
     slug: "agency-brand-materials",
     brandName: "Creative Agency",
@@ -313,22 +246,10 @@ export const brandCases = [
     category: "Creative Agency Branding",
     year: "2026",
     description:
-      "A bold and flexible branding material system designed for creative studios, marketing agencies, and digital service companies.",
-    images: createFallbackImages(
-      "/images/branding-materials/brand-7.webp"
-    ),
-    colors: [
-      "#6D28D9",
-      "#EC4899",
-      "#111827",
-      "#F9FAFB",
-    ],
-    typography: [
-      "Space Grotesk",
-      "Inter",
-      "Creative Display",
-      "Professional Sans",
-    ],
+      "A bold flexible branding system for creative studios, marketing agencies, and digital service companies.",
+    images: createFallbackImages("/images/branding-materials/brand-7.webp"),
+    colors: ["#6D28D9", "#EC4899", "#111827", "#F9FAFB"],
+    typography: ["Space Grotesk", "Inter", "Creative Display", "Professional Sans"],
     elements: [
       "Agency logo and visual identity",
       "Bold campaign color palette",
@@ -338,7 +259,6 @@ export const brandCases = [
       "Digital marketing brand assets",
     ],
   },
-
   {
     slug: "ecommerce-brand-kit",
     brandName: "Ecommerce Brand",
@@ -346,22 +266,10 @@ export const brandCases = [
     category: "Ecommerce Business Branding",
     year: "2026",
     description:
-      "A complete ecommerce branding kit designed for online stores, product businesses, marketplaces, and digital retail brands.",
-    images: createFallbackImages(
-      "/images/branding-materials/brand-8.webp"
-    ),
-    colors: [
-      "#FF5A5F",
-      "#1D4ED8",
-      "#111827",
-      "#FFFFFF",
-    ],
-    typography: [
-      "Outfit",
-      "Inter",
-      "Bold Commerce Display",
-      "Clean UI Sans",
-    ],
+      "A complete ecommerce branding kit for online stores, product businesses, marketplaces, and digital retail brands.",
+    images: createFallbackImages("/images/branding-materials/brand-8.webp"),
+    colors: ["#FF5A5F", "#1D4ED8", "#111827", "#FFFFFF"],
+    typography: ["Outfit", "Inter", "Bold Commerce Display", "Clean UI Sans"],
     elements: [
       "Ecommerce logo identity",
       "Website and marketplace color palette",

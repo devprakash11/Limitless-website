@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import DownloadPreviewButton from "../components/DownloadPreviewButton";
+import SEO from "../components/SEO";
+import ServiceContentSection from "../components/seo/ServiceContentSection";
+import { businessCardServiceContent } from "../data/pageSeoContent";
 import { businessCardDownloads } from "../data/downloadAssets";
 
 import {
@@ -104,6 +107,13 @@ function BusinessCardDesign() {
 
   return (
     <>
+      <SEO
+        title="Professional Business Card Design | Limitless Design"
+        description="Get a modern, professional and print-ready business card designed for your company, startup, agency, service or personal brand."
+        path="/services/business-card-design"
+        image="/logo-01.webp"
+      />
+
       {/* =====================================================
           HERO SECTION
       ====================================================== */}
@@ -197,7 +207,7 @@ function BusinessCardDesign() {
                   <div className="bcd-page-image-wrap">
                     <img
                       src={item.image}
-                      alt={item.title}
+                      alt={`${item.title} professional business card design sample`}
                       loading="lazy"
                     />
                   </div>
@@ -309,7 +319,7 @@ function BusinessCardDesign() {
             <div className="bcd-page-modal-image">
               <img
                 src={previewCard.image}
-                alt={previewCard.title}
+                alt={`${previewCard.title} full business card design preview`}
               />
             </div>
 
@@ -424,6 +434,8 @@ function BusinessCardDesign() {
           </div>
         </div>
       </section>
+
+      <ServiceContentSection {...businessCardServiceContent} />
     </>
   );
 }

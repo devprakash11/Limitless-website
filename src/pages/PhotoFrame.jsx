@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import DownloadPreviewButton from "../components/DownloadPreviewButton";
+import SEO from "../components/SEO";
+import ServiceContentSection from "../components/seo/ServiceContentSection";
+import { photoFrameServiceContent } from "../data/pageSeoContent";
 import { photoFrameDownloads } from "../data/downloadAssets";
 
 import {
@@ -75,6 +78,13 @@ function PhotoFrame() {
 
   return (
     <>
+      <SEO
+        title="Custom Photo Frame Design Services | Limitless Design"
+        description="Get custom photo frame designs for events, festivals, campaigns, schools, NGOs, brands and professional social media sharing."
+        path="/services/photo-frame-design"
+        image="/logo-01.webp"
+      />
+
       {/* Hero section */}
       <section className="pf-page-hero">
         <div className="container pf-page-hero-grid">
@@ -151,7 +161,7 @@ function PhotoFrame() {
                   <div className="pf-page-image-wrap">
                     <img
                       src={item.image}
-                      alt={item.title}
+                      alt={`${item.title} custom photo frame design sample`}
                       loading="lazy"
                     />
                   </div>
@@ -236,7 +246,7 @@ function PhotoFrame() {
             <div className="pf-page-modal-image">
               <img
                 src={previewFrame.image}
-                alt={previewFrame.title}
+                alt={`${previewFrame.title} full photo frame design preview`}
               />
             </div>
 
@@ -333,6 +343,8 @@ function PhotoFrame() {
           </div>
         </div>
       </section>
+
+      <ServiceContentSection {...photoFrameServiceContent} />
     </>
   );
 }

@@ -1,4 +1,8 @@
 import { Link } from "react-router-dom";
+
+import SEO from "../components/SEO";
+import ServiceContentSection from "../components/seo/ServiceContentSection";
+import { pricingPageContent } from "../data/pageSeoContent";
 import {
   ArrowRight,
   BadgeCheck,
@@ -429,7 +433,15 @@ function UIUXPricingBox() {
 
 function Price() {
   return (
-    <main className="price-page">
+    <>
+      <SEO
+        title="Design Service Pricing | Limitless Design"
+        description="View starting prices for logo design, poster design, business cards, photo frames, branding and UI UX design services."
+        path="/price"
+        image="/logo-01.webp"
+      />
+
+      <main className="price-page">
       {/* Hero */}
       <section
         className="price-page-hero"
@@ -615,7 +627,10 @@ function Price() {
           </div>
         </div>
       </section>
-    </main>
+
+      <ServiceContentSection {...pricingPageContent} />
+      </main>
+    </>
   );
 }
 

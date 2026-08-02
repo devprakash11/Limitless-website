@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import DownloadPreviewButton from "../components/DownloadPreviewButton";
+import SEO from "../components/SEO";
+import ServiceContentSection from "../components/seo/ServiceContentSection";
+import { logoServiceContent } from "../data/pageSeoContent";
 import {
   ArrowRight,
   BadgeCheck,
@@ -75,6 +78,13 @@ function LogoDesign() {
 
   return (
     <>
+      <SEO
+        title="Professional Logo Design Services | Limitless Design"
+        description="Get a professional custom logo designed for your business, startup, ecommerce store, agency or personal brand by Limitless Design."
+        path="/services/logo-design"
+        image="/logo-01.webp"
+      />
+
       <section className="logo-v2-hero">
         <div className="container logo-v2-hero-grid">
           <div className="logo-v2-hero-content">
@@ -152,7 +162,7 @@ function LogoDesign() {
                 <div className="logo-v2-image-wrap">
                   <img
                     src={item.image}
-                    alt={item.title}
+                    alt={`${item.title} professional logo design sample by Limitless Design`}
                     loading="lazy"
                   />
                 </div>
@@ -328,6 +338,8 @@ function LogoDesign() {
           </div>
         </div>
       </section>
+
+      <ServiceContentSection {...logoServiceContent} />
     </>
   );
 }

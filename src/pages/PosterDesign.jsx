@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import DownloadPreviewButton from "../components/DownloadPreviewButton";
+import SEO from "../components/SEO";
+import ServiceContentSection from "../components/seo/ServiceContentSection";
+import { posterServiceContent } from "../data/pageSeoContent";
 import { posterDownloads } from "../data/downloadAssets";
 
 import {
@@ -101,6 +104,13 @@ function PosterDesign() {
 
   return (
     <>
+      <SEO
+        title="Creative Poster Design Services | Limitless Design"
+        description="Professional poster design services for events, offers, launches, campaigns, businesses, schools, NGOs and social media promotions."
+        path="/services/poster-design"
+        image="/logo-01.webp"
+      />
+
       {/* =====================================================
           HERO SECTION
       ====================================================== */}
@@ -195,7 +205,7 @@ function PosterDesign() {
                   <div className="pd-page-image-wrap">
                     <img
                       src={item.image}
-                      alt={item.title}
+                      alt={`${item.title} professional poster design sample by Limitless Design`}
                       loading="lazy"
                     />
                   </div>
@@ -305,7 +315,7 @@ function PosterDesign() {
             <div className="pd-page-modal-image">
               <img
                 src={previewPoster.image}
-                alt={previewPoster.title}
+                alt={`${previewPoster.title} full poster design preview`}
               />
             </div>
 
@@ -420,6 +430,8 @@ function PosterDesign() {
           </div>
         </div>
       </section>
+
+      <ServiceContentSection {...posterServiceContent} />
     </>
   );
 }

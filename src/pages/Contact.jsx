@@ -13,6 +13,10 @@ import {
   Sparkles,
 } from "lucide-react";
 
+import SEO from "../components/SEO";
+import ServiceContentSection from "../components/seo/ServiceContentSection";
+import { contactPageContent } from "../data/pageSeoContent";
+
 const receiverEmail = "help.limitlessdesign@gmail.com";
 const contactNumber = "7667583859";
 
@@ -179,9 +183,17 @@ function Contact() {
   };
 
   return (
-    <main className="commission-page">
-      <section className="commission-hero">
-        <div className="container commission-hero-container">
+    <>
+      <SEO
+        title="Contact Limitless Design | Start Your Design Project"
+        description="Contact Limitless Design for logo design, branding, posters, business cards, social media creatives, UI design and custom graphic design work."
+        path="/contact"
+        image="/logo-01.webp"
+      />
+
+      <main className="commission-page">
+        <section className="commission-hero">
+          <div className="container commission-hero-container">
           <div className="commission-hero-content">
             <span className="commission-hero-label">
               <Sparkles size={16} />
@@ -543,8 +555,11 @@ function Contact() {
             )}
           </div>
         </div>
-      </section>
-    </main>
+        </section>
+
+        <ServiceContentSection {...contactPageContent} />
+      </main>
+    </>
   );
 }
 

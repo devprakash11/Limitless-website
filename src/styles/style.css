@@ -21,13 +21,14 @@
    17. Poster Design Service Page
    18. Business Card Design Service Page
    19. Shared Small-Mobile Responsive Styles
-   20. Branding Materials — Coming Soon Page
+   20. Branding Materials — Active Page & Brand Case Studies
    21. Home Page — Animations
    22. Universal Download Preview Page
    23. Pricing Page
    24. Home Page — Content Refresh
    25. UI Design Service Page
    26. UI/UX Design Plans — Both Plans in One Box
+   27. Shared SEO Content, FAQ & Related Service Sections
 ========================================================================= */
 
 /* ========================================================================
@@ -5850,183 +5851,1000 @@ a.commission-contact-item:hover {
 }
 
 /* ========================================================================
-   20. BRANDING MATERIALS — COMING SOON PAGE
+   20. BRANDING MATERIALS — ACTIVE PAGE & BRAND CASE STUDIES
 ======================================================================== */
 
-.bm-coming-soon {
-  position: relative;
-  min-height: calc(100vh - 76px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  padding: 90px 20px;
-  background:
-    radial-gradient(
-      circle at 15% 20%,
-      rgba(104, 80, 255, 0.13),
-      transparent 32%
-    ),
-    radial-gradient(
-      circle at 85% 80%,
-      rgba(214, 92, 255, 0.12),
-      transparent 30%
-    ),
-    linear-gradient(
-      145deg,
-      #f8f7ff 0%,
-      #ffffff 48%,
-      #f7f5ff 100%
-    );
-}
+/*
+  This section replaces the obsolete Coming Soon design.
+  It intentionally uses the global design variables defined at the top of
+  this stylesheet, so no second :root block can override the rest of the site.
+*/
 
-.bm-coming-soon * {
+.bmpro-hero *,
+.bmpro-gallery-section *,
+.bmpro-detail-section *,
+.bmpro-process-section *,
+.bcpro-hero *,
+.bcpro-board-section *,
+.bcpro-elements-section *,
+.bcpro-style-section *,
+.bcpro-not-found * {
   box-sizing: border-box;
 }
 
-.bm-coming-soon-container {
-  position: relative;
-  z-index: 2;
+.bmpro-hero .container,
+.bmpro-gallery-section .container,
+.bmpro-detail-section .container,
+.bmpro-process-section .container,
+.bcpro-hero .container,
+.bcpro-board-section .container,
+.bcpro-elements-section .container,
+.bcpro-style-section .container,
+.bcpro-not-found .container {
   width: 100%;
-  max-width: 900px;
-  margin: 0 auto;
+  max-width: 1240px;
+  margin-inline: auto;
+  padding-inline: 20px;
 }
 
-.bm-coming-soon-card {
-  position: relative;
-  width: 100%;
-  max-width: 790px;
-  margin: 0 auto;
-  padding: 62px 55px;
-  text-align: center;
-  background: rgba(255, 255, 255, 0.88);
-  border: 1px solid rgba(91, 67, 210, 0.12);
-  border-radius: 32px;
-  box-shadow:
-    0 30px 80px rgba(32, 22, 87, 0.11),
-    0 10px 30px rgba(50, 34, 110, 0.06);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-}
-
-.bm-coming-soon-icon {
-  width: 82px;
-  height: 82px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 24px;
-  color: #ffffff;
-  background: linear-gradient(
-    135deg,
-    #5639e8 0%,
-    #8158f4 55%,
-    #a35cf2 100%
-  );
-  border-radius: 24px;
-  box-shadow:
-    0 18px 35px rgba(100, 65, 226, 0.28),
-    inset 0 1px 1px rgba(255, 255, 255, 0.35);
-}
-
-.bm-coming-soon-label {
-  width: fit-content;
+.bmpro-hero .section-label,
+.bmpro-gallery-section .section-label,
+.bmpro-detail-section .section-label,
+.bmpro-process-section .section-label,
+.bcpro-elements-section .section-label {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  gap: 7px;
-  margin-bottom: 17px;
-  padding: 8px 14px;
-  color: #6544d8;
-  background: #f1edff;
-  border: 1px solid #ded5ff;
-  border-radius: 999px;
-  font-size: 12px;
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: 0.08em;
+  gap: 8px;
+  width: fit-content;
+  margin-bottom: 14px;
+  color: var(--primary-dark);
+  font-size: 0.82rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
-.bm-coming-soon h1 {
-  margin: 0;
-  color: #171429;
-  font-size: clamp(38px, 5vw, 64px);
-  font-weight: 800;
-  line-height: 1.08;
-  letter-spacing: -0.04em;
+.bmpro-hero .dark-label {
+  color: #ffffff;
 }
 
-.bm-coming-soon h2 {
-  margin: 12px 0 22px;
-  color: #7048e8;
-  font-size: clamp(25px, 3vw, 36px);
-  font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: -0.025em;
+.bmpro-hero,
+.bcpro-hero {
+  position: relative;
+  overflow: hidden;
+  padding: 100px 0;
+  color: var(--white);
+  background:
+    radial-gradient(circle at 16% 20%, rgba(109, 93, 252, 0.44), transparent 30%),
+    radial-gradient(circle at 84% 12%, rgba(255, 95, 199, 0.36), transparent 28%),
+    linear-gradient(135deg, #070716 0%, #15164a 55%, #080816 100%);
 }
 
-.bm-coming-soon-description {
-  max-width: 670px;
-  margin: 0 auto;
-  color: #59566b;
-  font-size: 17px;
-  font-weight: 400;
-  line-height: 1.8;
+.bmpro-hero::before,
+.bcpro-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.055) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: linear-gradient(to bottom, #000, transparent 88%);
 }
 
-.bm-coming-soon-note {
-  max-width: 650px;
-  margin: 14px auto 0;
-  color: #777386;
-  font-size: 15px;
-  line-height: 1.75;
+.bmpro-hero-grid,
+.bcpro-hero-grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1.12fr 0.88fr;
+  gap: 60px;
+  align-items: center;
 }
 
-.bm-coming-soon-features {
+.bmpro-hero-content h1,
+.bcpro-hero-content h1 {
+  max-width: 820px;
+  font-size: clamp(3rem, 6.5vw, 5.8rem);
+  line-height: 0.94;
+  letter-spacing: -0.085em;
+  font-weight: 950;
+}
+
+.bmpro-hero-content p,
+.bcpro-hero-content p {
+  max-width: 700px;
+  margin-top: 24px;
+  color: #cbd5e1;
+  font-size: 1.08rem;
+  line-height: 1.85;
+}
+
+.bmpro-hero-actions {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 28px;
-}
-
-.bm-coming-soon-features span {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 38px;
-  padding: 8px 15px;
-  color: #504a66;
-  background: #faf9ff;
-  border: 1px solid #e5e0f5;
-  border-radius: 999px;
-  font-size: 13px;
-  font-weight: 600;
-  line-height: 1;
-}
-
-.bm-coming-soon-buttons {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   flex-wrap: wrap;
   gap: 14px;
   margin-top: 34px;
 }
 
-.bm-coming-primary-btn,
-.bm-coming-secondary-btn {
+.bmpro-hero-card,
+.bcpro-summary-card {
+  padding: 38px;
+  border-radius: 34px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 36px 100px rgba(0, 0, 0, 0.32);
+  backdrop-filter: blur(22px);
+}
+
+.bmpro-hero-icon,
+.bcpro-summary-icon {
+  width: 74px;
+  height: 74px;
+  display: grid;
+  place-items: center;
+  color: var(--white);
+  border-radius: 24px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  box-shadow: 0 18px 44px rgba(109, 93, 252, 0.38);
+}
+
+.bmpro-hero-card h3,
+.bcpro-summary-card h3 {
+  margin-top: 26px;
+  font-size: 1.8rem;
+  line-height: 1.15;
+  letter-spacing: -0.045em;
+  font-weight: 950;
+}
+
+.bmpro-hero-card p,
+.bcpro-summary-card p {
+  margin-top: 12px;
+  color: #cbd5e1;
+  line-height: 1.75;
+}
+
+.bmpro-tags,
+.bcpro-summary-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 26px;
+}
+
+.bmpro-tags span,
+.bcpro-summary-tags span {
+  padding: 9px 13px;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+/* Gallery */
+
+.bmpro-gallery-section {
+  padding: 92px 0;
+  background: #111111;
+}
+
+.bmpro-heading,
+.bcpro-heading {
+  max-width: 780px;
+  margin: 0 auto 48px;
+  text-align: center;
+}
+
+.bmpro-heading h2,
+.bcpro-heading h2 {
+  color: #0f172a;
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  line-height: 1.04;
+  letter-spacing: -0.058em;
+  font-weight: 950;
+}
+
+.bmpro-gallery-section .bmpro-heading h2 {
+  color: #ffffff;
+}
+
+.bmpro-heading p,
+.bcpro-heading p {
+  max-width: 660px;
+  margin: 16px auto 0;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.bmpro-gallery-section .bmpro-heading p {
+  color: #cbd5e1;
+}
+
+.bmpro-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+}
+
+.bmpro-card,
+.bmpro-gallery-card {
+  display: flex;
+  height: 100%;
+  min-width: 0;
+  overflow: hidden;
+  flex-direction: column;
+  border-radius: 22px;
+  background: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: 0.28s ease;
+}
+
+.bmpro-card:hover,
+.bmpro-gallery-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.28);
+}
+
+.bmpro-card-image,
+.bmpro-gallery-image {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.bmpro-card-image img,
+.bmpro-gallery-image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.bmpro-gallery-card:hover .bmpro-gallery-image img,
+.bmpro-card:hover .bmpro-card-image img {
+  transform: scale(1.045);
+}
+
+.bmpro-gallery-image img,
+.bmpro-card-image img {
+  transition: transform 0.4s ease;
+}
+
+.bmpro-card-body,
+.bmpro-gallery-card-content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 16px;
+}
+
+.bmpro-card-info h3,
+.bmpro-gallery-card-content h3 {
+  color: #0f172a;
+  font-size: 0.98rem;
+  font-weight: 900;
+}
+
+.bmpro-card-info > span,
+.bmpro-gallery-card-content > .bmpro-gallery-category {
+  display: inline-flex;
+  margin-top: 8px;
+  padding: 7px 10px;
+  color: var(--primary-dark);
+  background: #f1f3ff;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 900;
+}
+
+.bmpro-open-btn,
+.bmpro-view-all-btn {
+  min-height: 42px;
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  margin-top: 14px;
+  padding: 0 14px;
+  border: 0;
+  color: #ffffff;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 900;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 12px 28px rgba(109, 93, 252, 0.22);
+  transition: 0.25s ease;
+}
+
+.bmpro-open-btn:hover,
+.bmpro-view-all-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 36px rgba(109, 93, 252, 0.32);
+}
+
+.bmpro-view-all-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 42px;
+}
+
+.bmpro-view-all-btn {
+  width: auto;
+  min-height: 50px;
+  padding: 0 26px;
+  font-size: 0.92rem;
+}
+
+/* Main Page Detail */
+
+.bmpro-detail-section,
+.bmpro-process-section,
+.bcpro-elements-section,
+.bcpro-style-section {
+  padding: 92px 0;
+  background: #ffffff;
+}
+
+.bmpro-process-section,
+.bcpro-style-section {
+  background:
+    radial-gradient(circle at 10% 10%, rgba(109, 93, 252, 0.08), transparent 30%),
+    #f8fafc;
+}
+
+.bmpro-detail-grid,
+.bcpro-elements-grid,
+.bcpro-style-grid {
+  display: grid;
+  grid-template-columns: 1.08fr 0.92fr;
+  gap: 58px;
+  align-items: start;
+}
+
+.bmpro-detail-content h2,
+.bcpro-elements-content h2 {
+  max-width: 680px;
+  color: #0f172a;
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  line-height: 1.04;
+  letter-spacing: -0.058em;
+  font-weight: 950;
+}
+
+.bmpro-detail-content p,
+.bcpro-elements-content p {
+  max-width: 660px;
+  margin-top: 16px;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.bmpro-benefit-list,
+.bcpro-elements-list,
+.bcpro-included-list {
+  display: grid;
+  gap: 14px;
+  margin-top: 30px;
+}
+
+.bmpro-benefit-list div,
+.bcpro-elements-list div,
+.bcpro-included-list div {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  color: #344054;
+  font-weight: 800;
+  line-height: 1.6;
+}
+
+.bmpro-benefit-list svg,
+.bcpro-elements-list svg,
+.bcpro-included-list svg {
+  flex: 0 0 auto;
+  margin-top: 2px;
+  color: var(--primary-dark);
+}
+
+.bmpro-quote-card,
+.bcpro-included-card,
+.bcpro-style-card {
+  padding: 34px;
+  background:
+    radial-gradient(circle at top right, rgba(255, 95, 199, 0.12), transparent 36%),
+    #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  box-shadow: var(--shadow);
+}
+
+.bmpro-quote-card {
+  position: sticky;
+  top: 110px;
+}
+
+.bmpro-quote-card h3,
+.bcpro-included-card h3,
+.bcpro-style-card h3 {
+  color: #0f172a;
+  font-size: 1.55rem;
+  letter-spacing: -0.04em;
+  font-weight: 950;
+}
+
+.bmpro-quote-card p {
+  margin-top: 12px;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+.bmpro-quote-card .primary-btn {
+  margin-top: 24px;
+}
+
+.bmpro-process-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.bmpro-process-card {
+  padding: 30px;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  box-shadow: var(--shadow);
+}
+
+.bmpro-process-icon {
+  width: 58px;
+  height: 58px;
+  display: grid;
+  place-items: center;
+  color: #ffffff;
+  border-radius: 19px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+}
+
+.bmpro-process-card h3 {
+  margin-top: 22px;
+  color: #0f172a;
+  font-size: 1.22rem;
+  letter-spacing: -0.03em;
+  font-weight: 950;
+}
+
+.bmpro-process-card p {
+  margin-top: 10px;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+/* Branding View Page */
+
+.bcpro-back {
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 24px;
+  color: #dbeafe;
+  font-weight: 850;
+}
+
+.bcpro-back:hover {
+  color: #ffffff;
+  transform: translateX(-3px);
+}
+
+.bcpro-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 18px;
+  padding: 9px 15px;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 900;
+}
+
+.bcpro-meta {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-top: 36px;
+}
+
+.bcpro-meta div {
+  padding: 18px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.09);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(18px);
+}
+
+.bcpro-meta span {
+  display: block;
+  color: #cbd5e1;
+  font-size: 0.78rem;
+  font-weight: 750;
+}
+
+.bcpro-meta strong {
+  display: block;
+  margin-top: 8px;
+  color: #ffffff;
+  font-size: 0.95rem;
+  line-height: 1.35;
+  font-weight: 900;
+}
+
+/* Brand Board */
+
+.bcpro-board-section {
+  padding: 96px 0;
+  background:
+    radial-gradient(circle at 12% 20%, rgba(248, 203, 48, 0.16), transparent 30%),
+    linear-gradient(135deg, #f8fafc, #fff7d1);
+}
+
+.bcpro-heading span {
+  display: inline-flex;
+  margin-bottom: 12px;
+  color: var(--primary-dark);
+  font-size: 0.82rem;
+  font-weight: 950;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.bcpro-board {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 28px;
+  background: #fff5c8;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 32px;
+  box-shadow: 0 36px 110px rgba(15, 23, 42, 0.18);
+}
+
+.bcpro-board > h3 {
+  margin-bottom: 18px;
+  color: #111111;
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: 950;
+}
+
+.bcpro-main-logo-box {
+  overflow: hidden;
+  min-height: 230px;
+  display: grid;
+  place-items: center;
+  background: #f8cb30;
+  border-radius: 8px;
+}
+
+.bcpro-main-logo-box img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.bcpro-board-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+  margin-top: 18px;
+}
+
+.bcpro-board-box {
+  position: relative;
+  overflow: hidden;
+  min-height: 230px;
+  display: grid;
+  place-items: center;
+  background: #f4df91;
+  border-radius: 8px;
+}
+
+.bcpro-board-box img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.bcpro-board-box span {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 2;
+  padding: 7px 11px;
+  color: #111827;
+  background: rgba(255, 255, 255, 0.84);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 900;
+  backdrop-filter: blur(12px);
+}
+
+/* Style Cards */
+
+.bcpro-color-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.bcpro-color-row div {
+  text-align: center;
+}
+
+.bcpro-color-row span {
+  display: block;
+  height: 88px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+}
+
+.bcpro-color-row p {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 850;
+}
+
+.bcpro-type-list {
+  display: grid;
+  gap: 14px;
+  margin-top: 24px;
+}
+
+.bcpro-type-list div {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  background: #f8fafc;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+}
+
+.bcpro-type-list strong {
+  color: #0f172a;
+  font-size: 2rem;
+}
+
+.bcpro-type-list span {
+  color: var(--muted);
+  font-weight: 850;
+}
+
+/* Responsive */
+
+@media (max-width: 1024px) {
+  .bmpro-hero-grid,
+  .bmpro-detail-grid,
+  .bcpro-hero-grid,
+  .bcpro-elements-grid,
+  .bcpro-style-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .bmpro-gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .bmpro-quote-card {
+    position: static;
+  }
+
+  .bcpro-meta {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 680px) {
+  .bmpro-hero,
+  .bcpro-hero {
+    padding: 70px 0;
+  }
+
+  .bmpro-hero-content h1,
+  .bcpro-hero-content h1 {
+    font-size: 3.2rem;
+  }
+
+  .bmpro-hero-actions {
+    flex-direction: column;
+  }
+
+  .bmpro-hero-card,
+  .bcpro-summary-card,
+  .bcpro-included-card,
+  .bcpro-style-card {
+    padding: 26px;
+    border-radius: 24px;
+  }
+
+  .bmpro-gallery-section,
+  .bmpro-detail-section,
+  .bmpro-process-section,
+  .bcpro-board-section,
+  .bcpro-elements-section,
+  .bcpro-style-section {
+    padding: 66px 0;
+  }
+
+  .bmpro-gallery-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .bmpro-process-grid,
+  .bcpro-board-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .bcpro-board {
+    padding: 14px;
+    border-radius: 22px;
+  }
+
+  .bcpro-main-logo-box {
+    min-height: 160px;
+  }
+
+  .bcpro-board-box {
+    min-height: 210px;
+  }
+
+  .bcpro-color-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* =====================================================
+   Additional fixes for the current JSX structure
+===================================================== */
+
+.bmpro-gallery-card-content > div:first-child {
+  min-width: 0;
+}
+
+.bmpro-gallery-card-content h3 {
+  margin: 0;
+  line-height: 1.4;
+}
+
+.bmpro-gallery-card-content .bmpro-gallery-category {
+  width: fit-content;
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+.bmpro-open-btn {
+  margin-top: auto;
+}
+
+.bcpro-back {
+  text-decoration: none;
+  transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.bcpro-main-logo-box img,
+.bcpro-board-box img {
+  max-width: 100%;
+}
+
+.bcpro-included-list > div {
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: #f8fafc;
+}
+
+.bcpro-not-found {
+  min-height: 70vh;
+  padding: 100px 0;
+  background:
+    radial-gradient(circle at 10% 10%, rgba(109, 93, 252, 0.08), transparent 30%),
+    #f8fafc;
+}
+
+.bcpro-not-found .bcpro-back {
+  color: var(--primary-dark);
+}
+
+.bcpro-not-found-content {
+  max-width: 680px;
+  margin: 60px auto 0;
+  text-align: center;
+}
+
+.bcpro-not-found-content h1 {
+  margin: 0 0 16px;
+  color: #0f172a;
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  font-weight: 950;
+}
+
+.bcpro-not-found-content p {
+  margin: 0 0 26px;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+.bcpro-not-found .primary-btn,
+.bmpro-hero .primary-btn,
+.bmpro-detail-section .primary-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 0 20px;
+  border: 0;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: #ffffff;
+  font-weight: 900;
+  text-decoration: none;
+  box-shadow: 0 12px 28px rgba(109, 93, 252, 0.22);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.bcpro-not-found .primary-btn:hover,
+.bmpro-hero .primary-btn:hover,
+.bmpro-detail-section .primary-btn:hover {
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 16px 36px rgba(109, 93, 252, 0.32);
+}
+
+.bmpro-hero .secondary-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 20px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.09);
+  color: #ffffff;
+  font-weight: 900;
+  text-decoration: none;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.bmpro-hero .secondary-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 430px) {
+  .bmpro-container,
+  .bmpro-hero .container,
+  .bmpro-gallery-section .container,
+  .bmpro-detail-section .container,
+  .bmpro-process-section .container,
+  .bcpro-hero .container,
+  .bcpro-board-section .container,
+  .bcpro-elements-section .container,
+  .bcpro-style-section .container,
+  .bcpro-not-found .container {
+    padding-inline: 15px;
+  }
+
+  .bmpro-gallery-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .bmpro-hero-content h1,
+  .bcpro-hero-content h1 {
+    font-size: 2.75rem;
+  }
+}
+
+/* ------------------------------------------------------------------------
+   BRANDING MATERIALS — JSX COMPATIBILITY & CONFLICT FIXES
+------------------------------------------------------------------------ */
+
+/* Optional wrapper used by the corrected BrandingMaterials.jsx file. */
+.bmpro-page {
+  width: 100%;
+  overflow: clip;
+  color: #344054;
+  background: #ffffff;
+}
+
+.bmpro-page h1,
+.bmpro-page h2,
+.bmpro-page h3,
+.bmpro-page p {
+  margin: 0;
+}
+
+/* Supports both .container and the page-specific .bmpro-container class. */
+.bmpro-container {
+  width: min(100% - 40px, 1240px);
+  margin-inline: auto;
+}
+
+/* Supports both the old shared label and the page-specific label. */
+.bmpro-section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+  margin-bottom: 14px;
+  color: var(--primary-dark);
+  font-size: 0.82rem;
+  font-weight: 900;
+  line-height: 1.2;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.bmpro-section-label--light,
+.bmpro-heading--light .bmpro-section-label {
+  color: #ffffff;
+}
+
+/* Corrected JSX uses an h2 inside the glass hero card. */
+.bmpro-hero-card h2 {
+  margin-top: 26px;
+  color: #ffffff;
+  font-size: 1.8rem;
+  line-height: 1.15;
+  letter-spacing: -0.045em;
+  font-weight: 950;
+}
+
+/* Supports both .bmpro-tags and .bmpro-hero-tags. */
+.bmpro-hero-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 26px;
+}
+
+.bmpro-hero-tags span {
+  padding: 9px 13px;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+/* Page-specific buttons used by the corrected JSX. */
+.bmpro-btn {
   min-height: 50px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 9px;
-  padding: 13px 25px;
-  border-radius: 12px;
-  font-size: 15px;
-  font-weight: 700;
+  padding: 0 24px;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  font-weight: 900;
   line-height: 1;
   text-decoration: none;
   transition:
@@ -6036,186 +6854,170 @@ a.commission-contact-item:hover {
     border-color 0.25s ease;
 }
 
-.bm-coming-primary-btn {
+.bmpro-btn--primary {
   color: #ffffff;
-  background: linear-gradient(
-    135deg,
-    #5738df,
-    #8153ed
-  );
-  border: 1px solid transparent;
-  box-shadow: 0 13px 28px rgba(90, 55, 220, 0.23);
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  box-shadow: 0 18px 42px rgba(109, 93, 252, 0.28);
 }
 
-.bm-coming-primary-btn:hover {
+.bmpro-btn--primary:hover {
   color: #ffffff;
   transform: translateY(-2px);
-  box-shadow: 0 17px 34px rgba(90, 55, 220, 0.3);
+  box-shadow: 0 24px 56px rgba(109, 93, 252, 0.36);
 }
 
-.bm-coming-secondary-btn {
-  color: #332f48;
-  background: #ffffff;
-  border: 1px solid #dcd7e9;
-  box-shadow: 0 8px 20px rgba(37, 28, 76, 0.05);
+.bmpro-btn--secondary {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.09);
+  border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
-.bm-coming-secondary-btn:hover {
-  color: #6241d5;
-  background: #f9f7ff;
-  border-color: #bfb1ef;
+.bmpro-btn--secondary:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.15);
   transform: translateY(-2px);
 }
 
-.bm-coming-soon-decoration {
-  position: absolute;
-  border-radius: 50%;
-  pointer-events: none;
-  filter: blur(2px);
+/*
+  The old CSS styled every span in the card as a category badge. These
+  specific rules separate category, service tags, description and CTA.
+*/
+.bmpro-gallery-card-content .bmpro-gallery-category {
+  width: fit-content;
+  display: inline-flex;
+  margin: 0 0 11px;
+  padding: 7px 10px;
+  color: var(--primary-dark);
+  background: #f1f3ff;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 900;
+  line-height: 1.2;
 }
 
-.bm-decoration-one {
-  top: -110px;
-  left: -90px;
-  width: 330px;
-  height: 330px;
-  background: rgba(111, 74, 232, 0.08);
+.bmpro-gallery-title,
+.bmpro-gallery-card-content h3 {
+  margin: 0;
+  color: #0f172a;
+  font-size: 1.05rem;
+  font-weight: 900;
+  line-height: 1.35;
+  letter-spacing: -0.025em;
 }
 
-.bm-decoration-two {
-  right: -90px;
-  bottom: -120px;
-  width: 390px;
-  height: 390px;
-  background: rgba(185, 78, 231, 0.08);
+.bmpro-gallery-title a,
+.bmpro-gallery-card-content h3 a {
+  color: inherit;
+  text-decoration: none;
 }
 
-/* ----------------------------------------------------------
-   BRANDING MATERIALS — TABLET
----------------------------------------------------------- */
-
-@media (max-width: 900px) {
-  .bm-coming-soon {
-    min-height: calc(100vh - 70px);
-    padding: 70px 24px;
-  }
-
-  .bm-coming-soon-card {
-    padding: 52px 38px;
-    border-radius: 28px;
-  }
+.bmpro-gallery-title a:hover,
+.bmpro-gallery-card-content h3 a:hover {
+  color: var(--primary-dark);
 }
 
-/* ----------------------------------------------------------
-   BRANDING MATERIALS — MOBILE
----------------------------------------------------------- */
+.bmpro-gallery-description {
+  margin: 11px 0 0;
+  color: var(--muted);
+  font-size: 0.86rem;
+  line-height: 1.65;
+}
 
-@media (max-width: 600px) {
-  .bm-coming-soon {
-    min-height: calc(100vh - 64px);
-    padding: 45px 16px;
-  }
+.bmpro-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 15px;
+}
 
-  .bm-coming-soon-card {
-    padding: 40px 20px;
-    border-radius: 22px;
-  }
+.bmpro-gallery-card-content .bmpro-card-tags span {
+  width: auto;
+  display: inline-flex;
+  margin: 0;
+  padding: 6px 9px;
+  color: #475467;
+  background: #f8fafc;
+  border: 1px solid #e4e7ec;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
 
-  .bm-coming-soon-icon {
-    width: 68px;
-    height: 68px;
-    margin-bottom: 20px;
-    border-radius: 19px;
-  }
+.bmpro-card-link {
+  width: 100%;
+  min-height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  margin-top: auto;
+  padding: 0 14px;
+  color: #ffffff;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 900;
+  text-decoration: none;
+  box-shadow: 0 12px 28px rgba(109, 93, 252, 0.22);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
 
-  .bm-coming-soon-icon svg {
-    width: 31px;
-    height: 31px;
-  }
+.bmpro-card-link:hover {
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 16px 36px rgba(109, 93, 252, 0.32);
+}
 
-  .bm-coming-soon-label {
-    margin-bottom: 15px;
-    padding: 7px 12px;
-    font-size: 10px;
-  }
+.bmpro-card-link svg {
+  flex: 0 0 auto;
+  transition: transform 0.25s ease;
+}
 
-  .bm-coming-soon h1 {
-    font-size: 38px;
-    line-height: 1.12;
-  }
+.bmpro-card-link:hover svg {
+  transform: translateX(3px);
+}
 
-  .bm-coming-soon h2 {
-    margin-top: 10px;
-    margin-bottom: 18px;
-    font-size: 25px;
-  }
+/* Keep card content aligned even when descriptions have different lengths. */
+.bmpro-gallery-card-content {
+  gap: 0;
+}
 
-  .bm-coming-soon-description {
-    font-size: 15px;
-    line-height: 1.7;
-  }
+.bmpro-card-tags + .bmpro-card-link,
+.bmpro-gallery-description + .bmpro-card-link {
+  margin-top: 18px;
+}
 
-  .bm-coming-soon-note {
-    margin-top: 12px;
-    font-size: 14px;
-    line-height: 1.65;
-  }
+.bmpro-gallery-image:focus-visible,
+.bmpro-card-link:focus-visible,
+.bmpro-view-all-btn:focus-visible,
+.bmpro-btn:focus-visible {
+  outline: 3px solid rgba(109, 93, 252, 0.34);
+  outline-offset: 4px;
+}
 
-  .bm-coming-soon-features {
-    gap: 8px;
-    margin-top: 23px;
-  }
-
-  .bm-coming-soon-features span {
-    min-height: 34px;
-    padding: 7px 12px;
-    font-size: 11px;
-  }
-
-  .bm-coming-soon-buttons {
-    flex-direction: column;
-    gap: 11px;
-    margin-top: 28px;
-  }
-
-  .bm-coming-primary-btn,
-  .bm-coming-secondary-btn {
+@media (max-width: 680px) {
+  .bmpro-btn {
     width: 100%;
-    min-height: 48px;
-  }
-
-  .bm-decoration-one {
-    width: 220px;
-    height: 220px;
-  }
-
-  .bm-decoration-two {
-    width: 250px;
-    height: 250px;
   }
 }
 
-/* ----------------------------------------------------------
-   BRANDING MATERIALS — SMALL MOBILE
----------------------------------------------------------- */
-
-@media (max-width: 380px) {
-  .bm-coming-soon {
-    padding-right: 12px;
-    padding-left: 12px;
+@media (max-width: 430px) {
+  .bmpro-container {
+    width: min(100% - 30px, 1240px);
   }
+}
 
-  .bm-coming-soon-card {
-    padding-right: 16px;
-    padding-left: 16px;
-  }
-
-  .bm-coming-soon h1 {
-    font-size: 33px;
-  }
-
-  .bm-coming-soon h2 {
-    font-size: 22px;
+@media (prefers-reduced-motion: reduce) {
+  .bmpro-gallery-card,
+  .bmpro-gallery-image img,
+  .bmpro-card-link,
+  .bmpro-view-all-btn,
+  .bmpro-btn,
+  .bcpro-back {
+    transition: none;
   }
 }
 
@@ -11626,6 +12428,369 @@ a.commission-contact-item:hover {
 
 @media (prefers-reduced-motion: reduce) {
   .price-page-uiux-plan-button {
+    transition: none;
+  }
+}
+
+/* ========================================================================
+   27. SHARED SEO CONTENT, FAQ & RELATED SERVICE SECTIONS
+======================================================================== */
+
+.ld-seo-content-section {
+  --ld-seo-accent: var(--primary, #6d5dfc);
+  --ld-seo-accent-soft: color-mix(
+    in srgb,
+    var(--ld-seo-accent) 10%,
+    transparent
+  );
+  --ld-seo-text: var(--text, #101828);
+  --ld-seo-muted: var(--muted, #667085);
+  --ld-seo-border: var(--border, #e5e7eb);
+  --ld-seo-surface: var(--white, #ffffff);
+  --ld-seo-soft-surface: var(--light, #f8fafc);
+
+  padding: clamp(70px, 8vw, 120px) 0;
+  background:
+    radial-gradient(
+      circle at top right,
+      var(--ld-seo-accent-soft),
+      transparent 34%
+    ),
+    var(--ld-seo-soft-surface);
+}
+
+.ld-seo-content-heading {
+  max-width: 900px;
+  margin-bottom: 40px;
+}
+
+.ld-seo-content-heading h2 {
+  max-width: 780px;
+  margin: 14px 0 18px;
+  color: var(--ld-seo-text);
+  font-size: clamp(2rem, 4vw, 3.6rem);
+  line-height: 1.08;
+  letter-spacing: -0.045em;
+}
+
+.ld-seo-content-intro {
+  display: grid;
+  gap: 12px;
+}
+
+.ld-seo-content-intro p {
+  margin: 0;
+  color: var(--ld-seo-muted);
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.ld-seo-content-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.ld-seo-info-card {
+  min-width: 0;
+  padding: clamp(24px, 3vw, 34px);
+  border: 1px solid var(--ld-seo-border);
+  border-radius: 24px;
+  background: var(--ld-seo-surface);
+  box-shadow: 0 16px 50px rgba(20, 20, 30, 0.06);
+}
+
+.ld-seo-info-icon {
+  display: inline-grid;
+  width: 44px;
+  height: 44px;
+  margin-bottom: 22px;
+  place-items: center;
+  border-radius: 14px;
+  color: var(--ld-seo-accent);
+  background: var(--ld-seo-accent-soft);
+}
+
+.ld-seo-info-card h3 {
+  margin: 0 0 12px;
+  color: var(--ld-seo-text);
+  font-size: 1.2rem;
+  line-height: 1.3;
+}
+
+.ld-seo-info-card > p {
+  margin: 0;
+  color: var(--ld-seo-muted);
+  line-height: 1.75;
+}
+
+.ld-seo-info-card ul {
+  display: grid;
+  gap: 10px;
+  margin: 20px 0 0;
+  padding: 18px 0 0;
+  border-top: 1px solid var(--ld-seo-border);
+  list-style: none;
+}
+
+.ld-seo-info-card li {
+  position: relative;
+  padding-left: 20px;
+  color: var(--ld-seo-muted);
+  font-size: 0.94rem;
+  line-height: 1.55;
+}
+
+.ld-seo-info-card li::before {
+  position: absolute;
+  top: 0.65em;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ld-seo-accent);
+  content: "";
+  transform: translateY(-50%);
+}
+
+.ld-seo-faq-block {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.7fr) minmax(0, 1.3fr);
+  gap: clamp(28px, 5vw, 70px);
+  margin-top: clamp(60px, 7vw, 90px);
+  padding-top: clamp(44px, 6vw, 70px);
+  border-top: 1px solid var(--ld-seo-border);
+}
+
+.ld-seo-faq-heading {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  color: var(--ld-seo-accent);
+}
+
+.ld-seo-faq-heading span,
+.ld-seo-related-heading span,
+.ld-seo-content-cta > div > span {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--ld-seo-accent);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.ld-seo-faq-heading h3,
+.ld-seo-related-heading h3,
+.ld-seo-content-cta h3 {
+  margin: 0;
+  color: var(--ld-seo-text);
+  font-size: clamp(1.35rem, 2.2vw, 2rem);
+  line-height: 1.25;
+}
+
+.ld-seo-faq-list {
+  display: grid;
+  gap: 12px;
+}
+
+.ld-seo-faq-list details {
+  overflow: hidden;
+  border: 1px solid var(--ld-seo-border);
+  border-radius: 18px;
+  background: var(--ld-seo-surface);
+}
+
+.ld-seo-faq-list summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 20px 22px;
+  color: var(--ld-seo-text);
+  font-weight: 750;
+  line-height: 1.45;
+  cursor: pointer;
+  list-style: none;
+}
+
+.ld-seo-faq-list summary::-webkit-details-marker {
+  display: none;
+}
+
+.ld-seo-faq-plus {
+  flex: 0 0 auto;
+  color: var(--ld-seo-accent);
+  font-size: 1.5rem;
+  font-weight: 400;
+  transition: transform 180ms ease;
+}
+
+.ld-seo-faq-list details[open] .ld-seo-faq-plus {
+  transform: rotate(45deg);
+}
+
+.ld-seo-faq-list details p {
+  margin: 0;
+  padding: 0 22px 22px;
+  color: var(--ld-seo-muted);
+  line-height: 1.75;
+}
+
+.ld-seo-related {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.65fr) minmax(0, 1.35fr);
+  gap: clamp(28px, 5vw, 70px);
+  margin-top: clamp(54px, 7vw, 84px);
+  padding-top: clamp(40px, 5vw, 60px);
+  border-top: 1px solid var(--ld-seo-border);
+}
+
+.ld-seo-related-heading {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  color: var(--ld-seo-accent);
+}
+
+.ld-seo-related-links {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.ld-seo-related-links a {
+  display: flex;
+  min-height: 70px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 20px;
+  border: 1px solid var(--ld-seo-border);
+  border-radius: 17px;
+  color: var(--ld-seo-text);
+  background: var(--ld-seo-surface);
+  font-weight: 750;
+  text-decoration: none;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.ld-seo-related-links a:hover {
+  border-color: var(--ld-seo-accent);
+  box-shadow: 0 14px 36px rgba(20, 20, 30, 0.08);
+  transform: translateY(-3px);
+}
+
+.ld-seo-content-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  margin-top: clamp(50px, 7vw, 80px);
+  padding: clamp(28px, 5vw, 52px);
+  border-radius: 28px;
+  color: #ffffff;
+  background:
+    linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--ld-seo-accent) 88%, #111111),
+      var(--ld-seo-accent)
+    );
+}
+
+.ld-seo-content-cta h3 {
+  color: inherit;
+}
+
+.ld-seo-content-cta > div > span {
+  color: rgba(255, 255, 255, 0.74);
+}
+
+.ld-seo-content-cta p {
+  max-width: 700px;
+  margin: 12px 0 0;
+  color: rgba(255, 255, 255, 0.82);
+  line-height: 1.7;
+}
+
+.ld-seo-content-cta-link {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 50px;
+  padding: 0 22px;
+  border-radius: 14px;
+  color: var(--ld-seo-text);
+  background: #ffffff;
+  font-weight: 800;
+  text-decoration: none;
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.ld-seo-content-cta-link:hover {
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.18);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 980px) {
+  .ld-seo-content-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ld-seo-faq-block,
+  .ld-seo-related {
+    grid-template-columns: 1fr;
+  }
+
+  .ld-seo-related-links {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .ld-seo-content-section {
+    padding: 64px 0;
+  }
+
+  .ld-seo-content-heading {
+    margin-bottom: 28px;
+  }
+
+  .ld-seo-info-card {
+    border-radius: 20px;
+  }
+
+  .ld-seo-faq-list summary {
+    padding: 18px;
+  }
+
+  .ld-seo-faq-list details p {
+    padding: 0 18px 18px;
+  }
+
+  .ld-seo-content-cta {
+    align-items: stretch;
+    flex-direction: column;
+    border-radius: 22px;
+  }
+
+  .ld-seo-content-cta-link {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ld-seo-faq-plus,
+  .ld-seo-related-links a,
+  .ld-seo-content-cta-link {
     transition: none;
   }
 }

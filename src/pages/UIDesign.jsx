@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
+import SEO from "../components/SEO";
+import ServiceContentSection from "../components/seo/ServiceContentSection";
+import { uiDesignServiceContent } from "../data/pageSeoContent";
+
 import {
   includedItems,
   processSteps,
@@ -291,7 +295,15 @@ function UIDesign() {
   }, [selectedDesign]);
 
   return (
-    <main className="ui-design-page">
+    <>
+      <SEO
+        title="Professional UI Design Services | Limitless Design"
+        description="Professional responsive UI design for websites, mobile apps, dashboards, SaaS products, ecommerce stores and digital platforms."
+        path="/services/ui-design"
+        image="/logo-01.webp"
+      />
+
+      <main className="ui-design-page">
       {/* Hero */}
       <section
         className="ui-design-hero"
@@ -582,13 +594,16 @@ function UIDesign() {
         </div>
       </section>
 
+      <ServiceContentSection {...uiDesignServiceContent} />
+
       {selectedDesign && (
         <UIDesignPreviewModal
           item={selectedDesign}
           onClose={() => setSelectedDesign(null)}
         />
       )}
-    </main>
+      </main>
+    </>
   );
 }
 
