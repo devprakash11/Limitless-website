@@ -44,23 +44,23 @@ export const services = [
   //     "Campaign-ready designs"
   //   ]
   // },
-  {
-    title: "Photo Frame",
-    slug: "photo-frame",
-    icon: Frame,
-    short:
-      "Creative photo frames for events, campaigns, festivals, social media, and celebrations.",
-    description:
-      "Our photo frame design service is ideal for events, organizations, campaigns, schools, NGOs, and festivals. We design attractive frames that make photos more branded, shareable, and professional.",
-    features: [
-      "Festival frames",
-      "Event frames",
-      "Social media profile frames",
-      "Campaign-based frames",
-      "School and organization frames",
-      "Custom branded frames"
-    ]
-  },
+  // {
+  //   title: "Photo Frame",
+  //   slug: "photo-frame",
+  //   icon: Frame,
+  //   short:
+  //     "Creative photo frames for events, campaigns, festivals, social media, and celebrations.",
+  //   description:
+  //     "Our photo frame design service is ideal for events, organizations, campaigns, schools, NGOs, and festivals. We design attractive frames that make photos more branded, shareable, and professional.",
+  //   features: [
+  //     "Festival frames",
+  //     "Event frames",
+  //     "Social media profile frames",
+  //     "Campaign-based frames",
+  //     "School and organization frames",
+  //     "Custom branded frames"
+  //   ]
+  // },
   {
     title: "Poster Design",
     slug: "poster-design",

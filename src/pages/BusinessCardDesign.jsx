@@ -24,12 +24,11 @@ import {
 ========================================================= */
 
 const benefits = [
-  "Professional business card designs for brands, founders, agencies, and service providers",
-  "Front and back business card layout with clean visual hierarchy",
-  "Premium typography, spacing, color palette, and brand identity usage",
-  "Perfect for corporate, minimal, luxury, modern, and creative card styles",
-  "Print-ready and digital-ready export formats",
-  "Strong first impression with professional contact information layout",
+  "You will receive the final approved business card design in one-side or front-and-back format, according to the selected package.",
+  "The business card will be delivered as a print-ready PDF with the correct dimensions, CMYK colour mode, bleed area and high-resolution output.",
+  "Digital preview files will be provided in high-resolution JPG and PNG formats for easy viewing and sharing.",
+  "Editable source files such as AI, PSD, EPS or CorelDRAW may be included when they are part of the package or purchased separately.",
+  "All required supporting information, including font names, colour codes, linked graphics and logo files, will be provided where applicable.",
 ];
 
 /* =========================================================

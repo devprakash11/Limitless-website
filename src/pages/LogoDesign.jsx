@@ -20,12 +20,10 @@ import {
 import { logoDownloads } from "../data/downloadAssets";
 
 const benefits = [
-  "Custom logo concepts based on your business identity",
-  "Professional color palette and typography direction",
-  "Clean, scalable design suitable for digital and print use",
-  "Perfect for brands, creators, stores, startups, and agencies",
-  "High-quality export formats for website, social media, and packaging",
-  "Modern, memorable, and business-focused visual identity",
+  "3 custom logo variants to review (Primary, Secondary and Icon or Symbol)",
+  "Logo user manual",
+  "AI or EPS, PDF, JPG, PNG, SVG",
+  "Logo Colour- Colour logo, Dark logo, Light logo ",
 ];
 
 const process = [

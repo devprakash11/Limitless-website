@@ -8536,6 +8536,7 @@ a.commission-contact-item:hover {
 
 .price-page-primary-button,
 .price-page-secondary-button,
+.price-page-learn-more-button,
 .price-page-card-button {
   min-height: 52px;
   display: inline-flex;
@@ -9110,8 +9111,47 @@ a.commission-contact-item:hover {
   color: #ffffff;
 }
 
+.price-page-card-actions {
+  display: grid;
+  gap: 12px;
+}
+
+.price-page-learn-more-button,
 .price-page-card-button {
   width: 100%;
+}
+
+.price-page-learn-more-button {
+  color: #101828;
+  background: #ffffff;
+  border: 1px solid #dfe3e8;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+}
+
+.price-page-learn-more-button:hover {
+  color: #ffffff;
+  background: linear-gradient(
+    135deg,
+    var(--primary),
+    var(--secondary)
+  );
+  border-color: transparent;
+  box-shadow: 0 18px 38px rgba(109, 93, 252, 0.28);
+  transform: translateY(-2px);
+}
+
+.price-page-learn-more-button svg,
+.price-page-card-button svg {
+  flex: 0 0 auto;
+  transition: transform 0.25s ease;
+}
+
+.price-page-learn-more-button:hover svg,
+.price-page-card-button:hover svg {
+  transform: translateX(3px);
+}
+
+.price-page-card-button {
   color: #ffffff;
   background: linear-gradient(
     135deg,
@@ -9299,6 +9339,7 @@ a.commission-contact-item:hover {
 
 .price-page-primary-button:focus-visible,
 .price-page-secondary-button:focus-visible,
+.price-page-learn-more-button:focus-visible,
 .price-page-card-button:focus-visible {
   outline: 3px solid rgba(109, 93, 252, 0.28);
   outline-offset: 4px;
@@ -9463,6 +9504,7 @@ a.commission-contact-item:hover {
   .price-page-card,
   .price-page-primary-button,
   .price-page-secondary-button,
+  .price-page-learn-more-button,
   .price-page-card-button {
     transition: none;
   }
@@ -12263,6 +12305,18 @@ a.commission-contact-item:hover {
   line-height: 1.6;
 }
 
+.price-page-uiux-plan-actions {
+  display: grid;
+  gap: 12px;
+  margin-top: auto;
+}
+
+.price-page-uiux-plan-note
+  + .price-page-uiux-plan-actions {
+  margin-top: 25px;
+}
+
+.price-page-uiux-learn-more-button,
 .price-page-uiux-plan-button {
   width: 100%;
   min-height: 52px;
@@ -12270,34 +12324,64 @@ a.commission-contact-item:hover {
   align-items: center;
   justify-content: center;
   gap: 9px;
-  margin-top: auto;
   padding: 0 18px;
+  border-radius: 999px;
+  font-size: 0.83rem;
+  font-weight: 900;
+  transform: translateY(0);
+  transition:
+    color 0.25s ease,
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
+}
+
+.price-page-uiux-learn-more-button {
+  color: #101828;
+  background: #ffffff;
+  border: 1px solid #dfe3e8;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+}
+
+.price-page-uiux-learn-more-button:hover {
   color: #ffffff;
   background: linear-gradient(
     135deg,
     var(--primary),
     var(--secondary)
   );
-  border-radius: 999px;
-  font-size: 0.83rem;
-  font-weight: 900;
-  box-shadow: 0 17px 38px rgba(109, 93, 252, 0.24);
-  transform: translateY(0);
-  transition:
-    color 0.25s ease,
-    box-shadow 0.25s ease,
-    transform 0.25s ease;
+  border-color: transparent;
+  transform: translateY(-2px);
+  box-shadow: 0 20px 44px rgba(109, 93, 252, 0.3);
 }
 
-.price-page-uiux-plan-note
-  + .price-page-uiux-plan-button {
-  margin-top: 25px;
+.price-page-uiux-plan-button {
+  color: #ffffff;
+  background: linear-gradient(
+    135deg,
+    var(--primary),
+    var(--secondary)
+  );
+  border: 1px solid transparent;
+  box-shadow: 0 17px 38px rgba(109, 93, 252, 0.24);
 }
 
 .price-page-uiux-plan-button:hover {
   color: #ffffff;
   transform: translateY(-2px);
   box-shadow: 0 23px 48px rgba(109, 93, 252, 0.34);
+}
+
+.price-page-uiux-learn-more-button svg,
+.price-page-uiux-plan-button svg {
+  flex: 0 0 auto;
+  transition: transform 0.25s ease;
+}
+
+.price-page-uiux-learn-more-button:hover svg,
+.price-page-uiux-plan-button:hover svg {
+  transform: translateX(3px);
 }
 
 /* ------------------------------------------------------------------------
@@ -12348,6 +12432,7 @@ a.commission-contact-item:hover {
    ACCESSIBILITY
 ------------------------------------------------------------------------ */
 
+.price-page-uiux-learn-more-button:focus-visible,
 .price-page-uiux-plan-button:focus-visible {
   outline: 3px solid rgba(109, 93, 252, 0.34);
   outline-offset: 4px;
@@ -12427,6 +12512,7 @@ a.commission-contact-item:hover {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .price-page-uiux-learn-more-button,
   .price-page-uiux-plan-button {
     transition: none;
   }

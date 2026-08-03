@@ -66,12 +66,12 @@ export const brandingSamples = [
 ];
 
 export const brandingBenefits = [
-  "Complete logo usage and brand identity direction",
-  "Professional color palette and typography system",
-  "Brand patterns, packaging, stationery, and merchandise mockups",
-  "Social media-ready and print-ready visual brand materials",
-  "Consistent design system for marketing and business communication",
-  "Premium brand presentation for approval and brand guidelines",
+  "You will receive the final logo with approved variations, along with a brand colour palette containing HEX, RGB and CMYK codes.",
+  "Primary and secondary typography details will be provided with custom brand patterns and graphic elements.",
+  "Business card and stationery designs will be included with social media profile designs and poster templates.",
+  "Packaging, bag, apparel or product mockups will be provided where applicable, along with a brand guideline or mini brand book.",
+  "Final files will be delivered in print-ready PDF, JPG and PNG formats, with editable AI, PSD, EPS or CorelDRAW files when included in the package.",
+  "Fonts, icons, images and supporting assets will be provided, with all files clearly organised for print and digital use.",
 ];
 
 export const brandingProcess = [

@@ -24,12 +24,11 @@ import {
 ========================================================= */
 
 const benefits = [
-  "Professional poster designs for events, offers, campaigns, and promotions",
-  "Strong visual hierarchy with bold headline and clear message placement",
-  "Perfect for schools, NGOs, brands, businesses, creators, and agencies",
-  "Print-ready and digital-ready poster formats",
-  "Attractive color, typography, layout, and CTA direction",
-  "High-quality export for social media, website, WhatsApp, and printing",
+  "You will receive one final poster design and one size variation for review.",
+  "The final poster will be delivered in the required formats, including PSD, AI or EPS, CorelDRAW, PDF, JPG and PNG.",
+  "All necessary supporting files, such as linked images, graphics, fonts and other design assets, will also be included where applicable.",
+  "The final files will be organised clearly and prepared for both professional printing and digital use.",
+  
 ];
 
 /* =========================================================

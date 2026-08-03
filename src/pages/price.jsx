@@ -25,6 +25,7 @@ import {
 const pricingPlans = [
   {
     slug: "business-card-design",
+    learnMorePath: "/services/business-card-design",
     title: "Business Card Design",
     price: "299",
     icon: CreditCard,
@@ -41,6 +42,7 @@ const pricingPlans = [
   },
   {
     slug: "logo-design",
+    learnMorePath: "/services/logo-design",
     title: "Logo Design",
     price: "599",
     icon: PenTool,
@@ -57,6 +59,7 @@ const pricingPlans = [
   },
   {
     slug: "photo-frame-design",
+    learnMorePath: "/services/photo-frame",
     title: "Photo Frame Design",
     price: "499",
     icon: ImageIcon,
@@ -71,24 +74,26 @@ const pricingPlans = [
     note:
       "The ₹499 price applies to small or average sizes such as 5 × 7 inch. Larger sizes are priced separately.",
   },
-  {
-    slug: "poster-design",
-    title: "Poster Design",
-    price: "699",
-    icon: FileImage,
-    description:
-      "A high-impact poster created for promotions, events, campaigns, announcements, or business marketing.",
-    features: [
-      "2 poster variants included",
-      "Strong headline and content hierarchy",
-      "Campaign-focused visual layout",
-      "Digital or print-oriented composition",
-    ],
-    note:
-      "You receive two poster variants based on the same project brief.",
-  },
+  // {
+  //   slug: "poster-design",
+  //   learnMorePath: "/services/poster-design",
+  //   title: "Poster Design",
+  //   price: "699",
+  //   icon: FileImage,
+  //   description:
+  //     "A high-impact poster created for promotions, events, campaigns, announcements, or business marketing.",
+  //   features: [
+  //     "2 poster variants included",
+  //     "Strong headline and content hierarchy",
+  //     "Campaign-focused visual layout",
+  //     "Digital or print-oriented composition",
+  //   ],
+  //   note:
+  //     "You receive two poster variants based on the same project brief.",
+  // },
   {
     slug: "brand-design",
+    learnMorePath: "/services/branding-materials",
     title: "Brand Design",
     price: "2999",
     icon: Palette,
@@ -112,6 +117,7 @@ const pricingPlans = [
 const uiUxPlans = [
   {
     slug: "ui-ux-basic-plan",
+    learnMorePath: "/services/ui-design",
     title: "Basic Plan",
     price: "3499",
     icon: MonitorSmartphone,
@@ -133,6 +139,7 @@ const uiUxPlans = [
   },
   {
     slug: "ui-ux-professional-plan",
+    learnMorePath: "/services/ui-design",
     title: "Professional Plan",
     price: "7999",
     icon: Crown,
@@ -261,17 +268,27 @@ function PriceCard({ plan }) {
           <strong> +₹499</strong>
         </p>
 
-        <Link
-          to="/contact"
-          state={{
-            selectedService: plan.title,
-            selectedPrice: `₹${plan.price}`,
-          }}
-          className="price-page-card-button"
-        >
-          Choose Plan
-          <ArrowRight size={17} aria-hidden="true" />
-        </Link>
+        <div className="price-page-card-actions">
+          {/* <Link
+            to={plan.learnMorePath}
+            className="price-page-learn-more-button"
+          >
+            Learn More
+            <ArrowRight size={17} aria-hidden="true" />
+          </Link> */}
+
+          <Link
+            to="/contact"
+            state={{
+              selectedService: plan.title,
+              selectedPrice: `₹${plan.price}`,
+            }}
+            className="price-page-card-button"
+          >
+            Choose Plan
+            <ArrowRight size={17} aria-hidden="true" />
+          </Link>
+        </div>
       </div>
     </article>
   );
@@ -342,17 +359,27 @@ function UIUXPlanColumn({ plan }) {
         <p>{plan.note}</p>
       </div>
 
-      <Link
-        to="/contact"
-        state={{
-          selectedService: `UI/UX Design - ${plan.title}`,
-          selectedPrice: `₹${plan.price}`,
-        }}
-        className="price-page-uiux-plan-button"
-      >
-        Choose {plan.title}
-        <ArrowRight size={17} aria-hidden="true" />
-      </Link>
+      <div className="price-page-uiux-plan-actions">
+        {/* <Link
+          to={plan.learnMorePath}
+          className="price-page-uiux-learn-more-button"
+        >
+          Learn More
+          <ArrowRight size={17} aria-hidden="true" />
+        </Link> */}
+
+        <Link
+          to="/contact"
+          state={{
+            selectedService: `UI/UX Design - ${plan.title}`,
+            selectedPrice: `₹${plan.price}`,
+          }}
+          className="price-page-uiux-plan-button"
+        >
+          Choose {plan.title}
+          <ArrowRight size={17} aria-hidden="true" />
+        </Link>
+      </div>
     </div>
   );
 }
