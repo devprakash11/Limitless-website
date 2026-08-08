@@ -16,6 +16,7 @@ import SectionHeading from "../components/SectionHeading";
 import ServiceCard from "../components/ServiceCard";
 import { services } from "../data/services";
 import SEO from "../components/SEO";
+import DiscountPopup from "../components/DiscountPopup";
 
 /* =========================================================
    PAGE DATA
@@ -251,6 +252,9 @@ function Home() {
         path="/"
         image="/logo-01.webp"
       />
+
+      {/* 30% Discount Popup */}
+      <DiscountPopup />
 
       <main className="home-page">
       {/* Hero */}
