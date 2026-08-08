@@ -1,47 +1,78 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import {
-  ArrowRight,
-  BadgeCheck,
-  BriefcaseBusiness,
-  Layers3,
-  Package,
-  Palette,
-  Sparkles,
-} from "lucide-react";
+import { Sparkles } from "lucide-react";
 
-import BrandingGalleryCard from "../components/branding/BrandingGalleryCard";
-import SEO from "../components/SEO";
-import ServiceContentSection from "../components/seo/ServiceContentSection";
-import { brandingServiceContent } from "../data/pageSeoContent";
-import {
-  brandingBenefits,
-  brandingProcess,
-  brandingSamples,
-} from "../data/BrandingMaterialsData";
+// import { useState } from "react";
+// import { Link } from "react-router-dom";
+// import {
+//   ArrowRight,
+//   BadgeCheck,
+//   BriefcaseBusiness,
+//   Layers3,
+//   Package,
+//   Palette,
+//   Sparkles,
+// } from "lucide-react";
+
+// import BrandingGalleryCard from "../components/branding/BrandingGalleryCard";
+// import SEO from "../components/SEO";
+// import ServiceContentSection from "../components/seo/ServiceContentSection";
+// import { brandingServiceContent } from "../data/pageSeoContent";
+// import {
+//   brandingBenefits,
+//   brandingProcess,
+//   brandingSamples,
+// } from "../data/BrandingMaterialsData";
 
 function BrandingMaterials() {
-  const [showAll, setShowAll] = useState(false);
+  // const [showAll, setShowAll] = useState(false);
 
-  const safeSamples = Array.isArray(brandingSamples)
-    ? brandingSamples
-    : [];
+  // const safeSamples = Array.isArray(brandingSamples)
+  //   ? brandingSamples
+  //   : [];
 
-  const visibleBranding = showAll
-    ? safeSamples
-    : safeSamples.slice(0, 4);
+  // const visibleBranding = showAll
+  //   ? safeSamples
+  //   : safeSamples.slice(0, 4);
 
-  const processIcons = [Palette, Layers3, Package];
+  // const processIcons = [Palette, Layers3, Package];
 
   return (
     <>
-      <SEO
-        title="Branding Materials & Brand Identity | Limitless Design"
-        description="Create a professional and consistent brand identity with custom logo usage, color palettes, typography, packaging, stationery and marketing materials."
-        path="/services/branding-materials"
-        image="/logo-01.webp"
-      />
+      {/* =========================
+          COMING SOON SECTION
+      ========================== */}
 
+      <main className="bmpro-coming-page">
+        <section className="bmpro-coming-soon">
+          <div className="container">
+            <div className="bmpro-coming-content">
+              <div className="bmpro-coming-icon">
+                <Sparkles size={30} aria-hidden="true" />
+              </div>
+
+              <span className="bmpro-coming-label">Branding Materials</span>
+
+              <h1>Coming Soon</h1>
+
+              <p>
+                We are preparing our Branding Materials service with complete
+                brand identity systems, packaging, typography, colors,
+                stationery, merchandise, and professional brand presentations.
+              </p>
+
+              <div className="bmpro-coming-badge">
+                New branding projects are on the way.
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      {/* ==========================================================
+          ORIGINAL BRANDING MATERIALS PAGE
+          Uncomment this section when the service is ready.
+      =========================================================== */}
+
+      {/*
       <main className="bmpro-page">
         <section className="bmpro-hero">
           <div className="container bmpro-hero-grid">
@@ -127,7 +158,9 @@ function BrandingMaterials() {
                 <button
                   type="button"
                   className="bmpro-view-all-btn"
-                  onClick={() => setShowAll((current) => !current)}
+                  onClick={() =>
+                    setShowAll((current) => !current)
+                  }
                   aria-expanded={showAll}
                   aria-controls="branding-gallery"
                 >
@@ -143,7 +176,9 @@ function BrandingMaterials() {
         <section className="bmpro-detail-section">
           <div className="container bmpro-detail-grid">
             <div className="bmpro-detail-content">
-              <span className="section-label">Service Details</span>
+              <span className="section-label">
+                Service Details
+              </span>
 
               <h2>What you get in Branding Materials</h2>
 
@@ -155,7 +190,10 @@ function BrandingMaterials() {
               <div className="bmpro-benefit-list">
                 {brandingBenefits.map((item) => (
                   <div key={item}>
-                    <BadgeCheck size={21} aria-hidden="true" />
+                    <BadgeCheck
+                      size={21}
+                      aria-hidden="true"
+                    />
                     <span>{item}</span>
                   </div>
                 ))}
@@ -173,7 +211,10 @@ function BrandingMaterials() {
 
               <Link to="/contact" className="primary-btn">
                 Start Branding Project
-                <ArrowRight size={18} aria-hidden="true" />
+                <ArrowRight
+                  size={18}
+                  aria-hidden="true"
+                />
               </Link>
             </aside>
           </div>
@@ -182,7 +223,9 @@ function BrandingMaterials() {
         <section className="bmpro-process-section">
           <div className="container">
             <div className="bmpro-heading">
-              <span className="section-label">Our Process</span>
+              <span className="section-label">
+                Our Process
+              </span>
 
               <h2>Simple process, complete brand system</h2>
 
@@ -194,12 +237,19 @@ function BrandingMaterials() {
 
             <div className="bmpro-process-grid">
               {brandingProcess.map((item, index) => {
-                const Icon = processIcons[index] || Layers3;
+                const Icon =
+                  processIcons[index] || Layers3;
 
                 return (
-                  <article className="bmpro-process-card" key={item.title}>
+                  <article
+                    className="bmpro-process-card"
+                    key={item.title}
+                  >
                     <div className="bmpro-process-icon">
-                      <Icon size={25} aria-hidden="true" />
+                      <Icon
+                        size={25}
+                        aria-hidden="true"
+                      />
                     </div>
 
                     <h3>{item.title}</h3>
@@ -211,8 +261,11 @@ function BrandingMaterials() {
           </div>
         </section>
 
-        <ServiceContentSection {...brandingServiceContent} />
+        <ServiceContentSection
+          {...brandingServiceContent}
+        />
       </main>
+      */}
     </>
   );
 }

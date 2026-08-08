@@ -44,12 +44,12 @@ const pricingPlans = [
     slug: "logo-design",
     learnMorePath: "/services/logo-design",
     title: "Logo Design",
-    price: "599",
+    price: "999",
     icon: PenTool,
     description:
       "A custom logo direction designed to give your business a clear and memorable visual identity.",
     features: [
-      "4 logo variants included",
+      "3 logo variants included",
       "Professional logo presentation",
       "Brand-focused creative direction",
       "Final design file included",
@@ -57,45 +57,45 @@ const pricingPlans = [
     note:
       "You receive four logo variants to review before selecting the final direction.",
   },
-  {
-    slug: "photo-frame-design",
-    learnMorePath: "/services/photo-frame",
-    title: "Photo Frame Design",
-    price: "499",
-    icon: ImageIcon,
-    description:
-      "A personalized photo-frame layout for memories, celebrations, gifts, and special occasions.",
-    features: [
-      "Base price for sizes such as 5 × 7 inch",
-      "Personalized photo arrangement",
-      "Custom text and occasion details",
-      "Digital preview before delivery",
-    ],
-    note:
-      "The ₹499 price applies to small or average sizes such as 5 × 7 inch. Larger sizes are priced separately.",
-  },
   // {
-  //   slug: "poster-design",
-  //   learnMorePath: "/services/poster-design",
-  //   title: "Poster Design",
-  //   price: "699",
-  //   icon: FileImage,
+  //   slug: "photo-frame-design",
+  //   learnMorePath: "/services/photo-frame",
+  //   title: "Photo Frame Design",
+  //   price: "499",
+  //   icon: ImageIcon,
   //   description:
-  //     "A high-impact poster created for promotions, events, campaigns, announcements, or business marketing.",
+  //     "A personalized photo-frame layout for memories, celebrations, gifts, and special occasions.",
   //   features: [
-  //     "2 poster variants included",
-  //     "Strong headline and content hierarchy",
-  //     "Campaign-focused visual layout",
-  //     "Digital or print-oriented composition",
+  //     "Base price for sizes such as 5 × 7 inch",
+  //     "Personalized photo arrangement",
+  //     "Custom text and occasion details",
+  //     "Digital preview before delivery",
   //   ],
   //   note:
-  //     "You receive two poster variants based on the same project brief.",
+  //     "The ₹499 price applies to small or average sizes such as 5 × 7 inch. Larger sizes are priced separately.",
   // },
+  {
+    slug: "poster-design",
+    learnMorePath: "/services/poster-design",
+    title: "Poster Design",
+    price: "699",
+    icon: FileImage,
+    description:
+      "A high-impact poster created for promotions, events, campaigns, announcements, or business marketing.",
+    features: [
+      "2 poster variants included",
+      "Strong headline and content hierarchy",
+      "Campaign-focused visual layout",
+      "Digital or print-oriented composition",
+    ],
+    note:
+      "You receive two poster variants based on the same project brief.",
+  },
   {
     slug: "brand-design",
     learnMorePath: "/services/branding-materials",
     title: "Brand Design",
-    price: "2999",
+    price: "7999",
     icon: Palette,
     featured: true,
     description:
