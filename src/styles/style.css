@@ -30,6 +30,7 @@
    26. UI/UX Design Plans — Both Plans in One Box
    27. Shared SEO Content, FAQ & Related Service Sections
    28. Home Page — 30% Discount Popup
+   29. Home Page — Trusted Customers
 ========================================================================= */
 
 /* ========================================================================
@@ -12750,5 +12751,307 @@ a.commission-contact-item:hover {
   .ld-offer-button,
   .ld-offer-button svg {
     transition: none;
+  }
+}
+
+/* ========================================================================
+   29. HOME PAGE — TRUSTED CUSTOMERS
+======================================================================== */
+
+.home-trusted-section {
+  position: relative;
+  overflow: hidden;
+  padding: 78px 0 70px;
+  background:
+    radial-gradient(circle at 10% 10%, rgba(109, 93, 252, 0.07), transparent 30%),
+    radial-gradient(circle at 90% 80%, rgba(255, 95, 199, 0.06), transparent 28%),
+    #ffffff;
+  border-top: 1px solid #eef2f7;
+  border-bottom: 1px solid #eef2f7;
+}
+
+.home-trusted-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 300px);
+  gap: 54px;
+  align-items: end;
+}
+
+.home-trusted-heading-copy {
+  max-width: 760px;
+}
+
+.home-trusted-label {
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 17px;
+  padding: 8px 13px;
+  color: var(--primary-dark, #4f46e5);
+  background: #eef0ff;
+  border: 1px solid #dfe3ff;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 850;
+  line-height: 1;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.home-trusted-heading h2 {
+  margin: 0;
+  color: #0f172a;
+  font-size: clamp(2.15rem, 4.2vw, 3.65rem);
+  font-weight: 950;
+  line-height: 1.03;
+  letter-spacing: -0.06em;
+}
+
+.home-trusted-heading p {
+  max-width: 690px;
+  margin-top: 18px;
+  color: #667085;
+  font-size: 0.98rem;
+  line-height: 1.8;
+}
+
+.home-trusted-summary {
+  display: grid;
+  gap: 7px;
+  padding: 25px;
+  background: linear-gradient(145deg, #0b0b1f, #151744);
+  border: 1px solid rgba(109, 93, 252, 0.16);
+  border-radius: 24px;
+  box-shadow: 0 20px 54px rgba(15, 23, 42, 0.12);
+}
+
+.home-trusted-summary strong {
+  color: #ffffff;
+  font-size: 2.6rem;
+  font-weight: 950;
+  line-height: 1;
+  letter-spacing: -0.06em;
+}
+
+.home-trusted-summary span {
+  color: #b8c1d1;
+  font-size: 0.78rem;
+  font-weight: 650;
+  line-height: 1.55;
+}
+
+.home-trusted-marquee {
+  position: relative;
+  width: 100%;
+  margin-top: 44px;
+  overflow: hidden;
+}
+
+.home-trusted-marquee::before,
+.home-trusted-marquee::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 3;
+  width: min(12vw, 150px);
+  pointer-events: none;
+}
+
+.home-trusted-marquee::before {
+  left: 0;
+  background: linear-gradient(to right, #ffffff 0%, rgba(255,255,255,.94) 28%, transparent 100%);
+}
+
+.home-trusted-marquee::after {
+  right: 0;
+  background: linear-gradient(to left, #ffffff 0%, rgba(255,255,255,.94) 28%, transparent 100%);
+}
+
+.home-trusted-track {
+  width: max-content;
+  display: flex;
+  align-items: center;
+  animation: home-trusted-slide 34s linear infinite;
+  will-change: transform;
+}
+
+.home-trusted-marquee:hover .home-trusted-track,
+.home-trusted-marquee:focus-within .home-trusted-track {
+  animation-play-state: paused;
+}
+
+.home-trusted-group {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding-right: 18px;
+}
+
+.home-trusted-logo-card {
+  width: 190px;
+  height: 112px;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  overflow: hidden;
+  background: #ffffff;
+  border: 1px solid #e6eaf0;
+  border-radius: 20px;
+  box-shadow: 0 14px 36px rgba(15, 23, 42, 0.07);
+  transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+}
+
+.home-trusted-logo-card:hover {
+  border-color: rgba(109, 93, 252, 0.28);
+  box-shadow: 0 20px 46px rgba(79, 70, 229, 0.12);
+  transform: translateY(-4px);
+}
+
+.home-trusted-logo-card img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  object-position: center;
+}
+
+.home-trusted-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 34px;
+}
+
+.home-trusted-footer span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  padding: 0 12px;
+  color: #475467;
+  background: #f8fafc;
+  border: 1px solid #e7ebf0;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 750;
+}
+
+@keyframes home-trusted-slide {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@media (max-width: 1024px) {
+  .home-trusted-heading {
+    grid-template-columns: 1fr;
+    gap: 26px;
+  }
+
+  .home-trusted-summary {
+    max-width: 360px;
+  }
+
+  .home-trusted-logo-card {
+    width: 170px;
+    height: 102px;
+  }
+
+  .home-trusted-track {
+    animation-duration: 30s;
+  }
+}
+
+@media (max-width: 768px) {
+  .home-trusted-section {
+    padding: 58px 0 54px;
+  }
+
+  .home-trusted-heading h2 {
+    font-size: 2.35rem;
+  }
+
+  .home-trusted-heading p {
+    font-size: 0.91rem;
+    line-height: 1.7;
+  }
+
+  .home-trusted-summary {
+    padding: 20px;
+    border-radius: 20px;
+  }
+
+  .home-trusted-marquee {
+    margin-top: 34px;
+  }
+
+  .home-trusted-group {
+    gap: 12px;
+    padding-right: 12px;
+  }
+
+  .home-trusted-logo-card {
+    width: 148px;
+    height: 92px;
+    padding: 14px;
+    border-radius: 17px;
+  }
+
+  .home-trusted-marquee::before,
+  .home-trusted-marquee::after {
+    width: 46px;
+  }
+
+  .home-trusted-track {
+    animation-duration: 26s;
+  }
+
+  .home-trusted-footer {
+    justify-content: flex-start;
+    margin-top: 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-trusted-section {
+    padding: 50px 0 46px;
+  }
+
+  .home-trusted-heading h2 {
+    font-size: 2rem;
+  }
+
+  .home-trusted-logo-card {
+    width: 132px;
+    height: 82px;
+    padding: 12px;
+  }
+
+  .home-trusted-footer span {
+    min-height: 29px;
+    padding: 0 10px;
+    font-size: 0.64rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-trusted-track {
+    width: auto;
+    flex-wrap: wrap;
+    justify-content: center;
+    animation: none;
+  }
+
+  .home-trusted-group[aria-hidden="true"] {
+    display: none;
+  }
+
+  .home-trusted-group {
+    justify-content: center;
+    flex-wrap: wrap;
+    padding-right: 0;
   }
 }
