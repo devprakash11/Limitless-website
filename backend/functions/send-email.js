@@ -4,7 +4,7 @@ const BRAND = {
   name: "Limitless Design",
   email: "help.limitlessdesign@gmail.com",
   website: "https://limitlessdesign.netlify.app",
-  logo: "https://limitlessdesign.netlify.app/logo-01.webp", // use full public logo URL
+  logo: "https://limitlessdesign.netlify.app/logo.webp", // use full public logo URL
   instagram: "https://www.instagram.com/limitless_design11?igsh=a245ZDk1emF1bXJu&utm_source=qr",
   // facebook: "https://facebook.com/yourusername",
   // linkedin: "https://linkedin.com/in/yourusername",
