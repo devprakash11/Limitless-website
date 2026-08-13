@@ -23,8 +23,4 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
     X-Frame-Options = "DENY"
-<<<<<<< HEAD
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
-=======
-    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
->>>>>>> 549237826ee660840337da8f50adac1e86f9d616
