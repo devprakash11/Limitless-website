@@ -11,17 +11,17 @@ const BRAND = {
 
   website: "https://limitlessdesign.netlify.app",
 
-  logo: "/frontend/public/logo.webp",
+  logo: "https://limitlessdesign.netlify.app/logo.webp",
 
   instagram:
     "https://www.instagram.com/limitless_design11",
 
-  // Contact number: 7667583859
-  phoneDisplay: "+91 7667583859",
+  // Contact: 7667583859
+  phoneDisplay: "+91 76675 83859",
 
-  phoneRaw: "+91 7667583859",
+  phoneRaw: "+917667583859",
 
-  // Direct WhatsApp chat
+  // WhatsApp: 7667583859
   whatsapp:
     "https://wa.me/917667583859",
 };
@@ -49,8 +49,14 @@ function cleanSubject(value = "") {
     .trim();
 }
 
+function normalizePhone(value = "") {
+  return String(value)
+    .replace(/[^\d+]/g, "")
+    .trim();
+}
+
 /* =========================================================
-   SHARED RESPONSIVE CSS
+   RESPONSIVE EMAIL CSS
 ========================================================= */
 
 const EMAIL_CSS = `
@@ -137,7 +143,7 @@ const EMAIL_CSS = `
     }
 
     .ld-details-label {
-      width: 95px !important;
+      width: 90px !important;
     }
 
   }
@@ -146,7 +152,7 @@ const EMAIL_CSS = `
 `;
 
 /* =========================================================
-   ADMIN EMAIL TEMPLATE
+   ADMIN EMAIL
 ========================================================= */
 
 function adminMailTemplate({
@@ -156,6 +162,8 @@ function adminMailTemplate({
   service,
   message,
 }) {
+  const clientPhone = normalizePhone(phone);
+
   return `
 <!DOCTYPE html>
 
@@ -221,16 +229,17 @@ function adminMailTemplate({
           "
         >
 
-          <!-- ===========================================
-               HEADER
-          ============================================ -->
+          <!-- =========================================
+               WHITE ADMIN HEADER
+          ========================================== -->
 
           <tr>
 
             <td
               class="ld-header"
+              bgcolor="#ffffff"
               style="
-                background:#ffffff;
+                background:#ffffff !important;
                 padding:28px 32px;
                 border-bottom:1px solid #e5e7eb;
               "
@@ -247,13 +256,9 @@ function adminMailTemplate({
 
                 <tr class="ld-admin-header-row">
 
-                  <!-- Logo -->
-
                   <td
                     class="ld-admin-logo-cell"
-                    style="
-                      vertical-align:middle;
-                    "
+                    style="vertical-align:middle;"
                   >
 
                     <img
@@ -270,8 +275,6 @@ function adminMailTemplate({
                     />
 
                   </td>
-
-                  <!-- Heading -->
 
                   <td
                     align="right"
@@ -316,9 +319,9 @@ function adminMailTemplate({
 
           </tr>
 
-          <!-- ===========================================
-               INTRO
-          ============================================ -->
+          <!-- =========================================
+               INTRODUCTION
+          ========================================== -->
 
           <tr>
 
@@ -358,9 +361,9 @@ function adminMailTemplate({
 
           </tr>
 
-          <!-- ===========================================
+          <!-- =========================================
                CLIENT NAME
-          ============================================ -->
+          ========================================== -->
 
           <tr>
 
@@ -410,9 +413,9 @@ function adminMailTemplate({
 
           </tr>
 
-          <!-- ===========================================
+          <!-- =========================================
                SERVICE
-          ============================================ -->
+          ========================================== -->
 
           <tr>
 
@@ -462,9 +465,9 @@ function adminMailTemplate({
 
           </tr>
 
-          <!-- ===========================================
+          <!-- =========================================
                CLIENT DETAILS
-          ============================================ -->
+          ========================================== -->
 
           <tr>
 
@@ -567,11 +570,12 @@ function adminMailTemplate({
                       border-top:1px solid #e5e7eb;
                     "
                   >
+
                     ${
                       phone
                         ? `
                           <a
-                            href="tel:${escapeHtml(phone)}"
+                            href="tel:${escapeHtml(clientPhone)}"
                             style="
                               color:#2563eb;
                               text-decoration:none;
@@ -582,6 +586,7 @@ function adminMailTemplate({
                         `
                         : "Not provided"
                     }
+
                   </td>
 
                 </tr>
@@ -623,9 +628,9 @@ function adminMailTemplate({
 
           </tr>
 
-          <!-- ===========================================
-               PROJECT MESSAGE
-          ============================================ -->
+          <!-- =========================================
+               MESSAGE
+          ========================================== -->
 
           <tr>
 
@@ -666,9 +671,9 @@ function adminMailTemplate({
 
           </tr>
 
-          <!-- ===========================================
-               ADMIN BUTTONS
-          ============================================ -->
+          <!-- =========================================
+               ADMIN CTA
+          ========================================== -->
 
           <tr>
 
@@ -707,6 +712,7 @@ function adminMailTemplate({
                         padding:14px 24px;
                         border-radius:10px;
                         box-sizing:border-box;
+                        text-align:center;
                       "
                     >
                       Reply to Client
@@ -717,11 +723,12 @@ function adminMailTemplate({
                   ${
                     phone
                       ? `
+
                         <td
                           class="ld-cta-spacer"
-                          width="10"
+                          width="12"
                           style="
-                            width:10px;
+                            width:12px;
                             font-size:1px;
                             line-height:1px;
                           "
@@ -735,7 +742,7 @@ function adminMailTemplate({
                         >
 
                           <a
-                            href="tel:${escapeHtml(phone)}"
+                            href="tel:${escapeHtml(clientPhone)}"
                             class="ld-cta-button"
                             style="
                               display:inline-block;
@@ -747,12 +754,14 @@ function adminMailTemplate({
                               padding:14px 24px;
                               border-radius:10px;
                               box-sizing:border-box;
+                              text-align:center;
                             "
                           >
                             Call Client
                           </a>
 
                         </td>
+
                       `
                       : ""
                   }
@@ -765,9 +774,9 @@ function adminMailTemplate({
 
           </tr>
 
-          <!-- ===========================================
+          <!-- =========================================
                ADMIN FOOTER
-          ============================================ -->
+          ========================================== -->
 
           <tr>
 
@@ -804,6 +813,7 @@ function adminMailTemplate({
                 <a
                   href="${BRAND.website}"
                   target="_blank"
+                  rel="noopener noreferrer"
                   style="
                     color:#2563eb;
                     text-decoration:none;
@@ -842,7 +852,7 @@ function adminMailTemplate({
 
               </div>
 
-              <!-- Social links -->
+              <!-- Social -->
 
               <div
                 style="
@@ -895,11 +905,11 @@ function adminMailTemplate({
 </body>
 
 </html>
-  `;
+`;
 }
 
 /* =========================================================
-   CLIENT EMAIL TEMPLATE
+   CLIENT EMAIL
 ========================================================= */
 
 function clientMailTemplate({
@@ -974,24 +984,23 @@ function clientMailTemplate({
           "
         >
 
-          <!-- ===========================================
-               CLIENT HEADER - WHITE
-          ============================================ -->
+          <!-- =========================================
+               WHITE CLIENT HEADER
+          ========================================== -->
 
           <tr>
 
             <td
               align="center"
               class="ld-header"
+              bgcolor="#ffffff"
               style="
-                background:#ffffff;
+                background:#ffffff !important;
                 padding:32px;
                 text-align:center;
                 border-bottom:1px solid #e5e7eb;
               "
             >
-
-              <!-- Logo -->
 
               <img
                 src="${BRAND.logo}"
@@ -1035,9 +1044,9 @@ function clientMailTemplate({
 
           </tr>
 
-          <!-- ===========================================
+          <!-- =========================================
                GREETING
-          ============================================ -->
+          ========================================== -->
 
           <tr>
 
@@ -1091,9 +1100,9 @@ function clientMailTemplate({
 
           </tr>
 
-          <!-- ===========================================
+          <!-- =========================================
                SELECTED SERVICE
-          ============================================ -->
+          ========================================== -->
 
           <tr>
 
@@ -1142,9 +1151,9 @@ function clientMailTemplate({
 
           </tr>
 
-          <!-- ===========================================
+          <!-- =========================================
                MESSAGE
-          ============================================ -->
+          ========================================== -->
 
           <tr>
 
@@ -1185,9 +1194,9 @@ function clientMailTemplate({
 
           </tr>
 
-          <!-- ===========================================
-               NEXT STEPS
-          ============================================ -->
+          <!-- =========================================
+               WHAT HAPPENS NEXT
+          ========================================== -->
 
           <tr>
 
@@ -1208,8 +1217,6 @@ function clientMailTemplate({
               >
                 What happens next?
               </div>
-
-              <!-- Step 1 -->
 
               <div
                 style="
@@ -1233,8 +1240,6 @@ function clientMailTemplate({
 
               </div>
 
-              <!-- Step 2 -->
-
               <div
                 style="
                   background:#f8fafc;
@@ -1256,8 +1261,6 @@ function clientMailTemplate({
                 project information is required.
 
               </div>
-
-              <!-- Step 3 -->
 
               <div
                 style="
@@ -1284,9 +1287,9 @@ function clientMailTemplate({
 
           </tr>
 
-          <!-- ===========================================
-               CTA BUTTONS
-          ============================================ -->
+          <!-- =========================================
+               CTA
+          ========================================== -->
 
           <tr>
 
@@ -1307,13 +1310,9 @@ function clientMailTemplate({
 
                 <tr class="ld-cta-row">
 
-                  <!-- Website -->
-
                   <td
                     class="ld-cta-cell"
-                    style="
-                      vertical-align:top;
-                    "
+                    style="vertical-align:top;"
                   >
 
                     <a
@@ -1339,7 +1338,7 @@ function clientMailTemplate({
 
                   </td>
 
-                  <!-- Space between buttons -->
+                  <!-- Desktop + mobile spacing -->
 
                   <td
                     class="ld-cta-spacer"
@@ -1353,13 +1352,9 @@ function clientMailTemplate({
                     &nbsp;
                   </td>
 
-                  <!-- WhatsApp -->
-
                   <td
                     class="ld-cta-cell"
-                    style="
-                      vertical-align:top;
-                    "
+                    style="vertical-align:top;"
                   >
 
                     <a
@@ -1393,9 +1388,9 @@ function clientMailTemplate({
 
           </tr>
 
-          <!-- ===========================================
+          <!-- =========================================
                CLIENT FOOTER
-          ============================================ -->
+          ========================================== -->
 
           <tr>
 
@@ -1471,7 +1466,7 @@ function clientMailTemplate({
 
               </div>
 
-              <!-- Social Links -->
+              <!-- Social -->
 
               <div
                 style="
@@ -1537,7 +1532,7 @@ function clientMailTemplate({
 </body>
 
 </html>
-  `;
+`;
 }
 
 /* =========================================================
@@ -1568,7 +1563,7 @@ export async function handler(event) {
   try {
 
     /* =====================================================
-       PARSE REQUEST
+       REQUEST BODY
     ===================================================== */
 
     const {
@@ -1637,16 +1632,18 @@ export async function handler(event) {
 
     const transporter =
       nodemailer.createTransport({
+
         service: "gmail",
 
         auth: {
           user: process.env.GMAIL_USER,
           pass: process.env.GMAIL_APP_PASSWORD,
         },
+
       });
 
     /* =====================================================
-       CLEAN SUBJECT DATA
+       SAFE SUBJECT
     ===================================================== */
 
     const safeName =
@@ -1681,6 +1678,7 @@ export async function handler(event) {
           service,
           message,
         }),
+
     });
 
     /* =====================================================
@@ -1707,10 +1705,11 @@ export async function handler(event) {
           service,
           message,
         }),
+
     });
 
     /* =====================================================
-       SUCCESS RESPONSE
+       SUCCESS
     ===================================================== */
 
     return {
@@ -1730,7 +1729,7 @@ export async function handler(event) {
   } catch (err) {
 
     /* =====================================================
-       ERROR
+       SERVER ERROR
     ===================================================== */
 
     console.error(
@@ -1751,5 +1750,6 @@ export async function handler(event) {
           "Unable to send your requirement right now. Please try again later.",
       }),
     };
+
   }
 }
