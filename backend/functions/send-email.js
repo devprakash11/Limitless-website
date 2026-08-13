@@ -17,13 +17,13 @@ const BRAND = {
     "https://www.instagram.com/limitless_design11",
 
   // Contact number: 7667583859
-  phoneDisplay: "+91 76675 83859",
+  phoneDisplay: "+91 7667583859",
 
-  phoneRaw: "+917667583859",
+  phoneRaw: "+91 7667583859",
 
   // Direct WhatsApp chat
   whatsapp:
-    "https://api.whatsapp.com/send?phone=917667583859&text=Hello%20Limitless%20Design%2C%20I%20would%20like%20to%20discuss%20my%20project.",
+    "https://wa.me/917667583859",
 };
 
 /* =========================================================
