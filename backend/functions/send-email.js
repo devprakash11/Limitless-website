@@ -11,7 +11,7 @@ const BRAND = {
 
   website: "https://limitlessdesign.netlify.app",
 
-  logo: "https://limitlessdesign.netlify.app/logo.webp",
+  logo: "/frontend/public/logo.webp",
 
   instagram:
     "https://www.instagram.com/limitless_design11",
