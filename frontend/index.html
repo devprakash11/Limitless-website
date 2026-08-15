@@ -24,7 +24,7 @@
 
         var f = d.getElementsByTagName(s)[0],
           j = d.createElement(s),
-          dl = l != "dataLayer" ? "&l=" + l : "";
+          dl = l !== "dataLayer" ? "&l=" + l : "";
 
         j.async = true;
         j.src =
@@ -35,7 +35,7 @@
     </script>
     <!-- End Google Tag Manager -->
 
-    <!-- Google tag (gtag.js) -->
+    <!-- Google Analytics -->
     <script
       async
       src="https://www.googletagmanager.com/gtag/js?id=G-9DPPMD2M4L"
@@ -51,14 +51,16 @@
       gtag("js", new Date());
       gtag("config", "G-9DPPMD2M4L");
     </script>
+    <!-- End Google Analytics -->
 
+    <!-- Primary SEO -->
     <title>
       Limitless Design | Logo, Branding and Graphic Design Services
     </title>
 
     <meta
       name="description"
-      content="Limitless Design provides professional logo design, poster design, branding, business card, social media and creative graphic design services."
+      content="Limitless Design provides professional logo design, poster design, branding, business card, social media, UI/UX and creative graphic design services."
     />
 
     <meta
@@ -84,7 +86,7 @@
 
     <meta
       property="og:description"
-      content="Professional logo design, branding, posters, business cards and creative graphic design services."
+      content="Professional logo design, branding, posters, business cards, UI/UX and creative graphic design services."
     />
 
     <meta
@@ -102,10 +104,30 @@
       content="https://limitlessdesign.netlify.app/logo-01.webp"
     />
 
+    <meta
+      property="og:image:alt"
+      content="Limitless Design"
+    />
+
     <!-- Twitter -->
     <meta
       name="twitter:card"
       content="summary_large_image"
+    />
+
+    <meta
+      name="twitter:title"
+      content="Limitless Design | Creative Design Services"
+    />
+
+    <meta
+      name="twitter:description"
+      content="Professional logo design, branding, UI/UX, posters, business cards and creative graphic design services."
+    />
+
+    <meta
+      name="twitter:image"
+      content="https://limitlessdesign.netlify.app/logo-01.webp"
     />
 
     <!-- Favicon -->
@@ -117,6 +139,12 @@
 
     <link
       rel="apple-touch-icon"
+      href="/logo-favicon.png"
+    />
+
+    <link
+      rel="shortcut icon"
+      type="image/png"
       href="/logo-favicon.png"
     />
   </head>
