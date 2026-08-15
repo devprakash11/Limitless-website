@@ -4,25 +4,16 @@ import {
   Mail,
   MapPin,
   Phone,
-  Sparkles,
 } from "lucide-react";
 
 import {
   FaBehance,
-  FaDribbble,
   FaInstagram,
-  FaLinkedin,
-  FaYoutube,
 } from "react-icons/fa6";
 
 import { services } from "../data/services";
 
 const socialLinks = [
-  // {
-  //   name: "YouTube",
-  //   href: "https://www.youtube.com/",
-  //   icon: FaYoutube,
-  // },
   {
     name: "Instagram",
     href: "https://www.instagram.com/limitless_design11?igsh=a245ZDk1emF1bXJu&utm_source=qr",
@@ -33,16 +24,6 @@ const socialLinks = [
     href: "https://www.behance.net/devprakash116",
     icon: FaBehance,
   },
-  // {
-  //   name: "Dribbble",
-  //   href: "https://dribbble.com/",
-  //   icon: FaDribbble,
-  // },
-  // {
-  //   name: "LinkedIn",
-  //   href: "https://www.linkedin.com/",
-  //   icon: FaLinkedin,
-  // },
 ];
 
 function Footer() {
@@ -59,20 +40,26 @@ function Footer() {
   return (
     <footer className="footer">
       <div className="container footer-grid">
+
+        {/* =========================================================
+            BRAND / ABOUT
+        ========================================================= */}
         <div className="footer-about">
+
           <Link
             to="/"
-            className="brand footer-brand"
+            className="footer-brand"
             aria-label="Go to Limitless Design home page"
           >
-            <span className="brand-icon">
-              <Sparkles
-                size={22}
-                aria-hidden="true"
-              />
-            </span>
+            <img
+              src="/logo-white.png"
+              alt="Limitless Design Logo"
+              className="footer-logo"
+            />
 
-            <span>Limitless Design</span>
+            <span className="brand-text">
+              Limitless Design
+            </span>
           </Link>
 
           <p>
@@ -81,6 +68,7 @@ function Footer() {
             powerful visual solutions.
           </p>
 
+          {/* Social Links */}
           <div
             className="footer-socials"
             aria-label="Limitless Design social media"
@@ -114,15 +102,32 @@ function Footer() {
           </div>
         </div>
 
+        {/* =========================================================
+            COMPANY
+        ========================================================= */}
         <div className="footer-col">
           <h4>Company</h4>
 
-          <Link to="/">Home</Link>
-          <Link to="/about">About Us</Link>
-          <Link to="/price">Pricing</Link>
-          <Link to="/contact">Contact</Link>
+          <Link to="/">
+            Home
+          </Link>
+
+          <Link to="/about">
+            About Us
+          </Link>
+
+          <Link to="/price">
+            Pricing
+          </Link>
+
+          <Link to="/contact">
+            Contact
+          </Link>
         </div>
 
+        {/* =========================================================
+            SERVICES
+        ========================================================= */}
         <div className="footer-col">
           <h4>Services</h4>
 
@@ -138,9 +143,13 @@ function Footer() {
             ))}
         </div>
 
+        {/* =========================================================
+            CONTACT
+        ========================================================= */}
         <div className="footer-col footer-contact-col">
           <h4>Contact</h4>
 
+          {/* Email */}
           <a
             href="mailto:help.limitlessdesign@gmail.com"
             className="footer-contact-link"
@@ -156,6 +165,7 @@ function Footer() {
             </span>
           </a>
 
+          {/* Phone */}
           <a
             href="tel:+917667583859"
             className="footer-contact-link"
@@ -171,6 +181,7 @@ function Footer() {
             </span>
           </a>
 
+          {/* Location */}
           <div
             className="footer-contact-link footer-location"
             aria-label="Limitless Design location: India"
@@ -180,15 +191,22 @@ function Footer() {
               aria-hidden="true"
             />
 
-            <span>India</span>
+            <span>
+              India
+            </span>
           </div>
         </div>
       </div>
 
+      {/* =========================================================
+          FOOTER BOTTOM
+      ========================================================= */}
       <div className="footer-bottom">
-        <p>
-          © {currentYear} Limitless Design. All rights reserved.
-        </p>
+        <div className="container">
+          <p>
+            © {currentYear} Limitless Design. All rights reserved.
+          </p>
+        </div>
       </div>
     </footer>
   );
