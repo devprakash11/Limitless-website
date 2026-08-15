@@ -1,0 +1,206 @@
+/* Navbar.css — site header & navigation (section 02) */
+
+/* ========================================================================
+   02. SITE HEADER & NAVIGATION
+======================================================================== */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  background: rgba(255, 255, 255, 255);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(229, 231, 235, 0.9);
+}
+
+.navbar {
+  position: relative;
+  height: 78px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.08rem;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+}
+
+.brand-logo {
+  width: 46px;
+  height: 46px;
+  object-fit: contain;
+  border-radius: 12px;
+}
+
+.brand-text {
+  color: #101828;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-links a,
+.dropdown-btn {
+  min-height: 42px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 14px;
+  color: #344054;
+  font-size: 0.94rem;
+  font-weight: 750;
+  border-radius: 999px;
+  transition:
+    color 0.25s ease,
+    background-color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active,
+.dropdown-btn:hover,
+.dropdown-btn.active,
+.dropdown.active .dropdown-btn {
+  color: var(--primary-dark);
+  background: #f1f3ff;
+}
+
+.nav-btn,
+.primary-btn,
+.secondary-btn {
+  min-height: 50px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 0 24px;
+  font-size: 0.95rem;
+  font-weight: 850;
+  border-radius: 999px;
+  transition: 0.25s ease;
+}
+
+.nav-btn,
+.primary-btn {
+  color: var(--white);
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  box-shadow: 0 18px 42px rgba(109, 93, 252, 0.28);
+}
+
+.nav-btn:hover,
+.primary-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 24px 56px rgba(109, 93, 252, 0.36);
+}
+
+.secondary-btn {
+  color: var(--text);
+  background: var(--white);
+  border: 1px solid var(--border);
+}
+
+.secondary-btn:hover {
+  color: var(--primary-dark);
+  border-color: var(--primary);
+}
+
+.white-btn {
+  color: var(--primary-dark);
+  background: var(--white);
+}
+
+.page-btn {
+  margin-top: 20px;
+}
+
+.mobile-toggle {
+  display: none;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  flex: 0 0 auto;
+  color: var(--text);
+  border-radius: 14px;
+  background: #f1f5f9;
+  transition:
+    color 0.25s ease,
+    background-color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.mobile-toggle:hover,
+.mobile-toggle.active {
+  color: var(--primary-dark);
+  background: #eef0ff;
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown-btn {
+  justify-content: center;
+}
+
+.dropdown-arrow {
+  flex: 0 0 auto;
+  transition: transform 0.28s ease;
+}
+
+.dropdown-arrow.rotate,
+.dropdown.active .dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 16px);
+  left: 0;
+  z-index: 1000;
+  width: 292px;
+  padding: 10px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition:
+    opacity 0.25s ease,
+    visibility 0.25s ease,
+    transform 0.25s ease;
+}
+
+.dropdown:hover .dropdown-menu,
+.dropdown.active .dropdown-menu,
+.dropdown-menu.show {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.dropdown-menu a {
+  width: 100%;
+  justify-content: flex-start;
+  border-radius: 14px;
+}

@@ -1,0 +1,906 @@
+/* DownloadPreview.css — universal download preview page (section 22) */
+
+/* ========================================================================
+   22. UNIVERSAL DOWNLOAD PREVIEW PAGE
+======================================================================== */
+
+.ldp-page,
+.ldp-not-found {
+  position: fixed;
+  inset: 0;
+  z-index: 100000;
+  min-height: 100vh;
+  color: #ffffff;
+  background:
+    radial-gradient(
+      circle at 18% 12%,
+      rgba(109, 93, 252, 0.22),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 86% 82%,
+      rgba(255, 95, 199, 0.18),
+      transparent 30%
+    ),
+    #070716;
+}
+
+.ldp-page {
+  overflow: auto;
+}
+
+.ldp-shell {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+}
+
+.ldp-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  min-height: 88px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 22px;
+  padding: 14px 28px;
+  background: rgba(8, 8, 22, 0.91);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.22);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.ldp-logo-meta {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.ldp-brand-icon {
+  width: 48px;
+  height: 48px;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 16px;
+  background:
+    linear-gradient(
+      135deg,
+      var(--primary),
+      var(--secondary)
+    );
+  box-shadow:
+    0 14px 34px rgba(109, 93, 252, 0.3);
+}
+
+.ldp-logo-title {
+  min-width: 0;
+}
+
+.ldp-logo-title h1 {
+  overflow: hidden;
+  color: #f8fafc;
+  font-size: clamp(1rem, 1.7vw, 1.2rem);
+  font-weight: 850;
+  line-height: 1.25;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ldp-logo-title p {
+  margin-top: 4px;
+  color: #94a3b8;
+  font-size: 0.87rem;
+  line-height: 1.4;
+}
+
+.ldp-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-right: 18px;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.ldp-toolbar-button,
+.ldp-close-button,
+.ldp-side-arrow {
+  display: grid;
+  place-items: center;
+  color: #e2e8f0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.055);
+  transition:
+    color 0.25s ease,
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease,
+    opacity 0.25s ease;
+}
+
+.ldp-toolbar-button,
+.ldp-close-button {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+}
+
+.ldp-toolbar-button:hover {
+  color: #ffffff;
+  background: rgba(109, 93, 252, 0.24);
+  border-color: rgba(139, 92, 246, 0.48);
+  transform: translateY(-2px);
+}
+
+.ldp-close-button {
+  border-radius: 999px;
+}
+
+.ldp-close-button:hover {
+  color: #ffffff;
+  background: #ef4444;
+  border-color: #ef4444;
+  transform: rotate(7deg);
+}
+
+.ldp-main-layout {
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 20px;
+  padding: 20px;
+}
+
+.ldp-stage {
+  position: relative;
+  min-width: 0;
+  min-height: calc(100vh - 128px);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  padding: 40px 70px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 30px;
+  background:
+    radial-gradient(
+      circle at 50% 12%,
+      rgba(109, 93, 252, 0.24),
+      transparent 36%
+    ),
+    radial-gradient(
+      circle at 88% 86%,
+      rgba(255, 95, 199, 0.15),
+      transparent 32%
+    ),
+    #0d0e20;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.045);
+}
+
+.ldp-side-arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 4;
+  width: 46px;
+  height: 46px;
+  border-radius: 999px;
+  transform: translateY(-50%);
+}
+
+.ldp-side-arrow-left {
+  left: 18px;
+}
+
+.ldp-side-arrow-right {
+  right: 18px;
+}
+
+.ldp-side-arrow:hover:not(:disabled) {
+  color: #ffffff;
+  background:
+    linear-gradient(
+      135deg,
+      var(--primary),
+      var(--secondary)
+    );
+  border-color: transparent;
+  transform: translateY(-50%) scale(1.06);
+}
+
+.ldp-side-arrow:disabled {
+  cursor: not-allowed;
+  opacity: 0.24;
+}
+
+.ldp-preview-card {
+  width: min(100%, 900px);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  border-radius: 30px;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(109, 93, 252, 0.96),
+      rgba(168, 85, 247, 0.95) 52%,
+      rgba(255, 95, 199, 0.94)
+    );
+  box-shadow:
+    0 36px 110px rgba(0, 0, 0, 0.42),
+    0 0 80px rgba(109, 93, 252, 0.16);
+  animation:
+    ldp-preview-enter
+    0.65s
+    cubic-bezier(0.22, 1, 0.36, 1)
+    both;
+}
+
+.ldp-preview-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 18px 24px;
+  background: rgba(7, 7, 22, 0.14);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+.ldp-preview-heading span {
+  color: rgba(255, 255, 255, 0.74);
+  font-size: 0.66rem;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ldp-preview-heading strong {
+  color: #ffffff;
+  font-size: 0.94rem;
+  text-align: right;
+}
+
+.ldp-preview-image {
+  min-height: 430px;
+  display: grid;
+  place-items: center;
+  padding: clamp(28px, 5vw, 62px);
+  background:
+    radial-gradient(
+      circle at top,
+      rgba(255, 255, 255, 0.16),
+      transparent 44%
+    ),
+    rgba(7, 7, 22, 0.08);
+}
+
+.ldp-preview-image img {
+  width: min(100%, 680px);
+  max-height: 60vh;
+  display: block;
+  object-fit: contain;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow:
+    0 24px 70px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.ldp-preview-features {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  padding: 22px 28px 26px;
+  background: rgba(7, 7, 22, 0.21);
+  border-top: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+.ldp-preview-features > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 11px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.ldp-preview-features svg {
+  flex: 0 0 auto;
+  color: #ffffff;
+}
+
+.ldp-preview-features span {
+  display: grid;
+  gap: 3px;
+  font-size: 0.66rem;
+  line-height: 1.35;
+}
+
+.ldp-preview-features strong {
+  color: #ffffff;
+  font-size: 0.8rem;
+}
+
+.ldp-download-panel {
+  align-self: start;
+  position: sticky;
+  top: 108px;
+  max-height: calc(100vh - 128px);
+  overflow-y: auto;
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 26px;
+  background: rgba(17, 18, 37, 0.95);
+  box-shadow:
+    0 26px 80px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  animation:
+    ldp-panel-enter
+    0.58s
+    0.08s
+    cubic-bezier(0.22, 1, 0.36, 1)
+    both;
+}
+
+.ldp-download-panel::-webkit-scrollbar {
+  width: 6px;
+}
+
+.ldp-download-panel::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.3);
+  border-radius: 999px;
+}
+
+.ldp-selected-file {
+  display: grid;
+  gap: 5px;
+  margin-bottom: 16px;
+}
+
+.ldp-selected-file > span,
+.ldp-format-title {
+  color: #94a3b8;
+  font-size: 0.66rem;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ldp-selected-file strong {
+  color: #ffffff;
+  font-size: 1.08rem;
+}
+
+.ldp-selected-file small {
+  color: #94a3b8;
+  line-height: 1.45;
+}
+
+.ldp-download-control {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 50px;
+  overflow: hidden;
+  border-radius: 15px;
+  box-shadow:
+    0 16px 34px rgba(109, 93, 252, 0.23);
+}
+
+.ldp-primary-download,
+.ldp-format-toggle {
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  background:
+    linear-gradient(
+      135deg,
+      var(--primary),
+      var(--secondary)
+    );
+}
+
+.ldp-primary-download {
+  gap: 9px;
+  padding: 0 20px;
+  font-size: 0.95rem;
+  font-weight: 900;
+}
+
+.ldp-primary-download:hover:not(:disabled) {
+  filter: brightness(1.08);
+}
+
+.ldp-primary-download:disabled {
+  cursor: wait;
+  opacity: 0.62;
+}
+
+.ldp-format-toggle {
+  border-left: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.ldp-format-toggle:hover {
+  filter: brightness(1.1);
+}
+
+.ldp-format-toggle svg {
+  transition: transform 0.25s ease;
+}
+
+.ldp-format-toggle svg.is-open {
+  transform: rotate(180deg);
+}
+
+.ldp-download-status {
+  margin-top: 12px;
+  padding: 10px 12px;
+  border-radius: 11px;
+  font-size: 0.75rem;
+  line-height: 1.45;
+}
+
+.ldp-download-status.is-loading {
+  color: #dbeafe;
+  background: rgba(59, 130, 246, 0.12);
+  border: 1px solid rgba(59, 130, 246, 0.24);
+}
+
+.ldp-download-status.is-success {
+  color: #bbf7d0;
+  background: rgba(34, 197, 94, 0.12);
+  border: 1px solid rgba(34, 197, 94, 0.24);
+}
+
+.ldp-download-status.is-error {
+  color: #fecaca;
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.24);
+}
+
+.ldp-format-menu {
+  display: grid;
+  gap: 9px;
+  margin-top: 16px;
+  padding: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 19px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.ldp-format-title {
+  padding: 0 4px 5px;
+}
+
+.ldp-format-item {
+  width: 100%;
+  min-height: 62px;
+  display: grid;
+  grid-template-columns: 38px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 11px;
+  padding: 9px 10px;
+  color: #dbe4f0;
+  text-align: left;
+  border: 1px solid transparent;
+  border-radius: 14px;
+  background: transparent;
+  transition:
+    background-color 0.22s ease,
+    border-color 0.22s ease,
+    transform 0.22s ease;
+}
+
+.ldp-format-item:hover {
+  background: rgba(255, 255, 255, 0.065);
+  border-color: rgba(255, 255, 255, 0.09);
+  transform: translateX(3px);
+}
+
+.ldp-format-item.is-selected {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(109, 93, 252, 0.19),
+      rgba(255, 95, 199, 0.11)
+    );
+  border-color: rgba(139, 92, 246, 0.35);
+}
+
+.ldp-format-icon {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  color: #ffffff;
+  border-radius: 12px;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(109, 93, 252, 0.86),
+      rgba(255, 95, 199, 0.78)
+    );
+}
+
+.ldp-format-copy {
+  min-width: 0;
+  display: grid;
+  gap: 3px;
+}
+
+.ldp-format-copy strong {
+  color: #ffffff;
+  font-size: 0.88rem;
+  font-weight: 850;
+}
+
+.ldp-format-copy small {
+  overflow: hidden;
+  color: #94a3b8;
+  font-size: 0.66rem;
+  line-height: 1.35;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ldp-format-badge {
+  padding: 5px 7px;
+  color: #ffffff;
+  background: #4f46e5;
+  border-radius: 6px;
+  font-size: 0.59rem;
+  font-weight: 850;
+}
+
+.ldp-format-check {
+  color: #8bffcb;
+}
+
+.ldp-about-logo {
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.ldp-about-logo h2 {
+  color: #ffffff;
+  font-size: 0.96rem;
+  font-weight: 850;
+}
+
+.ldp-about-logo p {
+  margin-top: 8px;
+  color: #94a3b8;
+  font-size: 0.82rem;
+  line-height: 1.65;
+}
+
+.ldp-logo-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 10px;
+}
+
+.ldp-logo-tags span {
+  padding: 6px 9px;
+  color: #ddd6fe;
+  background: rgba(109, 93, 252, 0.1);
+  border: 1px solid rgba(139, 92, 246, 0.22);
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 750;
+}
+
+.ldp-specification-list {
+  display: grid;
+  gap: 10px;
+  margin-top: 17px;
+  padding-top: 17px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.ldp-specification-list > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.ldp-specification-list span {
+  color: #94a3b8;
+  font-size: 0.74rem;
+}
+
+.ldp-specification-list strong {
+  color: #e2e8f0;
+  font-size: 0.74rem;
+  text-align: right;
+}
+
+.ldp-open-image {
+  width: 100%;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 18px;
+  color: #e9e7ff;
+  border: 1px solid rgba(139, 92, 246, 0.31);
+  border-radius: 13px;
+  background: rgba(109, 93, 252, 0.09);
+  font-size: 0.8rem;
+  font-weight: 800;
+  transition:
+    color 0.22s ease,
+    background-color 0.22s ease,
+    border-color 0.22s ease;
+}
+
+.ldp-open-image:hover {
+  color: #ffffff;
+  background: rgba(109, 93, 252, 0.19);
+  border-color: rgba(139, 92, 246, 0.52);
+}
+
+.ldp-not-found {
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.ldp-not-found-card {
+  width: min(100%, 540px);
+  padding: 50px 30px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.3);
+}
+
+.ldp-not-found-card h1 {
+  margin-top: 18px;
+  color: #ffffff;
+}
+
+.ldp-not-found-card p {
+  margin-top: 10px;
+  color: #94a3b8;
+  line-height: 1.6;
+}
+
+.ldp-return-button {
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 24px;
+  padding: 0 22px;
+  color: #ffffff;
+  border-radius: 999px;
+  background:
+    linear-gradient(
+      135deg,
+      var(--primary),
+      var(--secondary)
+    );
+  font-weight: 900;
+}
+
+@keyframes ldp-preview-enter {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.975);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes ldp-panel-enter {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ------------------------------------------------------------------------
+   UNIVERSAL DOWNLOAD PREVIEW — TABLET
+------------------------------------------------------------------------ */
+
+@media (max-width: 1024px) {
+  .ldp-main-layout {
+    grid-template-columns: minmax(0, 1fr) 290px;
+    gap: 14px;
+    padding: 14px;
+  }
+
+  .ldp-stage {
+    min-height: calc(100vh - 116px);
+    padding: 24px 62px;
+    border-radius: 24px;
+  }
+
+  .ldp-preview-image {
+    min-height: 360px;
+  }
+
+  .ldp-download-panel {
+    top: 102px;
+    max-height: calc(100vh - 116px);
+  }
+}
+
+/* ------------------------------------------------------------------------
+   UNIVERSAL DOWNLOAD PREVIEW — MOBILE
+------------------------------------------------------------------------ */
+
+@media (max-width: 768px) {
+  .ldp-topbar {
+    position: relative;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 12px;
+    padding: 12px;
+  }
+
+  .ldp-toolbar {
+    grid-column: 1 / -1;
+    justify-content: flex-start;
+    order: 3;
+    padding: 10px 0 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-right: 0;
+  }
+
+  .ldp-close-button {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .ldp-main-layout {
+    grid-template-columns: 1fr;
+    padding: 12px;
+  }
+
+  /*
+    Mobile content order:
+
+    1. Image/design preview
+    2. Selected file and download options
+
+    The desktop layout is unchanged.
+  */
+  .ldp-stage {
+    min-height: auto;
+    order: 1;
+    padding: 58px 14px 16px;
+  }
+
+  .ldp-download-panel {
+    position: static;
+    max-height: none;
+    order: 2;
+  }
+
+  .ldp-side-arrow {
+    top: 12px;
+    width: 40px;
+    height: 40px;
+    transform: none;
+  }
+
+  .ldp-side-arrow-left {
+    left: calc(50% - 48px);
+  }
+
+  .ldp-side-arrow-right {
+    right: calc(50% - 48px);
+  }
+
+  .ldp-side-arrow:hover:not(:disabled) {
+    transform: scale(1.05);
+  }
+
+  .ldp-preview-card {
+    border-radius: 16px;
+  }
+
+  .ldp-preview-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .ldp-preview-heading strong {
+    text-align: left;
+  }
+
+  .ldp-preview-image {
+    min-height: 280px;
+    padding: 22px;
+  }
+
+  .ldp-preview-image img {
+    max-height: 55vh;
+  }
+
+  .ldp-preview-features {
+    grid-template-columns: 1fr;
+  }
+
+  .ldp-preview-features > div {
+    justify-content: flex-start;
+  }
+}
+
+/* ------------------------------------------------------------------------
+   UNIVERSAL DOWNLOAD PREVIEW — SMALL MOBILE
+------------------------------------------------------------------------ */
+
+@media (max-width: 480px) {
+  .ldp-logo-title h1 {
+    max-width: 205px;
+  }
+
+  .ldp-logo-title p {
+    font-size: 0.75rem;
+  }
+
+  .ldp-brand-icon,
+  .ldp-toolbar-button,
+  .ldp-close-button {
+    width: 40px;
+    height: 40px;
+  }
+
+  .ldp-download-panel {
+    padding: 16px;
+    border-radius: 20px;
+  }
+
+  .ldp-preview-image {
+    min-height: 220px;
+    padding: 15px;
+  }
+
+  .ldp-preview-features {
+    padding: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .commission-spinner {
+    animation-duration: 1.8s;
+  }
+
+  .ldp-preview-card,
+  .ldp-download-panel {
+    animation: none;
+  }
+}
+
+/* ========================================================================
+   UNIVERSAL GALLERY DOWNLOAD BUTTON — DISABLED STATE
+======================================================================== */
+
+.logo-v2-download-btn:disabled,
+.pf-page-download-btn:disabled,
+.pd-page-download-btn:disabled,
+.smb-v2-download-btn:disabled,
+.bcd-page-download-btn:disabled {
+  opacity: 0.58;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}

@@ -1,0 +1,23 @@
+/* ServicePage.css — generic service detail page layout (section 09) */
+
+/* ========================================================================
+   09. SERVICE DETAIL PAGE
+======================================================================== */
+
+.service-detail-grid {
+  align-items: start;
+}
+
+.quote-card {
+  position: sticky;
+  top: 110px;
+  padding: 34px;
+}
+
+.quote-card .primary-btn {
+  margin-top: 24px;
+}
+
+.detail-list div {
+  align-items: flex-start;
+}

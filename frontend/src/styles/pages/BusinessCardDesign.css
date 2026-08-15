@@ -1,0 +1,560 @@
+/* BusinessCardDesign.css — business card design service page (section 18) */
+
+/* ========================================================================
+   18. BUSINESS CARD DESIGN SERVICE PAGE
+======================================================================== */
+
+.bcd-page-hero {
+  position: relative;
+  overflow: hidden;
+  padding: 100px 0;
+  color: var(--white);
+  background:
+    radial-gradient(circle at 16% 20%, rgba(109, 93, 252, 0.44), transparent 30%),
+    radial-gradient(circle at 84% 12%, rgba(255, 95, 199, 0.36), transparent 28%),
+    linear-gradient(135deg, #070716 0%, #15164a 55%, #080816 100%);
+}
+
+.bcd-page-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.055) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: linear-gradient(to bottom, #000, transparent 88%);
+}
+
+.bcd-page-hero-grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.bcd-page-hero-content h1 {
+  max-width: 820px;
+  font-size: clamp(3rem, 6.5vw, 5.8rem);
+  line-height: 0.94;
+  letter-spacing: -0.085em;
+  font-weight: 950;
+}
+
+.bcd-page-hero-content p {
+  max-width: 650px;
+  margin-top: 24px;
+  color: #cbd5e1;
+  font-size: 1.08rem;
+  line-height: 1.85;
+}
+
+.bcd-page-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 34px;
+}
+
+.bcd-page-hero-card {
+  padding: 38px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 36px 100px rgba(0, 0, 0, 0.32);
+  backdrop-filter: blur(22px);
+}
+
+.bcd-page-card-icon {
+  width: 74px;
+  height: 74px;
+  display: grid;
+  place-items: center;
+  color: var(--white);
+  border-radius: 24px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  box-shadow: 0 18px 44px rgba(109, 93, 252, 0.38);
+}
+
+.bcd-page-hero-card h3 {
+  margin-top: 26px;
+  font-size: 1.8rem;
+  line-height: 1.15;
+  letter-spacing: -0.045em;
+  font-weight: 950;
+}
+
+.bcd-page-hero-card p {
+  margin-top: 12px;
+  color: #cbd5e1;
+  line-height: 1.75;
+}
+
+.bcd-page-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 26px;
+}
+
+.bcd-page-tags span {
+  padding: 9px 13px;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+/* ----------------------------------------------------------
+   BUSINESS CARD — GALLERY
+---------------------------------------------------------- */
+
+.bcd-page-gallery-section {
+  padding: 92px 0;
+  background: #111111;
+}
+
+.bcd-page-heading {
+  max-width: 780px;
+  margin: 0 auto 48px;
+  text-align: center;
+}
+
+.bcd-page-heading h2 {
+  color: #0f172a;
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  line-height: 1.04;
+  letter-spacing: -0.058em;
+  font-weight: 950;
+}
+
+.bcd-page-gallery-section .bcd-page-heading h2 {
+  color: #ffffff;
+}
+
+.bcd-page-heading p {
+  margin-top: 16px;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.bcd-page-gallery-section .bcd-page-heading p {
+  color: #cbd5e1;
+}
+
+.bcd-page-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+}
+
+.bcd-page-card {
+  overflow: hidden;
+  border-radius: 16px;
+  background: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: 0.28s ease;
+}
+
+.bcd-page-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.28);
+}
+
+.bcd-page-image-wrap {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.bcd-page-image-wrap img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.bcd-page-card-content {
+  padding: 16px;
+}
+
+.bcd-page-card-info h3 {
+  color: #0f172a;
+  font-size: 0.98rem;
+  font-weight: 900;
+}
+
+.bcd-page-card-info span {
+  display: inline-flex;
+  margin-top: 8px;
+  padding: 7px 10px;
+  color: var(--primary-dark);
+  background: #f1f3ff;
+  border-radius: 999px;
+  font-size: 0.66rem;
+  font-weight: 900;
+}
+
+.bcd-page-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.bcd-page-preview-btn,
+.bcd-page-download-btn,
+.bcd-page-view-all-btn {
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 0 12px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 900;
+  transition: 0.25s ease;
+}
+
+.bcd-page-preview-btn {
+  color: #101828;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+}
+
+.bcd-page-preview-btn:hover {
+  color: var(--primary-dark);
+  background: #f1f3ff;
+  border-color: #c7d2fe;
+}
+
+.bcd-page-download-btn,
+.bcd-page-view-all-btn {
+  color: #ffffff;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  box-shadow: 0 12px 28px rgba(109, 93, 252, 0.22);
+}
+
+.bcd-page-download-btn:hover,
+.bcd-page-view-all-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 36px rgba(109, 93, 252, 0.32);
+}
+
+.bcd-page-view-all-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 42px;
+}
+
+.bcd-page-view-all-btn {
+  min-height: 50px;
+  padding: 0 26px;
+  font-size: 0.8rem;
+}
+
+/* ----------------------------------------------------------
+   BUSINESS CARD — PREVIEW MODAL
+---------------------------------------------------------- */
+
+.bcd-page-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(8, 8, 22, 0.84);
+  backdrop-filter: blur(12px);
+}
+
+.bcd-page-modal-box {
+  position: relative;
+  width: min(100%, 880px);
+  max-height: 92vh;
+  overflow: auto;
+  padding: 22px;
+  background: #ffffff;
+  border-radius: 30px;
+  box-shadow: 0 40px 120px rgba(0, 0, 0, 0.42);
+}
+
+.bcd-page-modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 3;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  color: #101828;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 999px;
+  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.16);
+}
+
+.bcd-page-modal-close:hover {
+  color: #ffffff;
+  background: #ef4444;
+  border-color: #ef4444;
+}
+
+.bcd-page-modal-image {
+  min-height: 430px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 24px;
+}
+
+.bcd-page-modal-image img {
+  width: 100%;
+  max-height: 72vh;
+  object-fit: contain;
+  display: block;
+}
+
+.bcd-page-modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin-top: 18px;
+}
+
+.bcd-page-modal-footer h3 {
+  color: #0f172a;
+  font-size: 1.25rem;
+  font-weight: 950;
+  letter-spacing: -0.03em;
+}
+
+.bcd-page-modal-footer p {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+/* ----------------------------------------------------------
+   BUSINESS CARD — SERVICE DETAILS
+---------------------------------------------------------- */
+
+.bcd-page-detail-section {
+  padding: 92px 0;
+  background: #ffffff;
+}
+
+.bcd-page-detail-grid {
+  display: grid;
+  grid-template-columns: 1.08fr 0.92fr;
+  gap: 58px;
+  align-items: start;
+}
+
+.bcd-page-detail-content h2 {
+  max-width: 680px;
+  color: #0f172a;
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  line-height: 1.04;
+  letter-spacing: -0.058em;
+  font-weight: 950;
+}
+
+.bcd-page-detail-content p {
+  max-width: 660px;
+  margin-top: 16px;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.bcd-page-benefit-list {
+  display: grid;
+  gap: 14px;
+  margin-top: 30px;
+}
+
+.bcd-page-benefit-list div {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  color: #344054;
+  font-weight: 800;
+  line-height: 1.6;
+}
+
+.bcd-page-benefit-list svg {
+  flex: 0 0 auto;
+  margin-top: 2px;
+  color: var(--primary-dark);
+}
+
+.bcd-page-quote-card {
+  position: sticky;
+  top: 110px;
+  padding: 34px;
+  background:
+    radial-gradient(circle at top right, rgba(255, 95, 199, 0.12), transparent 36%),
+    #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  box-shadow: var(--shadow);
+}
+
+.bcd-page-quote-card h3 {
+  color: #0f172a;
+  font-size: 1.6rem;
+  letter-spacing: -0.04em;
+  font-weight: 950;
+}
+
+.bcd-page-quote-card p {
+  margin-top: 12px;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+.bcd-page-quote-card .primary-btn {
+  margin-top: 24px;
+}
+
+/* ----------------------------------------------------------
+   BUSINESS CARD — PROCESS
+---------------------------------------------------------- */
+
+.bcd-page-process-section {
+  padding: 92px 0;
+  background:
+    radial-gradient(circle at 10% 10%, rgba(109, 93, 252, 0.08), transparent 30%),
+    #f8fafc;
+}
+
+.bcd-page-process-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.bcd-page-process-card {
+  padding: 30px;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  box-shadow: var(--shadow);
+}
+
+.bcd-page-process-icon {
+  width: 58px;
+  height: 58px;
+  display: grid;
+  place-items: center;
+  color: #ffffff;
+  border-radius: 19px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+}
+
+.bcd-page-process-card h3 {
+  margin-top: 16px;
+  color: #0f172a;
+  font-size: 1.22rem;
+  letter-spacing: -0.03em;
+  font-weight: 950;
+}
+
+.bcd-page-process-card p {
+  margin-top: 10px;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+/* ----------------------------------------------------------
+   BUSINESS CARD — RESPONSIVE
+---------------------------------------------------------- */
+
+/* Business Card: Tablet */
+@media (max-width: 1024px) {
+  .bcd-page-hero-grid,
+  .bcd-page-detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .bcd-page-gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .bcd-page-quote-card {
+    position: static;
+  }
+}
+
+/* Business Card: Mobile */
+@media (max-width: 768px) {
+  .bcd-page-hero {
+    padding: 70px 0;
+  }
+
+  .bcd-page-hero-content h1 {
+    font-size: 3.2rem;
+  }
+
+  .bcd-page-hero-actions {
+    flex-direction: column;
+  }
+
+  .bcd-page-hero-card {
+    padding: 28px;
+    border-radius: 26px;
+  }
+
+  .bcd-page-gallery-section,
+  .bcd-page-detail-section,
+  .bcd-page-process-section {
+    padding: 66px 0;
+  }
+
+  .bcd-page-gallery-grid,
+  .bcd-page-process-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .bcd-page-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .bcd-page-modal-overlay {
+    padding: 14px;
+  }
+
+  .bcd-page-modal-box {
+    padding: 16px;
+    border-radius: 16px;
+  }
+
+  .bcd-page-modal-close {
+    top: 12px;
+    right: 12px;
+  }
+
+  .bcd-page-modal-image {
+    min-height: 280px;
+    border-radius: 16px;
+  }
+
+  .bcd-page-modal-footer {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .bcd-page-modal-footer .bcd-page-download-btn {
+    width: 100%;
+  }
+}

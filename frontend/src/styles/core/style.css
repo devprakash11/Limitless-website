@@ -3,7 +3,6 @@
    Order matters: global first, then components, then pages. */
 
 @import "./global.css";
-@import "./style.css";
 
 /* Components */
 @import "./components/Navbar.css";

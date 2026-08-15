@@ -1,0 +1,88 @@
+/* About.css — about page (section 08) */
+
+/* ========================================================================
+   08. ABOUT PAGE
+======================================================================== */
+
+.about-grid,
+.contact-grid,
+.service-detail-grid {
+  display: grid;
+  grid-template-columns: 0.92fr 1.08fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.about-visual {
+  min-height: 470px;
+  display: grid;
+  place-items: center;
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 72% 18%, rgba(255, 95, 199, 0.24), transparent 30%),
+    linear-gradient(135deg, #101123, #191b54);
+}
+
+.about-card {
+  width: min(85%, 390px);
+  padding: 36px;
+  color: var(--white);
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.11);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(18px);
+}
+
+.about-card h3 {
+  margin-top: 18px;
+  font-size: 1.5rem;
+  letter-spacing: -0.03em;
+}
+
+.about-card p {
+  margin-top: 10px;
+  color: #cbd5e1;
+  line-height: 1.75;
+}
+
+.about-content p + p {
+  margin-top: 14px;
+}
+
+.about-points,
+.detail-list,
+.contact-list {
+  display: grid;
+  gap: 14px;
+  margin: 28px 0;
+}
+
+.about-points div,
+.detail-list div,
+.contact-list div {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #344054;
+  font-weight: 800;
+}
+
+.about-points svg,
+.detail-list svg,
+.contact-list svg {
+  color: var(--primary-dark);
+}
+
+.mission-section {
+  padding-top: 0;
+}
+
+.mission-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.mission-card {
+  padding: 30px;
+}

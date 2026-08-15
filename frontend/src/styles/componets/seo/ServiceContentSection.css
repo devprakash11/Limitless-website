@@ -1,0 +1,364 @@
+/* ServiceContentSection.css — shared SEO content, FAQ & related service sections (section 27) */
+
+/* ========================================================================
+   27. SHARED SEO CONTENT, FAQ & RELATED SERVICE SECTIONS
+======================================================================== */
+
+.ld-seo-content-section {
+  --ld-seo-accent: var(--primary, #6d5dfc);
+  --ld-seo-accent-soft: color-mix(
+    in srgb,
+    var(--ld-seo-accent) 10%,
+    transparent
+  );
+  --ld-seo-text: var(--text, #101828);
+  --ld-seo-muted: var(--muted, #667085);
+  --ld-seo-border: var(--border, #e5e7eb);
+  --ld-seo-surface: var(--white, #ffffff);
+  --ld-seo-soft-surface: var(--light, #f8fafc);
+
+  padding: clamp(70px, 8vw, 120px) 0;
+  background:
+    radial-gradient(
+      circle at top right,
+      var(--ld-seo-accent-soft),
+      transparent 34%
+    ),
+    var(--ld-seo-soft-surface);
+}
+
+.ld-seo-content-heading {
+  max-width: 900px;
+  margin-bottom: 40px;
+}
+
+.ld-seo-content-heading h2 {
+  max-width: 780px;
+  margin: 14px 0 18px;
+  color: var(--ld-seo-text);
+  font-size: clamp(2rem, 4vw, 3.6rem);
+  line-height: 1.08;
+  letter-spacing: -0.045em;
+}
+
+.ld-seo-content-intro {
+  display: grid;
+  gap: 12px;
+}
+
+.ld-seo-content-intro p {
+  margin: 0;
+  color: var(--ld-seo-muted);
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.ld-seo-content-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.ld-seo-info-card {
+  min-width: 0;
+  padding: clamp(24px, 3vw, 34px);
+  border: 1px solid var(--ld-seo-border);
+  border-radius: 24px;
+  background: var(--ld-seo-surface);
+  box-shadow: 0 16px 50px rgba(20, 20, 30, 0.06);
+}
+
+.ld-seo-info-icon {
+  display: inline-grid;
+  width: 44px;
+  height: 44px;
+  margin-bottom: 22px;
+  place-items: center;
+  border-radius: 14px;
+  color: var(--ld-seo-accent);
+  background: var(--ld-seo-accent-soft);
+}
+
+.ld-seo-info-card h3 {
+  margin: 0 0 12px;
+  color: var(--ld-seo-text);
+  font-size: 1.2rem;
+  line-height: 1.3;
+}
+
+.ld-seo-info-card > p {
+  margin: 0;
+  color: var(--ld-seo-muted);
+  line-height: 1.75;
+}
+
+.ld-seo-info-card ul {
+  display: grid;
+  gap: 10px;
+  margin: 20px 0 0;
+  padding: 18px 0 0;
+  border-top: 1px solid var(--ld-seo-border);
+  list-style: none;
+}
+
+.ld-seo-info-card li {
+  position: relative;
+  padding-left: 20px;
+  color: var(--ld-seo-muted);
+  font-size: 0.94rem;
+  line-height: 1.55;
+}
+
+.ld-seo-info-card li::before {
+  position: absolute;
+  top: 0.65em;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ld-seo-accent);
+  content: "";
+  transform: translateY(-50%);
+}
+
+.ld-seo-faq-block {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.7fr) minmax(0, 1.3fr);
+  gap: clamp(28px, 5vw, 70px);
+  margin-top: clamp(60px, 7vw, 90px);
+  padding-top: clamp(44px, 6vw, 70px);
+  border-top: 1px solid var(--ld-seo-border);
+}
+
+.ld-seo-faq-heading {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  color: var(--ld-seo-accent);
+}
+
+.ld-seo-faq-heading span,
+.ld-seo-related-heading span,
+.ld-seo-content-cta > div > span {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--ld-seo-accent);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.ld-seo-faq-heading h3,
+.ld-seo-related-heading h3,
+.ld-seo-content-cta h3 {
+  margin: 0;
+  color: var(--ld-seo-text);
+  font-size: clamp(1.35rem, 2.2vw, 2rem);
+  line-height: 1.25;
+}
+
+.ld-seo-faq-list {
+  display: grid;
+  gap: 12px;
+}
+
+.ld-seo-faq-list details {
+  overflow: hidden;
+  border: 1px solid var(--ld-seo-border);
+  border-radius: 16px;
+  background: var(--ld-seo-surface);
+}
+
+.ld-seo-faq-list summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 20px 22px;
+  color: var(--ld-seo-text);
+  font-weight: 750;
+  line-height: 1.45;
+  cursor: pointer;
+  list-style: none;
+}
+
+.ld-seo-faq-list summary::-webkit-details-marker {
+  display: none;
+}
+
+.ld-seo-faq-plus {
+  flex: 0 0 auto;
+  color: var(--ld-seo-accent);
+  font-size: 1.5rem;
+  font-weight: 400;
+  transition: transform 180ms ease;
+}
+
+.ld-seo-faq-list details[open] .ld-seo-faq-plus {
+  transform: rotate(45deg);
+}
+
+.ld-seo-faq-list details p {
+  margin: 0;
+  padding: 0 22px 22px;
+  color: var(--ld-seo-muted);
+  line-height: 1.75;
+}
+
+.ld-seo-related {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.65fr) minmax(0, 1.35fr);
+  gap: clamp(28px, 5vw, 70px);
+  margin-top: clamp(54px, 7vw, 84px);
+  padding-top: clamp(40px, 5vw, 60px);
+  border-top: 1px solid var(--ld-seo-border);
+}
+
+.ld-seo-related-heading {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  color: var(--ld-seo-accent);
+}
+
+.ld-seo-related-links {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.ld-seo-related-links a {
+  display: flex;
+  min-height: 70px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 20px;
+  border: 1px solid var(--ld-seo-border);
+  border-radius: 17px;
+  color: var(--ld-seo-text);
+  background: var(--ld-seo-surface);
+  font-weight: 750;
+  text-decoration: none;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.ld-seo-related-links a:hover {
+  border-color: var(--ld-seo-accent);
+  box-shadow: 0 14px 36px rgba(20, 20, 30, 0.08);
+  transform: translateY(-3px);
+}
+
+.ld-seo-content-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  margin-top: clamp(50px, 7vw, 80px);
+  padding: clamp(28px, 5vw, 52px);
+  border-radius: 24px;
+  color: #ffffff;
+  background:
+    linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--ld-seo-accent) 88%, #111111),
+      var(--ld-seo-accent)
+    );
+}
+
+.ld-seo-content-cta h3 {
+  color: inherit;
+}
+
+.ld-seo-content-cta > div > span {
+  color: rgba(255, 255, 255, 0.74);
+}
+
+.ld-seo-content-cta p {
+  max-width: 700px;
+  margin: 12px 0 0;
+  color: rgba(255, 255, 255, 0.82);
+  line-height: 1.6;
+}
+
+.ld-seo-content-cta-link {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 50px;
+  padding: 0 22px;
+  border-radius: 14px;
+  color: var(--ld-seo-text);
+  background: #ffffff;
+  font-weight: 800;
+  text-decoration: none;
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.ld-seo-content-cta-link:hover {
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.18);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 980px) {
+  .ld-seo-content-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ld-seo-faq-block,
+  .ld-seo-related {
+    grid-template-columns: 1fr;
+  }
+
+  .ld-seo-related-links {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .ld-seo-content-section {
+    padding: 64px 0;
+  }
+
+  .ld-seo-content-heading {
+    margin-bottom: 28px;
+  }
+
+  .ld-seo-info-card {
+    border-radius: 20px;
+  }
+
+  .ld-seo-faq-list summary {
+    padding: 18px;
+  }
+
+  .ld-seo-faq-list details p {
+    padding: 0 18px 18px;
+  }
+
+  .ld-seo-content-cta {
+    align-items: stretch;
+    flex-direction: column;
+    border-radius: 16px;
+  }
+
+  .ld-seo-content-cta-link {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ld-seo-faq-plus,
+  .ld-seo-related-links a,
+  .ld-seo-content-cta-link {
+    transition: none;
+  }
+}
