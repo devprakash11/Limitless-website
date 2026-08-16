@@ -4,24 +4,46 @@
    08. ABOUT PAGE
 ======================================================================== */
 
+/* ------------------------------------------------------------------------
+   MAIN ABOUT / CONTACT / SERVICE DETAIL GRID
+------------------------------------------------------------------------ */
+
 .about-grid,
 .contact-grid,
 .service-detail-grid {
   display: grid;
-  grid-template-columns: 0.92fr 1.08fr;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
   gap: 60px;
   align-items: center;
 }
+
+/* ------------------------------------------------------------------------
+   ABOUT VISUAL
+------------------------------------------------------------------------ */
 
 .about-visual {
   min-height: 470px;
   display: grid;
   place-items: center;
+  overflow: hidden;
+  padding: 30px;
   border-radius: 24px;
   background:
-    radial-gradient(circle at 72% 18%, rgba(255, 95, 199, 0.24), transparent 30%),
-    linear-gradient(135deg, #101123, #191b54);
+    radial-gradient(
+      circle at 72% 18%,
+      rgba(255, 95, 199, 0.24),
+      transparent 30%
+    ),
+    linear-gradient(
+      135deg,
+      #101123,
+      #191b54
+    );
 }
+
+/* ------------------------------------------------------------------------
+   ABOUT CARD
+------------------------------------------------------------------------ */
 
 .about-card {
   width: min(85%, 390px);
@@ -31,23 +53,41 @@
   background: rgba(255, 255, 255, 0.11);
   border: 1px solid rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.2);
 }
 
 .about-card h3 {
   margin-top: 18px;
+  color: var(--white);
   font-size: 1.5rem;
+  line-height: 1.2;
   letter-spacing: -0.03em;
 }
 
 .about-card p {
   margin-top: 10px;
   color: #cbd5e1;
+  font-size: 0.92rem;
   line-height: 1.75;
+}
+
+.about-content {
+  min-width: 0;
+}
+
+.about-content p {
+  color: #667085;
+  line-height: 1.8;
 }
 
 .about-content p + p {
   margin-top: 14px;
 }
+
+/* ------------------------------------------------------------------------
+   ABOUT / DETAIL / CONTACT POINTS
+------------------------------------------------------------------------ */
 
 .about-points,
 .detail-list,
@@ -55,23 +95,33 @@
   display: grid;
   gap: 14px;
   margin: 28px 0;
+  padding: 0;
+  list-style: none;
 }
 
 .about-points div,
 .detail-list div,
 .contact-list div {
+  min-width: 0;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 12px;
   color: #344054;
   font-weight: 800;
+  line-height: 1.5;
 }
 
 .about-points svg,
 .detail-list svg,
 .contact-list svg {
+  flex: 0 0 auto;
+  margin-top: 2px;
   color: var(--primary-dark);
 }
+
+/* ------------------------------------------------------------------------
+   MISSION
+------------------------------------------------------------------------ */
 
 .mission-section {
   padding-top: 0;
@@ -79,10 +129,281 @@
 
 .mission-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 22px;
 }
 
 .mission-card {
+  min-width: 0;
   padding: 30px;
+}
+
+/* ========================================================================
+   LARGE LAPTOP
+======================================================================== */
+
+@media (max-width: 1200px) {
+  .about-grid,
+  .contact-grid,
+  .service-detail-grid {
+    gap: 44px;
+  }
+
+  .about-visual {
+    min-height: 430px;
+    padding: 26px;
+  }
+
+  .about-card {
+    width: min(88%, 380px);
+    padding: 30px;
+  }
+
+  .mission-grid {
+    gap: 18px;
+  }
+
+  .mission-card {
+    padding: 26px;
+  }
+}
+
+/* ========================================================================
+   TABLET
+======================================================================== */
+
+@media (max-width: 991px) {
+  .about-grid,
+  .contact-grid,
+  .service-detail-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    align-items: stretch;
+  }
+
+  .about-visual {
+    min-height: 400px;
+    order: 1;
+  }
+
+  .about-content {
+    order: 2;
+  }
+
+  .about-card {
+    width: min(82%, 390px);
+    padding: 30px;
+  }
+
+  .about-content p {
+    font-size: 0.95rem;
+    line-height: 1.75;
+  }
+
+  .about-points,
+  .detail-list,
+  .contact-list {
+    gap: 12px;
+    margin: 24px 0;
+  }
+
+  .mission-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .mission-card {
+    padding: 26px;
+  }
+}
+
+/* ========================================================================
+   MOBILE
+======================================================================== */
+
+@media (max-width: 768px) {
+  .about-grid,
+  .contact-grid,
+  .service-detail-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .about-visual {
+    min-height: 330px;
+    padding: 22px;
+    border-radius: 22px;
+  }
+
+  .about-card {
+    width: min(92%, 360px);
+    padding: 24px;
+    border-radius: 22px;
+  }
+
+  .about-card h3 {
+    margin-top: 15px;
+    font-size: 1.3rem;
+  }
+
+  .about-card p {
+    margin-top: 8px;
+    font-size: 0.87rem;
+    line-height: 1.65;
+  }
+
+  .about-content p {
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+
+  .about-points,
+  .detail-list,
+  .contact-list {
+    gap: 11px;
+    margin: 22px 0;
+  }
+
+  .about-points div,
+  .detail-list div,
+  .contact-list div {
+    gap: 10px;
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+
+  .about-points svg,
+  .detail-list svg,
+  .contact-list svg {
+    width: 17px;
+    height: 17px;
+    margin-top: 2px;
+  }
+
+  .mission-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .mission-card {
+    padding: 23px;
+  }
+}
+
+/* ========================================================================
+   SMALL MOBILE
+======================================================================== */
+
+@media (max-width: 480px) {
+  .about-grid,
+  .contact-grid,
+  .service-detail-grid {
+    gap: 26px;
+  }
+
+  .about-visual {
+    min-height: 285px;
+    padding: 18px;
+    border-radius: 20px;
+  }
+
+  .about-card {
+    width: 94%;
+    padding: 20px;
+    border-radius: 19px;
+  }
+
+  .about-card h3 {
+    font-size: 1.16rem;
+  }
+
+  .about-card p {
+    font-size: 0.82rem;
+    line-height: 1.6;
+  }
+
+  .about-content p {
+    font-size: 0.85rem;
+    line-height: 1.65;
+  }
+
+  .about-points,
+  .detail-list,
+  .contact-list {
+    gap: 9px;
+    margin: 19px 0;
+  }
+
+  .about-points div,
+  .detail-list div,
+  .contact-list div {
+    gap: 8px;
+    font-size: 0.79rem;
+  }
+
+  .about-points svg,
+  .detail-list svg,
+  .contact-list svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .mission-card {
+    padding: 20px;
+    border-radius: 18px;
+  }
+}
+
+/* ========================================================================
+   VERY SMALL MOBILE
+======================================================================== */
+
+@media (max-width: 360px) {
+  .about-grid,
+  .contact-grid,
+  .service-detail-grid {
+    gap: 22px;
+  }
+
+  .about-visual {
+    min-height: 255px;
+    padding: 14px;
+  }
+
+  .about-card {
+    width: 96%;
+    padding: 18px;
+  }
+
+  .about-card h3 {
+    font-size: 1.08rem;
+  }
+
+  .about-card p {
+    font-size: 0.78rem;
+  }
+
+  .about-content p {
+    font-size: 0.81rem;
+  }
+
+  .about-points div,
+  .detail-list div,
+  .contact-list div {
+    font-size: 0.74rem;
+  }
+
+  .mission-card {
+    padding: 18px;
+  }
+}
+
+/* ========================================================================
+   ACCESSIBILITY
+======================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .about-card {
+    transition: none !important;
+  }
 }
