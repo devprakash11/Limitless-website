@@ -16,19 +16,19 @@ const liveProjects = [
     accent: "violet",
     tags: ["React", "Supabase", "QR Code", "Responsive"],
   },
-  {
-    id: "limitless-design",
-    title: "Limitless Design",
-    category: "Creative Design Studio",
-    description:
-      "A modern creative studio website for exploring design services, branding work, pricing, previews, and project enquiries.",
-    url: "https://limitlessdesign.vercel.app/",
-    thumbnail:
-      "https://image.thum.io/get/width/1600/crop/1000/https://limitlessdesign.vercel.app/",
-    badge: "Live",
-    accent: "blue",
-    tags: ["React", "UI/UX", "Responsive", "Vercel"],
-  },
+//   {
+//     id: "limitless-design",
+//     title: "Limitless Design",
+//     category: "Creative Design Studio",
+//     description:
+//       "A modern creative studio website for exploring design services, branding work, pricing, previews, and project enquiries.",
+//     url: "https://limitlessdesign.vercel.app/",
+//     thumbnail:
+//       "https://image.thum.io/get/width/1600/crop/1000/https://limitlessdesign.vercel.app/",
+//     badge: "Live",
+//     accent: "blue",
+//     tags: ["React", "UI/UX", "Responsive", "Vercel"],
+//   },
 ];
 
 function ProjectPreview({ project }) {
