@@ -4,21 +4,42 @@ import SEO from "../components/SEO";
 
 const liveProjects = [
   {
-  id: "digital-gate-pass",
-  title: "Digital Gate Pass",
-  category: "School Management System",
-  description:
-    "A digital gate pass system for managing student entry and exit securely through QR code verification, real-time status updates, and an admin dashboard.",
-  url: "https://pes-gate-pass.vercel.app/",
-  badge: "Live",
-  accent: "violet",
-  tags: ["React", "Supabase", "QR Code", "Responsive"],
-},
+    id: "digital-gate-pass",
+    title: "Digital Gate Pass",
+    category: "School Management System",
+    description:
+      "A smart digital gate pass platform that streamlines student entry and exit using QR code verification, secure tracking, and an admin dashboard.",
+    url: "https://pes-gate-pass.vercel.app/",
+    thumbnail:
+      "https://image.thum.io/get/width/1600/crop/1000/https://pes-gate-pass.vercel.app/",
+    badge: "Live",
+    accent: "violet",
+    tags: ["React", "Supabase", "QR Code", "Responsive"],
+  },
+  {
+    id: "limitless-design",
+    title: "Limitless Design",
+    category: "Creative Design Studio",
+    description:
+      "A modern creative studio website for exploring design services, branding work, pricing, previews, and project enquiries.",
+    url: "https://limitlessdesign.vercel.app/",
+    thumbnail:
+      "https://image.thum.io/get/width/1600/crop/1000/https://limitlessdesign.vercel.app/",
+    badge: "Live",
+    accent: "blue",
+    tags: ["React", "UI/UX", "Responsive", "Vercel"],
+  },
 ];
 
 function ProjectPreview({ project }) {
   return (
-    <div className={`live-project-preview live-project-preview-${project.accent}`}>
+    <a
+      className={`live-project-preview live-project-preview-${project.accent}`}
+      href={project.url}
+      target="_blank"
+      rel="noreferrer"
+      aria-label={`Open ${project.title} live project`}
+    >
       <div className="live-project-browserbar">
         <div className="live-project-window-dots" aria-hidden="true">
           <span />
@@ -33,12 +54,11 @@ function ProjectPreview({ project }) {
       </div>
 
       <div className="live-project-screen">
-        <iframe
-          className="live-project-iframe"
-          src={project.url}
-          title={`${project.title} live preview`}
+        <img
+          className="live-project-thumbnail"
+          src={project.thumbnail}
+          alt={`${project.title} website preview`}
           loading="lazy"
-          allow="fullscreen"
         />
         <div className="live-project-screen-overlay" aria-hidden="true" />
         <div className="live-project-live-label">
@@ -46,7 +66,7 @@ function ProjectPreview({ project }) {
           Live preview
         </div>
       </div>
-    </div>
+    </a>
   );
 }
 
@@ -80,7 +100,7 @@ function LiveProjects() {
           <div className="live-projects-toolbar" aria-label="Live project summary">
             <div>
               <strong>{liveProjects.length}</strong>
-              <span>live project{liveProjects.length === 1 ? "" : "s"}</span>
+              <span>live projects</span>
             </div>
             <div>
               <strong>100%</strong>
