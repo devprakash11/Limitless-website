@@ -19,6 +19,7 @@ import "./styles/pages/BusinessCardDesign.css";
 import "./styles/pages/Contact.css";
 import "./styles/pages/DownloadPreview.css";
 import "./styles/pages/Home.css";
+import "./styles/pages/LiveProjects.css";
 import "./styles/pages/LogoDesign.css";
 import "./styles/pages/PhotoFrame.css";
 import "./styles/pages/PosterDesign.css";
