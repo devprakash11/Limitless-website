@@ -4,16 +4,16 @@ import SEO from "../components/SEO";
 
 const liveProjects = [
   {
-    id: "limitless-design",
-    title: "Limitless Design",
-    category: "Creative Design Studio",
-    description:
-      "A modern design studio website for discovering creative services, design previews, branding work, pricing, and project enquiries.",
-    url: "https://limitlessdesign.vercel.app/",
-    badge: "Live",
-    accent: "violet",
-    tags: ["React", "Responsive", "UI/UX"],
-  },
+  id: "digital-gate-pass",
+  title: "Digital Gate Pass",
+  category: "School Management System",
+  description:
+    "A digital gate pass system for managing student entry and exit securely through QR code verification, real-time status updates, and an admin dashboard.",
+  url: "https://pes-gate-pass.vercel.app/",
+  badge: "Live",
+  accent: "violet",
+  tags: ["React", "Supabase", "QR Code", "Responsive"],
+},
 ];
 
 function ProjectPreview({ project }) {
