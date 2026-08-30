@@ -33,16 +33,17 @@ function ProjectPreview({ project }) {
       </div>
 
       <div className="live-project-screen">
-        <div className="live-project-screen-glow" />
-        <div className="live-project-screen-content">
-          <span className="live-project-screen-kicker">LIVE PROJECT</span>
-          <strong>{project.title}</strong>
-          <small>{project.category}</small>
-          <div className="live-project-screen-lines" aria-hidden="true">
-            <span />
-            <span />
-            <span />
-          </div>
+        <iframe
+          className="live-project-iframe"
+          src={project.url}
+          title={`${project.title} live preview`}
+          loading="lazy"
+          allow="fullscreen"
+        />
+        <div className="live-project-screen-overlay" aria-hidden="true" />
+        <div className="live-project-live-label">
+          <span />
+          Live preview
         </div>
       </div>
     </div>
