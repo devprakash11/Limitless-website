@@ -23,6 +23,7 @@ import BrandingMaterialView from "./pages/BrandingMaterialView";
 import DownloadPreview from "./pages/DownloadPreview";
 import Price from "./pages/price";
 import UIDesign from "./pages/UIDesign";
+import LiveProjects from "./pages/LiveProjects";
 
 import NotFound from "./pages/NotFound";
 
@@ -55,6 +56,11 @@ function App() {
       <Route
         path="/contact"
         element={<Contact />}
+      />
+
+      <Route
+        path="/live-projects"
+        element={<LiveProjects />}
       />
 
       <Route
