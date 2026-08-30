@@ -29,7 +29,8 @@
 }
 
 .live-projects-status-dot,
-.live-project-badge span {
+.live-project-badge span,
+.live-project-live-label span {
   width: 8px;
   height: 8px;
   border-radius: 50%;
@@ -121,6 +122,7 @@
 
 .live-project-preview {
   position: relative;
+  display: block;
   min-height: 330px;
   padding: 18px;
   overflow: hidden;
@@ -143,6 +145,13 @@
     radial-gradient(circle at 80% 18%, rgba(255, 95, 199, 0.33), transparent 30%),
     radial-gradient(circle at 20% 72%, rgba(54, 216, 255, 0.20), transparent 32%),
     linear-gradient(145deg, #090a1b, #19134a 62%, #25105c);
+}
+
+.live-project-preview-blue {
+  background:
+    radial-gradient(circle at 82% 16%, rgba(59, 130, 246, 0.34), transparent 30%),
+    radial-gradient(circle at 18% 76%, rgba(34, 211, 238, 0.20), transparent 32%),
+    linear-gradient(145deg, #07111f, #102b54 62%, #12396a);
 }
 
 .live-project-browserbar {
@@ -194,10 +203,10 @@
 .live-project-screen {
   position: absolute;
   z-index: 1;
-  left: 11%;
-  right: 11%;
-  bottom: 28px;
-  min-height: 220px;
+  left: 8%;
+  right: 8%;
+  bottom: 18px;
+  height: 248px;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 22px;
@@ -205,23 +214,25 @@
   box-shadow: 0 24px 70px rgba(0, 0, 0, 0.3);
 }
 
-.live-project-iframe {
+.live-project-thumbnail {
   display: block;
   width: 100%;
-  height: 310px;
-  border: 0;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
   background: #ffffff;
-  transform: scale(0.86);
-  transform-origin: top left;
-  width: 116.28%;
-  height: 360px;
+  transition: transform 0.45s ease;
+}
+
+.live-project-preview:hover .live-project-thumbnail {
+  transform: scale(1.035);
 }
 
 .live-project-screen-overlay {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: linear-gradient(180deg, rgba(8, 10, 27, 0.02) 0%, rgba(8, 10, 27, 0.03) 62%, rgba(8, 10, 27, 0.26) 100%);
+  background: linear-gradient(180deg, rgba(8, 10, 27, 0.03) 0%, rgba(8, 10, 27, 0.04) 55%, rgba(8, 10, 27, 0.35) 100%);
 }
 
 .live-project-live-label {
@@ -246,9 +257,6 @@
 .live-project-live-label span {
   width: 7px;
   height: 7px;
-  border-radius: 50%;
-  background: #22c55e;
-  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.12);
 }
 
 .live-project-card-body {
@@ -418,14 +426,10 @@
   }
 
   .live-project-screen {
-    left: 7%;
-    right: 7%;
-    bottom: 20px;
-    min-height: 190px;
-  }
-
-  .live-project-iframe {
-    height: 300px;
+    left: 6%;
+    right: 6%;
+    bottom: 16px;
+    height: 214px;
   }
 
   .live-project-actions,
@@ -452,5 +456,15 @@
 
   .live-project-category {
     text-align: left;
+  }
+
+  .live-project-preview {
+    padding: 14px;
+  }
+
+  .live-project-screen {
+    left: 4%;
+    right: 4%;
+    height: 205px;
   }
 }
