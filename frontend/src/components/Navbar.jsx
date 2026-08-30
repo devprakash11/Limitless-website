@@ -283,6 +283,19 @@ function Navbar() {
               </div>
             </div>
 
+            {/* Live Projects */}
+            <NavLink
+              to="/live-projects"
+              onClick={closeMenu}
+              className={({ isActive }) =>
+                isActive
+                  ? "nav-link active"
+                  : "nav-link"
+              }
+            >
+              Live Projects
+            </NavLink>
+
             {/* Pricing Page */}
             <NavLink
               to="/price"
