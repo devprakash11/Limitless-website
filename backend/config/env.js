@@ -1,3 +1,4 @@
+import "dotenv/config";
 import { z } from "zod";
 
 const schema = z.object({
@@ -15,7 +16,12 @@ export const env = schema.parse(process.env);
 
 export const allowedOrigins = [
   env.FRONTEND_URL,
-  ...env.ALLOWED_ORIGINS.split(",").map((value) => value.trim()).filter(Boolean),
+  ...env.ALLOWED_ORIGINS
+    .split(",")
+    .map((value) => value.trim())
+    .filter(Boolean),
 ];
 
-export const mailConfigured = Boolean(env.GMAIL_USER && env.GMAIL_APP_PASSWORD);
+export const mailConfigured = Boolean(
+  env.GMAIL_USER && env.GMAIL_APP_PASSWORD,
+);
