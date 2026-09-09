@@ -11,8 +11,12 @@ export async function listRows(table, { select = "*", filters = {}, order = "cre
   return { data, count, limit, offset };
 }
 
-export async function getRow(table, id, select = "*") {
-  const { data, error } = await supabaseAdmin.from(table).select(select).eq("id", id).maybeSingle();
+export async function getRow(table, id, select = "*", filters = {}) {
+  let query = supabaseAdmin.from(table).select(select).eq("id", id);
+  for (const [key, value] of Object.entries(filters)) {
+    if (value !== undefined && value !== null && value !== "") query = query.eq(key, value);
+  }
+  const { data, error } = await query.maybeSingle();
   if (error) throw error;
   return data;
 }
