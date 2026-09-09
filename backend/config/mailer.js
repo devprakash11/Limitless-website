@@ -2,33 +2,23 @@ import nodemailer from "nodemailer";
 
 let transporter;
 
-function getRequiredEnvironmentVariable(name) {
-  const value = process.env[name];
-
-  if (!value) {
-    throw new Error(`Missing required environment variable: ${name}`);
-  }
-
-  return value;
+export function getMailAccount() {
+  return process.env.GMAIL_USER || "";
 }
 
-export function getMailAccount() {
-  return getRequiredEnvironmentVariable("GMAIL_USER");
+export function isMailConfigured() {
+  return Boolean(process.env.GMAIL_USER && process.env.GMAIL_APP_PASSWORD);
 }
 
 export function getMailer() {
-  if (transporter) {
-    return transporter;
-  }
-
-  const user = getMailAccount();
-  const pass = getRequiredEnvironmentVariable("GMAIL_APP_PASSWORD");
+  if (!isMailConfigured()) return null;
+  if (transporter) return transporter;
 
   transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user,
-      pass,
+      user: process.env.GMAIL_USER,
+      pass: process.env.GMAIL_APP_PASSWORD,
     },
   });
 
