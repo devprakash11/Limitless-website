@@ -22,7 +22,7 @@ export function resourceRouter(table, { createSchema, updateSchema, adminOnly = 
 
   router.get("/:id", ...readGuard, async (req, res, next) => {
     try {
-      const row = await getRow(table, idSchema.parse(req.params.id));
+      const row = await getRow(table, idSchema.parse(req.params.id), "*", publicFilters);
       if (!row) return res.status(404).json({ success: false, message: "Record not found" });
       ok(res, row);
     } catch (e) { next(e); }
