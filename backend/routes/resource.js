@@ -1,41 +1,38 @@
 import { Router } from "express";
 import { z } from "zod";
-import { requireAuth, requireRoles } from "../middleware/auth.js";
-import { created, ok } from "../utils/api.js";
-import { deleteRow, getRow, insertRow, listRows, updateRow } from "../services/database.js";
+import { ok } from "../utils/api.js";
+import { getRow, listRows } from "../services/database.js";
 
 const idSchema = z.string().uuid();
 
-export function resourceRouter(table, { createSchema, updateSchema, adminOnly = true, publicRead = true, publicFilters = {} } = {}) {
+export function resourceRouter(table, { publicRead = true, publicFilters = {} } = {}) {
   const router = Router();
-  const guard = adminOnly ? [requireAuth, requireRoles("SUPER_ADMIN", "ADMIN", "STAFF")] : [requireAuth];
-  const readGuard = publicRead ? [] : guard;
+  const readGuard = publicRead
+    ? []
+    : [(_req, res) => res.status(403).json({ success: false, message: "Access denied" })];
 
   router.get("/", ...readGuard, async (req, res, next) => {
     try {
-      const filters = { ...publicFilters };
-      if (req.query.status) filters.status = req.query.status;
-      const result = await listRows(table, { filters, limit: Math.min(Number(req.query.limit) || 50, 100), offset: Math.max(Number(req.query.offset) || 0, 0) });
-      ok(res, result);
-    } catch (e) { next(e); }
+      const limitValue = Number(req.query.limit);
+      const offsetValue = Number(req.query.offset);
+      const limit = Number.isFinite(limitValue) ? Math.min(Math.max(Math.trunc(limitValue), 1), 100) : 50;
+      const offset = Number.isFinite(offsetValue) ? Math.max(Math.trunc(offsetValue), 0) : 0;
+      const result = await listRows(table, { filters: { ...publicFilters }, limit, offset });
+      return ok(res, result);
+    } catch (error) {
+      return next(error);
+    }
   });
 
   router.get("/:id", ...readGuard, async (req, res, next) => {
     try {
       const row = await getRow(table, idSchema.parse(req.params.id), "*", publicFilters);
       if (!row) return res.status(404).json({ success: false, message: "Record not found" });
-      ok(res, row);
-    } catch (e) { next(e); }
+      return ok(res, row);
+    } catch (error) {
+      return next(error);
+    }
   });
 
-  router.post("/", ...guard, async (req, res, next) => {
-    try { created(res, await insertRow(table, createSchema ? createSchema.parse(req.body) : req.body)); } catch (e) { next(e); }
-  });
-  router.patch("/:id", ...guard, async (req, res, next) => {
-    try { ok(res, await updateRow(table, idSchema.parse(req.params.id), updateSchema ? updateSchema.parse(req.body) : req.body), "Updated successfully"); } catch (e) { next(e); }
-  });
-  router.delete("/:id", ...guard, async (req, res, next) => {
-    try { await deleteRow(table, idSchema.parse(req.params.id)); ok(res, null, "Deleted successfully"); } catch (e) { next(e); }
-  });
   return router;
 }
