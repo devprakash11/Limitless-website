@@ -19,11 +19,9 @@ adminRouter.get("/dashboard", async (req, res, next) => {
     ok(res, Object.fromEntries(tables.map((t, i) => [t, results[i].count || 0])));
   } catch (e) { next(e); }
 });
-
 adminRouter.get("/profiles", async (req, res, next) => {
   try { ok(res, await listRows("profiles", { limit: Math.min(Number(req.query.limit) || 50, 100), offset: Math.max(Number(req.query.offset) || 0, 0) })); } catch (e) { next(e); }
 });
-
 adminRouter.patch("/profiles/:id/role", async (req, res, next) => {
   try {
     const role = z.enum(["SUPER_ADMIN","ADMIN","STAFF","CLIENT"]).parse(req.body.role);
@@ -31,26 +29,25 @@ adminRouter.patch("/profiles/:id/role", async (req, res, next) => {
     ok(res, await updateRow("profiles", z.string().uuid().parse(req.params.id), { role }), "Role updated");
   } catch (e) { next(e); }
 });
-
 adminRouter.post("/invoices", async (req, res, next) => {
   try { created(res, await insertRow("invoices", invoiceSchema.parse(req.body))); } catch (e) { next(e); }
 });
 adminRouter.post("/payments", async (req, res, next) => {
   try { created(res, await insertRow("payments", paymentSchema.parse(req.body))); } catch (e) { next(e); }
 });
-
 adminRouter.get("/enquiries", async (req, res, next) => {
   try { ok(res, await listRows("contact_enquiries", { filters: req.query.status ? { status: req.query.status } : {}, limit: 100 })); } catch (e) { next(e); }
 });
 adminRouter.patch("/enquiries/:id", async (req, res, next) => {
   try { ok(res, await updateRow("contact_enquiries", z.string().uuid().parse(req.params.id), { status: z.enum(["NEW","CONTACTED","IN_PROGRESS","CONVERTED","CLOSED"]).parse(req.body.status) }), "Enquiry updated"); } catch (e) { next(e); }
 });
-
 adminRouter.post("/users/invite", requireRoles("SUPER_ADMIN"), async (req, res, next) => {
   try {
     const input = z.object({ email: z.string().email(), full_name: text(160), role: z.enum(["ADMIN","STAFF","CLIENT"]).default("CLIENT") }).parse(req.body);
-    const { data, error } = await supabaseAdmin.auth.admin.inviteUserByEmail(input.email, { data: { full_name: input.full_name, role: input.role } });
+    const { data, error } = await supabaseAdmin.auth.admin.inviteUserByEmail(input.email, { data: { full_name: input.full_name } });
     if (error) throw error;
-    created(res, data.user, "Invitation sent");
+    const { data: profile, error: profileError } = await supabaseAdmin.from("profiles").upsert({ id: data.user.id, full_name: input.full_name, role: input.role }, { onConflict: "id" }).select().single();
+    if (profileError) throw profileError;
+    created(res, { user: data.user, profile }, "Invitation sent");
   } catch (e) { next(e); }
 });
