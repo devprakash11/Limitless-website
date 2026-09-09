@@ -4,10 +4,6 @@ import { BrowserRouter } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 
 import App from "./App";
-// import "./styles/global.css";
-// import "./styles/pages.css";
-// import "./styles/pagesService.css";
-// import "./styles/components.css";
 import "./styles/global.css";
 import "./styles/componets/seo/ServiceContentSection.css";
 import "./styles/componets/DiscountPopup.css";
@@ -29,16 +25,11 @@ import "./styles/pages/SocialMediaBanner.css";
 import "./styles/pages/UIDesign.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  // <React.StrictMode>
-  //   <BrowserRouter>
-  //     <App />
-  //   </BrowserRouter>
-  // </React.StrictMode>
   <React.StrictMode>
     <HelmetProvider>
       <BrowserRouter>
         <App />
       </BrowserRouter>
     </HelmetProvider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );
