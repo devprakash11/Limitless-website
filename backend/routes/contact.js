@@ -14,12 +14,33 @@ const schema = z.object({
 });
 
 export const contactRouter = Router();
+
 contactRouter.post("/", async (req, res, next) => {
   try {
     const data = schema.parse(req.body);
+
+    // Honeypot field: silently accept obvious bot submissions.
     if (data.website) return created(res, null, "Thank you");
-    const contact = await insertRow("contact_enquiries", { name: data.name, email: data.email, phone: data.phone, service: data.service, message: data.message, status: "NEW" });
-    await sendProjectRequirementEmails(data);
-    created(res, { id: contact.id }, "Your enquiry has been received");
-  } catch (e) { next(e); }
+
+    const contact = await insertRow("contact_enquiries", {
+      name: data.name,
+      email: data.email,
+      phone: data.phone,
+      service: data.service,
+      message: data.message,
+      status: "NEW",
+    });
+
+    // The enquiry is already stored successfully. Email delivery should not
+    // make the website report a failed form submission.
+    try {
+      await sendProjectRequirementEmails(data);
+    } catch (emailError) {
+      console.error("Contact notification email failed:", emailError);
+    }
+
+    return created(res, { id: contact.id }, "Your enquiry has been received");
+  } catch (e) {
+    next(e);
+  }
 });
