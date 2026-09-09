@@ -1,0 +1,23 @@
+/* Client-side media protection. This is deterrence, not DRM. */
+
+img,
+picture img,
+.protected-media,
+.protected-media img {
+  -webkit-user-drag: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+.protected-media {
+  -webkit-user-drag: none;
+}
+
+@media print {
+  /* Avoid intentionally exposing protected media through browser printing. */
+  .protected-media,
+  .protected-media img {
+    visibility: hidden !important;
+  }
+}
