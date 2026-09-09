@@ -6,9 +6,12 @@ import { deleteRow, getRow, insertRow, listRows, updateRow } from "../services/d
 
 const idSchema = z.string().uuid();
 
-export function resourceRouter(table, { createSchema, updateSchema, adminOnly = true, publicFilters = {} } = {}) {
+export function resourceRouter(table, { createSchema, updateSchema, adminOnly = true, publicRead = true, publicFilters = {} } = {}) {
   const router = Router();
-  router.get("/", async (req, res, next) => {
+  const guard = adminOnly ? [requireAuth, requireRoles("SUPER_ADMIN", "ADMIN", "STAFF")] : [requireAuth];
+  const readGuard = publicRead ? [] : guard;
+
+  router.get("/", ...readGuard, async (req, res, next) => {
     try {
       const filters = { ...publicFilters };
       if (req.query.status) filters.status = req.query.status;
@@ -16,15 +19,15 @@ export function resourceRouter(table, { createSchema, updateSchema, adminOnly = 
       ok(res, result);
     } catch (e) { next(e); }
   });
-  router.get("/:id", async (req, res, next) => {
+
+  router.get("/:id", ...readGuard, async (req, res, next) => {
     try {
-      const id = idSchema.parse(req.params.id);
-      const row = await getRow(table, id);
+      const row = await getRow(table, idSchema.parse(req.params.id));
       if (!row) return res.status(404).json({ success: false, message: "Record not found" });
       ok(res, row);
     } catch (e) { next(e); }
   });
-  const guard = adminOnly ? [requireAuth, requireRoles("SUPER_ADMIN", "ADMIN", "STAFF")] : [requireAuth];
+
   router.post("/", ...guard, async (req, res, next) => {
     try { created(res, await insertRow(table, createSchema ? createSchema.parse(req.body) : req.body)); } catch (e) { next(e); }
   });
