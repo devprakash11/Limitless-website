@@ -52,7 +52,7 @@ function Footer() {
             aria-label="Go to Limitless Design home page"
           >
             <img
-              src="/logo-white.png"
+              src="https://res.cloudinary.com/orfe5dmh/image/upload/v1788939270/logo-white.png"
               alt="Limitless Design Logo"
               className="footer-logo"
             />

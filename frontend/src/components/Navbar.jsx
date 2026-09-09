@@ -154,7 +154,7 @@ function Navbar() {
           aria-label="Go to Limitless Design home page"
         >
           <img
-            src="/images/logo.webp"
+            src="https://res.cloudinary.com/orfe5dmh/image/upload/v1788939269/logo.webp"
             alt="Limitless Design Logo"
             className="brand-logo"
           />

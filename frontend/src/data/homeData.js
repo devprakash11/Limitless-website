@@ -50,39 +50,39 @@ export const heroStats = [
 export const trustedCustomers = [
   {
     name: "Flazetech",
-    logo: "/trusted-customers/flazetech.webp",
+    logo: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788939746/flazetech.webp",
   },
   {
     name: "Hack2Skill",
-    logo: "/trusted-customers/hacktoskill.webp",
+    logo: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788939746/hacktoskill.webp",
   },
   {
     name: "Instahyre",
-    logo: "/trusted-customers/instahyer.webp",
+    logo: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788939747/instahyer.webp",
   },
   {
     name: "Officiel CRM",
-    logo: "/trusted-customers/officielcrm.webp",
+    logo: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788939747/officielcrm.webp",
   },
   {
     name: "Polytechnic English School",
-    logo: "/trusted-customers/pes.webp",
+    logo: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788939746/pes.webp",
   },
   {
     name: "Sri Aurobindo Society Rupantar",
-    logo: "/trusted-customers/rupantar.webp",
+    logo: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788939747/rupantar.webp",
   },
   {
     name: "Shoopy",
-    logo: "/trusted-customers/shoopy.webp",
+    logo: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788939747/shoopy.webp",
   },
   {
     name: "SIA Graphics",
-    logo: "/trusted-customers/siagraphics.webp",
+    logo: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788939749/siagraphics.webp",
   },
   {
     name: "WarnHack",
-    logo: "/trusted-customers/warnhack.webp",
+    logo: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788939749/warnhack.webp",
   },
 ];
 

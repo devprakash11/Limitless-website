@@ -312,167 +312,167 @@ export const createBrandingMaterialAsset = makeCategoryCreator(
 export const logoDownloads = [
   createLogoAsset({
     title: "Animalia Logo",
-    image: "/images/logo-design/animalia.webp",
+    image: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788940855/animalia.webp",
     tags: ["Animal Brand", "Mascot", "Modern Identity"],
   }),
   createLogoAsset({
     title: "Black Hat Logo",
-    image: "/images/logo-design/balck-hat.webp",
+    image: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788940855/balck-hat.webp",
     tags: ["Fashion", "Dark Identity", "Premium"],
   }),
   createLogoAsset({
     title: "Bear Chat Logo",
-    image: "/images/logo-design/bearchat.webp",
+    image: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788940855/bearchat.webp",
     tags: ["Chat Brand", "Bear Mascot", "Friendly"],
   }),
   createLogoAsset({
     title: "Bird Logo",
-    image: "/images/logo-design/bird.webp",
+    image: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788940856/bird.webp",
     tags: ["Bird Mark", "Minimal", "Creative"],
   }),
   createLogoAsset({
     title: "Bishop Logo",
-    image: "/images/logo-design/bishop-logo.webp",
+    image: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788940855/bishop-logo.webp",
     tags: ["Chess Identity", "Professional", "Symbol Mark"],
   }),
   createLogoAsset({
     title: "C&C Logo",
-    image: "/images/logo-design/C&C-logo.webp",
+    image: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788940862/C_C-logo.webp",
     tags: ["Letter Mark", "Corporate", "Clean"],
   }),
   createLogoAsset({
     title: "Chicken Tikka Logo",
-    image: "/images/logo-design/chicken-tikka.webp",
+    image: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788940855/chicken-tikka.webp",
     tags: ["Restaurant", "Food Brand", "Mascot"],
   }),
   createLogoAsset({
     title: "Chrunchy Logo",
-    image: "/images/logo-design/chrunchy.webp",
+    image: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788940855/chrunchy.webp",
     tags: ["Snack Brand", "Food Identity", "Bold"],
   }),
   createLogoAsset({
     title: "Clay Human Logo",
-    image: "/images/logo-design/clay-human.webp",
+    image: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788940856/clay-human.webp",
     tags: ["Human Figure", "Art Brand", "Creative"],
   }),
   createLogoAsset({
     title: "Dance Logo",
-    image: "/images/logo-design/dance-logo.webp",
+    image: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788940856/dance-logo.webp",
     tags: ["Dance Studio", "Movement", "Elegant"],
   }),
   createLogoAsset({
     title: "Data Location Logo",
-    image: "/images/logo-design/data-loacation-logo.webp",
+    image: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788940856/data-loacation-logo.webp",
     tags: ["Technology", "Location", "Data Brand"],
   }),
   createLogoAsset({
     title: "Digital Library Logo",
-    image: "/images/logo-design/digtal-library-logo.webp",
+    image: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788940856/digtal-library-logo.webp",
     tags: ["Education", "Digital Library", "Knowledge"],
   }),
   createLogoAsset({
     title: "Dott Logo",
-    image: "/images/logo-design/Dott-logo.webp",
+    image: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788940856/Dott-logo.webp",
     tags: ["Minimal", "Dot Mark", "Modern"],
   }),
   createLogoAsset({
     title: "Dragonoid Logo",
-    image: "/images/logo-design/dragonoid-logo.webp",
+    image: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788940856/dragonoid-logo.webp",
     tags: ["Dragon Mascot", "Gaming", "Bold"],
   }),
   createLogoAsset({
     title: "Drive Com Logo",
-    image: "/images/logo-design/drive-com.webp",
+    image: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788940855/drive-com.webp",
     tags: ["Automotive", "Technology", "Modern"],
   }),
   createLogoAsset({
     title: "Elephant Logo",
-    image: "/images/logo-design/elephant-logo.webp",
+    image: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788940856/elephant-logo.webp",
     tags: ["Elephant Mark", "Strong Brand", "Mascot"],
   }),
   createLogoAsset({
     title: "Food Logo",
-    image: "/images/logo-design/food.webp",
+    image: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788940856/food.webp",
     tags: ["Food Business", "Restaurant", "Fresh"],
   }),
   createLogoAsset({
     title: "Geek Owl Logo",
-    image: "/images/logo-design/geekowl.webp",
+    image: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788940856/geekowl.webp",
     tags: ["Education", "Technology", "Owl Mascot"],
   }),
   createLogoAsset({
     title: "Goat Leaf Logo",
-    image: "/images/logo-design/goat-leaf.webp",
+    image: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788940856/goat-leaf.webp",
     tags: ["Organic", "Animal Mark", "Natural"],
   }),
   createLogoAsset({
     title: "Humming Bird Logo",
-    image: "/images/logo-design/humming-bird1.webp",
+    image: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788940856/humming-bird1.webp",
     tags: ["Bird Identity", "Elegant", "Colorful"],
   }),
   createLogoAsset({
     title: "Moto Race Logo",
-    image: "/images/logo-design/moto-race-logo.webp",
+    image: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788940856/moto-race-logo.webp",
     tags: ["Motorsport", "Speed", "Bold"],
   }),
   createLogoAsset({
     title: "Nail Queen Logo",
-    image: "/images/logo-design/nail-queen.webp",
+    image: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788940856/nail-queen.webp",
     tags: ["Beauty", "Nail Studio", "Luxury"],
   }),
   createLogoAsset({
     title: "Navyojan Logo",
-    image: "/images/logo-design/navyojan.webp",
+    image: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788940856/navyojan.webp",
     tags: ["Organisation", "Modern Identity", "Corporate"],
   }),
   createLogoAsset({
     title: "Organics Logo",
-    image: "/images/logo-design/Organics-logo.webp",
+    image: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788940856/Organics-logo.webp",
     tags: ["Organic Brand", "Natural", "Eco Friendly"],
   }),
   createLogoAsset({
     title: "Pasta House Logo",
-    image: "/images/logo-design/Pasta-house.webp",
+    image: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788940856/Pasta-house.webp",
     tags: ["Restaurant", "Pasta Brand", "Food"],
   }),
   createLogoAsset({
     title: "Peacock Logo",
-    image: "/images/logo-design/peacock.webp",
+    image: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788940856/peacock.webp",
     tags: ["Peacock Mark", "Elegant", "Premium"],
   }),
   createLogoAsset({
     title: "Quick Stop Logo",
-    image: "/images/logo-design/quick-stop.webp",
+    image: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788940856/quick-stop.webp",
     tags: ["Retail", "Fast Service", "Modern"],
   }),
   createLogoAsset({
     title: "Restaurant 2 Logo",
-    image: "/images/logo-design/restaurant-2.webp",
+    image: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788940856/restaurant-2.webp",
     tags: ["Restaurant", "Hospitality", "Food Brand"],
   }),
   createLogoAsset({
     title: "Restaurant Logo",
-    image: "/images/logo-design/restaurant.webp",
+    image: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788940856/restaurant.webp",
     tags: ["Restaurant", "Food Identity", "Professional"],
   }),
   createLogoAsset({
     title: "Turning Point Logo",
-    image: "/images/logo-design/TURNING-POINT.webp",
+    image: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788940856/TURNING-POINT.webp",
     tags: ["Corporate", "Growth", "Direction"],
   }),
   createLogoAsset({
     title: "Veggie Food Logo",
-    image: "/images/logo-design/VEGGIE-FOOD.webp",
+    image: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788940856/VEGGIE-FOOD.webp",
     tags: ["Vegetarian", "Healthy Food", "Fresh"],
   }),
   createLogoAsset({
     title: "Wetcap Logo",
-    image: "/images/logo-design/wetcap-logo.webp",
+    image: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788940856/wetcap-logo.webp",
     tags: ["Modern Brand", "Symbol Mark", "Creative"],
   }),
   createLogoAsset({
     title: "Whale Logo",
-    image: "/images/logo-design/whale-logo.webp",
+    image: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788940856/whale-logo.webp",
     tags: ["Whale Mark", "Ocean", "Strong Identity"],
   }),
 ];
@@ -493,56 +493,56 @@ export const logoDownloads = [
 export const photoFrameDownloads = [
   createPhotoFrameAsset({
     title: "Baby Photo Frame",
-    image: "/images/photo-frame/baby-frame.webp",
+    image: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788941215/baby-frame.webp",
     description:
       "A sweet baby photo frame design suitable for newborn memories, birthday posts, family sharing, and special celebrations.",
     tags: ["Baby Frame", "Celebration", "Family Memory"],
   }),
   createPhotoFrameAsset({
     title: "Greeting Card Design",
-    image: "/images/photo-frame/card.webp",
+    image: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788941215/card.webp",
     description:
       "A clean greeting card design created for wishes, announcements, celebrations, social sharing, and personalized messages.",
     tags: ["Greeting Card", "Celebration", "Digital Design"],
   }),
   createPhotoFrameAsset({
     title: "Classic Photo Frame",
-    image: "/images/photo-frame/frame.webp",
+    image: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788941215/frame.webp",
     description:
       "A versatile classic photo frame layout suitable for personal photographs, events, campaigns, and branded social posts.",
     tags: ["Classic Frame", "Photo Layout", "Digital Ready"],
   }),
   createPhotoFrameAsset({
     title: "Google Template Design",
-    image: "/images/photo-frame/google-template.webp",
+    image: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788941215/google-template.webp",
     description:
       "A professional Google-themed template suitable for promotional posts, digital campaigns, announcements, and online communication.",
     tags: ["Google Template", "Campaign", "Professional"],
   }),
   createPhotoFrameAsset({
     title: "Love Photo Frame",
-    image: "/images/photo-frame/love-frame.webp",
+    image: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788941215/love-frame.webp",
     description:
       "A romantic photo frame design created for couples, anniversaries, Valentine's Day posts, and memorable social sharing.",
     tags: ["Love Frame", "Romantic", "Couple Design"],
   }),
   createPhotoFrameAsset({
     title: "Love Story Photo Frame",
-    image: "/images/photo-frame/love-story-frame.webp",
+    image: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788941215/love-story-frame.webp",
     description:
       "A storytelling photo frame layout suitable for relationship memories, anniversaries, engagement posts, and special moments.",
     tags: ["Love Story", "Anniversary", "Memory Frame"],
   }),
   createPhotoFrameAsset({
     title: "Sorry Card Design",
-    image: "/images/photo-frame/sorry-card.webp",
+    image: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788941215/sorry-card.webp",
     description:
       "A thoughtful sorry card design created for personal messages, apology posts, emotional communication, and digital sharing.",
     tags: ["Sorry Card", "Message Design", "Personal"],
   }),
   createPhotoFrameAsset({
     title: "Wedding Photo Frame",
-    image: "/images/photo-frame/wedding.webp",
+    image: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788941215/wedding.webp",
     description:
       "An elegant wedding photo frame suitable for wedding memories, invitations, couple posts, ceremonies, and social media sharing.",
     tags: ["Wedding", "Celebration", "Elegant Frame"],
@@ -572,7 +572,7 @@ export const photoFrameDownloads = [
 export const posterDownloads = [
   createPosterAsset({
     title: "Air Force Day Poster",
-    image: "/images/poster-design/Air_Force_Day_Poster.webp",
+    image: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788941401/Air_Force_Day_Poster.webp",
     description:
       "A patriotic Air Force Day poster created for tribute campaigns, social media posts, schools, organisations, and awareness communication.",
     tags: ["Air Force Day", "Patriotic", "Awareness"],
@@ -580,7 +580,7 @@ export const posterDownloads = [
   createPosterAsset({
     slug: "chhath-puja-poster-one",
     title: "Chhath Puja Poster",
-    image: "/images/poster-design/chhath-puja.webp",
+    image: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788941401/chhath-puja.webp",
     description:
       "A devotional Chhath Puja poster suitable for festival greetings, community messages, business posts, and social media campaigns.",
     tags: ["Chhath Puja", "Festival", "Greeting"],
@@ -588,70 +588,70 @@ export const posterDownloads = [
   createPosterAsset({
     slug: "chhath-puja-poster-two",
     title: "Chhath Puja Poster",
-    image: "/images/poster-design/chhath-puja1.webp",
+    image: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788941401/chhath-puja1.webp",
     description:
       "A second Chhath Puja creative designed for festive wishes, promotional communication, organisations, and digital sharing.",
     tags: ["Chhath Puja", "Devotional", "Social Post"],
   }),
   createPosterAsset({
     title: "Fresh Fruits Poster",
-    image: "/images/poster-design/fresh-fruits.webp",
+    image: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788941401/fresh-fruits.webp",
     description:
       "A fresh fruit promotional poster suitable for grocery stores, food businesses, healthy campaigns, offers, and product advertising.",
     tags: ["Fresh Fruits", "Food Promotion", "Retail"],
   }),
   createPosterAsset({
     title: "Gandhi Jayanti Poster",
-    image: "/images/poster-design/gandhi-jayanti..webp",
+    image: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788941401/gandhi-jayanti..webp",
     description:
       "A respectful Gandhi Jayanti poster created for schools, NGOs, organisations, public messages, and national tribute campaigns.",
     tags: ["Gandhi Jayanti", "National Day", "Tribute"],
   }),
   createPosterAsset({
     title: "Happy Diwali Poster",
-    image: "/images/poster-design/happy-diwali.webp",
+    image: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788941401/happy-diwali.webp",
     description:
       "A vibrant Diwali greeting poster suitable for businesses, festive offers, organisations, brands, and social media wishes.",
     tags: ["Diwali", "Festival Greeting", "Celebration"],
   }),
   createPosterAsset({
     title: "Happy New Year Poster",
-    image: "/images/poster-design/happy-new-year.webp",
+    image: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788941401/happy-new-year.webp",
     description:
       "A modern New Year poster created for greetings, business announcements, promotional campaigns, and social media sharing.",
     tags: ["New Year", "Greeting", "Celebration"],
   }),
   createPosterAsset({
     title: "Hiring Poster",
-    image: "/images/poster-design/hiring-poster.webp",
+    image: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788941401/hiring-poster.webp",
     description:
       "A professional recruitment poster suitable for job openings, hiring campaigns, companies, agencies, and social media announcements.",
     tags: ["Hiring", "Recruitment", "Corporate"],
   }),
   createPosterAsset({
     title: "Hospital Pamphlet",
-    image: "/images/poster-design/hospital-pamphlate.webp",
+    image: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788941401/hospital-pamphlate.webp",
     description:
       "An informative hospital pamphlet design suitable for healthcare services, medical awareness, clinics, and patient communication.",
     tags: ["Healthcare", "Hospital", "Pamphlet"],
   }),
   createPosterAsset({
     title: "Independence Day Poster",
-    image: "/images/poster-design/independence-dayai.webp",
+    image: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788941401/independence-dayai.webp",
     description:
       "A patriotic Independence Day poster created for schools, businesses, NGOs, organisations, and national celebration campaigns.",
     tags: ["Independence Day", "Patriotic", "National Event"],
   }),
   createPosterAsset({
     title: "Mehndi Arts Poster",
-    image: "/images/poster-design/mehndi-arts.webp",
+    image: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788941401/mehndi-arts.webp",
     description:
       "A decorative Mehndi Arts poster suitable for artists, beauty businesses, wedding promotions, bookings, and social campaigns.",
     tags: ["Mehndi Art", "Beauty", "Wedding"],
   }),
   createPosterAsset({
     title: "Merry Christmas Poster",
-    image: "/images/poster-design/merry-christmas.webp",
+    image: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788941401/merry-christmas.webp",
     description:
       "A festive Christmas poster suitable for greetings, seasonal offers, organisations, businesses, and social media campaigns.",
     tags: ["Christmas", "Festival Greeting", "Seasonal"],
@@ -659,7 +659,7 @@ export const posterDownloads = [
   createPosterAsset({
     slug: "pamphlet-design-one",
     title: "Pamphlet Design",
-    image: "/images/poster-design/pamphlete-2.webp",
+    image: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788941401/pamphlete-2.webp",
     description:
       "A professional pamphlet layout suitable for services, promotions, awareness campaigns, events, and business communication.",
     tags: ["Pamphlet", "Promotion", "Print Design"],
@@ -667,7 +667,7 @@ export const posterDownloads = [
   createPosterAsset({
     slug: "pamphlet-design-two",
     title: "Pamphlet Design",
-    image: "/images/poster-design/pamphlete.webp",
+    image: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788941401/pamphlete.webp",
     description:
       "A clean promotional pamphlet designed for business information, product communication, campaigns, and print distribution.",
     tags: ["Pamphlet", "Business", "Marketing"],
@@ -675,7 +675,7 @@ export const posterDownloads = [
   createPosterAsset({
     slug: "pamphlet-design-three",
     title: "Pamphlet Design",
-    image: "/images/poster-design/pamphlete1.webp",
+    image: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788941401/pamphlete1.webp",
     description:
       "An organised pamphlet design suitable for educational content, services, events, offers, and public communication.",
     tags: ["Pamphlet", "Information", "Campaign"],
@@ -683,7 +683,7 @@ export const posterDownloads = [
   createPosterAsset({
     slug: "pamphlet-design-four",
     title: "Pamphlet Design",
-    image: "/images/poster-design/pamphlete02.webp",
+    image: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788941401/pamphlete02.webp",
     description:
       "A modern pamphlet layout created for brand promotions, awareness material, service information, and print-ready use.",
     tags: ["Pamphlet", "Brand Promotion", "Print Ready"],
@@ -691,28 +691,28 @@ export const posterDownloads = [
   createPosterAsset({
     slug: "pamphlet-design-five",
     title: "Pamphlet Design",
-    image: "/images/poster-design/pamphlete4.webp",
+    image: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788941401/pamphlete4.webp",
     description:
       "A versatile pamphlet design suitable for campaigns, organisations, businesses, local promotions, and marketing communication.",
     tags: ["Pamphlet", "Marketing", "Professional"],
   }),
   createPosterAsset({
     title: "Pizza Poster",
-    image: "/images/poster-design/pizza-poster.webp",
+    image: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788941401/pizza-poster.webp",
     description:
       "An appetising pizza poster created for restaurants, food offers, delivery campaigns, menu promotions, and social advertising.",
     tags: ["Pizza", "Restaurant", "Food Promotion"],
   }),
   createPosterAsset({
     title: "Creative Poster Design",
-    image: "/images/poster-design/poster.webp",
+    image: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788941401/poster.webp",
     description:
       "A versatile creative poster suitable for business promotions, events, marketing campaigns, announcements, and social media use.",
     tags: ["Creative Poster", "Marketing", "Campaign"],
   }),
   createPosterAsset({
     title: "Ram Navami Poster",
-    image: "/images/poster-design/ramnavmi.webp",
+    image: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788941401/ramnavmi.webp",
     description:
       "A devotional Ram Navami poster suitable for festive greetings, temple events, community campaigns, and social media sharing.",
     tags: ["Ram Navami", "Festival", "Devotional"],
@@ -782,7 +782,7 @@ export const businessCardDownloads = [
   createBusinessCardAsset({
     slug: "premium-business-card-one",
     title: "Premium Business Card",
-    image: "/images/business-card-design/chrunchy-visiting-card.webp",
+    image: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788940701/chrunchy-visiting-card.webp",
     description:
       "A bold premium business card design suitable for food brands, restaurants, product businesses, founders, and professional networking.",
     tags: ["Premium Card", "Food Brand", "Professional Identity"],
@@ -796,7 +796,7 @@ export const businessCardDownloads = [
   createBusinessCardAsset({
     slug: "premium-business-card-two",
     title: "Premium Business Card",
-    image: "/images/business-card-design/visiting-card-2.webp",
+    image: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788940701/visiting-card-2.webp",
     description:
       "A clean premium visiting card suitable for corporate professionals, consultants, agencies, startups, and personal brand communication.",
     tags: ["Corporate Card", "Clean Layout", "Networking"],
@@ -810,7 +810,7 @@ export const businessCardDownloads = [
   createBusinessCardAsset({
     slug: "premium-business-card-three",
     title: "Premium Business Card",
-    image: "/images/business-card-design/visiting-card.webp",
+    image: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788940701/visiting-card.webp",
     description:
       "A modern business card presentation designed for founders, service providers, entrepreneurs, freelancers, and growing brands.",
     tags: ["Modern Card", "Entrepreneur", "Brand Identity"],
@@ -824,7 +824,7 @@ export const businessCardDownloads = [
   createBusinessCardAsset({
     slug: "premium-business-card-four",
     title: "Premium Business Card",
-    image: "/images/business-card-design/visiting-card1.webp",
+    image: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788940701/visiting-card1.webp",
     description:
       "A refined premium business card design suitable for luxury brands, creative professionals, agencies, and high-quality print communication.",
     tags: ["Luxury Card", "Creative Professional", "Print Ready"],

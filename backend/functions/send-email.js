@@ -9,9 +9,9 @@ const BRAND = {
 
   email: "help.limitlessdesign@gmail.com",
 
-  website: "https://limitlessdesign.netlify.app",
+  website: "https://limitlessdesign.vercel.app/",
 
-  logo: "https://limitlessdesign.netlify.app/email-logo.png",
+  logo: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788939269/email-logo.png",
 
   instagram:
     "https://www.instagram.com/limitless_design11",

@@ -64,9 +64,9 @@ export const uiDesignTypes = [
     "Editorial-style visual hierarchy",
   ],
 
-  cardImage: "/images/ui-design/cards/advaitacollection.webp",
+  cardImage: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788941869/advaitacollection.webp",
   previewImage:
-    "/images/ui-design/preview/Advaita Collections Preview.webp",
+    "https://res.cloudinary.com/orfe5dmh/image/upload/v1788952806/Advaita_Collections_Preview.webp",
 
   previewContent: {
     kicker: "Ethnic fashion storefront",
@@ -95,9 +95,9 @@ export const uiDesignTypes = [
     "Promotional banner layouts",
   ],
 
-  cardImage: "/images/ui-design/cards/adharshop.webp",
+  cardImage: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788941869/adharshop.webp",
   previewImage:
-    "/images/ui-design/preview/Adhar Shop Store Preview.webp",
+    "https://res.cloudinary.com/orfe5dmh/image/upload/v1788952809/Adhar_Shop_Store_Preview.webp",
 
   previewContent: {
     kicker: "Everyday grocery storefront",
@@ -125,9 +125,9 @@ export const uiDesignTypes = [
     "Collection and review layouts",
   ],
 
-  cardImage: "/images/ui-design/cards/ajfashion.webp",
+  cardImage: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788941869/ajfashion.webp",
   previewImage:
-    "/images/ui-design/preview/AJ Fashion Jewellery Preview.webp",
+    "https://res.cloudinary.com/orfe5dmh/image/upload/v1788952810/AJ_Fashion_Jewellery_Preview.webp",
 
   previewContent: {
     kicker: "Jewellery shopping experience",
@@ -155,8 +155,8 @@ export const uiDesignTypes = [
     "Responsive shopping layout",
   ],
 
-  cardImage: "/images/ui-design/cards/among.webp",
-  previewImage: "/images/ui-design/preview/Among Preview.webp",
+  cardImage: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788941869/among.webp",
+  previewImage: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788952806/Among_Preview.webp",
 
   previewContent: {
     kicker: "Professional uniform store",
@@ -184,9 +184,9 @@ export const uiDesignTypes = [
     "Promotional banner layouts",
   ],
 
-  cardImage: "/images/ui-design/cards/aquaplus.webp",
+  cardImage: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788941869/aquaplus.webp",
   previewImage:
-    "/images/ui-design/preview/Aquaplus Store preview.webp",
+    "https://res.cloudinary.com/orfe5dmh/image/upload/v1788952808/Aquaplus_Store_preview.webp",
 
   previewContent: {
     kicker: "Plumbing product storefront",
@@ -214,9 +214,9 @@ export const uiDesignTypes = [
     "Promotional banner sections",
   ],
 
-  cardImage: "/images/ui-design/cards/avon.webp",
+  cardImage: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788941869/avon.webp",
   previewImage:
-    "/images/ui-design/preview/avon store preview.webp",
+    "https://res.cloudinary.com/orfe5dmh/image/upload/v1788952806/avon_store_preview.webp",
 
   previewContent: {
     kicker: "Industrial product storefront",
@@ -244,9 +244,9 @@ export const uiDesignTypes = [
     "Promotional campaign banners",
   ],
 
-  cardImage: "/images/ui-design/cards/avior.webp",
+  cardImage: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788941869/avior.webp",
   previewImage:
-    "/images/ui-design/preview/Avior Clothing Store Preview.webp",
+    "https://res.cloudinary.com/orfe5dmh/image/upload/v1788952809/Avior_Clothing_Store_Preview.webp",
 
   previewContent: {
     kicker: "Streetwear shopping experience",
@@ -274,9 +274,9 @@ export const uiDesignTypes = [
     "Promotional banner layouts",
   ],
 
-  cardImage: "/images/ui-design/cards/avyuktamobile.webp",
+  cardImage: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788941869/avyuktamobile.webp",
   previewImage:
-    "/images/ui-design/preview/Avyukta mobile Preview.webp",
+    "https://res.cloudinary.com/orfe5dmh/image/upload/v1788952810/Avyukta_mobile_Preview.webp",
 
   previewContent: {
     kicker: "Smart electronics storefront",
@@ -304,9 +304,9 @@ export const uiDesignTypes = [
     "Promotional banner layouts",
   ],
 
-  cardImage: "/images/ui-design/cards/booksworld.webp",
+  cardImage: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788941869/booksworld.webp",
   previewImage:
-    "/images/ui-design/preview/Books world store preview (2).webp",
+    "https://res.cloudinary.com/orfe5dmh/image/upload/v1788952809/Books_world_store_preview_2.webp",
 
   previewContent: {
     kicker: "School supply storefront",
@@ -334,9 +334,9 @@ export const uiDesignTypes = [
     "Promotional banner layouts",
   ],
 
-  cardImage: "/images/ui-design/cards/bytesize.webp",
+  cardImage: "https://res.cloudinary.com/orfe5dmh/image/upload/v1788941869/bytesize.webp",
   previewImage:
-    "/images/ui-design/preview/byte size electronics preview.webp",
+    "https://res.cloudinary.com/orfe5dmh/image/upload/v1788952809/byte_size_electronics_preview.webp",
 
   previewContent: {
     kicker: "Electronics shopping experience",
