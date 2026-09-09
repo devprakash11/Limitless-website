@@ -23,33 +23,49 @@ app.use(helmet({ crossOriginResourcePolicy: { policy: "cross-origin" } }));
 app.use(cors({
   origin(origin, callback) {
     if (!origin || allowedOrigins.includes(origin)) return callback(null, true);
-    return callback(new Error("Origin is not allowed by CORS"));
+    const error = new Error("Origin is not allowed by CORS");
+    error.statusCode = 403;
+    return callback(error);
   },
   methods: ["GET", "POST", "OPTIONS"],
   allowedHeaders: ["Content-Type", "X-Request-ID"],
 }));
 app.use(express.json({ limit: "1mb" }));
 app.use(express.urlencoded({ extended: true, limit: "1mb" }));
-app.use(rateLimit({
+
+const apiLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   limit: 300,
   standardHeaders: "draft-8",
   legacyHeaders: false,
-}));
+});
 
-app.get("/", (req, res) => res.json({
+const contactLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: 10,
+  standardHeaders: "draft-8",
+  legacyHeaders: false,
+  message: {
+    success: false,
+    message: "Too many contact submissions. Please try again later.",
+  },
+});
+
+app.use(apiLimiter);
+
+app.get("/", (_req, res) => res.json({
   success: true,
   name: "Limitless Design API",
   version: "3.1.0",
 }));
 
-app.get("/health", (req, res) => res.json({
+app.get("/health", (_req, res) => res.json({
   success: true,
   status: "healthy",
   timestamp: new Date().toISOString(),
 }));
 
-app.get("/health/ready", async (req, res, next) => {
+app.get("/health/ready", async (_req, res, next) => {
   try {
     const { error } = await supabaseAdmin
       .from("services")
@@ -57,18 +73,18 @@ app.get("/health/ready", async (req, res, next) => {
 
     if (error) throw error;
 
-    res.json({
+    return res.json({
       success: true,
       status: "ready",
       services: { supabase: "ok", api: "ok" },
     });
   } catch (error) {
-    next(error);
+    return next(error);
   }
 });
 
 app.use("/api", publicRouter);
-app.use("/api/contact", contactRouter);
+app.use("/api/contact", contactLimiter, contactRouter);
 
 app.use(notFound);
 app.use(errorHandler);
