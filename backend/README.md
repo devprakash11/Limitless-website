@@ -1,84 +1,57 @@
 # Limitless Design Backend
 
-Production API for the Limitless Design website using **Node.js 20 + Express + Supabase + Cloudinary**, deployed as a Vercel serverless function.
+Production-ready REST API for the Limitless Design website.
 
-## Architecture
+## Stack
+
+- Node.js 20+
+- Express 5
+- Supabase PostgreSQL + Supabase Auth
+- Cloudinary for media storage
+- Nodemailer for contact notifications
+- Zod for request validation
+- Helmet, CORS and express-rate-limit for API security
+- Vercel Serverless Functions deployment
+
+Supabase Auth owns identity and JWT issuance. The API accepts `Authorization: Bearer <access_token>` and validates the token with Supabase before protected operations. This follows the server-side bearer-token model documented by Supabase. citeturn0search10
+
+## Structure
 
 ```text
 backend/
-├── api/index.js
-├── config/                 # env, Supabase, Cloudinary
-├── middleware/             # auth, RBAC, errors
-├── routes/                 # public, auth, contact, upload, admin, client
-├── services/               # Supabase data, Cloudinary, email
-├── supabase/schema.sql     # database + RLS + auth trigger
+├── api/
+│   └── index.js              # Vercel/Express entry point
+├── config/
+│   ├── cloudinary.js
+│   ├── env.js
+│   ├── mailer.js
+│   └── supabase.js
+├── middleware/
+│   ├── auth.js               # Supabase JWT + RBAC
+│   └── error.js
+├── routes/
+│   ├── admin.js
+│   ├── auth.js
+│   ├── client.js
+│   ├── contact.js
+│   ├── public.js
+│   ├── resource.js
+│   └── uploads.js
+├── services/
+│   ├── cloudinaryService.js
+│   ├── database.js
+│   └── emailService.js
+├── supabase/
+│   └── schema.sql
 ├── utils/
+│   ├── api.js
+│   └── escapeHtml.js
 ├── .env.example
-├── .vercelignore
 ├── package.json
 └── vercel.json
 ```
 
-## Features
-
-- Supabase Auth bearer-token verification.
-- Profile creation automatically triggered when a Supabase user signs up.
-- Roles: `SUPER_ADMIN`, `ADMIN`, `STAFF`, `CLIENT`.
-- Public services, projects, pricing and testimonials APIs.
-- Admin dashboard, CMS CRUD, enquiries, invoices, payments and user invitations.
-- Client dashboard with own projects, invoices and payments.
-- Cloudinary authenticated image/PDF uploads and asset deletion.
-- Contact enquiry validation, database persistence and email notifications.
-- Helmet, CORS, JSON body limits and API rate limiting.
-- Zod request validation and generic production error responses.
-- Supabase Row Level Security policies included in `supabase/schema.sql`.
-
-## API
-
-```text
-GET    /health
-GET    /api/auth/me
-PATCH  /api/auth/profile
-
-GET    /api/services
-GET    /api/projects
-GET    /api/pricing
-GET    /api/testimonials
-POST   /api/contact
-
-POST   /api/uploads
-DELETE /api/uploads
-
-GET    /api/admin/dashboard
-GET    /api/admin/profiles
-PATCH  /api/admin/profiles/:id/role
-GET    /api/admin/enquiries
-PATCH  /api/admin/enquiries/:id
-POST   /api/admin/invoices
-POST   /api/admin/payments
-POST   /api/admin/users/invite
-
-GET    /api/client/dashboard
-GET    /api/client/projects
-GET    /api/client/invoices
-GET    /api/client/payments
-```
-
-## Supabase setup
-
-1. Create a Supabase project.
-2. Open **SQL Editor** and run `supabase/schema.sql`.
-3. Configure your Auth providers in Supabase Authentication.
-4. Copy the project URL and **service role key** into Vercel environment variables.
-5. Never expose `SUPABASE_SERVICE_ROLE_KEY` in the frontend.
-
-The service-role key is intentionally server-only. Frontend applications should use Supabase's publishable/anon key only for Supabase Auth sessions.
-
-## Cloudinary setup
-
-Create a Cloudinary account and add the cloud name, API key and API secret to server environment variables. Uploads are limited to 10 MB and support JPEG, PNG, WebP, GIF and PDF.
-
-## Local development
+## Local setup
 
 ```bash
 cd backend
@@ -87,36 +60,143 @@ cp .env.example .env
 npm run dev
 ```
 
-The API runs on `http://localhost:3000` by default.
+API runs on `http://localhost:3000` by default.
 
-## Vercel deployment
+## Supabase setup
 
-Create a separate Vercel project for the backend and set its **Root Directory** to `backend`. Vercel will use `backend/vercel.json` and `backend/api/index.js`.
+1. Create a Supabase project.
+2. Open SQL Editor.
+3. Run `backend/supabase/schema.sql`.
+4. Copy the project URL and **service role key** into `.env`.
+5. Configure Auth providers in Supabase Authentication.
+6. Set your frontend URL/redirect URLs in Supabase Auth settings.
 
-Add these environment variables in Vercel:
+Never expose `SUPABASE_SERVICE_ROLE_KEY` in the frontend. The backend uses it only for trusted server operations.
 
-```text
-NODE_ENV=production
-FRONTEND_URL=https://your-frontend-domain.com
-SUPABASE_URL=https://your-project.supabase.co
-SUPABASE_SERVICE_ROLE_KEY=...
+## Cloudinary setup
+
+Create a Cloudinary account and add these server-only values:
+
+```env
 CLOUDINARY_CLOUD_NAME=...
 CLOUDINARY_API_KEY=...
 CLOUDINARY_API_SECRET=...
-GMAIL_USER=...
-GMAIL_APP_PASSWORD=...
+CLOUDINARY_FOLDER=limitless-design
+MAX_UPLOAD_MB=8
 ```
 
-Do not commit real credentials. If an old Gmail App Password was ever committed, revoke it and generate a replacement.
+Uploads are performed server-side and stored in `media_assets`. The Cloudinary API secret must remain server-side; Cloudinary explicitly warns not to expose it in client-side code. citeturn0search18
 
-## Frontend authentication
+## Vercel deployment
 
-After signing in with Supabase Auth, send the access token to the API:
+Deploy the `backend` directory as a separate Vercel project.
+
+- **Root Directory:** `backend`
+- **Framework Preset:** Other
+- **Build Command:** leave empty/default
+- **Install Command:** `npm install`
+- **Node.js:** 20+
+
+Add all `.env` values in Vercel Project Settings → Environment Variables.
+
+The server exports the Express application from `api/index.js`; Vercel can run Node.js Express applications as serverless functions. citeturn0search11
+
+Your API URL will look like:
+
+```text
+https://limitless-backend.vercel.app
+```
+
+Then set the frontend:
+
+```env
+FRONTEND_URL=https://your-frontend.vercel.app
+ALLOWED_ORIGINS=https://your-frontend.vercel.app
+```
+
+## API endpoints
+
+### Public
+
+| Method | Endpoint | Purpose |
+|---|---|---|
+| GET | `/health` | Liveness check |
+| GET | `/health/ready` | Supabase readiness check |
+| GET | `/api/services` | Published services |
+| GET | `/api/services/:id` | Service detail |
+| GET | `/api/projects` | Published projects |
+| GET | `/api/projects/:id` | Project detail |
+| GET | `/api/pricing` | Active pricing plans |
+| GET | `/api/testimonials` | Published testimonials |
+| POST | `/api/contact` | Create contact/project enquiry |
+
+### Authentication
+
+Authentication itself is handled by Supabase Auth on the frontend. The backend validates the resulting JWT.
+
+| Method | Endpoint | Auth |
+|---|---|---|
+| GET | `/api/auth/me` | User |
+| PATCH | `/api/auth/profile` | User |
+
+### Client portal
+
+| Method | Endpoint | Auth |
+|---|---|---|
+| GET | `/api/client/dashboard` | User |
+| GET | `/api/client/projects` | User |
+| GET | `/api/client/invoices` | User |
+| GET | `/api/client/payments` | User |
+
+### Admin
+
+Roles: `SUPER_ADMIN`, `ADMIN`, `STAFF`, `CLIENT`.
+
+| Method | Endpoint | Role |
+|---|---|---|
+| GET | `/api/admin/dashboard` | Admin/Staff |
+| GET | `/api/admin/profiles` | Admin/Staff |
+| PATCH | `/api/admin/profiles/:id/role` | Super Admin |
+| POST | `/api/admin/users/invite` | Super Admin |
+| POST | `/api/admin/invoices` | Admin/Staff |
+| POST | `/api/admin/payments` | Admin/Staff |
+| GET | `/api/admin/enquiries` | Admin/Staff |
+| PATCH | `/api/admin/enquiries/:id` | Admin/Staff |
+| POST/PATCH/DELETE | `/api/services/*` | Admin/Staff |
+| POST/PATCH/DELETE | `/api/projects/*` | Admin/Staff |
+| POST/PATCH/DELETE | `/api/pricing/*` | Admin/Staff |
+| POST/PATCH/DELETE | `/api/testimonials/*` | Admin/Staff |
+
+### Media
+
+```text
+POST   /api/uploads
+DELETE /api/uploads/:id
+```
+
+Upload with `multipart/form-data` using the field name `file` and an optional `folder` field. Supported files are JPEG, PNG, WebP, GIF and PDF.
+
+## Frontend request example
 
 ```js
-fetch(`${API_URL}/api/auth/me`, {
-  headers: { Authorization: `Bearer ${session.access_token}` },
+const { data: { session } } = await supabase.auth.getSession();
+
+const response = await fetch(`${import.meta.env.VITE_API_URL}/api/client/dashboard`, {
+  headers: {
+    Authorization: `Bearer ${session.access_token}`,
+  },
 });
+
+const result = await response.json();
 ```
 
-For uploads, send a `multipart/form-data` request with a `file` field and a server-authenticated session.
+## Security notes
+
+- Keep Supabase service-role and Cloudinary API secret server-side.
+- Use Supabase Auth for login/signup/password recovery/social providers.
+- Use the backend only with access tokens issued by Supabase.
+- RLS is enabled in `schema.sql` for direct Supabase access.
+- Admin operations use the service role only after API-level RBAC checks.
+- Uploads are memory-buffered and capped by `MAX_UPLOAD_MB`.
+- Contact input is validated and HTML-escaped before email rendering.
+- CORS is restricted to configured frontend origins.
