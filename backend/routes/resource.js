@@ -6,19 +6,16 @@ import { deleteRow, getRow, insertRow, listRows, updateRow } from "../services/d
 
 const idSchema = z.string().uuid();
 
-export function resourceRouter(table, { createSchema, updateSchema, adminOnly = true } = {}) {
+export function resourceRouter(table, { createSchema, updateSchema, adminOnly = true, publicFilters = {} } = {}) {
   const router = Router();
   router.get("/", async (req, res, next) => {
     try {
-      const result = await listRows(table, {
-        filters: req.query.status ? { status: req.query.status } : {},
-        limit: Math.min(Number(req.query.limit) || 50, 100),
-        offset: Math.max(Number(req.query.offset) || 0, 0),
-      });
+      const filters = { ...publicFilters };
+      if (req.query.status) filters.status = req.query.status;
+      const result = await listRows(table, { filters, limit: Math.min(Number(req.query.limit) || 50, 100), offset: Math.max(Number(req.query.offset) || 0, 0) });
       ok(res, result);
     } catch (e) { next(e); }
   });
-
   router.get("/:id", async (req, res, next) => {
     try {
       const id = idSchema.parse(req.params.id);
@@ -27,31 +24,15 @@ export function resourceRouter(table, { createSchema, updateSchema, adminOnly = 
       ok(res, row);
     } catch (e) { next(e); }
   });
-
   const guard = adminOnly ? [requireAuth, requireRoles("SUPER_ADMIN", "ADMIN", "STAFF")] : [requireAuth];
   router.post("/", ...guard, async (req, res, next) => {
-    try {
-      const payload = createSchema ? createSchema.parse(req.body) : req.body;
-      const row = await insertRow(table, payload);
-      created(res, row);
-    } catch (e) { next(e); }
+    try { created(res, await insertRow(table, createSchema ? createSchema.parse(req.body) : req.body)); } catch (e) { next(e); }
   });
-
   router.patch("/:id", ...guard, async (req, res, next) => {
-    try {
-      const id = idSchema.parse(req.params.id);
-      const payload = updateSchema ? updateSchema.parse(req.body) : req.body;
-      const row = await updateRow(table, id, payload);
-      ok(res, row, "Updated successfully");
-    } catch (e) { next(e); }
+    try { ok(res, await updateRow(table, idSchema.parse(req.params.id), updateSchema ? updateSchema.parse(req.body) : req.body), "Updated successfully"); } catch (e) { next(e); }
   });
-
   router.delete("/:id", ...guard, async (req, res, next) => {
-    try {
-      const id = idSchema.parse(req.params.id);
-      await deleteRow(table, id);
-      ok(res, null, "Deleted successfully");
-    } catch (e) { next(e); }
+    try { await deleteRow(table, idSchema.parse(req.params.id)); ok(res, null, "Deleted successfully"); } catch (e) { next(e); }
   });
   return router;
 }
