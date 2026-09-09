@@ -38,6 +38,11 @@ export async function sendProjectRequirementEmails(contact) {
 
   const mailer = getMailer();
   const mailAccount = getMailAccount();
+
+  if (!mailer) {
+    console.warn("Email notifications are disabled: mailer is not available.");
+    return { sent: false };
+  }
   const safeSubjectService = contact.service.replace(/[\r\n]+/g, " ").slice(0, 100);
   const safeSubjectName = contact.name.replace(/[\r\n]+/g, " ").slice(0, 80);
 

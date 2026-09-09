@@ -1,4 +1,5 @@
 import { ExternalLink, Globe2, ArrowUpRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 import SEO from "../components/SEO";
 
@@ -161,10 +162,10 @@ function LiveProjects() {
               <span>More launches coming soon</span>
               <h2>Built something worth putting live?</h2>
             </div>
-            <a href="/contact" className="live-projects-note-link">
+            <Link to="/contact" className="live-projects-note-link">
               Start a project
               <ArrowUpRight size={18} aria-hidden="true" />
-            </a>
+            </Link>
           </section>
         </div>
       </section>

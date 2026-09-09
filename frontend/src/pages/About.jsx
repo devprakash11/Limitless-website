@@ -1,9 +1,16 @@
 import { ArrowRight, BadgeCheck, Gem, Globe2, Target } from "lucide-react";
 import { Link } from "react-router-dom";
+import SEO from "../components/SEO";
 
 function About() {
   return (
     <>
+      <SEO
+        title="About Limitless Design | Professional Creative Design Services"
+        description="Learn about Limitless Design — a professional creative marketplace for logo design, branding, posters, UI/UX and graphic design services for businesses and growing brands."
+        path="/about"
+        image="/logo-01.webp"
+      />
       <section className="page-hero">
         <div className="container">
           <span className="section-label dark-label">About Us</span>

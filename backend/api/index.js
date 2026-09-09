@@ -6,6 +6,10 @@ import { randomUUID } from "node:crypto";
 import { env, allowedOrigins } from "../config/env.js";
 import { publicRouter } from "../routes/public.js";
 import { contactRouter } from "../routes/contact.js";
+import { authRouter } from "../routes/auth.js";
+import { adminRouter } from "../routes/admin.js";
+import { clientRouter } from "../routes/client.js";
+import { uploadRouter } from "../routes/uploads.js";
 import { supabaseAdmin } from "../config/supabase.js";
 import { notFound, errorHandler } from "../middleware/error.js";
 
@@ -85,6 +89,10 @@ app.get("/health/ready", async (_req, res, next) => {
 
 app.use("/api", publicRouter);
 app.use("/api/contact", contactLimiter, contactRouter);
+app.use("/api/auth", authRouter);
+app.use("/api/admin", adminRouter);
+app.use("/api/client", clientRouter);
+app.use("/api/uploads", uploadRouter);
 
 app.use(notFound);
 app.use(errorHandler);

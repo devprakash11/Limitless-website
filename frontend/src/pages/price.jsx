@@ -467,6 +467,7 @@ function UIUXPricingBox() {
               {isMobile && (
                 <>
                   <button
+                    type="button"
                     className="price-page-uiux-slider-btn price-page-uiux-slider-prev"
                     onClick={handlePrev}
                     aria-label="Previous plan"
@@ -474,6 +475,7 @@ function UIUXPricingBox() {
                     <ChevronLeft size={24} />
                   </button>
                   <button
+                    type="button"
                     className="price-page-uiux-slider-btn price-page-uiux-slider-next"
                     onClick={handleNext}
                     aria-label="Next plan"
@@ -484,6 +486,7 @@ function UIUXPricingBox() {
                   <div className="price-page-uiux-dots">
                     {uiUxPlans.map((_, index) => (
                       <button
+                        type="button"
                         key={index}
                         className={`price-page-uiux-dot ${
                           index === currentIndex ? "is-active" : ""

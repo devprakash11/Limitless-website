@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ImageOff } from "lucide-react";
 
 function ServiceCard({ service }) {
   const Icon = service.icon;
@@ -7,7 +7,7 @@ function ServiceCard({ service }) {
   return (
     <Link to={`/services/${service.slug}`} className="service-card">
       <div className="service-icon">
-        <Icon size={28} />
+        {Icon ? <Icon size={28} /> : <ImageOff size={28} />}
       </div>
 
       <h3>{service.title}</h3>

@@ -10,6 +10,12 @@ const schema = z.object({
   SUPABASE_SERVICE_ROLE_KEY: z.string().min(20),
   GMAIL_USER: z.string().email().optional(),
   GMAIL_APP_PASSWORD: z.string().min(1).optional(),
+  // Cloudinary — required only when the upload routes are used
+  CLOUDINARY_CLOUD_NAME: z.string().min(1).optional(),
+  CLOUDINARY_API_KEY: z.string().min(1).optional(),
+  CLOUDINARY_API_SECRET: z.string().min(1).optional(),
+  CLOUDINARY_FOLDER: z.string().default("limitless"),
+  MAX_UPLOAD_MB: z.coerce.number().int().positive().default(10),
 });
 
 export const env = schema.parse(process.env);

@@ -271,10 +271,8 @@ function Home() {
           (service) =>
             service &&
             typeof service === "object" &&
-            Boolean(
-              service.slug ||
-              service.title
-            )
+            Boolean(service.slug) &&
+            Boolean(service.title)
         )
       : [];
 
