@@ -9,7 +9,7 @@ const pricingSchema = z.object({ name: text(160), description: text(10000).optio
 const testimonialSchema = z.object({ client_name: text(160), company: text(160).optional().nullable(), content: text(5000), rating: z.number().int().min(1).max(5).default(5), avatar_url: z.string().url().optional().nullable(), published: z.boolean().default(true) });
 
 export const publicRouter = Router();
-publicRouter.use("/services", resourceRouter("services", { createSchema: serviceSchema, updateSchema: serviceSchema.partial() }));
-publicRouter.use("/projects", resourceRouter("projects", { createSchema: projectSchema, updateSchema: projectSchema.partial() }));
-publicRouter.use("/pricing", resourceRouter("pricing_plans", { createSchema: pricingSchema, updateSchema: pricingSchema.partial() }));
-publicRouter.use("/testimonials", resourceRouter("testimonials", { createSchema: testimonialSchema, updateSchema: testimonialSchema.partial() }));
+publicRouter.use("/services", resourceRouter("services", { createSchema: serviceSchema, updateSchema: serviceSchema.partial(), publicFilters: { active: true } }));
+publicRouter.use("/projects", resourceRouter("projects", { createSchema: projectSchema, updateSchema: projectSchema.partial(), publicFilters: { published: true } }));
+publicRouter.use("/pricing", resourceRouter("pricing_plans", { createSchema: pricingSchema, updateSchema: pricingSchema.partial(), publicFilters: { active: true } }));
+publicRouter.use("/testimonials", resourceRouter("testimonials", { createSchema: testimonialSchema, updateSchema: testimonialSchema.partial(), publicFilters: { published: true } }));
