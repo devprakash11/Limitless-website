@@ -1,105 +1,122 @@
 # Limitless Design Backend
 
-Netlify Functions backend for the Limitless Design website.
+Production API for the Limitless Design website using **Node.js 20 + Express + Supabase + Cloudinary**, deployed as a Vercel serverless function.
 
-## Structure
+## Architecture
 
 ```text
 backend/
-├── functions/
-│   └── send-email.js
-├── config/
-│   └── mailer.js
-├── constants/
-│   └── services.js
-├── services/
-│   └── emailService.js
+├── api/index.js
+├── config/                 # env, Supabase, Cloudinary
+├── middleware/             # auth, RBAC, errors
+├── routes/                 # public, auth, contact, upload, admin, client
+├── services/               # Supabase data, Cloudinary, email
+├── supabase/schema.sql     # database + RLS + auth trigger
 ├── utils/
-│   ├── escapeHtml.js
-│   ├── requestSecurity.js
-│   ├── responses.js
-│   └── validation.js
 ├── .env.example
-├── netlify.toml.example
-└── package.json
+├── .vercelignore
+├── package.json
+└── vercel.json
 ```
 
-## Security included
+## Features
 
-- Secrets are read only from server environment variables.
-- Server-side required-field validation.
-- Email, phone, service and message validation.
-- Maximum request-body size.
-- Maximum field lengths.
-- HTML escaping before user content is inserted into email HTML.
-- Subject-line CR/LF removal.
-- Generic public server errors.
-- Detailed errors remain in server logs.
-- Optional exact-origin validation using `ALLOWED_ORIGIN`.
-- Server-side honeypot support through the `website` field.
+- Supabase Auth bearer-token verification.
+- Profile creation automatically triggered when a Supabase user signs up.
+- Roles: `SUPER_ADMIN`, `ADMIN`, `STAFF`, `CLIENT`.
+- Public services, projects, pricing and testimonials APIs.
+- Admin dashboard, CMS CRUD, enquiries, invoices, payments and user invitations.
+- Client dashboard with own projects, invoices and payments.
+- Cloudinary authenticated image/PDF uploads and asset deletion.
+- Contact enquiry validation, database persistence and email notifications.
+- Helmet, CORS, JSON body limits and API rate limiting.
+- Zod request validation and generic production error responses.
+- Supabase Row Level Security policies included in `supabase/schema.sql`.
 
-## Important: rotate the old Gmail App Password
-
-If the old password was ever committed to GitHub, revoke it in your Google
-Account and generate a new App Password. Never reuse the exposed password.
-
-## Netlify environment variables
-
-Add these in Netlify:
+## API
 
 ```text
-GMAIL_USER
-GMAIL_APP_PASSWORD
+GET    /health
+GET    /api/auth/me
+PATCH  /api/auth/profile
+
+GET    /api/services
+GET    /api/projects
+GET    /api/pricing
+GET    /api/testimonials
+POST   /api/contact
+
+POST   /api/uploads
+DELETE /api/uploads
+
+GET    /api/admin/dashboard
+GET    /api/admin/profiles
+PATCH  /api/admin/profiles/:id/role
+GET    /api/admin/enquiries
+PATCH  /api/admin/enquiries/:id
+POST   /api/admin/invoices
+POST   /api/admin/payments
+POST   /api/admin/users/invite
+
+GET    /api/client/dashboard
+GET    /api/client/projects
+GET    /api/client/invoices
+GET    /api/client/payments
 ```
 
-Optional:
+## Supabase setup
+
+1. Create a Supabase project.
+2. Open **SQL Editor** and run `supabase/schema.sql`.
+3. Configure your Auth providers in Supabase Authentication.
+4. Copy the project URL and **service role key** into Vercel environment variables.
+5. Never expose `SUPABASE_SERVICE_ROLE_KEY` in the frontend.
+
+The service-role key is intentionally server-only. Frontend applications should use Supabase's publishable/anon key only for Supabase Auth sessions.
+
+## Cloudinary setup
+
+Create a Cloudinary account and add the cloud name, API key and API secret to server environment variables. Uploads are limited to 10 MB and support JPEG, PNG, WebP, GIF and PDF.
+
+## Local development
+
+```bash
+cd backend
+npm install
+cp .env.example .env
+npm run dev
+```
+
+The API runs on `http://localhost:3000` by default.
+
+## Vercel deployment
+
+Create a separate Vercel project for the backend and set its **Root Directory** to `backend`. Vercel will use `backend/vercel.json` and `backend/api/index.js`.
+
+Add these environment variables in Vercel:
 
 ```text
-ALLOWED_ORIGIN=https://limitlessdesign.netlify.app
+NODE_ENV=production
+FRONTEND_URL=https://your-frontend-domain.com
+SUPABASE_URL=https://your-project.supabase.co
+SUPABASE_SERVICE_ROLE_KEY=...
+CLOUDINARY_CLOUD_NAME=...
+CLOUDINARY_API_KEY=...
+CLOUDINARY_API_SECRET=...
+GMAIL_USER=...
+GMAIL_APP_PASSWORD=...
 ```
 
-Do not commit the actual values.
+Do not commit real credentials. If an old Gmail App Password was ever committed, revoke it and generate a replacement.
 
-## Frontend change
+## Frontend authentication
 
-Your contact form should also send the existing honeypot field to the function:
+After signing in with Supabase Auth, send the access token to the API:
 
 ```js
-body: JSON.stringify({
-  name: formData.name.trim(),
-  email: formData.email.trim(),
-  phone: formData.phone.trim(),
-  service: formData.service,
-  message: formData.message.trim(),
-  website: formData.website.trim(),
-})
+fetch(`${API_URL}/api/auth/me`, {
+  headers: { Authorization: `Bearer ${session.access_token}` },
+});
 ```
 
-The backend still works if `website` is omitted, but sending it enables the
-server-side honeypot.
-
-## Netlify
-
-If the repository structure is:
-
-```text
-Limitless-website/
-├── frontend/
-├── backend/
-└── netlify.toml
-```
-
-point Netlify's functions directory at:
-
-```text
-backend/functions
-```
-
-See `netlify.toml.example`.
-
-## Additional production protection
-
-For a public contact endpoint, also configure platform-level rate limiting
-and/or a CAPTCHA such as Cloudflare Turnstile. Do not implement critical
-rate limits only with an in-memory JavaScript object in a serverless
-function, because serverless instances are not guaranteed to share memory.
+For uploads, send a `multipart/form-data` request with a `file` field and a server-authenticated session.
