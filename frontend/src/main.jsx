@@ -6,6 +6,7 @@ import { HelmetProvider } from "react-helmet-async";
 import App from "./App";
 import ContentProtection from "./components/security/ContentProtection";
 import "./styles/global.css";
+import "./styles/security/ContentProtection.css";
 import "./styles/componets/seo/ServiceContentSection.css";
 import "./styles/componets/DiscountPopup.css";
 import "./styles/componets/Footer.css";
