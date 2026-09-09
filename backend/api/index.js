@@ -2,25 +2,51 @@ import express from "express";
 import cors from "cors";
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";
-import { env } from "../config/env.js";
+import { randomUUID } from "node:crypto";
+import { env, allowedOrigins } from "../config/env.js";
 import { publicRouter } from "../routes/public.js";
 import { authRouter } from "../routes/auth.js";
 import { contactRouter } from "../routes/contact.js";
 import { uploadRouter } from "../routes/uploads.js";
 import { adminRouter } from "../routes/admin.js";
 import { clientRouter } from "../routes/client.js";
+import { supabaseAdmin } from "../config/supabase.js";
 import { notFound, errorHandler } from "../middleware/error.js";
 
 const app = express();
 app.set("trust proxy", 1);
-app.use(helmet());
-app.use(cors({ origin: env.FRONTEND_URL, credentials: true, methods: ["GET", "POST", "PATCH", "DELETE", "OPTIONS"] }));
+
+app.use((req, res, next) => {
+  const requestId = req.headers["x-request-id"] || randomUUID();
+  req.requestId = requestId;
+  res.setHeader("x-request-id", requestId);
+  next();
+});
+
+app.use(helmet({ crossOriginResourcePolicy: { policy: "cross-origin" } }));
+app.use(cors({
+  origin(origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) return callback(null, true);
+    return callback(new Error("Origin is not allowed by CORS"));
+  },
+  credentials: true,
+  methods: ["GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization", "X-Request-ID"],
+}));
 app.use(express.json({ limit: "1mb" }));
 app.use(express.urlencoded({ extended: true, limit: "1mb" }));
-app.use(rateLimit({ windowMs: 15 * 60 * 1000, limit: 300, standardHeaders: true, legacyHeaders: false }));
+app.use(rateLimit({ windowMs: 15 * 60 * 1000, limit: 300, standardHeaders: "draft-8", legacyHeaders: false }));
 
-app.get("/", (req, res) => res.json({ success: true, name: "Limitless Design API", version: "2.0.0" }));
+app.get("/", (req, res) => res.json({ success: true, name: "Limitless Design API", version: "3.0.0" }));
 app.get("/health", (req, res) => res.json({ success: true, status: "healthy", timestamp: new Date().toISOString() }));
+app.get("/health/ready", async (req, res, next) => {
+  try {
+    const { error } = await supabaseAdmin.from("profiles").select("id", { head: true, count: "exact" });
+    if (error) throw error;
+    res.json({ success: true, status: "ready", services: { supabase: "ok", api: "ok" } });
+  } catch (error) { next(error); }
+});
+
 app.use("/api/auth", authRouter);
 app.use("/api", publicRouter);
 app.use("/api/contact", contactRouter);
@@ -31,5 +57,8 @@ app.use("/api/client", clientRouter);
 app.use(notFound);
 app.use(errorHandler);
 
-if (process.env.VERCEL !== "1") app.listen(env.PORT, () => console.log(`Limitless API running on :${env.PORT}`));
+if (process.env.VERCEL !== "1") {
+  app.listen(env.PORT, () => console.log(`Limitless API running on :${env.PORT}`));
+}
+
 export default app;
