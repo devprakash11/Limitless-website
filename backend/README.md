@@ -13,21 +13,21 @@ Production-ready REST API for the Limitless Design website.
 - Helmet, CORS and express-rate-limit for API security
 - Vercel Serverless Functions deployment
 
-Supabase Auth owns identity and JWT issuance. The API accepts `Authorization: Bearer <access_token>` and validates the token with Supabase before protected operations. This follows the server-side bearer-token model documented by Supabase. citeturn0search10
+Supabase Auth owns identity and JWT issuance. The API accepts `Authorization: Bearer <access_token>` and validates the token with Supabase before protected operations.
 
 ## Structure
 
 ```text
 backend/
 ├── api/
-│   └── index.js              # Vercel/Express entry point
+│   └── index.js
 ├── config/
 │   ├── cloudinary.js
 │   ├── env.js
 │   ├── mailer.js
 │   └── supabase.js
 ├── middleware/
-│   ├── auth.js               # Supabase JWT + RBAC
+│   ├── auth.js
 │   └── error.js
 ├── routes/
 │   ├── admin.js
@@ -85,7 +85,7 @@ CLOUDINARY_FOLDER=limitless-design
 MAX_UPLOAD_MB=8
 ```
 
-Uploads are performed server-side and stored in `media_assets`. The Cloudinary API secret must remain server-side; Cloudinary explicitly warns not to expose it in client-side code. citeturn0search18
+Uploads are performed server-side and stored in `media_assets`. Keep the Cloudinary API secret server-side.
 
 ## Vercel deployment
 
@@ -99,7 +99,7 @@ Deploy the `backend` directory as a separate Vercel project.
 
 Add all `.env` values in Vercel Project Settings → Environment Variables.
 
-The server exports the Express application from `api/index.js`; Vercel can run Node.js Express applications as serverless functions. citeturn0search11
+The server exports the Express application from `api/index.js` and Vercel runs it as a Node.js serverless function.
 
 Your API URL will look like:
 
@@ -192,7 +192,7 @@ const result = await response.json();
 
 ## Security notes
 
-- Keep Supabase service-role and Cloudinary API secret server-side.
+- Keep Supabase service-role and Cloudinary API secrets server-side.
 - Use Supabase Auth for login/signup/password recovery/social providers.
 - Use the backend only with access tokens issued by Supabase.
 - RLS is enabled in `schema.sql` for direct Supabase access.
