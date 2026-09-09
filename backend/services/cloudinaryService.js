@@ -4,7 +4,7 @@ import cloudinary from "../config/cloudinary.js";
 export function uploadBuffer(buffer, options = {}) {
   return new Promise((resolve, reject) => {
     const stream = cloudinary.uploader.upload_stream(
-      { resource_type: "auto", folder: "limitless-design", ...options },
+      { resource_type: "auto", ...options },
       (error, result) => (error ? reject(error) : resolve(result))
     );
     Readable.from(buffer).pipe(stream);
