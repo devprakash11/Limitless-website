@@ -30,7 +30,7 @@ function Contact() {
     if (!formData.name.trim()) validationErrors.name = "Please enter your name.";
     if (!formData.email.trim()) validationErrors.email = "Please enter your email address.";
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) validationErrors.email = "Please enter a valid email address.";
-    if (formData.phone.trim() && !/^[0-9+\-\s()]{8,15}$/.test(formData.phone.trim())) validationErrors.phone = "Please enter a valid phone number.";
+    if (formData.phone.trim() && !/^[0-9+\-\s()]{7,20}$/.test(formData.phone.trim())) validationErrors.phone = "Please enter a valid phone number.";
     if (!formData.service) validationErrors.service = "Please select the required service.";
     if (!formData.message.trim()) validationErrors.message = "Please describe your project requirement.";
     else if (formData.message.trim().length < 20) validationErrors.message = "Please provide at least 20 characters about your project.";
