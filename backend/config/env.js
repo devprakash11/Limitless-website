@@ -8,9 +8,14 @@ const schema = z.object({
   ALLOWED_ORIGINS: z.string().default(""),
   SUPABASE_URL: z.string().url(),
   SUPABASE_SERVICE_ROLE_KEY: z.string().min(20),
-  GMAIL_USER: z.string().email().optional(),
-  GMAIL_APP_PASSWORD: z.string().min(1).optional(),
-  // Cloudinary — required only when the upload routes are used
+  SMTP_HOST: z.string().min(1).optional(),
+  SMTP_PORT: z.coerce.number().int().positive().optional(),
+  SMTP_SECURE: z.string().optional().default("false"),
+  SMTP_USER: z.string().email().optional(),
+  SMTP_PASS: z.string().min(1).optional(),
+  MAIL_FROM: z.string().email().optional(),
+  CONTACT_EMAIL: z.string().email().optional(),
+  // Cloudinary - required only when the upload routes are used
   CLOUDINARY_CLOUD_NAME: z.string().min(1).optional(),
   CLOUDINARY_API_KEY: z.string().min(1).optional(),
   CLOUDINARY_API_SECRET: z.string().min(1).optional(),
@@ -29,5 +34,10 @@ export const allowedOrigins = [
 ];
 
 export const mailConfigured = Boolean(
-  env.GMAIL_USER && env.GMAIL_APP_PASSWORD,
+  env.SMTP_HOST &&
+    env.SMTP_PORT &&
+    env.SMTP_USER &&
+    env.SMTP_PASS &&
+    env.MAIL_FROM &&
+    env.CONTACT_EMAIL,
 );
