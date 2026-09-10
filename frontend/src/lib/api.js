@@ -1,6 +1,15 @@
-const API_URL = (import.meta.env.VITE_API_URL || "http://localhost:3000").replace(/\/$/, "");
+const configuredApiUrl = import.meta.env.VITE_API_URL?.trim();
+const API_URL = configuredApiUrl
+  ? configuredApiUrl.replace(/\/$/, "")
+  : "";
 
 export async function apiRequest(path, options = {}) {
+  if (!API_URL) {
+    throw new Error(
+      "API is not configured. Set VITE_API_URL to the deployed backend URL.",
+    );
+  }
+
   const { body, headers = {}, timeout = 15000, ...rest } = options;
   const isFormData = typeof FormData !== "undefined" && body instanceof FormData;
   const controller = new AbortController();
@@ -14,7 +23,10 @@ export async function apiRequest(path, options = {}) {
         ...(isFormData ? {} : { "Content-Type": "application/json" }),
         ...headers,
       },
-      body: body && !isFormData && typeof body !== "string" ? JSON.stringify(body) : body,
+      body:
+        body && !isFormData && typeof body !== "string"
+          ? JSON.stringify(body)
+          : body,
     });
 
     const contentType = response.headers.get("content-type") || "";
@@ -38,7 +50,9 @@ export async function apiRequest(path, options = {}) {
       throw new Error("The request timed out. Please try again.");
     }
     if (error instanceof TypeError) {
-      throw new Error("Unable to connect to the server. Please try again later.");
+      throw new Error(
+        "Unable to connect to the server. Please try again later.",
+      );
     }
     throw error;
   } finally {
@@ -47,5 +61,6 @@ export async function apiRequest(path, options = {}) {
 }
 
 export function getApiUrl(path = "") {
+  if (!API_URL) return path;
   return `${API_URL}${path}`;
 }
