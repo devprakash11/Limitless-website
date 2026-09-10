@@ -5,17 +5,17 @@
  * Individual rules can also be switched on/off without changing the component.
  */
 export const CONTENT_PROTECTION = {
-  enabled: true,
+  enabled: false,
 
   rules: {
-    contextMenu: true,
-    keyboardShortcuts: true,
-    imageDrag: true,
-    linkDrag: true,
-    imageMouseDown: true,
-    copy: true,
-    cut: true,
-    textSelection: true,
+    contextMenu: false,
+    keyboardShortcuts: false,
+    imageDrag: false,
+    linkDrag: false,
+    imageMouseDown: false,
+    copy: false,
+    cut: false,
+    textSelection: false,
   },
 };
 
@@ -24,4 +24,4 @@ export const CONTENT_PROTECTION = {
  * are both enabled.
  */
 export const isProtectionEnabled = (rule) =>
-  CONTENT_PROTECTION.enabled && CONTENT_PROTECTION.rules[rule] === true;
+  CONTENT_PROTECTION.enabled && CONTENT_PROTECTION.rules[rule] === false;
