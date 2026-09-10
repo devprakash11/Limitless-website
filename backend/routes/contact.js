@@ -31,15 +31,24 @@ contactRouter.post("/", async (req, res, next) => {
       status: "NEW",
     });
 
-    // The enquiry is already stored successfully. Email delivery should not
-    // make the website report a failed form submission.
     try {
       await sendProjectRequirementEmails(data);
     } catch (emailError) {
       console.error("Contact notification email failed:", emailError);
+      const error = new Error(
+        "Your enquiry was saved, but email delivery failed. Please contact us directly or try again later.",
+      );
+      error.statusCode = 502;
+      error.code = "CONTACT_EMAIL_FAILED";
+      error.cause = emailError;
+      return next(error);
     }
 
-    return created(res, { id: contact.id }, "Your enquiry has been received");
+    return created(
+      res,
+      { id: contact.id, emailSent: true },
+      "Your enquiry has been received and email confirmation has been sent",
+    );
   } catch (e) {
     next(e);
   }
