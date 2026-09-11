@@ -8,19 +8,13 @@ const schema = z.object({
   ALLOWED_ORIGINS: z.string().default(""),
   SUPABASE_URL: z.string().url(),
   SUPABASE_SERVICE_ROLE_KEY: z.string().min(20),
-  SMTP_HOST: z.string().min(1).optional(),
-  SMTP_PORT: z.coerce.number().int().positive().optional(),
-  SMTP_SECURE: z.string().optional().default("false"),
-  SMTP_USER: z.string().email().optional(),
-  SMTP_PASS: z.string().min(1).optional(),
-  MAIL_FROM: z.string().email().optional(),
-  CONTACT_EMAIL: z.string().email().optional(),
-  // Cloudinary - required only when the upload routes are used
-  CLOUDINARY_CLOUD_NAME: z.string().min(1).optional(),
-  CLOUDINARY_API_KEY: z.string().min(1).optional(),
-  CLOUDINARY_API_SECRET: z.string().min(1).optional(),
-  CLOUDINARY_FOLDER: z.string().default("limitless"),
-  MAX_UPLOAD_MB: z.coerce.number().int().positive().default(10),
+  SMTP_HOST: z.string().min(1),
+  SMTP_PORT: z.coerce.number().int().positive(),
+  SMTP_SECURE: z.string().default("false"),
+  SMTP_USER: z.string().email(),
+  SMTP_PASS: z.string().min(1),
+  MAIL_FROM: z.string().email(),
+  CONTACT_EMAIL: z.string().email(),
 });
 
 export const env = schema.parse(process.env);
@@ -32,12 +26,3 @@ export const allowedOrigins = [
     .map((value) => value.trim())
     .filter(Boolean),
 ];
-
-export const mailConfigured = Boolean(
-  env.SMTP_HOST &&
-    env.SMTP_PORT &&
-    env.SMTP_USER &&
-    env.SMTP_PASS &&
-    env.MAIL_FROM &&
-    env.CONTACT_EMAIL,
-);
