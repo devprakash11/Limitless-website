@@ -9,7 +9,6 @@ const COLORS = {
   pink: "#ff5fc7",
   cyan: "#36d8ff",
   dark: "#080816",
-  darkSoft: "#111225",
   text: "#101828",
   muted: "#667085",
   border: "#e4e7ec",
@@ -36,7 +35,6 @@ function getTransporter() {
 }
 
 export async function sendContactEmails(contact) {
-  // Real emails are intentionally disabled during local development.
   if (env.nodeEnv !== "production") {
     console.log("[email] Development mode: contact emails are disabled.");
     return { sent: false, skipped: true };
@@ -50,7 +48,7 @@ export async function sendContactEmails(contact) {
   const data = sanitizeContact(contact);
   const submittedAt = formatDate(contact.created_at);
   const websiteUrl = getWebsiteUrl();
-  const logoUrl = env.emailLogoUrl || `${websiteUrl}/email-logo.png`;
+  const logoUrl = `${websiteUrl}/logo-white.png`;
 
   await Promise.all([
     mailer.sendMail({
@@ -83,23 +81,20 @@ function buildAdminEmail(contact, submittedAt, websiteUrl, logoUrl) {
     logoUrl,
     eyebrow: "New enquiry",
     heading: "A new project request has arrived.",
-    intro: "A client has submitted a new requirement through the Limitless Design website. Review the project details below and reply directly to the client when ready.",
+    intro: "A client has submitted a new requirement through the Limitless Design website. Review the details below and reply directly to the client when ready.",
     body: `
       ${leadSummary(contact, submittedAt)}
-
       <div style="margin-top:28px;">
         <div style="font-size:11px;line-height:17px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;color:${COLORS.primary};">Client message</div>
         <div style="margin-top:10px;padding:20px 22px;background:${COLORS.surface};border:1px solid #e5e7eb;border-left:4px solid ${COLORS.primary};border-radius:14px;font-size:15px;line-height:27px;color:${COLORS.text};">${contact.messageHtml}</div>
       </div>
-
-      <div style="margin-top:30px;padding:18px 20px;background:${COLORS.dark};border-radius:14px;">
+      <div style="margin-top:28px;padding:18px 20px;background:${COLORS.dark};border-radius:14px;">
         <div style="font-size:11px;line-height:17px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:${COLORS.pink};">Quick action</div>
         <div style="margin-top:6px;font-size:14px;line-height:22px;color:#d9d7e5;">Reply to the client or visit the website to review the available design services.</div>
       </div>
-
       <div style="margin-top:26px;text-align:center;">
         <a href="${replyUrl}" class="mobile-button" style="display:inline-block;padding:13px 23px;background:${COLORS.primary};color:${COLORS.white};text-decoration:none;border-radius:10px;font-size:14px;line-height:20px;font-weight:800;">Reply to client</a>
-        <a href="${websiteUrl}" class="mobile-button" style="display:inline-block;margin-left:8px;padding:12px 22px;background:${COLORS.white};color:#344054;text-decoration:none;border:1px solid #d0d5dd;border-radius:10px;font-size:14px;line-height:20px;font-weight:800;">Visit website</a>
+        <a href="${websiteUrl}" class="mobile-button secondary-button" style="display:inline-block;margin-left:8px;padding:12px 22px;background:${COLORS.white};color:#344054;text-decoration:none;border:1px solid #d0d5dd;border-radius:10px;font-size:14px;line-height:20px;font-weight:800;">Visit website</a>
       </div>
     `,
     footerNote: "This notification was generated automatically from the Limitless Design contact form.",
@@ -116,22 +111,19 @@ function buildCustomerEmail(contact, submittedAt, websiteUrl, logoUrl) {
     heading: `Thank you, ${contact.nameText}.`,
     intro: "Your project requirement has been received successfully. We appreciate you choosing Limitless Design and will review the information you provided.",
     body: `
-      <div style="padding:22px;background:${COLORS.surface};border:1px solid #e4e7ec;border-radius:14px;">
+      <div style="padding:22px;background:${COLORS.surface};border:1px solid ${COLORS.border};border-radius:14px;">
         <div style="font-size:10px;line-height:15px;font-weight:800;letter-spacing:1.3px;text-transform:uppercase;color:#98a2b3;">Selected service</div>
         <div style="margin-top:7px;font-size:20px;line-height:28px;font-weight:800;color:${COLORS.text};">${contact.serviceText}</div>
         <div style="margin-top:6px;font-size:12px;line-height:18px;color:${COLORS.muted};">Submitted ${submittedAt}</div>
       </div>
-
       <div style="margin-top:18px;padding:20px;background:#ffffff;border:1px solid #eaecf0;border-radius:14px;">
         <div style="font-size:11px;line-height:17px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:${COLORS.primary};">Your message</div>
         <div style="margin-top:9px;font-size:14px;line-height:25px;color:#475467;">${contact.messageHtml}</div>
       </div>
-
       <div style="margin-top:18px;padding:20px;background:#ffffff;border:1px solid #eaecf0;border-radius:14px;">
         <div style="font-size:11px;line-height:17px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:${COLORS.primary};">What happens next?</div>
         <p style="margin:9px 0 0;font-size:14px;line-height:24px;color:#475467;">Our team will review your requirement and contact you using the email address or phone number you provided. If we need any additional information, we will reach out to you.</p>
       </div>
-
       <div style="margin-top:26px;text-align:center;">
         <a href="${websiteUrl}" class="mobile-button" style="display:inline-block;padding:13px 24px;background:${COLORS.primary};color:${COLORS.white};text-decoration:none;border-radius:10px;font-size:14px;line-height:20px;font-weight:800;">Visit Limitless Design</a>
       </div>
@@ -149,7 +141,7 @@ function emailDocument({ title, preheader, logoUrl, eyebrow, heading, intro, bod
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="x-apple-disable-message-reformatting">
   <meta name="format-detection" content="telephone=no,address=no,email=no,date=no,url=no">
-  <title>${title}</title>
+  <title>${escapeHtml(title)}</title>
   <style>
     body { margin:0 !important; padding:0 !important; width:100% !important; background:#f3f2fb; }
     table { border-spacing:0; }
@@ -161,7 +153,7 @@ function emailDocument({ title, preheader, logoUrl, eyebrow, heading, intro, bod
     .email-header { padding:26px 38px; }
     .email-footer { padding:30px 38px; }
     .mobile-button { white-space:nowrap; }
-    @media only screen and (max-width: 640px) {
+    @media only screen and (max-width:640px) {
       .email-shell { padding:12px !important; }
       .email-card { width:100% !important; }
       .email-content { padding:30px 20px !important; }
@@ -176,8 +168,7 @@ function emailDocument({ title, preheader, logoUrl, eyebrow, heading, intro, bod
   </style>
 </head>
 <body style="margin:0;padding:0;background:#f3f2fb;font-family:Arial,Helvetica,sans-serif;color:${COLORS.text};-webkit-text-size-adjust:100%;">
-  <div style="display:none;max-height:0;overflow:hidden;opacity:0;color:transparent;">${preheader}</div>
-
+  <div style="display:none;max-height:0;overflow:hidden;opacity:0;color:transparent;">${escapeHtml(preheader)}</div>
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%;background:#f3f2fb;">
     <tr>
       <td class="email-shell" align="center" style="padding:42px 16px;">
@@ -196,7 +187,6 @@ function emailDocument({ title, preheader, logoUrl, eyebrow, heading, intro, bod
               </table>
             </td>
           </tr>
-
           <tr>
             <td class="email-content" style="padding:40px 38px 36px;">
               <div style="font-size:11px;line-height:17px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:${COLORS.primary};">${eyebrow}</div>
@@ -206,27 +196,21 @@ function emailDocument({ title, preheader, logoUrl, eyebrow, heading, intro, bod
               ${body}
             </td>
           </tr>
-
           <tr>
             <td class="email-footer" style="padding:30px 38px;background:${COLORS.dark};">
               <div style="font-size:16px;line-height:23px;font-weight:800;color:#ffffff;">Limitless Design</div>
               <div style="margin-top:4px;font-size:12px;line-height:19px;color:#b8b5c8;">Creative design solutions, thoughtfully made.</div>
-
               <div style="height:18px;line-height:18px;font-size:1px;">&nbsp;</div>
               <div style="height:1px;background:#29283a;font-size:1px;line-height:1px;">&nbsp;</div>
-
               <div style="padding-top:18px;font-size:12px;line-height:22px;color:#c5c2d2;">
                 <div style="font-size:10px;line-height:15px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:${COLORS.pink};">Contact us</div>
                 <div style="margin-top:6px;">
-                  <a href="mailto:${env.contactEmail}" style="color:#ffffff;text-decoration:none;">${escapeHtml(env.contactEmail || "help.limitlessdesign@gmail.com")}</a>
+                  <a href="mailto:${escapeHtml(env.contactEmail || "help.limitlessdesign@gmail.com")}" style="color:#ffffff;text-decoration:none;">${escapeHtml(env.contactEmail || "help.limitlessdesign@gmail.com")}</a>
                   <span style="color:#5f5c70;"> &nbsp;•&nbsp; </span>
-                  <a href="tel:${String(env.contactPhone || "").replace(/[^0-9+]/g, "")}" style="color:#ffffff;text-decoration:none;">${escapeHtml(env.contactPhone || "+91 7667583859")}</a>
+                  <a href="tel:${String(env.contactPhone || "+91 7667583859").replace(/[^0-9+]/g, "")}" style="color:#ffffff;text-decoration:none;">${escapeHtml(env.contactPhone || "+91 7667583859")}</a>
                 </div>
-                <div style="margin-top:4px;">
-                  <a href="${websiteUrl}" style="color:${COLORS.cyan};text-decoration:none;">${websiteUrl}</a>
-                </div>
+                <div style="margin-top:4px;"><a href="${websiteUrl}" style="color:${COLORS.cyan};text-decoration:none;">${websiteUrl}</a></div>
               </div>
-
               <div style="padding-top:15px;font-size:11px;line-height:18px;color:#77748a;">${footerNote}</div>
               <div style="padding-top:10px;font-size:10px;line-height:16px;color:#5f5c70;">© ${new Date().getFullYear()} Limitless Design. All rights reserved.</div>
             </td>
@@ -251,22 +235,14 @@ function leadSummary(contact, submittedAt) {
 
   const cells = [];
   for (let index = 0; index < rows.length; index += 2) {
-    cells.push(`
-      <tr>
-        ${detailCell(rows[index])}
-        ${rows[index + 1] ? detailCell(rows[index + 1]) : '<td class="detail-spacer" width="50%" style="width:50%;">&nbsp;</td>'}
-      </tr>
-    `);
+    cells.push(`<tr>${detailCell(rows[index])}${rows[index + 1] ? detailCell(rows[index + 1]) : '<td class="detail-spacer" width="50%">&nbsp;</td>'}</tr>`);
   }
 
   return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%;border:1px solid ${COLORS.border};border-radius:14px;background:#fbfbff;overflow:hidden;">${cells.join("")}</table>`;
 }
 
 function detailCell([label, value]) {
-  return `<td class="detail-cell" width="50%" valign="top" style="width:50%;padding:18px 14px 18px 18px;">
-    <div style="font-size:10px;line-height:15px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#98a2b3;">${label}</div>
-    <div style="margin-top:5px;font-size:14px;line-height:21px;font-weight:700;color:${COLORS.text};">${value}</div>
-  </td>`;
+  return `<td class="detail-cell" width="50%" valign="top" style="width:50%;padding:18px 14px 18px 18px;"><div style="font-size:10px;line-height:15px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#98a2b3;">${label}</div><div style="margin-top:5px;font-size:14px;line-height:21px;font-weight:700;color:${COLORS.text};">${value}</div></td>`;
 }
 
 function buildAdminText(contact, submittedAt, websiteUrl) {
