@@ -3,6 +3,9 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
+  "scripts": {
+    "build": "echo Contact API build complete"
+  },
   "dependencies": {
     "@supabase/supabase-js": "2.57.4",
     "cors": "2.8.5",
