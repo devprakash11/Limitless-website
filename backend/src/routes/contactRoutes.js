@@ -47,7 +47,16 @@ router.post("/", contactLimiter, async (req, res, next) => {
     const contact = await createContact(data);
 
     try {
-      await sendContactEmails({ ...contact, message: data.message });
+      const emailResult = await sendContactEmails({ ...contact, message: data.message });
+
+      return res.status(201).json({
+        success: true,
+        message: emailResult.skipped
+          ? "Requirement submitted successfully. Email delivery is disabled in development."
+          : "Requirement submitted successfully. A confirmation email has been sent.",
+        contactId: contact.id,
+        emailSent: emailResult.sent,
+      });
     } catch (emailError) {
       console.error("[contact] email delivery failed:", emailError);
 
@@ -57,12 +66,6 @@ router.post("/", contactLimiter, async (req, res, next) => {
         contactId: contact.id,
       });
     }
-
-    return res.status(201).json({
-      success: true,
-      message: "Requirement submitted successfully. A confirmation email has been sent.",
-      contactId: contact.id,
-    });
   } catch (error) {
     next(error);
   }
