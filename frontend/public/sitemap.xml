@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <url>
@@ -11,47 +10,43 @@
   </url>
 
   <url>
-    <loc>https://limitlessdesign.vercel.app/services</loc>
-  </url>
-
-  <url>
-    <loc>https://limitlessdesign.vercel.app/features</loc>
-  </url>
-
-  <url>
     <loc>https://limitlessdesign.vercel.app/contact</loc>
   </url>
 
   <url>
-    <loc>https://limitlessdesign.vercel.app/logo</loc>
+    <loc>https://limitlessdesign.vercel.app/live-projects</loc>
   </url>
 
   <url>
-    <loc>https://limitlessdesign.vercel.app/poster</loc>
+    <loc>https://limitlessdesign.vercel.app/price</loc>
   </url>
 
   <url>
-    <loc>https://limitlessdesign.vercel.app/business-card-design</loc>
+    <loc>https://limitlessdesign.vercel.app/services/logo-design</loc>
   </url>
 
   <url>
-    <loc>https://limitlessdesign.vercel.app/photo-frame-design</loc>
+    <loc>https://limitlessdesign.vercel.app/services/social-media-banner</loc>
   </url>
 
   <url>
-    <loc>https://limitlessdesign.vercel.app/wallpaper</loc>
+    <loc>https://limitlessdesign.vercel.app/services/photo-frame</loc>
   </url>
 
   <url>
-    <loc>https://limitlessdesign.vercel.app/branding</loc>
+    <loc>https://limitlessdesign.vercel.app/services/poster-design</loc>
   </url>
 
   <url>
-    <loc>https://limitlessdesign.vercel.app/faqs</loc>
+    <loc>https://limitlessdesign.vercel.app/services/business-card-design</loc>
   </url>
 
   <url>
-    <loc>https://limitlessdesign.vercel.app/commission-work</loc>
+    <loc>https://limitlessdesign.vercel.app/services/branding-materials</loc>
+  </url>
+
+  <url>
+    <loc>https://limitlessdesign.vercel.app/services/ui-design</loc>
   </url>
 
 </urlset>
