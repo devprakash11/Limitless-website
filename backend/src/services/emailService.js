@@ -160,7 +160,7 @@ function emailDocument({ title, preheader, logoUrl, eyebrow, heading, intro, bod
       .email-header { padding:22px 20px !important; }
       .email-footer { padding:26px 20px !important; }
       .email-heading { font-size:27px !important; line-height:35px !important; }
-      .email-logo { width:165px !important; }
+      .email-logo { width:60px !important; }
       .mobile-button { display:block !important; margin:10px 0 0 !important; text-align:center !important; white-space:normal !important; }
       .detail-cell { display:block !important; width:100% !important; padding:15px 16px !important; }
       .detail-spacer { display:none !important; }
