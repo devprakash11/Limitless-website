@@ -1,24 +1,17 @@
-const FORM_ENDPOINT = "https://formsubmit.co/ajax/help.limitlessdesign@gmail.com";
+const API_URL = (import.meta.env.VITE_API_URL || "").replace(/\/$/, "");
 
 export async function submitContact(payload) {
-  const response = await fetch(FORM_ENDPOINT, {
+  if (!API_URL) {
+    throw new Error("Contact service is not configured. Please try again later.");
+  }
+
+  const response = await fetch(`${API_URL}/api/contact`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       Accept: "application/json",
     },
-    body: JSON.stringify({
-      name: payload.name,
-      email: payload.email,
-      phone: payload.phone,
-      service: payload.service,
-      message: payload.message,
-      _subject: `New Limitless Design enquiry: ${payload.service}`,
-      _replyto: payload.email,
-      _template: "table",
-      _captcha: "true",
-      _honey: payload.website || "",
-    }),
+    body: JSON.stringify(payload),
   });
 
   let result = null;
@@ -29,9 +22,7 @@ export async function submitContact(payload) {
   }
 
   if (!response.ok || result?.success === false) {
-    throw new Error(
-      result?.message || "Your requirement could not be submitted. Please try again.",
-    );
+    throw new Error(result?.message || "Your requirement could not be submitted. Please try again.");
   }
 
   return result;
