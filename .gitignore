@@ -1,6 +1,9 @@
 # Dependencies
 node_modules/
 
+# Vite cache
+.vite/
+
 # Production builds
 dist/
 build/

@@ -1,79 +1,97 @@
-# Limitless Design — Website
+# Limitless Design Website
 
-Portfolio and commission website for **Limitless Design** — a professional graphic, e-commerce storefront, and UI design studio.
+Frontend-only portfolio and commission website for **Limitless Design**.
 
-## Project Structure
+The project is a React + Vite single-page application containing the studio homepage, service pages, portfolio work, pricing, live projects, SEO metadata, and contact experience.
 
-```
+## Architecture
+
+```text
 Limitless-website/
-├── frontend/   — React + Vite SPA (deployed to Vercel)
-└── backend/    — Express 5 REST API (deployed to Vercel Serverless)
+├── frontend/
+│   ├── public/              # Static images, logos, sitemap and robots.txt
+│   ├── src/
+│   │   ├── components/      # Reusable UI, service, portfolio, SEO and security components
+│   │   ├── data/            # Static service and page content
+│   │   ├── pages/           # Route-level pages
+│   │   ├── services/        # External service integrations
+│   │   └── styles/          # Global design system and page/component styles
+│   ├── package.json
+│   ├── package-lock.json
+│   └── vercel.json
+├── .gitignore
+└── README.md
 ```
 
-## Frontend
+There is intentionally **no Express, Supabase, Cloudinary, Nodemailer, authentication, database, or backend directory** in this repository.
 
-Built with **React**, **React Router**, and **Vite**. All design service pages, portfolio gallery, pricing, and the contact/commission form are part of the SPA.
+## Contact submission
 
-### Quick start
+The Contact page uses **FormSubmit AJAX** as the form delivery service. The browser sends validated form data directly to the Limitless Design email endpoint, so no custom backend is required.
+
+Before production use, the first FormSubmit submission must be confirmed from the receiving mailbox. FormSubmit also provides spam protection and supports cross-origin AJAX submissions.
+
+The contact flow still keeps client-side validation, a honeypot field, loading state, error state, and success state in the React application.
+
+## Tech stack
+
+- React 19
+- Vite 8
+- React Router 7
+- React Helmet Async
+- Lucide React
+- React Icons
+- Plain CSS with a shared design-system entry
+
+All dependency versions are pinned for reproducible installs.
+
+## Local development
 
 ```bash
 cd frontend
-npm install
-cp .env.example .env.local   # set VITE_API_URL to your backend URL
+npm ci
 npm run dev
 ```
 
-The app runs on `http://localhost:5173` by default.
+The development server normally runs at `http://localhost:5173`.
 
-### Environment variables
-
-| Variable | Description |
-|---|---|
-| `VITE_API_URL` | Base URL of the backend API (e.g. `http://localhost:3000` locally or your Vercel deployment URL in production) |
-
-## Backend
-
-Production-ready REST API built with **Express 5**, **Supabase** (PostgreSQL + Auth), **Cloudinary** (media storage), and **Nodemailer** (contact email notifications). See [`backend/README.md`](./backend/README.md) for full setup instructions.
-
-### Quick start
+## Production build
 
 ```bash
-cd backend
-npm install
-cp .env.example .env   # fill in Supabase and Gmail credentials
-npm run dev
+cd frontend
+npm ci
+npm run build
+npm run preview
 ```
 
-API runs on `http://localhost:3000` by default.
+The generated production files are written to `frontend/dist`.
 
-## API Overview
+## Vercel deployment
 
-| Route | Auth | Description |
-|---|---|---|
-| `GET /health` | Public | Health check |
-| `GET /api/services` | Public | Active design services |
-| `GET /api/projects` | Public | Published portfolio projects |
-| `GET /api/pricing` | Public | Active pricing plans |
-| `GET /api/testimonials` | Public | Published testimonials |
-| `POST /api/contact` | Public | Submit a project enquiry |
-| `GET /api/auth/me` | Bearer JWT | Current user profile |
-| `PATCH /api/auth/profile` | Bearer JWT | Update profile |
-| `GET /api/client/dashboard` | Bearer JWT | Client projects, invoices, payments |
-| `GET /api/admin/dashboard` | Admin JWT | Admin overview |
-| `POST /api/admin/invoices` | Admin JWT | Create invoice |
-| `POST /api/admin/payments` | Admin JWT | Record payment |
-| `POST /api/uploads` | Admin JWT | Upload media to Cloudinary |
+The Vercel project should use `frontend` as its project root, with the standard Vite build command:
 
-## Deployment
+```text
+npm run build
+```
 
-Both `frontend/` and `backend/` contain their own `vercel.json` and are deployed as separate Vercel projects.
+No backend URL or server environment variable is required by the application.
 
-- **Frontend** — set `VITE_API_URL` in Vercel environment variables to the backend deployment URL.
-- **Backend** — set all variables from `backend/.env.example` in Vercel environment variables.
+## Design system
 
-## Contact
+`frontend/src/styles/design-system.css` is the single stylesheet entry imported by `main.jsx`. It loads the shared base styles and the component/page styles in a controlled order.
 
-**Dev Prakash** — Graphic Designer | UI Designer  
-📧 devprakash1162004@gmail.com  
-🔗 [linkedin.com/in/dev-prakash11](https://linkedin.com/in/dev-prakash11)  
-🎨 [behance.net/devprakash116](https://behance.net/devprakash116)
+Shared tokens, reset rules, typography, containers, common cards, buttons, and responsive foundations remain centralized in `global.css`.
+
+## Performance
+
+Portfolio images use modern WebP assets where available, lazy loading for below-the-fold content, asynchronous image decoding, and stable media containers to reduce layout shift.
+
+For future asset batches, oversized source images should be converted to appropriately sized WebP/AVIF variants before being committed.
+
+## Routes
+
+The application includes the main studio pages, service pages, pricing, contact, live projects, download previews, and a fallback route. Service and portfolio content is data-driven and rendered through reusable components.
+
+## License
+
+Private project for Limitless Design.
