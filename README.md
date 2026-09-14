@@ -1,51 +1,90 @@
 # Limitless Design Website
 
-Frontend-only portfolio and commission website for **Limitless Design**.
-
-The project is a React + Vite single-page application containing the studio homepage, service pages, portfolio work, pricing, live projects, SEO metadata, and contact experience.
+Limitless Design portfolio and commission website with a React + Vite frontend and a dedicated contact API.
 
 ## Architecture
 
 ```text
 Limitless-website/
-├── frontend/
-│   ├── public/              # Static images, logos, sitemap and robots.txt
+├── frontend/                # React + Vite website
+│   ├── public/
 │   ├── src/
-│   │   ├── components/      # Reusable UI, service, portfolio, SEO and security components
-│   │   ├── data/            # Static service and page content
-│   │   ├── pages/           # Route-level pages
-│   │   ├── services/        # External service integrations
-│   │   └── styles/          # Global design system and page/component styles
+│   │   ├── components/
+│   │   ├── data/
+│   │   ├── pages/
+│   │   ├── services/
+│   │   └── styles/
 │   ├── package.json
-│   ├── package-lock.json
 │   └── vercel.json
-├── .gitignore
-└── README.md
+│
+├── backend/                 # Contact API only
+│   ├── api/index.js
+│   ├── src/
+│   │   ├── config/
+│   │   ├── routes/
+│   │   └── services/
+│   ├── supabase/schema.sql
+│   ├── package.json
+│   └── vercel.json
+└── .gitignore
 ```
 
-There is intentionally **no Express, Supabase, Cloudinary, Nodemailer, authentication, database, or backend directory** in this repository.
+## Contact flow
 
-## Contact submission
+```text
+Contact page
+   ↓
+React submitContact()
+   ↓
+POST /api/contact
+   ↓
+Express validation + rate limiting + honeypot
+   ↓
+Supabase contacts table
+   ↓
+Resend email notification
+   ↓
+help.limitlessdesign@gmail.com
+```
 
-The Contact page uses **FormSubmit AJAX** as the form delivery service. The browser sends validated form data directly to the Limitless Design email endpoint, so no custom backend is required.
+The frontend uses `VITE_API_URL` when provided. In production it falls back to the deployed contact API, while local development uses `http://localhost:5000`.
 
-Before production use, the first FormSubmit submission must be confirmed from the receiving mailbox. FormSubmit also provides spam protection and supports cross-origin AJAX submissions.
+The backend validates all incoming fields with Zod, limits requests, applies Helmet and CORS, stores enquiries with a `NEW` status, and sends email notifications through Resend. The Supabase service-role key is server-only.
 
-The contact flow still keeps client-side validation, a honeypot field, loading state, error state, and success state in the React application.
+## Backend setup
 
-## Tech stack
+```bash
+cd backend
+npm install
+cp .env.example .env
+npm run dev
+```
 
-- React 19
-- Vite 8
-- React Router 7
-- React Helmet Async
-- Lucide React
-- React Icons
-- Plain CSS with a shared design-system entry
+Local API:
 
-All dependency versions are pinned for reproducible installs.
+```text
+GET  http://localhost:5000/health
+POST http://localhost:5000/api/contact
+```
 
-## Local development
+Run `backend/supabase/schema.sql` in the Supabase SQL Editor before submitting real enquiries.
+
+## Backend environment variables
+
+```env
+PORT=5000
+NODE_ENV=development
+FRONTEND_URL=http://localhost:5173
+SUPABASE_URL=https://your-project.supabase.co
+SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
+RESEND_API_KEY=re_your_api_key
+CONTACT_EMAIL=help.limitlessdesign@gmail.com
+RESEND_FROM_EMAIL=Limitless Design <onboarding@resend.dev>
+```
+
+For production, use a verified Resend sender domain and set `FRONTEND_URL` to the production frontend origin.
+
+## Frontend development
 
 ```bash
 cd frontend
@@ -53,44 +92,48 @@ npm ci
 npm run dev
 ```
 
-The development server normally runs at `http://localhost:5173`.
+The frontend normally runs at `http://localhost:5173`.
 
-## Production build
+## Frontend production build
 
 ```bash
 cd frontend
 npm ci
 npm run build
-npm run preview
 ```
 
-The generated production files are written to `frontend/dist`.
+## Vercel
 
-## Vercel deployment
+Frontend Vercel project:
 
-The Vercel project should use `frontend` as its project root, with the standard Vite build command:
+- Root Directory: `frontend`
+- Build Command: `npm run build`
 
-```text
-npm run build
-```
+Backend Vercel project:
 
-No backend URL or server environment variable is required by the application.
+- Root Directory: `backend`
+- Build Command: `npm run build`
+- Entry point: `api/index.js`
+
+Required backend production variables:
+
+- `FRONTEND_URL`
+- `SUPABASE_URL`
+- `SUPABASE_SERVICE_ROLE_KEY`
+- `RESEND_API_KEY`
+- `CONTACT_EMAIL`
+- `RESEND_FROM_EMAIL`
+- `NODE_ENV=production`
+
+Never commit `.env` or API keys.
 
 ## Design system
 
-`frontend/src/styles/design-system.css` is the single stylesheet entry imported by `main.jsx`. It loads the shared base styles and the component/page styles in a controlled order.
-
-Shared tokens, reset rules, typography, containers, common cards, buttons, and responsive foundations remain centralized in `global.css`.
-
-## Performance
-
-Portfolio images use modern WebP assets where available, lazy loading for below-the-fold content, asynchronous image decoding, and stable media containers to reduce layout shift.
-
-For future asset batches, oversized source images should be converted to appropriately sized WebP/AVIF variants before being committed.
+`frontend/src/styles/design-system.css` is the single stylesheet entry imported by `main.jsx`. Shared styling remains organized across the global, component, page and security style layers.
 
 ## Routes
 
-The application includes the main studio pages, service pages, pricing, contact, live projects, download previews, and a fallback route. Service and portfolio content is data-driven and rendered through reusable components.
+The frontend contains the studio homepage, about, contact, pricing, live projects, service pages, download previews, and fallback route.
 
 ## License
 
