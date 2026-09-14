@@ -2,7 +2,7 @@ import { Router } from "express";
 import rateLimit from "express-rate-limit";
 import { z } from "zod";
 import { createContact } from "../services/contactService.js";
-import { sendContactNotification } from "../services/emailService.js";
+import { sendContactEmails } from "../services/emailService.js";
 
 const router = Router();
 
@@ -26,6 +26,7 @@ const contactSchema = z.object({
 router.post("/", contactLimiter, async (req, res, next) => {
   try {
     const parsed = contactSchema.safeParse(req.body);
+
     if (!parsed.success) {
       return res.status(400).json({
         success: false,
@@ -35,30 +36,36 @@ router.post("/", contactLimiter, async (req, res, next) => {
     }
 
     const data = parsed.data;
+
     if (data.website) {
-      return res.status(200).json({ success: true, message: "Requirement submitted successfully." });
+      return res.status(200).json({
+        success: true,
+        message: "Requirement submitted successfully.",
+      });
     }
 
     const contact = await createContact(data);
 
     try {
-      await sendContactNotification(contactWithMessage(contact, data.message));
+      await sendContactEmails({ ...contact, message: data.message });
     } catch (emailError) {
-      console.error("[contact] email notification failed:", emailError.message);
+      console.error("[contact] email delivery failed:", emailError);
+
+      return res.status(500).json({
+        success: false,
+        message: "Your enquiry was saved, but the confirmation email could not be sent. Please try again later.",
+        contactId: contact.id,
+      });
     }
 
     return res.status(201).json({
       success: true,
-      message: "Requirement submitted successfully.",
+      message: "Requirement submitted successfully. A confirmation email has been sent.",
       contactId: contact.id,
     });
   } catch (error) {
     next(error);
   }
 });
-
-function contactWithMessage(contact, message) {
-  return { ...contact, message };
-}
 
 export default router;
