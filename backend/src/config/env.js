@@ -24,4 +24,5 @@ export const env = {
   gmailAppPassword: process.env.GMAIL_APP_PASSWORD,
   contactEmail: process.env.CONTACT_EMAIL,
   contactPhone: process.env.CONTACT_PHONE || "+91 7667583859",
+  emailLogoUrl: process.env.EMAIL_LOGO_URL,
 };
