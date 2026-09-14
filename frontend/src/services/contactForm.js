@@ -1,10 +1,11 @@
-const API_URL = (import.meta.env.VITE_API_URL || "").replace(/\/$/, "");
+const API_URL = (
+  import.meta.env.VITE_API_URL ||
+  (import.meta.env.DEV
+    ? "http://localhost:5000"
+    : "https://limitless-website-backend-devprakash11s-projects.vercel.app")
+).replace(/\/$/, "");
 
 export async function submitContact(payload) {
-  if (!API_URL) {
-    throw new Error("Contact service is not configured. Please try again later.");
-  }
-
   const response = await fetch(`${API_URL}/api/contact`, {
     method: "POST",
     headers: {
@@ -22,7 +23,9 @@ export async function submitContact(payload) {
   }
 
   if (!response.ok || result?.success === false) {
-    throw new Error(result?.message || "Your requirement could not be submitted. Please try again.");
+    throw new Error(
+      result?.message || "Your requirement could not be submitted. Please try again.",
+    );
   }
 
   return result;
