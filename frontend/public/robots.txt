@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
 
+# Preview/download pages are intentionally excluded from crawling.
+Disallow: /download/
+Disallow: /logo-download/
+
 Sitemap: https://limitlessdesign.vercel.app/sitemap.xml
