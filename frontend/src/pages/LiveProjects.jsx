@@ -17,17 +17,17 @@ const liveProjects = [
     tags: ["React", "Supabase", "QR Code", "Responsive"],
   },
   {
-    id: "threads-ecommerce",
-    title: "Threads Ecommerce",
-    category: "Ecommerce",
-    description:
-      "A modern fashion ecommerce website featuring curated collections, product discovery, responsive shopping experiences, and a polished editorial design.",
-    url: "https://threads-ecommerce.vercel.app/",
-    thumbnail: "/projects/threads-ecommerce.svg",
-    badge: "Live",
-    accent: "blue",
-    tags: ["React", "Vite", "UI/UX", "Responsive", "Vercel"],
-  },
+id: "threads-ecommerce",
+title: "Threads Ecommerce",
+category: "Fashion Ecommerce",
+description:
+"A polished fashion ecommerce experience with curated products and responsive design.",
+url: "https://threads-ecommerce.vercel.app/",
+thumbnail: "/projects/threads-ecommerce.svg",
+badge: "Live",
+accent: "blue",
+tags: ["React", "Vite", "UI/UX", "Responsive"],
+},
 ];
 
 function LiveProjects() {
