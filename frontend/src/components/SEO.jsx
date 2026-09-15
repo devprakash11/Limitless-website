@@ -1,134 +1,60 @@
 import { Helmet } from "react-helmet-async";
 import { useLocation } from "react-router-dom";
 import { brandCases } from "../data/BrandingMaterialsData";
+import {
+  BREADCRUMB_LABELS,
+  DEFAULT_DESCRIPTION,
+  DEFAULT_IMAGE,
+  SERVICE_SEO,
+  SITE_NAME,
+  SITE_URL,
+  STATIC_SEO,
+  isNoIndexRoute,
+  normalizePath,
+  toAbsoluteUrl,
+} from "./seo.config";
 
-const SITE_URL = "https://limitlessdesign.netlify.app";
-const SITE_NAME = "Limitless Design";
-const DEFAULT_IMAGE = `${SITE_URL}/logo-01.webp`;
-const DEFAULT_DESCRIPTION =
-  "Limitless Design provides professional UI/UX, logo, branding and graphic design services for businesses, startups and growing brands.";
+const getCaseStudy = (pathname) => {
+  if (!pathname.startsWith("/services/branding-materials/")) return null;
 
-const PAGE_SEO = {
-  "/": {
-    title: "Limitless Design | UI/UX, Logo & Graphic Design",
-    description:
-      "Limitless Design provides professional UI/UX, logo, branding and graphic design services for businesses, startups and growing brands.",
-    type: "WebSite",
-  },
-  "/about": {
-    title: "About Limitless Design | Creative Design Studio",
-    description:
-      "Learn about Limitless Design and our approach to UI/UX, branding, logo design and graphic design for modern businesses and digital products.",
-    type: "AboutPage",
-  },
-  "/contact": {
-    title: "Contact Limitless Design | Start a Design Project",
-    description:
-      "Contact Limitless Design for UI/UX, logo, branding, poster, business card and graphic design projects. Tell us what you need and start your project.",
-    type: "ContactPage",
-  },
-  "/live-projects": {
-    title: "Live Projects | Limitless Design Portfolio",
-    description:
-      "Explore live websites and digital projects created by Limitless Design, including UI/UX work, web experiences and selected creative projects.",
-    type: "CollectionPage",
-  },
-  "/price": {
-    title: "UI/UX & Graphic Design Pricing | Limitless Design",
-    description:
-      "View transparent Limitless Design pricing for UI/UX design, branding and graphic design services, including available packages and project options.",
-    type: "WebPage",
-  },
-  "/services/logo-design": {
-    title: "Logo Design Services | Limitless Design",
-    description:
-      "Professional logo design for startups, businesses and growing brands. Get a memorable, scalable and print-ready logo from Limitless Design.",
-    service: "Logo Design",
-  },
-  "/services/social-media-banner": {
-    title: "Social Media Banner Design | Limitless Design",
-    description:
-      "Custom social media banner designs for campaigns, promotions and brand communication across Instagram, Facebook, LinkedIn and other platforms.",
-    service: "Social Media Banner Design",
-  },
-  "/services/photo-frame": {
-    title: "Photo Frame Design Services | Limitless Design",
-    description:
-      "Creative photo frame designs for events, campaigns, festivals, organizations and social media, tailored to your visual identity.",
-    service: "Photo Frame Design",
-  },
-  "/services/poster-design": {
-    title: "Poster Design Services | Limitless Design",
-    description:
-      "Professional poster design for events, launches, offers, awareness campaigns and promotions, created for clear and effective visual communication.",
-    service: "Poster Design",
-  },
-  "/services/business-card-design": {
-    title: "Business Card Design | Limitless Design",
-    description:
-      "Professional business card design with clean typography, strong brand identity and print-ready layouts for corporate and creative businesses.",
-    service: "Business Card Design",
-  },
-  "/services/branding-materials": {
-    title: "Branding Materials Design | Limitless Design",
-    description:
-      "Build a consistent brand identity with professional branding materials for stationery, brochures, social media, marketing and business communication.",
-    service: "Branding Materials Design",
-  },
-  "/services/ui-design": {
-    title: "UI/UX Design Services | Limitless Design",
-    description:
-      "Professional UI/UX design for websites, mobile apps, dashboards, SaaS products and ecommerce platforms with responsive, user-focused interfaces.",
-    service: "UI/UX Design",
-  },
+  const brandSlug = pathname.split("/")[3];
+  if (!brandSlug) return null;
+
+  return Array.isArray(brandCases)
+    ? brandCases.find((item) => item.slug === brandSlug) || null
+    : null;
 };
 
-const SERVICE_SLUGS = {
-  "logo-design": "Logo Design",
-  "social-media-banner": "Social Media Banner Design",
-  "photo-frame": "Photo Frame Design",
-  "poster-design": "Poster Design",
-  "business-card-design": "Business Card Design",
-  "branding-materials": "Branding Materials Design",
-  "ui-design": "UI/UX Design",
+const getCaseStudySeo = (brand) => {
+  const category = brand.category || "Brand Identity";
+  const description = brand.description ||
+    `Explore the ${category.toLowerCase()} case study created by Limitless Design.`;
+
+  return {
+    title: `${brand.brandName} | ${category} Case Study | Limitless Design`,
+    description: description.length > 160 ? `${description.slice(0, 157)}...` : description,
+    type: "CreativeWork",
+    image: brand.images?.heroLogo || brand.image || DEFAULT_IMAGE,
+    caseStudy: brand,
+  };
 };
 
-function getSeo(pathname) {
-  if (PAGE_SEO[pathname]) return PAGE_SEO[pathname];
+const getSeo = (pathname) => {
+  const normalizedPath = normalizePath(pathname);
 
-  if (pathname.startsWith("/services/branding-materials/")) {
-    const brandSlug = pathname.split("/")[3];
-    const brand = Array.isArray(brandCases)
-      ? brandCases.find((item) => item.slug === brandSlug)
-      : null;
+  if (STATIC_SEO[normalizedPath]) return STATIC_SEO[normalizedPath];
 
-    if (brand) {
-      return {
-        title: `${brand.brandName} Brand Identity Case Study | Limitless Design`,
-        description: `${brand.description} Explore the brand identity system, visual elements and applications created by Limitless Design.`,
-        type: "CreativeWork",
-        image: brand.image || DEFAULT_IMAGE,
-      };
-    }
+  const caseStudy = getCaseStudy(normalizedPath);
+  if (caseStudy) return getCaseStudySeo(caseStudy);
+
+  if (normalizedPath.startsWith("/services/")) {
+    const slug = normalizedPath.split("/")[2];
+    const service = SERVICE_SEO[slug];
+
+    if (service) return service;
   }
 
-  if (pathname.startsWith("/services/")) {
-    const slug = pathname.split("/")[2];
-    const service = SERVICE_SLUGS[slug];
-
-    if (service) {
-      return {
-        title: `${service} Services | Limitless Design`,
-        description: `Professional ${service.toLowerCase()} services from Limitless Design for businesses, brands and digital projects.`,
-        service,
-      };
-    }
-  }
-
-  if (
-    pathname.startsWith("/download/") ||
-    pathname.startsWith("/logo-download/")
-  ) {
+  if (isNoIndexRoute(normalizedPath)) {
     return {
       title: "Design Preview | Limitless Design",
       description: "Design preview page from Limitless Design.",
@@ -143,105 +69,141 @@ function getSeo(pathname) {
     noIndex: true,
     type: "WebPage",
   };
-}
+};
 
-function buildStructuredData({ pathname, seo, canonicalUrl, imageUrl }) {
-  const breadcrumbItems = pathname
-    .split("/")
-    .filter(Boolean)
-    .map((segment, index, segments) => ({
+const getBreadcrumbLabel = (segment) => {
+  if (BREADCRUMB_LABELS[segment]) return BREADCRUMB_LABELS[segment];
+  return decodeURIComponent(segment)
+    .replace(/-/g, " ")
+    .replace(/\b\w/g, (letter) => letter.toUpperCase());
+};
+
+const buildBreadcrumb = (pathname) => {
+  const normalizedPath = normalizePath(pathname);
+  if (normalizedPath === "/") return null;
+
+  const segments = normalizedPath.split("/").filter(Boolean);
+  const items = [
+    {
       "@type": "ListItem",
-      position: index + 1,
-      name: segment
-        .replace(/-/g, " ")
-        .replace(/\b\w/g, (letter) => letter.toUpperCase()),
+      position: 1,
+      name: "Home",
+      item: SITE_URL,
+    },
+  ];
+
+  segments.forEach((segment, index) => {
+    items.push({
+      "@type": "ListItem",
+      position: index + 2,
+      name: getBreadcrumbLabel(segment),
       item: `${SITE_URL}/${segments.slice(0, index + 1).join("/")}`,
-    }));
-
-  const breadcrumb = {
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: SITE_NAME,
-        item: SITE_URL,
-      },
-      ...breadcrumbItems,
-    ],
-  };
-
-  if (seo.service) {
-    return {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "Service",
-          name: seo.service,
-          description: seo.description,
-          provider: {
-            "@type": "Organization",
-            name: SITE_NAME,
-            url: SITE_URL,
-          },
-          url: canonicalUrl,
-        },
-        breadcrumb,
-      ],
-    };
-  }
-
-  if (seo.type === "WebSite") {
-    return {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "Organization",
-          name: SITE_NAME,
-          url: SITE_URL,
-          logo: imageUrl,
-        },
-        {
-          "@type": "WebSite",
-          name: SITE_NAME,
-          url: SITE_URL,
-          description: seo.description,
-        },
-      ],
-    };
-  }
+    });
+  });
 
   return {
-    "@context": "https://schema.org",
-    "@graph": [
+    "@type": "BreadcrumbList",
+    itemListElement: items,
+  };
+};
+
+const buildStructuredData = ({ pathname, seo, canonicalUrl, imageUrl }) => {
+  const graph = [];
+  const breadcrumb = buildBreadcrumb(pathname);
+
+  if (seo.type === "WebSite") {
+    graph.push(
       {
-        "@type": seo.type || "WebPage",
+        "@type": "Organization",
+        "@id": `${SITE_URL}/#organization`,
+        name: SITE_NAME,
+        url: SITE_URL,
+        logo: imageUrl,
+      },
+      {
+        "@type": "WebSite",
+        "@id": `${SITE_URL}/#website`,
+        name: SITE_NAME,
+        url: SITE_URL,
+        description: seo.description,
+        publisher: { "@id": `${SITE_URL}/#organization` },
+      },
+    );
+  } else if (seo.service) {
+    graph.push(
+      {
+        "@type": "Service",
+        "@id": `${canonicalUrl}#service`,
+        name: seo.service,
+        description: seo.description,
+        provider: { "@id": `${SITE_URL}/#organization` },
+        url: canonicalUrl,
+        image: imageUrl,
+      },
+      {
+        "@type": "WebPage",
+        "@id": `${canonicalUrl}#webpage`,
         name: seo.title,
         description: seo.description,
         url: canonicalUrl,
-        isPartOf: {
-          "@type": "WebSite",
-          name: SITE_NAME,
-          url: SITE_URL,
-        },
+        isPartOf: { "@id": `${SITE_URL}/#website` },
+        mainEntity: { "@id": `${canonicalUrl}#service` },
       },
-      breadcrumb,
-    ],
+    );
+  } else if (seo.caseStudy) {
+    graph.push(
+      {
+        "@type": "CreativeWork",
+        "@id": `${canonicalUrl}#case-study`,
+        name: seo.caseStudy.brandName,
+        headline: seo.title,
+        description: seo.description,
+        url: canonicalUrl,
+        image: imageUrl,
+        dateCreated: seo.caseStudy.year ? `${seo.caseStudy.year}-01-01` : undefined,
+        creator: { "@id": `${SITE_URL}/#organization` },
+      },
+      {
+        "@type": "WebPage",
+        "@id": `${canonicalUrl}#webpage`,
+        name: seo.title,
+        description: seo.description,
+        url: canonicalUrl,
+        isPartOf: { "@id": `${SITE_URL}/#website` },
+        mainEntity: { "@id": `${canonicalUrl}#case-study` },
+      },
+    );
+  } else {
+    graph.push({
+      "@type": seo.type || "WebPage",
+      "@id": `${canonicalUrl}#webpage`,
+      name: seo.title,
+      description: seo.description,
+      url: canonicalUrl,
+      isPartOf: { "@id": `${SITE_URL}/#website` },
+    });
+  }
+
+  if (breadcrumb) graph.push(breadcrumb);
+
+  return {
+    "@context": "https://schema.org",
+    "@graph": graph,
   };
-}
+};
 
 function SEO() {
   const { pathname } = useLocation();
   const seo = getSeo(pathname);
-  const normalizedPath =
-    pathname === "/" ? "/" : pathname.replace(/\/$/, "");
+  const normalizedPath = normalizePath(pathname);
   const canonicalUrl = `${SITE_URL}${normalizedPath}`;
-  const imageUrl = seo.image?.startsWith("http")
-    ? seo.image
-    : `${SITE_URL}${seo.image || "/logo-01.webp"}`;
+  const imageUrl = toAbsoluteUrl(seo.image, DEFAULT_IMAGE);
   const structuredData = seo.noIndex
     ? null
-    : buildStructuredData({ pathname, seo, canonicalUrl, imageUrl });
+    : buildStructuredData({ pathname: normalizedPath, seo, canonicalUrl, imageUrl });
+
+  const robots = seo.noIndex ? "noindex, nofollow" : "index, follow";
+  const ogType = seo.caseStudy ? "article" : "website";
 
   return (
     <Helmet>
@@ -249,13 +211,10 @@ function SEO() {
       <title>{seo.title}</title>
       <meta name="description" content={seo.description} />
       <meta name="author" content={SITE_NAME} />
-      <meta
-        name="robots"
-        content={seo.noIndex ? "noindex, nofollow" : "index, follow"}
-      />
+      <meta name="robots" content={robots} />
       <link rel="canonical" href={canonicalUrl} />
 
-      <meta property="og:type" content="website" />
+      <meta property="og:type" content={ogType} />
       <meta property="og:title" content={seo.title} />
       <meta property="og:description" content={seo.description} />
       <meta property="og:url" content={canonicalUrl} />
@@ -263,11 +222,14 @@ function SEO() {
       <meta property="og:locale" content="en_IN" />
       <meta property="og:image" content={imageUrl} />
       <meta property="og:image:alt" content={`${seo.title} | ${SITE_NAME}`} />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
 
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={seo.title} />
       <meta name="twitter:description" content={seo.description} />
       <meta name="twitter:image" content={imageUrl} />
+      <meta name="twitter:image:alt" content={`${seo.title} | ${SITE_NAME}`} />
 
       {structuredData && (
         <script type="application/ld+json">
