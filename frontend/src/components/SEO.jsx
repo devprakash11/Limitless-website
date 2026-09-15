@@ -27,12 +27,14 @@ const getCaseStudy = (pathname) => {
 
 const getCaseStudySeo = (brand) => {
   const category = brand.category || "Brand Identity";
-  const description = brand.description ||
+  const description =
+    brand.description ||
     `Explore the ${category.toLowerCase()} case study created by Limitless Design.`;
 
   return {
     title: `${brand.brandName} | ${category} Case Study | Limitless Design`,
-    description: description.length > 160 ? `${description.slice(0, 157)}...` : description,
+    description:
+      description.length > 160 ? `${description.slice(0, 157)}...` : description,
     type: "CreativeWork",
     image: brand.images?.heroLogo || brand.image || DEFAULT_IMAGE,
     caseStudy: brand,
@@ -78,7 +80,7 @@ const getBreadcrumbLabel = (segment) => {
     .replace(/\b\w/g, (letter) => letter.toUpperCase());
 };
 
-const buildBreadcrumb = (pathname) => {
+const buildBreadcrumb = (pathname, seo) => {
   const normalizedPath = normalizePath(pathname);
   if (normalizedPath === "/") return null;
 
@@ -93,10 +95,16 @@ const buildBreadcrumb = (pathname) => {
   ];
 
   segments.forEach((segment, index) => {
+    const isLast = index === segments.length - 1;
+    const label =
+      isLast && seo.caseStudy
+        ? seo.caseStudy.brandName
+        : getBreadcrumbLabel(segment);
+
     items.push({
       "@type": "ListItem",
       position: index + 2,
-      name: getBreadcrumbLabel(segment),
+      name: label,
       item: `${SITE_URL}/${segments.slice(0, index + 1).join("/")}`,
     });
   });
@@ -108,27 +116,27 @@ const buildBreadcrumb = (pathname) => {
 };
 
 const buildStructuredData = ({ pathname, seo, canonicalUrl, imageUrl }) => {
-  const graph = [];
-  const breadcrumb = buildBreadcrumb(pathname);
+  const breadcrumb = buildBreadcrumb(pathname, seo);
+  const graph = [
+    {
+      "@type": "Organization",
+      "@id": `${SITE_URL}/#organization`,
+      name: SITE_NAME,
+      url: SITE_URL,
+      logo: DEFAULT_IMAGE,
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${SITE_URL}/#website`,
+      name: SITE_NAME,
+      url: SITE_URL,
+      description: DEFAULT_DESCRIPTION,
+      publisher: { "@id": `${SITE_URL}/#organization` },
+    },
+  ];
 
   if (seo.type === "WebSite") {
-    graph.push(
-      {
-        "@type": "Organization",
-        "@id": `${SITE_URL}/#organization`,
-        name: SITE_NAME,
-        url: SITE_URL,
-        logo: imageUrl,
-      },
-      {
-        "@type": "WebSite",
-        "@id": `${SITE_URL}/#website`,
-        name: SITE_NAME,
-        url: SITE_URL,
-        description: seo.description,
-        publisher: { "@id": `${SITE_URL}/#organization` },
-      },
-    );
+    graph[1].description = seo.description;
   } else if (seo.service) {
     graph.push(
       {
@@ -160,7 +168,9 @@ const buildStructuredData = ({ pathname, seo, canonicalUrl, imageUrl }) => {
         description: seo.description,
         url: canonicalUrl,
         image: imageUrl,
-        dateCreated: seo.caseStudy.year ? `${seo.caseStudy.year}-01-01` : undefined,
+        ...(seo.caseStudy.year
+          ? { dateCreated: `${seo.caseStudy.year}-01-01` }
+          : {}),
         creator: { "@id": `${SITE_URL}/#organization` },
       },
       {
@@ -200,7 +210,12 @@ function SEO() {
   const imageUrl = toAbsoluteUrl(seo.image, DEFAULT_IMAGE);
   const structuredData = seo.noIndex
     ? null
-    : buildStructuredData({ pathname: normalizedPath, seo, canonicalUrl, imageUrl });
+    : buildStructuredData({
+        pathname: normalizedPath,
+        seo,
+        canonicalUrl,
+        imageUrl,
+      });
 
   const robots = seo.noIndex ? "noindex, nofollow" : "index, follow";
   const ogType = seo.caseStudy ? "article" : "website";
@@ -229,7 +244,10 @@ function SEO() {
       <meta name="twitter:title" content={seo.title} />
       <meta name="twitter:description" content={seo.description} />
       <meta name="twitter:image" content={imageUrl} />
-      <meta name="twitter:image:alt" content={`${seo.title} | ${SITE_NAME}`} />
+      <meta
+        name="twitter:image:alt"
+        content={`${seo.title} | ${SITE_NAME}`}
+      />
 
       {structuredData && (
         <script type="application/ld+json">
