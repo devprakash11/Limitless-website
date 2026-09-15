@@ -22,12 +22,15 @@ function ProjectPreview({ project }) {
         </div>
         <ArrowUpRight size={16} aria-hidden="true" />
       </div>
+
       <div className="live-project-screen">
         <img
           className="live-project-thumbnail"
           src={project.thumbnail}
           alt={`${project.title} website preview`}
-          loading="lazy"
+          width="1600"
+          height="1000"
+          loading="eager"
           decoding="async"
         />
         <div className="live-project-screen-overlay" aria-hidden="true" />
@@ -58,7 +61,12 @@ export default function PortfolioCard({ project }) {
           {project.tags.map((tag) => <span key={tag}>{tag}</span>)}
         </div>
         <div className="live-project-actions">
-          <a className="live-project-primary" href={project.url} target="_blank" rel="noreferrer">
+          <a
+            className="live-project-primary"
+            href={project.url}
+            target="_blank"
+            rel="noreferrer"
+          >
             Open Live Project
             <ExternalLink size={17} aria-hidden="true" />
           </a>
